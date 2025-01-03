@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penny & Debt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #0F4C75;
+            color: #FFF;
+            padding: 20px 10%;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0;
+            font-size: 1.2em;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #0F4C75;
+            margin: 0 15px;
+            font-size: 1em;
+        }
+        nav a:hover {
+            color: #FF7F50;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 10%;
+            background-color: #ECECEC;
+        }
+        .hero h2 {
+            font-size: 2em;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px 10%;
+        }
+        .service-card {
+            background: #FFF;
+            border: 1px solid #DDD;
+            border-radius: 8px;
+            padding: 20px;
+            width: 28%;
+            text-align: center;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            font-size: 1.5em;
+            color: #0F4C75;
+        }
+        .service-card p {
+            margin: 10px 0;
+            font-size: 1em;
+        }
+        .cta {
+            background-color: #0F4C75;
+            color: #FFF;
+            text-align: center;
+            padding: 30px 10%;
+        }
+        .cta h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .cta a {
+            background-color: #FF7F50;
+            color: #FFF;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+        .cta a:hover {
+            background-color: #FF4A24;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: #FFF;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Penny & Debt</h1>
+        <p>"We make your debt to pennies."</p>
+    </header>
+    
+    <nav>
+        <a href="#services">Services</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <section class="hero">
+        <h2>Take Control of Your Finances</h2>
+        <p>Your journey to a debt-free life begins here. Let us help you turn your debt into pennies.</p>
+    </section>
+    
+    <section class="services" id="services">
+        <div class="service-card">
+            <h3>Debt Relief Programs</h3>
+            <p>Custom solutions to manage and reduce your debt effectively.</p>
+        </div>
+        <div class="service-card">
+            <h3>Anti-Harassment Services</h3>
+            <p>Stop creditor harassment and regain peace of mind.</p>
+        </div>
+        <div class="service-card">
+            <h3>Credit Score Improvement</h3>
+            <p>Boost your credit score with our expert guidance.</p>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <h2>Ready to Change Your Life?</h2>
+        <p>Contact us today and start your debt-free journey.</p>
+        <a href="#contact">Get Started</a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Penny & Debt. All rights reserved.</p>
+    </footer>
+</body>
+</html>
