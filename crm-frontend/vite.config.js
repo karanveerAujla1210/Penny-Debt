@@ -3,11 +3,16 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // ✅ Only '/' unless deployed under subfolder like '/crm/'
+  base: '/',
   build: {
-    outDir: '../crm-backend/static/frontend', // ✅ Your actual backend build folder
+    outDir: 'dist',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
   },
-  publicDir: false,
   resolve: {
     alias: {
       '@': '/src',
@@ -16,4 +21,10 @@ export default defineConfig({
   server: {
     port: 3001,
   },
+  optimizeDeps: {
+    exclude: ['axios']
+  },
+  define: {
+    global: 'globalThis',
+  }
 });

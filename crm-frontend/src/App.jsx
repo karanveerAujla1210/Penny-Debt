@@ -33,7 +33,7 @@ import Profile from "./pages/crm/Customer/Profile";
 import CustomerHome from "./pages/crm/Customer/CustomerHome";
 
 import CustomerLogin from "./pages/Auth/CustomerLogin";
-import EmployeeLogin from "./pages/auth/EmployeeLogin";
+import EmployeeLogin from "./pages/Auth/EmployeeLogin";
 import Signup from "./pages/Website/Signup";
 
 const fontFamily = `'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
