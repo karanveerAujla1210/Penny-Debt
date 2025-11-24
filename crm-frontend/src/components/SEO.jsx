@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 import { seoConfig } from '../utils/seoConfig';
 
 const SEO = ({
@@ -26,8 +25,25 @@ const SEO = ({
   const fullUrl = seoData.url.startsWith('http') ? seoData.url : `https://pennyanddebt.in${seoData.url}`;
   const fullImage = image.startsWith('http') ? image : `https://pennyanddebt.in${image}`;
 
+  useEffect(() => {
+    // Update document title and meta tags
+    document.title = fullTitle;
+    
+    // Update meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', seoData.description);
+    }
+    
+    // Update meta keywords
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords) {
+      metaKeywords.setAttribute('content', seoData.keywords);
+    }
+  }, [fullTitle, seoData.description, seoData.keywords]);
+
   return (
-    <Helmet>
+    <div style={{ display: 'none' }}>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={seoData.description} />
@@ -81,7 +97,7 @@ const SEO = ({
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link rel="dns-prefetch" href="https://api.openai.com" />
-    </Helmet>
+    </div>
   );
 };
 
