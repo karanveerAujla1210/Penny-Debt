@@ -7,8 +7,8 @@ function doPost(e) {
     const sheetName = data.sheet || 'Sheet1';
     const rowData = data.data;
     
-    // Open the spreadsheet (replace with your spreadsheet ID)
-    const ss = SpreadsheetApp.openById('YOUR_SPREADSHEET_ID');
+    // Open the spreadsheet
+    const ss = SpreadsheetApp.openById('1mRtDJ8EGWGNj7j_bQ4nNEVdk1W4F83OwfLICCvgACLs');
     let sheet = ss.getSheetByName(sheetName);
     
     // Create sheet if it doesn't exist

@@ -1,5 +1,5 @@
 // Google Sheets API integration
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxh2YIs80DGDANY1ylXbTDk5ZJfeYngqhVqqos7s-N4Tn3OZehGcwNNlQTz3brbOEHJ/exec';
 
 export const submitToGoogleSheets = async (data, sheetName = 'Sheet1') => {
   try {
