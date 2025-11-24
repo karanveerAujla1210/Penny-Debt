@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
+import { initProtection } from "./utils/protection";
 
 
 import Home from "./pages/Website/Home";
@@ -114,6 +115,11 @@ const Footer = () => (
 
 // App without BrowserRouter
 export default function App() {
+  // Initialize protection
+  useEffect(() => {
+    initProtection();
+  }, []);
+
   // Get user from localStorage (employee or customer)
   const employee = useMemo(() => {
     try {
