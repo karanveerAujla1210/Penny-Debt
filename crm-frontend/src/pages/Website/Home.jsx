@@ -246,7 +246,7 @@ const Hero = () => {
           >
             {messages[messageIndex]}
           </p>
-          <Button to="#applyform" ariaLabel="Get started with Penny & Debt">
+          <Button to="/applyform" ariaLabel="Get started with Penny & Debt">
             Get Started Today
           </Button>
         </div>
