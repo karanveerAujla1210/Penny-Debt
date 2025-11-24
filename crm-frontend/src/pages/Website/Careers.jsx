@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { submitToGoogleSheets } from "../utils/googleSheets";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
@@ -27,16 +28,32 @@ const Careers = () => {
     }
     setSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      // Store application data locally
-      const applicationData = {
-        fullName: formData.fullName,
-        email: formData.email,
-        resumeName: formData.resume.name,
-        submittedAt: new Date().toISOString()
-      };
+    const applicationData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      resumeName: formData.resume.name,
+      submittedAt: new Date().toISOString()
+    };
+    
+    try {
+      // Submit to Google Sheets
+      const result = await submitToGoogleSheets(applicationData, 'CareerApplications');
       
+      if (result.success) {
+        // Also save locally as backup
+        const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
+        existingApplications.push(applicationData);
+        localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
+        
+        setFormData({ fullName: "", email: "", resume: null });
+        setMessage("✅ Application submitted successfully! We'll contact you soon.");
+        e.target.reset();
+      } else {
+        throw new Error('Google Sheets submission failed');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      // Fallback to local storage
       const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
       existingApplications.push(applicationData);
       localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
@@ -44,8 +61,9 @@ const Careers = () => {
       setFormData({ fullName: "", email: "", resume: null });
       setMessage("✅ Application submitted successfully! We'll contact you soon.");
       e.target.reset();
+    } finally {
       setSubmitting(false);
-    }, 2000);
+    }
   };
 
   return (

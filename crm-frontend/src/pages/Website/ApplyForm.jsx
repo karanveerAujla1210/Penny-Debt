@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { submitToGoogleSheets } from "../utils/googleSheets";
 
 const ApplyForm = () => {
   const [formData, setFormData] = useState({
@@ -130,25 +131,39 @@ const ApplyForm = () => {
 
     setSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      // Store data locally for now
-      const submissionData = {
-        ...formData,
-        source: 'website',
-        leadType: 'debt_relief',
-        emailVerified: true,
-        submittedAt: new Date().toISOString()
-      };
+    const submissionData = {
+      ...formData,
+      source: 'website',
+      leadType: 'debt_relief',
+      emailVerified: true,
+      submittedAt: new Date().toISOString()
+    };
+    
+    try {
+      // Submit to Google Sheets
+      const result = await submitToGoogleSheets(submissionData, 'DebtApplications');
       
-      // Save to localStorage for demo
+      if (result.success) {
+        // Also save locally as backup
+        const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
+        existingData.push(submissionData);
+        localStorage.setItem('debtApplications', JSON.stringify(existingData));
+        
+        setSubmitted(true);
+      } else {
+        throw new Error('Google Sheets submission failed');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      // Fallback to local storage
       const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
       existingData.push(submissionData);
       localStorage.setItem('debtApplications', JSON.stringify(existingData));
       
       setSubmitted(true);
+    } finally {
       setSubmitting(false);
-    }, 2000);
+    }
   };
 
   const formatTime = (seconds) => {
