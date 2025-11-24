@@ -281,7 +281,7 @@ const Hero = () => {
               filter: "drop-shadow(0 0 10px rgba(0,83,181,0.3))",
             }}
           >
-            <source src="/assets/debt-relief-video.mp4.mp4" type="video/mp4" />
+            <source src="/assets/debt-relief-video.mp4" type="video/mp4" />
             <source src="/assets/debt-relief-video.webm" type="video/webm" />
             {/* Fallback image if video doesn't load */}
             <img

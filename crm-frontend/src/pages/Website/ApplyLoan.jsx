@@ -1,6 +1,19 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bankLogos from "../../assets/logos/bankLogos.json";
+// Bank logos data
+const bankLogos = [
+  { "type": "Bank", "name": "State Bank of India", "logo": "/logos/sbi.png" },
+  { "type": "Bank", "name": "ICICI Bank", "logo": "/logos/icici.png" },
+  { "type": "Bank", "name": "Axis Bank", "logo": "/logos/axis.png" },
+  { "type": "Bank", "name": "Canara Bank", "logo": "/logos/canara.png" },
+  { "type": "Bank", "name": "PNB", "logo": "/logos/pnb.png" },
+  { "type": "NBFC", "name": "Aditya Birla", "logo": "/logos/adityabirla.png" },
+  { "type": "NBFC", "name": "Aptus", "logo": "/logos/aptus.png" },
+  { "type": "NBFC", "name": "Aavas", "logo": "/logos/aavas.png" },
+  { "type": "NBFC", "name": "Cholamandalam", "logo": "/logos/cholamandalam.png" },
+  { "type": "NBFC", "name": "Shriram Finance", "logo": "/logos/shriram.png" },
+  { "type": "NBFC", "name": "Tata Capital", "logo": "/logos/tatacapital.png" }
+];
 
 /**
  * ApplyLoan.jsx (Premium Edition)
