@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 
 import Home from "./pages/Website/Home";
@@ -201,6 +202,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 }
