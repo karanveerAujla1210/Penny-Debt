@@ -1,6 +1,9 @@
 // Google Sheets API integration
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbwoWxfBaztcXnazEYzJi5XkFwlZBzuWlFQnqT2NBnROClHubO_1fATLgeRa3MJvuilI/exec';
 
+// Production domain
+const PRODUCTION_DOMAIN = 'https://penny-debt-crm.vercel.app';
+
 export const submitToGoogleSheets = async (data, sheetName = 'Sheet1') => {
   try {
     const payload = {

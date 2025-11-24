@@ -20,4 +20,4 @@ Allow: /privacypolicy
 Allow: /terms
 
 # Sitemap location
-Sitemap: https://pennyanddebt.in/sitemap.xml
+Sitemap: https://penny-debt-crm.vercel.app/sitemap.xml

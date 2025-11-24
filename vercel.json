@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "pennyanddebt",
-  "buildCommand": "cd crm-frontend && npm run build",
+  "buildCommand": "cd crm-frontend && npm ci && npm run build",
   "outputDirectory": "crm-frontend/dist",
   "installCommand": "cd crm-frontend && npm install",
   "rewrites": [

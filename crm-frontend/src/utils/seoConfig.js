@@ -5,7 +5,7 @@ export const seoConfig = {
     description: "Professional debt relief and settlement services. Get expert help with debt management, loan solutions, and financial recovery. Contact Penny & Debt for personalized assistance.",
     keywords: "debt relief, debt settlement, loan solutions, financial recovery, debt management, credit repair, debt consolidation, financial assistance",
     image: "/assets/logo.png",
-    url: "https://pennyanddebt.in",
+    url: "https://penny-debt-crm.vercel.app",
     type: "website"
   },
   
