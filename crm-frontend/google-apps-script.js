@@ -3,9 +3,16 @@
 
 function doPost(e) {
   try {
+    // Log the incoming request for debugging
+    console.log('Received POST request:', e.postData.contents);
+    
     const data = JSON.parse(e.postData.contents);
     const sheetName = data.sheet || 'Sheet1';
     const rowData = data.data;
+    
+    console.log('Parsed data:', data);
+    console.log('Sheet name:', sheetName);
+    console.log('Row data:', rowData);
     
     // Open the spreadsheet
     const ss = SpreadsheetApp.openById('1mRtDJ8EGWGNj7j_bQ4nNEVdk1W4F83OwfLICCvgACLs');
@@ -69,20 +76,42 @@ function doPost(e) {
     
     // Add the data to the sheet
     sheet.appendRow(values);
+    console.log('Data added to sheet successfully');
     
     return ContentService
-      .createTextOutput(JSON.stringify({success: true}))
+      .createTextOutput(JSON.stringify({success: true, message: 'Data saved successfully'}))
       .setMimeType(ContentService.MimeType.JSON);
       
   } catch (error) {
+    console.error('Error in doPost:', error);
     return ContentService
       .createTextOutput(JSON.stringify({success: false, error: error.toString()}))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type'
+      });
   }
 }
 
 function doGet(e) {
   return ContentService
-    .createTextOutput(JSON.stringify({message: "Penny Debt CRM Data Collector"}))
-    .setMimeType(ContentService.MimeType.JSON);
+    .createTextOutput(JSON.stringify({message: "Penny Debt CRM Data Collector", status: "active"}))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+}
+
+function doOptions(e) {
+  return ContentService
+    .createTextOutput('')
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
 }
