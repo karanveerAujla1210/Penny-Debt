@@ -1,7 +1,7 @@
 import React from "react";
 import SEO from "../../components/SEO";
 
-const fontFamily = `'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
+const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 const mainContainerStyle = {
   background: "#eef6ff",
   color: "#2c3e50",

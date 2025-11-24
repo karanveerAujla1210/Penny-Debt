@@ -67,7 +67,7 @@ const StatCard = ({ label, value, prefix = "", suffix = "" }) => {
   );
 };
 
-const fontFamily = `'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
+const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 
 /* Reusable Button with hover animation */
 const Button = ({ children, onClick, style, to, ariaLabel }) => {
