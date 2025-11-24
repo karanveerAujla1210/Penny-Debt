@@ -195,6 +195,15 @@ body {
   user-select: none;
 }
 
+/* Allow text selection for form inputs */
+input, textarea, select, [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  pointer-events: auto !important;
+}
+
 /* Disable image dragging */
 img {
   -webkit-user-drag: none;
@@ -203,4 +212,13 @@ img {
   -o-user-drag: none;
   user-drag: none;
   pointer-events: none;
+}
+
+/* Ensure buttons and links work */
+button, a, input[type="submit"], input[type="button"] {
+  pointer-events: auto !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
 }

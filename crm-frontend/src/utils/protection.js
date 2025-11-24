@@ -35,14 +35,20 @@ export const initProtection = () => {
     }
   });
 
-  // Disable text selection
+  // Disable text selection (except for inputs)
   document.addEventListener('selectstart', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.contentEditable === 'true') {
+      return true;
+    }
     e.preventDefault();
     return false;
   });
 
-  // Disable drag
+  // Disable drag (except for inputs)
   document.addEventListener('dragstart', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+      return true;
+    }
     e.preventDefault();
     return false;
   });
