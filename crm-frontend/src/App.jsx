@@ -37,6 +37,7 @@ import CustomerHome from "./pages/crm/Customer/CustomerHome";
 import CustomerLogin from "./pages/Auth/CustomerLogin";
 import EmployeeLogin from "./pages/Auth/EmployeeLogin";
 import Signup from "./pages/Website/Signup";
+import DataViewer from "./pages/Admin/DataViewer";
 
 const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 
@@ -204,6 +205,7 @@ export default function App() {
           <Route path="/customer-login" element={<CustomerLogin />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/admin/data" element={<DataViewer />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
