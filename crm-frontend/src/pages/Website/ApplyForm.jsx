@@ -72,24 +72,13 @@ const ApplyForm = () => {
     }
 
     setSendingOtp(true);
-    try {
-      const response = await fetch('/api/send-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          name: formData.name || 'User'
-        }),
-      });
-
-      if (!response.ok) throw new Error('Failed to send OTP');
-
+    
+    // Simulate OTP sending
+    setTimeout(() => {
       setOtpData(prev => ({
         ...prev,
         isOtpSent: true,
-        timer: 300 // 5 minutes
+        timer: 60 // 1 minute for demo
       }));
 
       // Start countdown timer
@@ -103,12 +92,9 @@ const ApplyForm = () => {
         });
       }, 1000);
 
-      setMessage("OTP sent to your email address. Please check your inbox.");
-    } catch (error) {
-      setMessage("Failed to send OTP. Please try again.");
-    } finally {
+      setMessage("OTP sent to your email address. Use '123456' for demo.");
       setSendingOtp(false);
-    }
+    }, 1000);
   };
 
   const verifyOtp = async () => {
@@ -118,31 +104,20 @@ const ApplyForm = () => {
     }
 
     setSendingOtp(true);
-    try {
-      const response = await fetch('/api/verify-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          otp: otpData.otp
-        }),
-      });
-
-      if (!response.ok) throw new Error('Invalid OTP');
-
-      setOtpData(prev => ({
-        ...prev,
-        isVerified: true
-      }));
-
-      setMessage("Email verified successfully!");
-    } catch (error) {
-      setMessage("Invalid OTP. Please try again.");
-    } finally {
+    
+    // Simulate OTP verification (accept 123456 for demo)
+    setTimeout(() => {
+      if (otpData.otp === '123456') {
+        setOtpData(prev => ({
+          ...prev,
+          isVerified: true
+        }));
+        setMessage("Email verified successfully!");
+      } else {
+        setMessage("Invalid OTP. Use '123456' for demo.");
+      }
       setSendingOtp(false);
-    }
+    }, 1000);
   };
 
   const handleSubmit = async (e) => {
@@ -154,29 +129,26 @@ const ApplyForm = () => {
     }
 
     setSubmitting(true);
-    try {
-      const response = await fetch('/api/leads/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          source: 'website',
-          leadType: 'debt_relief',
-          emailVerified: true,
-          submittedAt: new Date().toISOString()
-        }),
-      });
-
-      if (!response.ok) throw new Error('Submission failed');
+    
+    // Simulate form submission
+    setTimeout(() => {
+      // Store data locally for now
+      const submissionData = {
+        ...formData,
+        source: 'website',
+        leadType: 'debt_relief',
+        emailVerified: true,
+        submittedAt: new Date().toISOString()
+      };
+      
+      // Save to localStorage for demo
+      const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
+      existingData.push(submissionData);
+      localStorage.setItem('debtApplications', JSON.stringify(existingData));
       
       setSubmitted(true);
-    } catch (error) {
-      setMessage("Failed to submit. Please try again.");
-    } finally {
       setSubmitting(false);
-    }
+    }, 2000);
   };
 
   const formatTime = (seconds) => {

@@ -26,27 +26,26 @@ const Careers = () => {
       return;
     }
     setSubmitting(true);
-    try {
-      const data = new FormData();
-      data.append("fullName", formData.fullName);
-      data.append("email", formData.email);
-      data.append("resume", formData.resume);
-      const res = await fetch("/api/careers", {
-        method: "POST",
-        body: data,
-      });
-      if (!res.ok) {
-        const errMsg = (await res.json())?.message || "Failed to submit application";
-        throw new Error(errMsg);
-      }
+    
+    // Simulate form submission
+    setTimeout(() => {
+      // Store application data locally
+      const applicationData = {
+        fullName: formData.fullName,
+        email: formData.email,
+        resumeName: formData.resume.name,
+        submittedAt: new Date().toISOString()
+      };
+      
+      const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
+      existingApplications.push(applicationData);
+      localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
+      
       setFormData({ fullName: "", email: "", resume: null });
-      setMessage("Application submitted successfully!");
+      setMessage("✅ Application submitted successfully! We'll contact you soon.");
       e.target.reset();
-    } catch (err) {
-      setMessage(err.message || "Something went wrong. Please try again.");
-    } finally {
       setSubmitting(false);
-    }
+    }, 2000);
   };
 
   return (

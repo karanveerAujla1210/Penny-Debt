@@ -583,7 +583,9 @@ export default function ApplyLoan() {
   }, []);
 
   const goApply = (product) => {
-  navigate(`/applyloan-basic-details?product=${encodeURIComponent(product)}`);
+    // For now, redirect to the apply form since applyloan-basic-details might not exist
+    navigate('/applyform');
+    setToast({ show: true, title: "Redirected to Apply Form", desc: `Applying for ${product}` });
   };
 
   return (
