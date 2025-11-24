@@ -1,4 +1,5 @@
 import React from "react";
+import SEO from "../../components/SEO";
 
 const fontFamily = `'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 const mainContainerStyle = {
@@ -161,7 +162,9 @@ const servicesList = [
 
 const Services = () => {
   return (
-    <main style={{ background: "#f9fbff", minHeight: "100vh", fontFamily }}>
+    <>
+      <SEO pageName="services" />
+      <main style={{ background: "#f9fbff", minHeight: "100vh", fontFamily }}>
       {/* Our Services Section */}
       <section style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px 24px 24px" }}>
         <h1
@@ -502,7 +505,8 @@ const Services = () => {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect, useRef } from "react";
+import SEO from "../../components/SEO";
 
 // Animated Stat Card Component
 const StatCard = ({ label, value, prefix = "", suffix = "" }) => {
@@ -174,12 +174,13 @@ const Hero = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-around",
-          padding: "80px 48px",
+          padding: "40px 16px",
           fontFamily,
           flexWrap: "wrap",
-          gap: 28,
+          gap: 16,
           overflow: "hidden",
           position: "relative",
+          flexDirection: "column",
         }}
         aria-label="Hero section introducing Penny & Debt - India's premier debt relief service"
       >
@@ -215,14 +216,14 @@ const Hero = () => {
             }
           }
         `}</style>
-        <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "left", userSelect: "text" }}>
+        <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "center", userSelect: "text", width: "100%" }}>
           <h1
             style={{
-              fontSize: 48,
+              fontSize: 28,
               fontWeight: 900,
               marginBottom: 22,
               color: "#0070f3",
-              lineHeight: 1.08,
+              lineHeight: 1.2,
               userSelect: "none",
               textShadow: "0 3px 8px rgba(0,112,243,0.3)",
             }}
@@ -232,11 +233,11 @@ const Hero = () => {
           </h1>
           <p
             style={{
-              fontSize: 24,
+              fontSize: 16,
               marginBottom: 36,
               color: "#223759cc",
               fontWeight: 600,
-              minHeight: 80,
+              minHeight: 60,
               lineHeight: 1.45,
               fontFamily: "'Segoe UI', sans-serif",
             }}
@@ -252,7 +253,7 @@ const Hero = () => {
         <div
           style={{
             flex: "1 1 460px",
-            maxWidth: 460,
+            maxWidth: "100%",
             position: "relative",
             display: "flex",
             alignItems: "center",
@@ -262,23 +263,33 @@ const Hero = () => {
             boxShadow: "0 14px 48px rgba(0,112,243,0.22)",
             background: "linear-gradient(135deg, #eaf5ff 25%, #ffffff 95%)",
             overflow: "hidden",
+            width: "100%",
+            marginTop: 20,
           }}
           aria-hidden="true"
         >
           {/* Replace with your high-res debt relief illustration */}
-          <img
-            src={"/assets/debt-relief-illustration.png"}
-            alt="Relieved individual breaking free from chains of debt, symbolizing financial freedom"
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
             style={{
               width: "100%",
-              maxWidth: 360,
+              maxWidth: 280,
               borderRadius: 20,
               filter: "drop-shadow(0 0 10px rgba(0,83,181,0.3))",
-              animation: "floatUpDown 6s ease-in-out infinite",
             }}
-            loading="eager"
-            decoding="async"
-          />
+          >
+            <source src="/assets/debt-relief-video.mp4.mp4" type="video/mp4" />
+            <source src="/assets/debt-relief-video.webm" type="video/webm" />
+            {/* Fallback image if video doesn't load */}
+            <img
+              src="/assets/debt-relief-illustration.png"
+              alt="Debt relief illustration"
+              style={{ width: "100%", maxWidth: 280, borderRadius: 20 }}
+            />
+          </video>
           <div style={floatingStyle("0s", 130, "6%", "8%", "#0070f3", 0.16)} />
           <div style={floatingStyle("2s", 92, "78%", "30%", "#00b4ff", 0.12)} />
           <div style={floatingStyle("4s", 110, "82%", "70%", "#005bb5", 0.1)} />
@@ -307,7 +318,7 @@ const About = () => {
     >
       <h2
         style={{
-          fontSize: 38,
+          fontSize: 24,
           fontWeight: 900,
           color: "#0070f3",
           marginBottom: 28,
@@ -498,13 +509,13 @@ const Services = () => {
     <section
       id="services"
       style={{
-        padding: "85px 30px",
+        padding: "40px 16px",
         backgroundColor: "#eef6ff",
-        maxWidth: 1240,
-        margin: "0 auto 90px",
-        display: "flex",
-        flexWrap: "wrap",
-        gap: 28,
+        maxWidth: "100%",
+        margin: "0 auto 40px",
+        display: "grid",
+        gridTemplateColumns: "1fr",
+        gap: 20,
         justifyContent: "center",
         fontFamily,
         userSelect: "text",
@@ -518,11 +529,11 @@ const Services = () => {
           role="article"
           aria-label={title}
           style={{
-            flex: "1 1 300px",
+            width: "100%",
             backgroundColor: "#fff",
             borderRadius: 16,
             boxShadow: "0 8px 28px rgba(0, 112, 243, 0.16)",
-            padding: 28,
+            padding: 20,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -1204,6 +1215,7 @@ const DebtGuruChatbot = () => {
 // Main Home page component
 const Home = () => (
   <div style={{ backgroundColor: "#f9fbff", color: "#2c3e50", minHeight: "100vh", position: "relative" }}>
+    <SEO pageName="home" />
     {/* Main content */}
     <main style={{ maxWidth: 1300, margin: "0 auto", padding: "0 24px" }}>
       <Hero />

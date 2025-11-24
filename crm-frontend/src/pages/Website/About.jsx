@@ -1,4 +1,5 @@
 import React from "react";
+import SEO from "../../components/SEO";
 
 const About = () => {
   const sectionStyle = {
@@ -33,7 +34,9 @@ const About = () => {
   };
 
   return (
-    <section id="about" style={sectionStyle} aria-labelledby="about-heading">
+    <>
+      <SEO pageName="about" />
+      <section id="about" style={sectionStyle} aria-labelledby="about-heading">
       <h1 id="about-heading" style={headingStyle}>
         🧭 About Penny &amp; Debt
       </h1>
@@ -98,7 +101,8 @@ const About = () => {
       <p>
         At Penny &amp; Debt, we don’t just provide services — we give you a second chance at financial freedom.
       </p>
-    </section>
+      </section>
+    </>
   );
 };
 

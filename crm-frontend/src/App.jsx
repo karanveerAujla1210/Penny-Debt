@@ -46,20 +46,22 @@ const Footer = () => (
     style={{
       position: "relative",
       color: "white",
-      padding: "12px 24px 32px 24px",
+      padding: "12px 16px 32px 16px",
       minHeight: 60,
       fontFamily,
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: 600,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
-      gap: 24,
+      justifyContent: "center",
+      gap: 16,
       userSelect: "none",
       overflow: "hidden",
       background: "linear-gradient(90deg, #0070f3 0%, #6228d7 100%)",
       zIndex: 1,
-      flexWrap: "wrap"
+      flexWrap: "wrap",
+      flexDirection: "column",
+      textAlign: "center"
     }}
   >
     {/* Animated SVG Waves */}
@@ -80,17 +82,16 @@ const Footer = () => (
       </svg>
     </div>
     {/* ...existing code... */}
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      <span style={{ fontWeight: 900, fontSize: 16, letterSpacing: "0.08em" }}>PENNY & DEBT</span>
-      <span style={{ fontWeight: 600, fontSize: 14, marginLeft: 8 }}>Debt Settlement</span>
-      <span style={{ fontWeight: 600, fontSize: 14, marginLeft: 8 }}>Loan Solutions</span>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+      <span style={{ fontWeight: 900, fontSize: 14, letterSpacing: "0.08em" }}>PENNY & DEBT</span>
+      <span style={{ fontWeight: 600, fontSize: 12 }}>Debt Settlement</span>
+      <span style={{ fontWeight: 600, fontSize: 12 }}>Loan Solutions</span>
     </div>
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-      <span>Contact:</span>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center", fontSize: 11 }}>
       <span>Email: care@pennyanddebt.in</span>
       <span>Phone: +91 7814447895</span>
     </div>
-    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
       <Link to="/terms" style={{ color: "white", textDecoration: "underline", fontSize: 14, marginRight: 8 }}>Terms & Conditions</Link>
       <Link to="/privacypolicy" style={{ color: "white", textDecoration: "underline", fontSize: 14, marginRight: 8 }}>Privacy Policy</Link>
       <span style={{ marginLeft: 8 }}>Follow Us:</span>
@@ -134,11 +135,13 @@ export default function App() {
       <main
         style={{
           minHeight: "80vh",
-          maxWidth: 1280,
+          maxWidth: "100%",
           margin: "0 auto",
-          padding: "16px 24px",
+          padding: "8px 16px",
           fontFamily,
           color: "#2c3e50",
+          width: "100%",
+          overflowX: "hidden",
         }}
       >
         <Routes>

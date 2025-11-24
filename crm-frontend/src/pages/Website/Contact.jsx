@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import SEO from "../../components/SEO";
 
 const fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
 const fontColor = "#223759"; // consistent text color with other pages
@@ -104,7 +105,9 @@ const Contact = () => {
   };
 
   return (
-    <section
+    <>
+      <SEO pageName="contact" />
+      <section
       style={{
         minHeight: "100vh",
         padding: "32px 24px",
@@ -309,7 +312,8 @@ const Contact = () => {
           </form>
         </div>
       </motion.div>
-    </section>
+      </section>
+    </>
   );
 };
 
