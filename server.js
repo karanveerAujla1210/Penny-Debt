@@ -5,12 +5,15 @@ require('dotenv').config();
 
 const app = express();
 
-// MongoDB Connection
-const uri = "mongodb+srv://singh2212karanveer_db_user:tVENTkpkJJIekGBA@cluster0.0xgwopz.mongodb.net/pennydebt?retryWrites=true&w=majority&appName=Cluster0";
-
-mongoose.connect(uri)
-.then(() => console.log("MongoDB Connected Successfully!"))
-.catch(err => console.error("MongoDB connection error:", err));
+// MongoDB Connection — use environment variable, never commit credentials
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+  console.warn('MONGODB_URI not set — skipping DB connection. Set MONGODB_URI in your .env to connect.');
+} else {
+  mongoose.connect(uri)
+    .then(() => console.log('MongoDB Connected Successfully!'))
+    .catch(err => console.error('MongoDB connection error:', err));
+}
 
 // Middleware
 app.use(cors());
