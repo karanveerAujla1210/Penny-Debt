@@ -163,8 +163,16 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/crm" element={<CRMApp />} />
-          <Route path="/test-login" element={<TestLogin />} />
+          {window.location.hostname === 'crmpennyanddebt.in' && (
+            <>
+              <Route path="/crm" element={<CRMApp />} />
+              <Route path="/test-login" element={<TestLogin />} />
+              <Route path="/" element={<CRMApp />} />
+            </>
+          )}
+          {window.location.hostname !== 'crmpennyanddebt.in' && (
+            <Route path="/crm" element={<div style={{padding: '50px', textAlign: 'center'}}><h2>CRM Access</h2><p>Please visit <a href="https://crmpennyanddebt.in/crm">crmpennyanddebt.in/crm</a></p></div>} />
+          )}
     <Route path="/faq" element={<FAQ />} />
     <Route path="/services" element={<Services />} />
     <Route path="/privacypolicy" element={<PrivacyPolicy />} />
