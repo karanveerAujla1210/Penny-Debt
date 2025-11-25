@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { initProtection } from "./utils/protection";
+import "./styles/website.css";
 
 
 import Home from "./pages/Website/Home";
@@ -63,7 +64,7 @@ const Footer = () => (
       gap: 16,
       userSelect: "none",
       overflow: "hidden",
-      background: "linear-gradient(90deg, #0070f3 0%, #6228d7 100%)",
+      background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       zIndex: 1,
       flexWrap: "wrap",
       flexDirection: "column",
@@ -144,13 +145,13 @@ export default function App() {
     <>
       <Header />
       <main
+        className="website-container"
         style={{
           minHeight: "80vh",
           maxWidth: "100%",
           margin: "0 auto",
-          padding: "8px 16px",
+          padding: "20px 16px",
           fontFamily,
-          color: "#2c3e50",
           width: "100%",
           overflowX: "hidden",
         }}
