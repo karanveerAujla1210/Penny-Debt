@@ -21,6 +21,28 @@ const WorkingLogin = () => {
     setError('');
 
     try {
+      // Try backend first, fallback to frontend auth
+      try {
+        const response = await fetch('https://penny-debt-crm.onrender.com/api/auth/employee-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            localStorage.setItem('employee', JSON.stringify(data.user));
+            alert(`✅ Login successful! Welcome ${data.user.name}`);
+            window.location.href = '/dashboard/admin';
+            return;
+          }
+        }
+      } catch (backendError) {
+        console.log('Backend unavailable, using frontend auth');
+      }
+
+      // Frontend fallback
       const employee = EMPLOYEE_ACCOUNTS[formData.email.toLowerCase()];
       
       if (!employee || employee.password !== formData.password) {
