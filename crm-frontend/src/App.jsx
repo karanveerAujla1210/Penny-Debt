@@ -14,6 +14,7 @@ import Contact from "./pages/Website/Contact";
 import FAQ from "./pages/Website/FAQ";
 import PrivacyPolicy from "./pages/Website/PrivacyPolicy";
 import Terms from "./pages/Website/Terms";
+import CRMApp from "./pages/CRM/CRMApp";
 
 
 import ApplyLoan from "./pages/Website/ApplyLoan";
@@ -160,6 +161,7 @@ export default function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/crm" element={<CRMApp />} />
     <Route path="/faq" element={<FAQ />} />
     <Route path="/services" element={<Services />} />
     <Route path="/privacypolicy" element={<PrivacyPolicy />} />
