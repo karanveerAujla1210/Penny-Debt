@@ -91,18 +91,26 @@ const EmployeeLogin = () => {
     setCaptchaValid(true);
     setFormError("");
 
-    // Use frontend authentication
+    // Use frontend authentication with debug logging
+    console.log('Attempting login with:', formData.identifier);
+    console.log('Available auth function:', typeof authenticateEmployee);
+    
     const result = authenticateEmployee(formData.identifier, formData.password);
+    console.log('Authentication result:', result);
     
     if (result.success) {
+      console.log('Login successful, user:', result.user);
       alert("Login successful!");
       // Save user info in localStorage
       localStorage.setItem("employee", JSON.stringify(result.user));
       // Redirect to role-based dashboard
       const role = result.user.role;
+      console.log('User role:', role);
       const dashboardRoute = getDashboardRouteForRole(role);
+      console.log('Dashboard route:', dashboardRoute);
       navigate(dashboardRoute);
     } else {
+      console.log('Login failed:', result.message);
       alert(result.message || "Login failed. Please check your credentials.");
       setFormError(result.message || "Invalid credentials");
     }
