@@ -21,6 +21,7 @@ Full-stack debt relief CRM application with React frontend, Node.js backend, and
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 16+
 - MongoDB (local or cloud) and a connection URI
 - SMTP email credentials
@@ -28,12 +29,14 @@ Full-stack debt relief CRM application with React frontend, Node.js backend, and
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone <repository-url>
 cd penny-debt-crm
 ```
 
-2. **Setup Backend**
+1. **Setup Backend**
+
 ```bash
 cd backend
 npm install
@@ -44,19 +47,22 @@ cp .env.example .env
 npm run dev
 ```
 
-3. **Setup Frontend**
+1. **Setup Frontend**
+
 ```bash
 cd crm-frontend
 npm install
 npm start
 ```
 
-4. **Database Setup**
+1. **Database Setup**
+
 If you're using a hosted MongoDB (Atlas) you typically do not need to import a schema file; collections are created automatically by Mongoose models. For local MongoDB, ensure the server is running and `MONGODB_URI` points to it.
 
 ## Environment Configuration
 
 Create `backend/.env` with:
+
 ```env
 # MongoDB connection string
 MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
@@ -96,7 +102,7 @@ See `DEPLOYMENT_FINAL.md` for detailed step-by-step instructions.
 
 ## Project Structure
 
-```
+```bash
 penny-debt-crm/
 ├── crm-frontend/          # React application
 ├── backend/               # Node.js API server

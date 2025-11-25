@@ -36,7 +36,7 @@ const WorkingLogin = () => {
       };
 
       localStorage.setItem('employee', JSON.stringify(user));
-      // For now redirect to same domain until subdomain is set up
+      alert(`✅ Login successful! Welcome ${user.name}`);
       window.location.href = '/dashboard/admin';
     } catch (error) {
       setError('Login failed. Please try again.');
