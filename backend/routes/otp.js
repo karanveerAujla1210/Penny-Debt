@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
-const db = require('../models/database');
+const supabase = require('../models/database');
 const { generateOTP, sendOTPEmail } = require('../utils/emailService');
 
 const router = express.Router();
@@ -29,10 +29,15 @@ router.post('/send-otp', otpLimiter, [
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
 
     // Store OTP in database
-    await db.execute(
-      'INSERT INTO email_otps (email, otp, expires_at) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE otp = ?, expires_at = ?',
-      [email, otp, expiresAt, otp, expiresAt]
-    );
+    const { error } = await supabase
+      .from('email_otps')
+      .upsert({
+        email,
+        otp,
+        expires_at: expiresAt.toISOString()
+      });
+    
+    if (error) throw error;
 
     // Send OTP email
     const emailResult = await sendOTPEmail(email, name, otp);
@@ -62,21 +67,25 @@ router.post('/verify-otp', [
     const { email, otp } = req.body;
 
     // Check OTP in database
-    const [rows] = await db.execute(
-      'SELECT * FROM email_otps WHERE email = ? AND otp = ? AND expires_at > NOW()',
-      [email, otp]
-    );
+    const { data: rows } = await supabase
+      .from('email_otps')
+      .select('*')
+      .eq('email', email)
+      .eq('otp', otp)
+      .gt('expires_at', new Date().toISOString());
 
-    if (rows.length === 0) {
+    if (!rows || rows.length === 0) {
       return res.status(400).json({ message: 'Invalid or expired OTP' });
     }
 
     // Mark as verified and delete OTP
-    await db.execute('DELETE FROM email_otps WHERE email = ?', [email]);
-    await db.execute(
-      'INSERT INTO verified_emails (email, verified_at) VALUES (?, NOW()) ON DUPLICATE KEY UPDATE verified_at = NOW()',
-      [email]
-    );
+    await supabase.from('email_otps').delete().eq('email', email);
+    await supabase
+      .from('verified_emails')
+      .upsert({
+        email,
+        verified_at: new Date().toISOString()
+      });
 
     res.json({ message: 'Email verified successfully' });
   } catch (error) {

@@ -1,23 +1,22 @@
-const mysql = require('mysql2/promise');
+const { createClient } = require('@supabase/supabase-js');
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-});
+const supabaseUrl = 'https://lbmrwhufxymdmuamjwor.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY;
+
+if (!supabaseKey) {
+  console.error('SUPABASE_KEY is not defined in environment variables');
+  process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Test connection
-pool.getConnection()
-  .then(connection => {
-    console.log('Database connected successfully');
-    connection.release();
+supabase.from('leads').select('count', { count: 'exact', head: true })
+  .then(() => {
+    console.log('Supabase connected successfully');
   })
   .catch(err => {
-    console.error('Database connection failed:', err.message);
+    console.error('Supabase connection failed:', err.message);
   });
 
-module.exports = pool;
+module.exports = supabase;

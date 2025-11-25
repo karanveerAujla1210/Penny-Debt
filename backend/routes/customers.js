@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
-const db = require('../models/database');
+const supabase = require('../models/database');
 
 const router = express.Router();
 
@@ -21,12 +21,12 @@ router.post('/signup', [
     const { full_name, email, password, mobile } = req.body;
 
     // Check if email already exists
-    const [existingUsers] = await db.execute(
-      'SELECT id FROM customers WHERE email = ?',
-      [email]
-    );
+    const { data: existingUsers } = await supabase
+      .from('customers')
+      .select('id')
+      .eq('email', email);
 
-    if (existingUsers.length > 0) {
+    if (existingUsers && existingUsers.length > 0) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
@@ -35,14 +35,22 @@ router.post('/signup', [
     const password_hash = await bcrypt.hash(password, saltRounds);
 
     // Insert customer
-    const [result] = await db.execute(`
-      INSERT INTO customers (full_name, email, password_hash, mobile)
-      VALUES (?, ?, ?, ?)
-    `, [full_name, email, password_hash, mobile || null]);
+    const { data: result, error } = await supabase
+      .from('customers')
+      .insert({
+        full_name,
+        email,
+        password_hash,
+        mobile: mobile || null
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
 
     res.status(201).json({ 
       message: 'Account created successfully',
-      customerId: result.insertId
+      customerId: result.id
     });
   } catch (error) {
     console.error('Customer signup error:', error);

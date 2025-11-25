@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const db = require('../models/database');
+const supabase = require('../models/database');
 
 const router = express.Router();
 
@@ -31,39 +31,50 @@ router.post('/submit', [
 
     // Check if email is verified
     if (emailVerified) {
-      const [verifiedRows] = await db.execute(
-        'SELECT * FROM verified_emails WHERE email = ?',
-        [email]
-      );
+      const { data: verifiedRows } = await supabase
+        .from('verified_emails')
+        .select('*')
+        .eq('email', email);
       
-      if (verifiedRows.length === 0) {
+      if (!verifiedRows || verifiedRows.length === 0) {
         return res.status(400).json({ message: 'Email not verified' });
       }
     }
 
     // Insert debt application
-    const [result] = await db.execute(`
-      INSERT INTO debt_applications (
-        name, email, phone, total_debt, monthly_income,
-        loan_type, employment_status, city, pincode,
-        message, source, lead_type, status
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new')
-    `, [
-      name, email, phone, totalDebt, monthlyIncome,
-      loanType, employmentStatus, city, pincode,
-      message || null, source || 'website', leadType || 'debt_relief'
-    ]);
+    const { data: result, error } = await supabase
+      .from('debt_applications')
+      .insert({
+        name, email, phone, 
+        total_debt: totalDebt, 
+        monthly_income: monthlyIncome,
+        loan_type: loanType, 
+        employment_status: employmentStatus, 
+        city, pincode,
+        message: message || null, 
+        source: source || 'website', 
+        lead_type: leadType || 'debt_relief',
+        status: 'new'
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
 
     // Log activity
-    await db.execute(`
-      INSERT INTO lead_activities (
-        lead_id, lead_type, activity_type, subject, description
-      ) VALUES (?, 'debt_application', 'note', 'Application Submitted', 'New debt relief application submitted from website')
-    `, [result.insertId]);
+    await supabase
+      .from('lead_activities')
+      .insert({
+        lead_id: result.id,
+        lead_type: 'debt_application',
+        activity_type: 'note',
+        subject: 'Application Submitted',
+        description: 'New debt relief application submitted from website'
+      });
 
     res.status(201).json({ 
       message: 'Application submitted successfully',
-      applicationId: result.insertId
+      applicationId: result.id
     });
   } catch (error) {
     console.error('Submit application error:', error);
@@ -77,33 +88,22 @@ router.get('/', async (req, res) => {
     const { status, page = 1, limit = 50 } = req.query;
     const offset = (page - 1) * limit;
 
-    let query = 'SELECT * FROM debt_applications';
-    let params = [];
+    let query = supabase
+      .from('debt_applications')
+      .select('*', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(offset, offset + parseInt(limit) - 1);
 
     if (status) {
-      query += ' WHERE status = ?';
-      params.push(status);
+      query = query.eq('status', status);
     }
 
-    query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
-    params.push(parseInt(limit), parseInt(offset));
-
-    const [rows] = await db.execute(query, params);
+    const { data: applications, count: total, error } = await query;
     
-    // Get total count
-    let countQuery = 'SELECT COUNT(*) as total FROM debt_applications';
-    let countParams = [];
-    
-    if (status) {
-      countQuery += ' WHERE status = ?';
-      countParams.push(status);
-    }
-    
-    const [countRows] = await db.execute(countQuery, countParams);
-    const total = countRows[0].total;
+    if (error) throw error;
 
     res.json({
-      applications: rows,
+      applications,
       pagination: {
         page: parseInt(page),
         limit: parseInt(limit),
