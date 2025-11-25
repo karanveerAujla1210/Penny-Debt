@@ -3,7 +3,9 @@
 
 export const roleDashboardMap = {
   admin: "/dashboard/admin",
+  manager: "/dashboard/manager",
   teamlead: "/dashboard/manager",
+  sales: "/dashboard/employee",
   marketing: "/dashboard/marketing",
   hr: "/dashboard/hr",
   verifier: "/dashboard/verifier",

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
+import { authenticateEmployee } from "../../utils/auth";
 import { getDashboardRouteForRole } from "../../utils/roleAccess";
 
 const EmployeeLogin = () => {
@@ -92,25 +91,21 @@ const EmployeeLogin = () => {
     setCaptchaValid(true);
     setFormError("");
 
-
-    axios.post("http://localhost:5000/api/employee-auth/login", {
-      identifier: formData.identifier,
-      password: formData.password
-    })
-      .then(res => {
-        alert(res.data.message || "Login successful");
-        // Save user info in localStorage
-        localStorage.setItem("employee", JSON.stringify(res.data));
-        // Redirect to role-based dashboard
-        const role = res.data?.employee?.role || res.data?.role;
-        const dashboardRoute = getDashboardRouteForRole(role);
-        navigate(dashboardRoute);
-      })
-      .catch(err => {
-        alert(
-          err.response?.data?.message || "Login failed. Please check your credentials."
-        );
-      });
+    // Use frontend authentication
+    const result = authenticateEmployee(formData.identifier, formData.password);
+    
+    if (result.success) {
+      alert("Login successful!");
+      // Save user info in localStorage
+      localStorage.setItem("employee", JSON.stringify(result.user));
+      // Redirect to role-based dashboard
+      const role = result.user.role;
+      const dashboardRoute = getDashboardRouteForRole(role);
+      navigate(dashboardRoute);
+    } else {
+      alert(result.message || "Login failed. Please check your credentials.");
+      setFormError(result.message || "Invalid credentials");
+    }
 
     setFormData({
       identifier: "",
