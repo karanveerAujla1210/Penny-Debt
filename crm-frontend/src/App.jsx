@@ -42,6 +42,7 @@ import EmployeeLogin from "./pages/Auth/EmployeeLogin";
 import SimpleEmployeeLogin from "./pages/Auth/SimpleEmployeeLogin";
 import TestAuth from "./pages/Auth/TestAuth";
 import IsolatedLogin from "./pages/Auth/IsolatedLogin";
+import WorkingLogin from "./pages/Auth/WorkingLogin";
 import Signup from "./pages/Website/Signup";
 import DataViewer from "./pages/Admin/DataViewer";
 import TestPage from "./pages/TestPage";
@@ -212,10 +213,11 @@ export default function App() {
           } />
           {/* Website Auth */}
           <Route path="/customer-login" element={<CustomerLogin />} />
-          <Route path="/employee-login" element={<EmployeeLogin />} />
+          <Route path="/employee-login" element={<WorkingLogin />} />
           <Route path="/simple-login" element={<SimpleEmployeeLogin />} />
           <Route path="/test-auth" element={<TestAuth />} />
           <Route path="/isolated-login" element={<IsolatedLogin />} />
+          <Route path="/old-employee-login" element={<EmployeeLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/data" element={<DataViewer />} />
           <Route path="/test" element={<TestPage />} />

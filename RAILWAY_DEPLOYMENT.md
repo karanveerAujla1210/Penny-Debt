@@ -34,16 +34,13 @@ railway init
 railway up
 ```
 
-## Step 3: Environment Variables
-Add these environment variables in Railway dashboard:
+### Step 3: Environment Variables
+Add these environment variables in Railway dashboard (or your chosen host):
 
 ### Required Variables:
 ```
 NODE_ENV=production
-DB_HOST=your_mysql_host
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
-DB_NAME=penny_debt_crm
+MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=care@pennyanddebt.in
@@ -53,13 +50,13 @@ FRONTEND_URL=https://your-frontend-domain.com
 ```
 
 ## Step 4: Database Setup
-1. **Add MySQL Database:**
-   - In Railway dashboard, click **"New"** → **"Database"** → **"MySQL"**
-   - Copy connection details to environment variables
+1. **Add MongoDB (Atlas) or external MongoDB service:**
+   - For MongoDB Atlas, create a new cluster and whitelist Railway's IPs if needed.
+   - Copy the connection string and paste it into `MONGODB_URI` environment variable.
 
-2. **Import Schema:**
-   - Use Railway's database connection to import your SQL schema
-   - Or connect via MySQL client using provided credentials
+2. **Schema / Collections:**
+   - MongoDB is schema-less; collections will be created automatically by Mongoose models when the app runs.
+   - If you have seed data, run a seed script or import JSON into the cluster.
 
 ## Step 5: Update Frontend
 Update your frontend API calls to use Railway backend URL:

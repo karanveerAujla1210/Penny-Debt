@@ -1,6 +1,6 @@
 # Penny Debt CRM System
 
-Full-stack debt relief CRM application with React frontend, Node.js backend, and MySQL database.
+Full-stack debt relief CRM application with React frontend, Node.js backend, and MongoDB database.
 
 ## Features
 
@@ -14,7 +14,7 @@ Full-stack debt relief CRM application with React frontend, Node.js backend, and
 
 - **Frontend**: React.js, Framer Motion
 - **Backend**: Node.js, Express.js
-- **Database**: MySQL
+- **Database**: MongoDB (Mongoose)
 - **Email**: Nodemailer with SMTP
 - **Deployment**: Ready for Vercel/Netlify (Frontend) + Railway/Heroku (Backend)
 
@@ -22,7 +22,7 @@ Full-stack debt relief CRM application with React frontend, Node.js backend, and
 
 ### Prerequisites
 - Node.js 16+
-- MySQL 8.0+
+- MongoDB (local or cloud) and a connection URI
 - SMTP email credentials
 
 ### Installation
@@ -38,7 +38,9 @@ cd penny-debt-crm
 cd backend
 npm install
 cp .env.example .env
-# Configure your .env file with database and email credentials
+# Configure your .env file with MongoDB connection and email credentials
+# Example .env entry:
+# MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
 npm run dev
 ```
 
@@ -50,20 +52,14 @@ npm start
 ```
 
 4. **Database Setup**
-```bash
-# Import the database schema
-mysql -u root -p < database/schema_updated.sql
-```
+If you're using a hosted MongoDB (Atlas) you typically do not need to import a schema file; collections are created automatically by Mongoose models. For local MongoDB, ensure the server is running and `MONGODB_URI` points to it.
 
 ## Environment Configuration
 
 Create `backend/.env` with:
 ```env
-# Database
-DB_HOST=localhost
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
-DB_NAME=penny_debt_crm
+# MongoDB connection string
+MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
 
 # Email
 SMTP_HOST=smtp.gmail.com
@@ -85,7 +81,7 @@ JWT_SECRET=your_jwt_secret
 ### Backend (Railway/Heroku)
 - Deploy from `backend/` directory
 - Add environment variables
-- Connect MySQL database
+-- Connect MongoDB database
 
 ## Project Structure
 

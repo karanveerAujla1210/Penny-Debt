@@ -8,8 +8,18 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
+// CORS: allow configured frontend URL, common dev ports (Vite 5173, CRA 3000), and other localhost ports
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000'].filter(Boolean);
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // allow requests with no origin (e.g., mobile apps, curl, server-to-server)
+    if (!origin) return callback(null, true);
+    // allow explicit origins or any localhost with any port
+    if (allowedOrigins.includes(origin) || /^https?:\/\/localhost(:\d+)?$/.test(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS policy: Origin not allowed'), false);
+  },
   credentials: true
 }));
 
@@ -25,6 +35,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
+app.use('/api/auth', require('./routes/auth'));
 app.use('/api/otp', require('./routes/otp'));
 app.use('/api/leads', require('./routes/leads'));
 app.use('/api/customers', require('./routes/customers'));
@@ -36,7 +47,9 @@ app.get('/health', (req, res) => {
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+// ignore unused `next` parameter required by Express error handler
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, _next) => {
   console.error(err.stack);
   res.status(500).json({ 
     message: 'Something went wrong!',
