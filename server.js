@@ -21,6 +21,9 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
+// API Routes
+app.use('/api/leads', require('./routes/leads'));
+
 // Basic API routes
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
