@@ -1,22 +1,5 @@
-const { createClient } = require('@supabase/supabase-js');
+// This file is deprecated and no longer used.
+// The project now uses MongoDB with Mongoose for database connections.
+// See backend/server.js for MongoDB connection setup.
 
-const supabaseUrl = 'https://lbmrwhufxymdmuamjwor.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY;
-
-if (!supabaseKey) {
-  console.error('SUPABASE_KEY is not defined in environment variables');
-  process.exit(1);
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-// Test connection
-supabase.from('leads').select('count', { count: 'exact', head: true })
-  .then(() => {
-    console.log('Supabase connected successfully');
-  })
-  .catch(err => {
-    console.error('Supabase connection failed:', err.message);
-  });
-
-module.exports = supabase;
+module.exports = null;

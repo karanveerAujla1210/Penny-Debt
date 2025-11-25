@@ -32,7 +32,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Trust proxy (for Render/Railway where requests come through a reverse proxy)
+// Trust proxy (for Render where requests come through a reverse proxy)
 app.set('trust proxy', 1);
 
 // Health check

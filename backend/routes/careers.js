@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const { body, validationResult } = require('express-validator');
-const supabase = require('../models/database');
+const Career = require('../../models/Career');
 
 const router = express.Router();
 
@@ -53,22 +53,18 @@ router.post('/', upload.single('resume'), [
     }
 
     // Insert career application
-    const { data: result, error } = await supabase
-      .from('career_applications')
-      .insert({
-        full_name: fullName,
-        email,
-        resume_filename: req.file.filename,
-        resume_path: req.file.path
-      })
-      .select()
-      .single();
+    const career = new Career({
+      fullName,
+      email,
+      resumeUrl: req.file.filename,
+      status: 'applied'
+    });
 
-    if (error) throw error;
+    const result = await career.save();
 
     res.status(201).json({ 
       message: 'Application submitted successfully',
-      applicationId: result.id
+      applicationId: result._id
     });
   } catch (error) {
     console.error('Career application error:', error);

@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
-const supabase = require('../models/database');
+const Customer = require('../../models/Customer');
 
 const router = express.Router();
 
@@ -21,12 +21,9 @@ router.post('/signup', [
     const { full_name, email, password, mobile } = req.body;
 
     // Check if email already exists
-    const { data: existingUsers } = await supabase
-      .from('customers')
-      .select('id')
-      .eq('email', email);
+    const existingCustomer = await Customer.findOne({ email });
 
-    if (existingUsers && existingUsers.length > 0) {
+    if (existingCustomer) {
       return res.status(400).json({ message: 'Email already registered' });
     }
 
@@ -34,23 +31,22 @@ router.post('/signup', [
     const saltRounds = 12;
     const password_hash = await bcrypt.hash(password, saltRounds);
 
-    // Insert customer
-    const { data: result, error } = await supabase
-      .from('customers')
-      .insert({
-        full_name,
-        email,
-        password_hash,
-        mobile: mobile || null
-      })
-      .select()
-      .single();
+    // Create customer
+    const customer = new Customer({
+      fullName: full_name,
+      email,
+      phone: mobile || '',
+      status: 'new'
+    });
 
-    if (error) throw error;
+    // Note: Store hashed password separately or extend Customer model
+    customer.passwordHash = password_hash;
+
+    const result = await customer.save();
 
     res.status(201).json({ 
       message: 'Account created successfully',
-      customerId: result.id
+      customerId: result._id
     });
   } catch (error) {
     console.error('Customer signup error:', error);

@@ -16,7 +16,7 @@ Full-stack debt relief CRM application with React frontend, Node.js backend, and
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (Mongoose)
 - **Email**: Nodemailer with SMTP
-- **Deployment**: Ready for Vercel/Netlify (Frontend) + Railway/Heroku (Backend)
+- **Deployment**: Vercel (Frontend) + Render (Backend) + MongoDB Atlas (Database)
 
 ## Quick Start
 
@@ -73,15 +73,26 @@ JWT_SECRET=your_jwt_secret
 
 ## Deployment
 
-### Frontend (Vercel/Netlify)
-- Build command: `npm run build`
-- Output directory: `build`
-- Environment variables: API endpoint
+### Frontend (Vercel)
 
-### Backend (Railway/Heroku)
-- Deploy from `backend/` directory
-- Add environment variables
--- Connect MongoDB database
+- Deploy `crm-frontend/` directory
+- Build command: `npm run build`
+- Output directory: `dist` (Vite)
+- Set environment variable: `VITE_API_BASE_URL` to your Render backend URL
+
+### Backend (Render)
+
+- Deploy from `backend/` directory via GitHub
+- Environment variables: MongoDB URI, JWT secret, email config
+- Free tier supports one backend instance
+
+### Database (MongoDB Atlas)
+
+- Create free tier cluster on MongoDB Atlas
+- Whitelist Render IP addresses
+- Share connection string as `MONGODB_URI` env var
+
+See `DEPLOYMENT_FINAL.md` for detailed step-by-step instructions.
 
 ## Project Structure
 
@@ -89,8 +100,8 @@ JWT_SECRET=your_jwt_secret
 penny-debt-crm/
 ├── crm-frontend/          # React application
 ├── backend/               # Node.js API server
-├── database/              # SQL schema files
-└── docs/                  # Documentation
+├── database/              # MongoDB schema files
+└── models/                # Mongoose models
 ```
 
 ## API Endpoints

@@ -1,6 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const supabase = require('../models/database');
+const Lead = require('../../models/Lead');
+const Activity = require('../../models/Activity');
 
 const router = express.Router();
 
@@ -29,52 +30,37 @@ router.post('/submit', [
       message, source, leadType, emailVerified
     } = req.body;
 
-    // Check if email is verified
-    if (emailVerified) {
-      const { data: verifiedRows } = await supabase
-        .from('verified_emails')
-        .select('*')
-        .eq('email', email);
-      
-      if (!verifiedRows || verifiedRows.length === 0) {
-        return res.status(400).json({ message: 'Email not verified' });
-      }
-    }
+    // Create debt application lead
+    const lead = new Lead({
+      name,
+      email,
+      phone,
+      totalDebt,
+      monthlyIncome,
+      loanType,
+      employmentStatus,
+      city,
+      pincode,
+      message: message || undefined,
+      source: source || 'website',
+      status: 'new',
+      emailVerified: emailVerified || false
+    });
 
-    // Insert debt application
-    const { data: result, error } = await supabase
-      .from('debt_applications')
-      .insert({
-        name, email, phone, 
-        total_debt: totalDebt, 
-        monthly_income: monthlyIncome,
-        loan_type: loanType, 
-        employment_status: employmentStatus, 
-        city, pincode,
-        message: message || null, 
-        source: source || 'website', 
-        lead_type: leadType || 'debt_relief',
-        status: 'new'
-      })
-      .select()
-      .single();
-
-    if (error) throw error;
+    const result = await lead.save();
 
     // Log activity
-    await supabase
-      .from('lead_activities')
-      .insert({
-        lead_id: result.id,
-        lead_type: 'debt_application',
-        activity_type: 'note',
-        subject: 'Application Submitted',
-        description: 'New debt relief application submitted from website'
-      });
+    await Activity.create({
+      relatedId: result._id,
+      type: 'debt_application',
+      action: 'note',
+      subject: 'Application Submitted',
+      description: 'New debt relief application submitted from website'
+    });
 
     res.status(201).json({ 
       message: 'Application submitted successfully',
-      applicationId: result.id
+      applicationId: result._id
     });
   } catch (error) {
     console.error('Submit application error:', error);
@@ -86,29 +72,29 @@ router.post('/submit', [
 router.get('/', async (req, res) => {
   try {
     const { status, page = 1, limit = 50 } = req.query;
-    const offset = (page - 1) * limit;
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+    const skip = (pageNum - 1) * limitNum;
 
-    let query = supabase
-      .from('debt_applications')
-      .select('*', { count: 'exact' })
-      .order('created_at', { ascending: false })
-      .range(offset, offset + parseInt(limit) - 1);
+    let query = Lead.find();
 
     if (status) {
-      query = query.eq('status', status);
+      query = query.where('status').equals(status);
     }
 
-    const { data: applications, count: total, error } = await query;
-    
-    if (error) throw error;
+    const total = await Lead.countDocuments(query.getFilter());
+    const applications = await query
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limitNum);
 
     res.json({
       applications,
       pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
+        page: pageNum,
+        limit: limitNum,
         total,
-        pages: Math.ceil(total / limit)
+        pages: Math.ceil(total / limitNum)
       }
     });
   } catch (error) {

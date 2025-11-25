@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
-const supabase = require('../models/database');
+const OTP = require('../../models/OTP');
 const { generateOTP, sendOTPEmail } = require('../utils/emailService');
 
 const router = express.Router();
@@ -29,15 +29,11 @@ router.post('/send-otp', otpLimiter, [
     const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
 
     // Store OTP in database
-    const { error } = await supabase
-      .from('email_otps')
-      .upsert({
-        email,
-        otp,
-        expires_at: expiresAt.toISOString()
-      });
-    
-    if (error) throw error;
+    await OTP.findOneAndUpdate(
+      { email },
+      { email, otp, expiresAt, verified: false },
+      { upsert: true, new: true }
+    );
 
     // Send OTP email
     const emailResult = await sendOTPEmail(email, name, otp);
@@ -67,25 +63,19 @@ router.post('/verify-otp', [
     const { email, otp } = req.body;
 
     // Check OTP in database
-    const { data: rows } = await supabase
-      .from('email_otps')
-      .select('*')
-      .eq('email', email)
-      .eq('otp', otp)
-      .gt('expires_at', new Date().toISOString());
+    const otpRecord = await OTP.findOne({
+      email,
+      otp,
+      expiresAt: { $gt: new Date() },
+      verified: false
+    });
 
-    if (!rows || rows.length === 0) {
+    if (!otpRecord) {
       return res.status(400).json({ message: 'Invalid or expired OTP' });
     }
 
-    // Mark as verified and delete OTP
-    await supabase.from('email_otps').delete().eq('email', email);
-    await supabase
-      .from('verified_emails')
-      .upsert({
-        email,
-        verified_at: new Date().toISOString()
-      });
+    // Mark as verified and clean up
+    await OTP.findByIdAndDelete(otpRecord._id);
 
     res.json({ message: 'Email verified successfully' });
   } catch (error) {

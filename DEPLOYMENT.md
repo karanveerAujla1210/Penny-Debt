@@ -1,120 +1,110 @@
-# Deployment Guide - pennyanddebt.in
+# Deployment Guide - Vercel + Render + MongoDB
 
-## Domain Configuration
+## Production Stack
 
-**Primary Domain**: `pennyanddebt.in`
-**Subdomains**:
-- `www.pennyanddebt.in` - Main website
-- `api.pennyanddebt.in` - Backend API
-- `admin.pennyanddebt.in` - CRM Dashboard (optional)
+- **Frontend**: Vercel (static React + Vite build)
+- **Backend**: Render (Node.js + Express)
+- **Database**: MongoDB Atlas (cloud MongoDB)
 
-## Deployment Architecture
+See `DEPLOYMENT_FINAL.md` for comprehensive step-by-step deployment guide.
 
-### Frontend (Vercel - Recommended)
-- **URL**: `https://pennyanddebt.in`
-- **Build**: React production build
-- **CDN**: Global edge network
-
-### Backend (Railway - Recommended)  
-- **URL**: `https://api.pennyanddebt.in`
-- **Database**: Railway MySQL
-- **Email**: Custom domain SMTP
-
-## Quick Deploy Steps
+## Quick Summary
 
 ### 1. Frontend Deployment (Vercel)
-```bash
-# Connect GitHub repo to Vercel
-# Set custom domain: pennyanddebt.in
-# Environment variables:
-REACT_APP_API_URL=https://api.pennyanddebt.in
-```
+- Connect GitHub repo to Vercel
+- Set environment variable: `VITE_API_BASE_URL` = your Render backend URL
+- Frontend auto-deploys on git push
 
-### 2. Backend Deployment (Railway)
-```bash
-# Deploy backend to Railway
-# Set custom domain: api.pennyanddebt.in
-# Environment variables in Railway dashboard
-```
+### 2. Backend Deployment (Render)
+- Create new Web Service on Render
+- Connect GitHub repo, select `backend/` directory
+- Set environment variables: `MONGODB_URI`, `JWT_SECRET`, email credentials
+- Backend starts on `https://your-app.onrender.com`
 
-### 3. DNS Configuration
-```
-# Add these DNS records to your domain provider:
-A     @           76.76.19.19        (Vercel)
-CNAME www         pennyanddebt.in
-CNAME api         railway-production-url
-```
-
-### 4. SSL Certificates
-- Vercel: Auto SSL for main domain
-- Railway: Auto SSL for API subdomain
+### 3. Database Setup (MongoDB Atlas)
+- Create free cluster on MongoDB Atlas
+- Add IP whitelist for Render servers (or use `0.0.0.0/0` for development)
+- Share connection string as `MONGODB_URI` environment variable
 
 ## Environment Variables
 
-### Frontend (.env.production)
-```env
-REACT_APP_API_URL=https://api.pennyanddebt.in
-REACT_APP_DOMAIN=pennyanddebt.in
+Set these in Vercel dashboard:
+```
+VITE_API_BASE_URL=https://your-render-backend.onrender.com
 ```
 
-### Backend (Railway)
-```env
-DB_HOST=railway-mysql-host
-DB_USER=root
-DB_PASSWORD=railway-generated-password
-DB_NAME=penny_debt_crm
-
-SMTP_HOST=mail.pennyanddebt.in
-SMTP_PORT=587
-SMTP_USER=care@pennyanddebt.in
-SMTP_PASS=your_email_password
-
-FRONTEND_URL=https://pennyanddebt.in
-CORS_ORIGIN=https://pennyanddebt.in
-
-JWT_SECRET=your-production-jwt-secret
+Set these in Render dashboard:
+```
+MONGODB_URI=mongodb+srv://user:password@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
 NODE_ENV=production
+JWT_SECRET=your-secret-key
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-specific-password
+FRONTEND_URL=https://your-vercel-app.vercel.app
 ```
 
-## Email Setup (Custom Domain)
+## Verification
 
-### Option 1: Google Workspace
-- Setup: `care@pennyanddebt.in`
-- SMTP: `smtp.gmail.com:587`
-- Use App Password for authentication
+- Frontend: Visit `https://your-vercel-app.vercel.app`
+- Backend: Visit `https://your-render-backend.onrender.com/health`
+- Logs: Check Render dashboard for backend logs
 
-### Option 2: Zoho Mail (Free)
-- Setup: `care@pennyanddebt.in` 
-- SMTP: `smtp.zoho.in:587`
-- Professional email solution
+## Support
+
+For detailed instructions, see `DEPLOYMENT_FINAL.md`
+
+
+
+
+## Environment Variables
+
+**Vercel dashboard:**
+
+```
+VITE_API_BASE_URL=https://your-render-backend.onrender.com
+```
+
+**Render dashboard:**
+
+```
+MONGODB_URI=mongodb+srv://user:password@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
+NODE_ENV=production
+JWT_SECRET=your-secret-key
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-specific-password
+FRONTEND_URL=https://your-vercel-app.vercel.app
+```
+
+## Email Setup
+
+Use Gmail with App-Specific Password:
+
+1. Enable 2-Factor Authentication on Gmail
+2. Generate App-Specific Password for "Mail" app
+3. Use this password as `EMAIL_PASS` environment variable
+4. Set `EMAIL_USER` to your Gmail address
 
 ## Production Checklist
 
-✅ Domain DNS configured
-✅ SSL certificates active  
-✅ Environment variables set
-✅ Database schema imported
-✅ Email SMTP configured
-✅ CORS origins updated
-✅ Error monitoring setup
+- ✅ Vercel frontend connected to GitHub
+- ✅ Render backend connected to GitHub
+- ✅ MongoDB Atlas cluster created and whitelisted
+- ✅ Environment variables configured on both platforms
+- ✅ Email credentials set up
+- ✅ Frontend can call backend API
+- ✅ Backend connects to MongoDB
+- ✅ Health check endpoints working
 
-## Monitoring & Analytics
+## Monitoring
 
-- **Vercel Analytics**: Built-in performance monitoring
-- **Railway Logs**: Backend error tracking
-- **Google Analytics**: Website traffic (optional)
+- **Frontend**: Vercel Analytics dashboard
+- **Backend**: Render logs in dashboard
+- **Database**: MongoDB Atlas monitoring
 
-## Backup Strategy
+## Support
 
-- **Database**: Railway auto-backups
-- **Code**: GitHub repository
-- **Environment**: Documented configurations
-
-## Cost Estimate
-
-- **Vercel Pro**: $20/month (custom domain + analytics)
-- **Railway**: $5-20/month (based on usage)
-- **Domain**: $10-15/year
-- **Email**: Free (Zoho) or $6/user/month (Google)
-
-**Total**: ~$30-50/month for professional setup
+For detailed instructions, see `DEPLOYMENT_FINAL.md`
