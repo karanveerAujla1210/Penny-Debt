@@ -14,10 +14,10 @@ export const PRODUCTION_CONFIG = {
 
   // Website Configuration
   WEBSITE: {
-    URL: 'https://penny-debt-crm.vercel.app',
+    URL: 'https://pennyanddebt.in',
     TITLE: 'Penny Debt CRM',
     EMAIL: 'care@pennyanddebt.in',
-    PHONE: '+91-XXXXXXXXXX'
+    PHONE: '+91-7814447895'
   },
 
   // Demo Configuration
