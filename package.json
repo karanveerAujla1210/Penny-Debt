@@ -1,19 +1,26 @@
 {
-  "name": "penny-debt-crm",
+  "name": "penny-debt-backend",
   "version": "1.0.0",
-  "description": "Full-stack debt relief CRM system",
-  "main": "index.js",
+  "description": "Backend API for Penny Debt CRM",
+  "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "backend": "cd backend && npm run dev",
-    "frontend": "cd crm-frontend && npm start",
-    "build": "cd crm-frontend && npm ci && npm run build",
-    "install-all": "npm install && cd backend && npm install && cd ../crm-frontend && npm install"
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
   },
-  "keywords": ["crm", "debt-relief", "react", "nodejs", "mysql"],
-  "author": "Penny & Debt",
-  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.84.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.7"
+  },
   "devDependencies": {
-    "concurrently": "^7.6.0"
+    "nodemon": "^3.0.1"
   }
 }
