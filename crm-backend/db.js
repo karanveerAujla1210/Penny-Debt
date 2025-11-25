@@ -1,18 +1,7 @@
-const mysql = require('mysql');
+const mongoose = require("mongoose");
 
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Aujla@1422',  // your MySQL password
-  database: 'loan_crm'     // database you already created
-});
+const uri = "mongodb+srv://singh2212karanveer_db_user:tVENTkpkJJIekGBA@cluster0.0xgwopz.mongodb.net/pennydebt?retryWrites=true&w=majority&appName=Cluster0";
 
-db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to database:', err.message);
-    return;
-  }
-  console.log('Connected to MySQL database ✅');
-});
-
-module.exports = db;
+mongoose.connect(uri)
+  .then(() => console.log("MongoDB Connected Successfully!"))
+  .catch(err => console.error("MongoDB connection error:", err));
