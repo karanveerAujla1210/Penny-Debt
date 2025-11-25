@@ -40,6 +40,8 @@ import CustomerHome from "./pages/crm/Customer/CustomerHome";
 import CustomerLogin from "./pages/Auth/CustomerLogin";
 import EmployeeLogin from "./pages/Auth/EmployeeLogin";
 import SimpleEmployeeLogin from "./pages/Auth/SimpleEmployeeLogin";
+import TestAuth from "./pages/Auth/TestAuth";
+import IsolatedLogin from "./pages/Auth/IsolatedLogin";
 import Signup from "./pages/Website/Signup";
 import DataViewer from "./pages/Admin/DataViewer";
 import TestPage from "./pages/TestPage";
@@ -212,6 +214,8 @@ export default function App() {
           <Route path="/customer-login" element={<CustomerLogin />} />
           <Route path="/employee-login" element={<EmployeeLogin />} />
           <Route path="/simple-login" element={<SimpleEmployeeLogin />} />
+          <Route path="/test-auth" element={<TestAuth />} />
+          <Route path="/isolated-login" element={<IsolatedLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/data" element={<DataViewer />} />
           <Route path="/test" element={<TestPage />} />
