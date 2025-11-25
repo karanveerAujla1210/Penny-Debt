@@ -14,7 +14,7 @@ export const PRODUCTION_CONFIG = {
 
   // Website Configuration
   WEBSITE: {
-    URL: 'https://pennyanddebt.in',
+    URL: 'https://crmpennyanddebt.in',
     TITLE: 'Penny Debt CRM',
     EMAIL: 'care@pennyanddebt.in',
     PHONE: '+91-7814447895'
