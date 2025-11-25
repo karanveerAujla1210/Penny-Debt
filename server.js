@@ -34,6 +34,10 @@ app.get('/health', (req, res) => {
 
 // API Routes
 app.use('/api/leads', require('./routes/leads'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/customers', require('./routes/customers'));
+app.use('/api/contacts', require('./routes/contacts'));
+app.use('/api/careers', require('./routes/careers'));
 
 // Basic API routes
 app.get('/api/test', (req, res) => {
