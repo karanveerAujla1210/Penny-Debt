@@ -2,13 +2,9 @@
   "version": 2,
   "name": "pennyanddebt",
   "buildCommand": "cd crm-frontend && npm ci && npm run build",
-  "outputDirectory": "crm-frontend/dist",
+  "outputDirectory": "crm-frontend/build",
   "installCommand": "cd crm-frontend && npm install",
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://api.pennyanddebt.in/api/$1"
-    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
