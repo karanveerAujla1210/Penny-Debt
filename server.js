@@ -39,6 +39,23 @@ app.use('/api/customers', require('./routes/customers'));
 app.use('/api/contacts', require('./routes/contacts'));
 app.use('/api/careers', require('./routes/careers'));
 
+// Database initialization endpoint
+app.post('/api/init-db', async (req, res) => {
+  try {
+    const { exec } = require('child_process');
+    exec('node scripts/initDatabase.js', (error, stdout, stderr) => {
+      if (error) {
+        console.error('Init DB Error:', error);
+        return res.status(500).json({ success: false, error: error.message });
+      }
+      console.log('Init DB Output:', stdout);
+      res.json({ success: true, message: 'Database initialized successfully', output: stdout });
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Basic API routes
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
