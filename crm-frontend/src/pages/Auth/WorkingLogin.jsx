@@ -7,28 +7,38 @@ const WorkingLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Employee credentials
+  const EMPLOYEE_ACCOUNTS = {
+    'admin@pennyanddebt.in': { password: 'PennyAdmin@2024#Secure', role: 'admin', name: 'Admin User' },
+    'manager@pennyanddebt.in': { password: 'DebtManager$2024!Strong', role: 'manager', name: 'Manager User' },
+    'sales1@pennyanddebt.in': { password: 'SalesLead#2024@Power', role: 'sales', name: 'Sales Lead' },
+    'support@pennyanddebt.in': { password: 'Support&2024!Help', role: 'support', name: 'Support Agent' }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch('https://penny-debt-backend.onrender.com/api/auth/employee-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        localStorage.setItem('employee', JSON.stringify(data.user));
-        window.location.href = 'https://crmpennyanddebt.in';
-      } else {
-        setError(data.message || 'Login failed');
+      const employee = EMPLOYEE_ACCOUNTS[formData.email.toLowerCase()];
+      
+      if (!employee || employee.password !== formData.password) {
+        setError('Invalid email or password');
+        setLoading(false);
+        return;
       }
+
+      const user = {
+        email: formData.email.toLowerCase(),
+        role: employee.role,
+        name: employee.name
+      };
+
+      localStorage.setItem('employee', JSON.stringify(user));
+      window.location.href = 'https://crmpennyanddebt.in';
     } catch (error) {
-      setError('Network error. Please try again.');
+      setError('Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
