@@ -56,6 +56,22 @@ app.post('/api/init-db', async (req, res) => {
   }
 });
 
+// Database connection test
+app.get('/api/db-test', async (req, res) => {
+  try {
+    const connectDB = require('./database');
+    const db = await connectDB();
+    const collections = await db.listCollections().toArray();
+    res.json({ 
+      success: true, 
+      message: 'Database connected successfully',
+      collections: collections.map(c => c.name)
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 // Basic API routes
 app.get('/api/test', (req, res) => {
   res.json({ message: 'API is working!' });
