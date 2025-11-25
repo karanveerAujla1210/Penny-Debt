@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: penny-debt-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://singh2212karanveer_db_user:tVENTkpkJJIekGBA@cluster0.0xgwopz.mongodb.net/pennydebt
+      - key: JWT_SECRET
+        value: PennyDebt2024$SecretKey#CRM@System!9876
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_USER
+        value: care@pennyanddebt.in
+      - key: FRONTEND_URL
+        value: https://penny-debt-crm.vercel.app

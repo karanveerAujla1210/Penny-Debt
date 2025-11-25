@@ -2,14 +2,26 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
 
+// Connect to MongoDB Atlas
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ Connected to MongoDB Atlas'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
+
 // Security middleware
 app.use(helmet());
 // CORS: allow configured frontend URL, common dev ports (Vite 5173, CRA 3000), and other localhost ports
-const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000'].filter(Boolean);
+const allowedOrigins = [
+  'https://penny-debt-crm.vercel.app',
+  'https://pennyanddebt.in', 
+  'https://crmpennyanddebt.in',
+  'http://localhost:5173', 
+  'http://localhost:3000'
+].filter(Boolean);
 app.use(cors({
   origin: (origin, callback) => {
     // allow requests with no origin (e.g., mobile apps, curl, server-to-server)
