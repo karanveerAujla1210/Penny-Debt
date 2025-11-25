@@ -12,11 +12,15 @@ const Login = ({ onLogin }) => {
     setLoading(true);
     setError('');
 
+    console.log('Login attempt:', credentials.email);
     const result = authenticateEmployee(credentials.email, credentials.password);
+    console.log('Login result:', result);
     
     if (result.success) {
+      console.log('Login successful, calling onLogin');
       onLogin(result.user);
     } else {
+      console.log('Login failed:', result.message);
       setError(result.message);
     }
     
@@ -64,10 +68,10 @@ const Login = ({ onLogin }) => {
         <div className="demo-accounts">
           <h4>Demo Accounts:</h4>
           <div className="account-list">
-            <div><strong>Admin:</strong> admin@pennyanddebt.in</div>
-            <div><strong>Manager:</strong> manager@pennyanddebt.in</div>
-            <div><strong>Sales:</strong> sales1@pennyanddebt.in</div>
-            <div><strong>Support:</strong> support@pennyanddebt.in</div>
+            <div><strong>Admin:</strong> admin@pennyanddebt.in<br/>Password: PennyAdmin@2024#Secure</div>
+            <div><strong>Manager:</strong> manager@pennyanddebt.in<br/>Password: DebtManager$2024!Strong</div>
+            <div><strong>Sales:</strong> sales1@pennyanddebt.in<br/>Password: SalesLead#2024@Power</div>
+            <div><strong>Support:</strong> support@pennyanddebt.in<br/>Password: Support&2024!Help</div>
           </div>
         </div>
       </div>
