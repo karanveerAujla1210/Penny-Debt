@@ -122,7 +122,7 @@ const Footer = () => (
   </footer>
 );
 
-// App without BrowserRouter
+// App without BrowserRouter - Fixed duplicate imports
 export default function App() {
   // Initialize protection (COMPLETELY DISABLED)
   useEffect(() => {
