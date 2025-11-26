@@ -20,6 +20,8 @@ const TestLogin = () => {
 
       const data = await response.json();
       
+      setResult(`Response Status: ${response.status}\nResponse Data: ${JSON.stringify(data, null, 2)}`);
+      
       if (data.success) {
         setResult('✅ SUCCESS: Login working! User: ' + data.user.name);
         localStorage.setItem('employee', JSON.stringify(data.user));
