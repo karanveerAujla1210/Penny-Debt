@@ -1,21 +1,7 @@
 {
-  "version": 2,
-  "name": "penny-debt-crm",
-  "projectSettings": {
-    "sourceFilesOutsideRootDirectory": true
-  },
   "buildCommand": "cd crm-frontend && npm install && npm run build",
   "outputDirectory": "crm-frontend/dist",
   "installCommand": "npm install",
-  "env": {
-    "VITE_API_BASE_URL": "@vite_api_base_url"
-  },
-  "git": {
-    "deploymentEnabled": {
-      "main": true,
-      "fix/mongo-integration": true
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",

@@ -55,7 +55,11 @@ app.use('/api/careers', require('./routes/careers'));
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    routes: ['auth', 'otp', 'leads', 'customers', 'careers']
+  });
 });
 
 // Error handling middleware
