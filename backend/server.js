@@ -62,7 +62,12 @@ app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    routes: ['auth', 'otp', 'leads', 'customers', 'careers']
+    routes: ['auth', 'otp', 'leads', 'customers', 'careers'],
+    mongodb: {
+      connected: mongoose.connection.readyState === 1,
+      state: mongoose.connection.readyState,
+      uri_set: !!process.env.MONGODB_URI
+    }
   });
 });
 
