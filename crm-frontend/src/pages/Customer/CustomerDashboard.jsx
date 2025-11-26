@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const CustomerDashboard = () => {
+  const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
   const [data, setData] = useState({ debt: [], offers: [], payments: [] });
   // Replace with actual logged-in customer ID from auth context or localStorage
   const customerId = localStorage.getItem('customerId') || 1;
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/customer-workflow/dashboard/${customerId}`)
+    axios.get(`${API_BASE_URL}/api/customer-workflow/dashboard/${customerId}`)
       .then(res => setData(res.data))
       .catch(() => {});
   }, [customerId]);

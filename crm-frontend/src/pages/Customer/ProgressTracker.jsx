@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ProgressTracker = () => {
+  const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
   const [progress, setProgress] = useState([]);
   // Replace with actual logged-in customer ID from auth context or localStorage
   const customerId = localStorage.getItem('customerId') || 1;
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/customer-workflow/progress/${customerId}`)
+    axios.get(`${API_BASE_URL}/api/customer-workflow/progress/${customerId}`)
       .then(res => setProgress(res.data.progress))
       .catch(() => {});
   }, [customerId]);
