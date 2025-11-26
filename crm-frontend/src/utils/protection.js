@@ -1,5 +1,4 @@
-// Code protection utilities (DISABLED FOR DEBUGGING)
+// Code protection utilities (COMPLETELY DISABLED)
 export const initProtection = () => {
-  // All protection disabled for debugging
-  console.log('Protection disabled - debugging mode');
+  // No protection - developer tools enabled
 };
