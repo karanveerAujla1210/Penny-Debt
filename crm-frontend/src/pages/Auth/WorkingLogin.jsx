@@ -7,8 +7,8 @@ const WorkingLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Use production backend URL
-  const API_BASE_URL = 'https://penny-debt-crm.onrender.com';
+  // Use environment variable or fallback to Render backend
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://penny-debt-crm.onrender.com';
 
   // Employee credentials
   const EMPLOYEE_ACCOUNTS = {
