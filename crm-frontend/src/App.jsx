@@ -16,7 +16,6 @@ import FAQ from "./pages/Website/FAQ";
 import PrivacyPolicy from "./pages/Website/PrivacyPolicy";
 import Terms from "./pages/Website/Terms";
 import CRMApp from "./pages/crm/CRMApp";
-import TestLogin from "./pages/crm/TestLogin";
 
 
 import ApplyLoan from "./pages/Website/ApplyLoan";
