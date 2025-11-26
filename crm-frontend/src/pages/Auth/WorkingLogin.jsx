@@ -23,6 +23,9 @@ const WorkingLogin = () => {
     setLoading(true);
     setError('');
 
+    console.log('Login attempt:', formData.email);
+    console.log('API URL:', `${API_BASE_URL}/api/auth/employee-login`);
+
     try {
       const response = await fetch(`${API_BASE_URL}/api/auth/employee-login`, {
         method: 'POST',
@@ -30,16 +33,20 @@ const WorkingLogin = () => {
         body: JSON.stringify(formData)
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (data.success) {
         localStorage.setItem('employee', JSON.stringify(data.user));
+        alert('Login successful!');
         window.location.href = '/dashboard/admin';
       } else {
         setError(data.message || 'Login failed');
       }
     } catch (error) {
-      setError('Network error. Please try again.');
+      console.error('Login error:', error);
+      setError(`Network error: ${error.message}`);
     } finally {
       setLoading(false);
     }
