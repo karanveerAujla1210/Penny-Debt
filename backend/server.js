@@ -12,8 +12,22 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB Atlas'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Security middleware
-app.use(helmet());
+// Security middleware with CSP allowing unsafe-eval for React compatibility
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "https://vercel.live", "https://*.vercel.com"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      fontSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https:", "http://localhost:*"],
+      mediaSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : undefined
+    }
+  }
+}));
 // CORS: allow configured frontend URL, common dev ports (Vite 5173, CRA 3000), and other localhost ports
 const allowedOrigins = [
   'https://penny-debt-crm.vercel.app',
