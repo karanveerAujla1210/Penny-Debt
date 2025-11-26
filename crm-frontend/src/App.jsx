@@ -44,7 +44,6 @@ import TestAuth from "./pages/Auth/TestAuth";
 import IsolatedLogin from "./pages/Auth/IsolatedLogin";
 import WorkingLogin from "./pages/Auth/WorkingLogin";
 import TestLogin from "./pages/Auth/TestLogin";
-import TestLogin from "./pages/Auth/TestLogin";
 import Signup from "./pages/Website/Signup";
 import DataViewer from "./pages/Admin/DataViewer";
 import TestPage from "./pages/TestPage";
