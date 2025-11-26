@@ -31,16 +31,14 @@ router.post('/signup', [
     const saltRounds = 12;
     const password_hash = await bcrypt.hash(password, saltRounds);
 
-    // Create customer
+    // Create customer with hashed password
     const customer = new Customer({
       fullName: full_name,
       email,
       phone: mobile || '',
+      passwordHash: password_hash,
       status: 'new'
     });
-
-    // Note: Store hashed password separately or extend Customer model
-    customer.passwordHash = password_hash;
 
     const result = await customer.save();
 
@@ -74,8 +72,12 @@ router.post('/login', [
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    // Check if password matches
-    const passwordMatch = await bcrypt.compare(password, customer.passwordHash || '');
+    // Check if passwordHash exists and compare
+    if (!customer.passwordHash) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, customer.passwordHash);
 
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid email or password' });
@@ -83,7 +85,7 @@ router.post('/login', [
 
     res.json({
       message: 'Login successful',
-      token: 'token_' + customer._id, // Simple token generation
+      token: 'token_' + customer._id,
       user: {
         id: customer._id,
         email: customer.email,

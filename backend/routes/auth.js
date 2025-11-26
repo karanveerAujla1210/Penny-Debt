@@ -34,9 +34,14 @@ router.post('/employee-login', (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    console.error('Employee login error:', error);
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
+});
+
+// Health check
+router.get('/health', (req, res) => {
+  res.json({ status: 'OK', message: 'Auth service is running' });
 });
 
 module.exports = router;
