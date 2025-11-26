@@ -9,6 +9,9 @@ const CustomerLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Get API base URL from environment or use fallback
+  const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
+
   const handleChange = (e) => {
     setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
     setError(""); // Clear error when user types
@@ -20,7 +23,7 @@ const CustomerLogin = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/api/customer-auth/login", formData);
+      const response = await axios.post(`${API_BASE_URL}/api/customers/login`, formData);
       
       // Save token and user info to localStorage
       localStorage.setItem("customerToken", response.data.token);

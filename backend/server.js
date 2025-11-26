@@ -17,10 +17,14 @@ app.use(helmet());
 // CORS: allow configured frontend URL, common dev ports (Vite 5173, CRA 3000), and other localhost ports
 const allowedOrigins = [
   'https://penny-debt-crm.vercel.app',
-  'https://pennyanddebt.in', 
+  'https://pennyanddebt.in',
+  'https://www.pennyanddebt.in',
   'https://crmpennyanddebt.in',
+  'https://www.crmpennyanddebt.in',
   'http://localhost:5173', 
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:5000'
 ].filter(Boolean);
 app.use(cors({
   origin: (origin, callback) => {

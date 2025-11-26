@@ -16,7 +16,16 @@ if (!uri) {
 }
 
 // Middleware
-const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3001', 'http://localhost:5173'].filter(Boolean);
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'https://pennyanddebt.in',
+  'https://www.pennyanddebt.in',
+  'https://crmpennyanddebt.in',
+  'https://www.crmpennyanddebt.in',
+  'http://localhost:3001',
+  'http://localhost:5173',
+  'http://localhost:3000'
+].filter(Boolean);
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin) || /^https?:\/\/localhost(:\d+)?$/.test(origin)) {

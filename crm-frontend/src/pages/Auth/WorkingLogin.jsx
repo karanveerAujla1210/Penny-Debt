@@ -7,6 +7,9 @@ const WorkingLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Get API base URL from environment or use fallback
+  const API_BASE_URL = import.meta.env?.VITE_API_BASE_URL || 'http://localhost:5000';
+
   // Employee credentials
   const EMPLOYEE_ACCOUNTS = {
     'admin@pennyanddebt.in': { password: 'PennyAdmin@2024#Secure', role: 'admin', name: 'Admin User' },
@@ -21,7 +24,7 @@ const WorkingLogin = () => {
     setError('');
 
     try {
-      const response = await fetch('https://penny-debt-crm.onrender.com/api/auth/employee-login', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/employee-login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
