@@ -94,4 +94,5 @@ app.listen(PORT, HOST, () => {
   console.log(`Server running on ${HOST}:${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`MongoDB URI set: ${!!process.env.MONGODB_URI}`);
+  console.log(`MongoDB connection state: ${mongoose.connection.readyState}`);
 });
