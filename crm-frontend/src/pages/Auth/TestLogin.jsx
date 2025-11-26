@@ -62,6 +62,13 @@ const TestLogin = () => {
       }}>
         {result || 'Click button to test login'}
       </div>
+      
+      <div style={{ marginTop: '1rem', fontSize: '14px', color: '#666' }}>
+        <p><strong>Test Credentials:</strong></p>
+        <p>Email: admin@pennyanddebt.in</p>
+        <p>Password: PennyAdmin@2024#Secure</p>
+        <p><strong>Backend URL:</strong> https://penny-debt-crm.onrender.com</p>
+      </div>
     </div>
   );
 };

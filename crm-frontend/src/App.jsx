@@ -126,20 +126,9 @@ const Footer = () => (
 
 // App without BrowserRouter
 export default function App() {
-  // Initialize protection (disabled for debugging)
+  // Initialize protection (COMPLETELY DISABLED)
   useEffect(() => {
-    // initProtection(); // Temporarily disabled
-    
-    // Enable developer tools
-    document.addEventListener('keydown', function(e) {
-      // Allow F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-      if (e.key === 'F12' || 
-          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-          (e.ctrlKey && e.key === 'u')) {
-        e.stopPropagation();
-        return true;
-      }
-    }, true);
+    initProtection(); // Now just logs a message
   }, []);
 
   // Get user from localStorage (employee or customer)
