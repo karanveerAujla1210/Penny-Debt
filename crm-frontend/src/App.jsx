@@ -43,6 +43,8 @@ import SimpleEmployeeLogin from "./pages/Auth/SimpleEmployeeLogin";
 import TestAuth from "./pages/Auth/TestAuth";
 import IsolatedLogin from "./pages/Auth/IsolatedLogin";
 import WorkingLogin from "./pages/Auth/WorkingLogin";
+import TestLogin from "./pages/Auth/TestLogin";
+import TestLogin from "./pages/Auth/TestLogin";
 import Signup from "./pages/Website/Signup";
 import DataViewer from "./pages/Admin/DataViewer";
 import TestPage from "./pages/TestPage";
@@ -124,9 +126,20 @@ const Footer = () => (
 
 // App without BrowserRouter
 export default function App() {
-  // Initialize protection
+  // Initialize protection (disabled for debugging)
   useEffect(() => {
-    initProtection();
+    // initProtection(); // Temporarily disabled
+    
+    // Enable developer tools
+    document.addEventListener('keydown', function(e) {
+      // Allow F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+          (e.ctrlKey && e.key === 'u')) {
+        e.stopPropagation();
+        return true;
+      }
+    }, true);
   }, []);
 
   // Get user from localStorage (employee or customer)
@@ -217,6 +230,7 @@ export default function App() {
           <Route path="/simple-login" element={<SimpleEmployeeLogin />} />
           <Route path="/test-auth" element={<TestAuth />} />
           <Route path="/isolated-login" element={<IsolatedLogin />} />
+          <Route path="/test-login" element={<TestLogin />} />
           <Route path="/old-employee-login" element={<EmployeeLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/data" element={<DataViewer />} />
