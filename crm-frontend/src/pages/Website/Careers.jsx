@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { submitToGoogleSheets } from "../utils/googleSheets";
+import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
