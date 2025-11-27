@@ -1,31 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import SEO from '../../components/SEO';
 
 const PremiumServices = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   const services = [
     {
       icon: '📊',
@@ -70,106 +46,88 @@ const PremiumServices = () => {
       <SEO title="Our Services | Penny & Debt" description="Comprehensive debt relief and financial wellness services" />
 
       {/* Hero Section */}
-      <motion.section
+      <section
         style={{
           background: 'linear-gradient(135deg, #F5F7FF 0%, #FAFBFF 100%)',
-          padding: '80px var(--space-lg) 60px',
+          padding: '4rem 2rem',
           textAlign: 'center',
         }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
       >
         <div className="container">
-          <motion.div variants={containerVariants} initial="hidden" animate="visible">
-            <motion.h1
+          <div>
+            <h1
               style={{
-                fontSize: 'var(--font-size-5xl)',
-                fontWeight: 'var(--font-weight-extrabold)',
-                color: 'var(--color-text)',
-                marginBottom: 'var(--space-md)',
+                fontSize: '3rem',
+                fontWeight: 800,
+                color: '#0D0D0D',
+                marginBottom: '1rem',
               }}
-              variants={itemVariants}
             >
               Complete Debt Solutions
-            </motion.h1>
-            <motion.p
+            </h1>
+            <p
               style={{
-                fontSize: 'var(--font-size-xl)',
-                color: 'var(--color-text-secondary)',
+                fontSize: '1.125rem',
+                color: '#333333',
                 maxWidth: '600px',
-                margin: '0 auto var(--space-lg)',
+                margin: '0 auto 2rem',
               }}
-              variants={itemVariants}
             >
               Professional financial services designed to eliminate debt and build lasting financial freedom
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Services Grid */}
-      <motion.section
+      <section
         style={{
-          padding: 'var(--space-5xl) var(--space-lg)',
+          padding: '4rem 2rem',
           backgroundColor: 'white',
         }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
       >
         <div className="container">
-          <motion.div
+          <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-              gap: 'var(--space-lg)',
+              gap: '2rem',
             }}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
             {services.map((service, i) => (
-              <motion.div
+              <div
                 key={i}
                 className="card"
                 style={{
-                  padding: 'var(--space-2xl)',
+                  padding: '2.5rem',
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
                 }}
-                variants={itemVariants}
-                whileHover={{
-                  y: -8,
-                  boxShadow: 'var(--shadow-lg)',
-                }}
               >
                 <div
                   style={{
-                    fontSize: 'var(--font-size-5xl)',
-                    marginBottom: 'var(--space-md)',
+                    fontSize: '3rem',
+                    marginBottom: '1rem',
                   }}
                 >
                   {service.icon}
                 </div>
                 <h3
                   style={{
-                    fontSize: 'var(--font-size-xl)',
-                    fontWeight: 'var(--font-weight-bold)',
-                    color: 'var(--color-text)',
-                    marginBottom: 'var(--space-md)',
+                    fontSize: '1.25rem',
+                    fontWeight: 'bold',
+                    color: '#0D0D0D',
+                    marginBottom: '1rem',
                   }}
                 >
                   {service.title}
                 </h3>
                 <p
                   style={{
-                    fontSize: 'var(--font-size-base)',
-                    color: 'var(--color-text-secondary)',
-                    marginBottom: 'var(--space-lg)',
+                    fontSize: '1rem',
+                    color: '#333333',
+                    marginBottom: '1.5rem',
                     flex: 1,
                   }}
                 >
@@ -182,18 +140,18 @@ const PremiumServices = () => {
                     margin: 0,
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: 'var(--space-sm)',
+                    gap: '0.5rem',
                   }}
                 >
                   {service.features.map((feature, j) => (
                     <li
                       key={j}
                       style={{
-                        fontSize: 'var(--font-size-sm)',
-                        color: 'var(--color-text-secondary)',
+                        fontSize: '0.875rem',
+                        color: '#333333',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 'var(--space-sm)',
+                        gap: '0.5rem',
                       }}
                     >
                       <span
@@ -201,7 +159,7 @@ const PremiumServices = () => {
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          background: 'var(--color-primary)',
+                          background: '#003BFF',
                           flexShrink: 0,
                         }}
                       />
@@ -209,57 +167,44 @@ const PremiumServices = () => {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Why Choose Us */}
-      <motion.section
+      <section
         style={{
-          padding: 'var(--space-5xl) var(--space-lg)',
-          backgroundColor: 'var(--color-bg)',
+          padding: '4rem 2rem',
+          backgroundColor: '#F5F7FF',
         }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
       >
         <div className="container">
-          <motion.div
+          <div
             style={{
               textAlign: 'center',
-              marginBottom: 'var(--space-5xl)',
+              marginBottom: '4rem',
             }}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
-            <motion.h2
+            <h2
               style={{
-                fontSize: 'var(--font-size-4xl)',
-                fontWeight: 'var(--font-weight-extrabold)',
-                color: 'var(--color-text)',
-                marginBottom: 'var(--space-md)',
+                fontSize: '2.25rem',
+                fontWeight: 800,
+                color: '#0D0D0D',
+                marginBottom: '1rem',
               }}
-              variants={itemVariants}
             >
               Why Choose Penny & Debt?
-            </motion.h2>
-          </motion.div>
+            </h2>
+          </div>
 
-          <motion.div
+          <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: 'var(--space-lg)',
+              gap: '2rem',
             }}
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
           >
             {[
               { value: '10,000+', label: 'Customers Helped', icon: '👥' },
@@ -269,83 +214,71 @@ const PremiumServices = () => {
               { value: '15+', label: 'Years Experience', icon: '📅' },
               { value: '24/7', label: 'Customer Support', icon: '📞' },
             ].map((stat, i) => (
-              <motion.div
+              <div
                 key={i}
                 className="card"
                 style={{
-                  padding: 'var(--space-2xl)',
+                  padding: '2.5rem',
                   textAlign: 'center',
                 }}
-                variants={itemVariants}
-                whileHover={{ y: -4 }}
               >
-                <div style={{ fontSize: 'var(--font-size-5xl)', marginBottom: 'var(--space-md)' }}>
+                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
                   {stat.icon}
                 </div>
                 <div
                   style={{
-                    fontSize: 'var(--font-size-2xl)',
-                    fontWeight: 'var(--font-weight-extrabold)',
-                    color: 'var(--color-primary)',
-                    marginBottom: 'var(--space-sm)',
+                    fontSize: '1.5rem',
+                    fontWeight: 800,
+                    color: '#003BFF',
+                    marginBottom: '0.5rem',
                   }}
                 >
                   {stat.value}
                 </div>
                 <div
                   style={{
-                    fontSize: 'var(--font-size-sm)',
-                    color: 'var(--color-text-secondary)',
+                    fontSize: '0.875rem',
+                    color: '#333333',
                   }}
                 >
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* CTA */}
-      <motion.section
+      <section
         style={{
-          padding: 'var(--space-5xl) var(--space-lg)',
+          padding: '4rem 2rem',
           background: 'linear-gradient(135deg, #003BFF 0%, #0066FF 100%)',
           textAlign: 'center',
         }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
       >
         <div className="container">
-          <motion.h2
+          <h2
             style={{
-              fontSize: 'var(--font-size-4xl)',
-              fontWeight: 'var(--font-weight-extrabold)',
+              fontSize: '2.25rem',
+              fontWeight: 800,
               color: 'white',
-              marginBottom: 'var(--space-lg)',
+              marginBottom: '2rem',
             }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
           >
             Ready to Get Started?
-          </motion.h2>
-          <motion.button
+          </h2>
+          <button
             className="btn btn-primary btn-lg"
             style={{
               background: 'white',
-              color: 'var(--color-primary)',
+              color: '#003BFF',
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             Schedule Free Consultation
-          </motion.button>
+          </button>
         </div>
-      </motion.section>
+      </section>
     </>
   );
 };

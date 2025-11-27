@@ -6,9 +6,17 @@
   "scripts": {
     "build": "cd crm-frontend && npm install && npm run build",
     "dev": "cd crm-frontend && npm run dev",
-    "install": "cd crm-frontend && npm install"
+    "install": "cd crm-frontend && npm install",
+    "init-db": "node scripts/initAllDatabases.js",
+    "backend": "cd backend && npm start",
+    "crm-backend": "cd crm-backend && npm start"
   },
   "workspaces": [
     "crm-frontend"
-  ]
+  ],
+  "dependencies": {
+    "mongoose": "^8.0.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1"
+  }
 }

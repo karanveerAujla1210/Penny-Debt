@@ -57,7 +57,6 @@ const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 
 import Header from "./components/Header";
 import PremiumNavbar from "./components/PremiumNavbar";
-import FooterRevamped from "./components/FooterRevamped";
 import PremiumFooter from "./components/PremiumFooter";
 
 

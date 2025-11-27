@@ -16,7 +16,11 @@ const Employee = require('../crm-backend/models/Employee');
 async function initializeDatabase() {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/pennydebt');
+    const mongoUri = process.env.MONGODB_URI;
+    if (!mongoUri) {
+      throw new Error('MONGODB_URI environment variable is required');
+    }
+    await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB');
 
     // Create collections with sample data
