@@ -1,19 +1,22 @@
-/* App-specific styles using the fintech design system */
+/* Premium Fintech App Styles - Royal Blue Theme Only */
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #F5F7FF;
 }
 
 /* Main content area */
 .main-content {
   flex: 1;
-  background-color: var(--white);
+  background-color: white;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 /* Page wrapper */
 .page-wrapper {
-  min-height: calc(100vh - 80px); /* Adjust based on header height */
+  min-height: calc(100vh - 80px);
 }
 
 /* Professional fintech styling overrides */

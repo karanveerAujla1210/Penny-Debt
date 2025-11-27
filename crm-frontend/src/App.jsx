@@ -10,6 +10,8 @@ import "./styles/website.css";
 
 import Home from "./pages/Website/Home";
 import HomeRevamped from "./pages/Website/HomeRevamped";
+import PremiumHome from "./pages/Website/PremiumHome";
+import PremiumServices from "./pages/Website/PremiumServices";
 import Services from "./pages/Website/Services";
 import About from "./pages/Website/About";
 import ApplyForm from "./pages/Website/ApplyForm";
@@ -54,7 +56,9 @@ import TestPage from "./pages/TestPage";
 const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 
 import Header from "./components/Header";
+import PremiumNavbar from "./components/PremiumNavbar";
 import FooterRevamped from "./components/FooterRevamped";
+import PremiumFooter from "./components/PremiumFooter";
 
 
 
@@ -83,7 +87,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <PremiumNavbar />
       <main
         className="main-content"
         style={{
@@ -92,9 +96,9 @@ export default function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<HomeRevamped />} />
-          <Route path="/home-old" element={<Home />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<PremiumHome />} />
+          <Route path="/home" element={<PremiumHome />} />
+          <Route path="/services" element={<PremiumServices />} />
           <Route path="/applyform" element={<ApplyForm />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/careers" element={<Careers />} />
@@ -154,10 +158,10 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/data" element={<DataViewer />} />
           <Route path="/test" element={<TestPage />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<PremiumHome />} />
         </Routes>
       </main>
-      <FooterRevamped />
+      <PremiumFooter />
       <Analytics />
     </>
   );
