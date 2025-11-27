@@ -3,7 +3,6 @@ import SEO from "../../components/SEO";
 
 // Professional Fintech Home Page with New Design System
 const HomeRevamped = () => {
-  const [currentStat, setCurrentStat] = useState(0);
   
   const stats = [
     { label: "Clients Served", value: 5000, prefix: "", suffix: "+" },
@@ -144,7 +143,7 @@ const HomeRevamped = () => {
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p style={{ fontSize: "1.125rem", color: "var(--gray-600)", maxWidth: "42rem", margin: "0 auto" }}>
               Comprehensive debt relief solutions tailored to your specific financial situation
             </p>
           </div>
@@ -199,7 +198,7 @@ const HomeRevamped = () => {
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600">
+            <p style={{ fontSize: "1.125rem", color: "var(--gray-600)" }}>
               Simple 5-step process to achieve debt freedom
             </p>
           </div>
@@ -263,7 +262,7 @@ const HomeRevamped = () => {
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-lg text-gray-600">
+            <p style={{ fontSize: "1.125rem", color: "var(--gray-600)" }}>
               Real stories from real people who achieved financial freedom
             </p>
           </div>

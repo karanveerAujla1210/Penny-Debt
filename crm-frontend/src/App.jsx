@@ -5,6 +5,7 @@ import { initProtection } from "./utils/protection";
 import "./App.css";
 import "./index.css";
 import "./styles/fintech-design-system.css";
+import "./styles/website.css";
 
 
 import Home from "./pages/Website/Home";

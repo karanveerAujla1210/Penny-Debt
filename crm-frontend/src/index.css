@@ -1,9 +1,6 @@
 /* Penny & Debt - Professional Fintech Design System */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* Import the main design system */
-@import './styles/fintech-design-system.css';
-
 /* Global Reset */
 *,
 *::before,
