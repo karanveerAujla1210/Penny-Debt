@@ -34,7 +34,7 @@ const PremiumNavbar = () => {
         </div>
 
         {/* CTA Button */}
-        <Link to="/apply" className="btn btn-primary">
+        <Link to="/applyform" className="btn btn-primary">
           Get Started
         </Link>
 
@@ -67,7 +67,7 @@ const PremiumNavbar = () => {
             Contact
           </Link>
           <Link
-            to="/apply"
+            to="/applyform"
             className="btn btn-primary"
             style={{ width: '100%', marginTop: 'var(--space-md)' }}
             onClick={() => setIsOpen(false)}

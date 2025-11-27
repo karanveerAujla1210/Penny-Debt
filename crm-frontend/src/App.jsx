@@ -98,6 +98,7 @@ export default function App() {
           <Route path="/" element={<PremiumHome />} />
           <Route path="/home" element={<PremiumHome />} />
           <Route path="/services" element={<PremiumServices />} />
+          <Route path="/about" element={<About />} />
           <Route path="/applyform" element={<ApplyForm />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/careers" element={<Careers />} />
