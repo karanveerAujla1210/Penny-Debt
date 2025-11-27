@@ -90,13 +90,16 @@ app.use('/api/otp', require('./routes/otp'));
 app.use('/api/leads', require('./routes/leads'));
 app.use('/api/customers', require('./routes/customers'));
 app.use('/api/careers', require('./routes/careers'));
+app.use('/api/loan-applications', require('./routes/loanApplications'));
+app.use('/api/csp-report', require('./routes/cspReport'));
+app.use('/api/contacts', require('./routes/contacts'));
 
 // Health check
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    routes: ['auth', 'otp', 'leads', 'customers', 'careers'],
+    routes: ['auth', 'otp', 'leads', 'customers', 'careers', 'loan-applications', 'csp-report', 'contacts'],
     mongodb: {
       connected: mongoose.connection.readyState === 1,
       state: mongoose.connection.readyState,

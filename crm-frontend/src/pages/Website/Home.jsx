@@ -166,146 +166,42 @@ const Hero = () => {
 
   return (
     <>
-      <section
-        id="home"
-        className="royal-section"
-        style={{
-          minHeight: "400px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "24px",
-          fontFamily: "'Segoe UI', system-ui, sans-serif",
-          flexWrap: "wrap",
-          gap: 16,
-          overflow: "hidden",
-          position: "relative",
-          flexDirection: "column",
-          background: "#FFFFFF",
-          border: "2px solid #4169E1",
-        }}
+      <section className="hero">
         aria-label="Hero section introducing Penny & Debt - India's premier debt relief service"
       >
 
-        <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "center", userSelect: "text", width: "100%" }}>
-          <h1
-            className="main-heading"
-            style={{
-              fontSize: "14px",
-              fontWeight: 700,
-              marginBottom: "12px",
-              lineHeight: 1.4,
-              userSelect: "none",
-              color: "#4169E1",
-              textAlign: "center",
-            }}
-          >
+        <div className="container">
+          <h1 className="hero-title animate-fade-in">
             India's Best Debt Relief Service Provider
           </h1>
-          <p
-            className="body-text"
-            style={{
-              fontSize: "10px",
-              marginBottom: "16px",
-              color: "#1F2937",
-              fontWeight: 400,
-              minHeight: "40px",
-              lineHeight: 1.5,
-              fontFamily: "'Segoe UI', system-ui, sans-serif",
-              textAlign: "center",
-            }}
+          <p className="hero-subtitle animate-slide-up"
             aria-live="polite"
             aria-atomic="true"
           >
             {messages[messageIndex]}
           </p>
-          <a href="/applyform" className="royal-button" style={{textDecoration: 'none'}}>
+          <a href="/applyform" className="btn btn-primary mt-8">
             Get Started Today
           </a>
         </div>
-        <div
-          style={{
-            flex: "1 1 460px",
-            maxWidth: "100%",
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            userSelect: "none",
-            borderRadius: 20,
-            boxShadow: "0 14px 48px rgba(0,112,243,0.22)",
-            background: "linear-gradient(135deg, #eaf5ff 25%, #ffffff 95%)",
-            overflow: "hidden",
-            width: "100%",
-            marginTop: 20,
-          }}
-          aria-hidden="true"
-        >
-          {/* Replace with your high-res debt relief illustration */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              width: "100%",
-              maxWidth: 280,
-              borderRadius: 20,
-              filter: "drop-shadow(0 0 10px rgba(0,83,181,0.3))",
-            }}
-          >
-            <source src="/assets/debt-relief-video.mp4" type="video/mp4" />
-            <source src="/assets/debt-relief-video.webm" type="video/webm" />
-            {/* Fallback image if video doesn't load */}
-            <img
-              src="/assets/debt-relief-illustration.png"
-              alt="Debt relief illustration"
-              style={{ width: "100%", maxWidth: 280, borderRadius: 20 }}
-            />
-          </video>
-          <div style={floatingStyle("0s", 130, "6%", "8%", "#0070f3", 0.16)} />
-          <div style={floatingStyle("2s", 92, "78%", "30%", "#00b4ff", 0.12)} />
-          <div style={floatingStyle("4s", 110, "82%", "70%", "#005bb5", 0.1)} />
-        </div>
       </section>
-    </>
-  );
-  };
 // Extended About Section with multi-paragraph info & professional tone
 // Extended About Section with multi-paragraph info & professional tone
 const About = () => {
   return (
-    <section
-      className="royal-container"
-      style={{
-        fontFamily: "'Segoe UI', system-ui, sans-serif",
-        color: "#1F2937",
-        userSelect: "text",
-        fontSize: "10px",
-        lineHeight: 1.5,
-        fontWeight: 400,
-        maxWidth: "800px",
-        margin: "16px auto",
-        textAlign: "center",
-      }}
+    <section className="section">
+      <div className="container">
+        <div className="card animate-slide-up"
       aria-label="About Penny & Debt - Our Mission and Expertise"
     >
-      <h2
-        className="sub-heading"
-        style={{
-          fontSize: "12px",
-          fontWeight: 600,
-          marginBottom: "8px",
-          userSelect: "none",
-          color: "#1E3A8A",
-          textAlign: "center",
-        }}
-      >
+          <h2 className="heading-lg mb-6">
         About Penny & Debt
       </h2>
-      <p>
-        Whether you're struggling with credit card balances, personal loans, or unsecured debts, Penny & Debt provides a realistic pathway out of financial distress — with no hidden fees or confusing jargon, just honest advice and actionable solutions. Join over 5,000 satisfied clients who have transformed their financial lives with our guidance.
-      </p>
+          <p className="text-lg">
+            Whether you're struggling with credit card balances, personal loans, or unsecured debts, Penny & Debt provides a realistic pathway out of financial distress — with no hidden fees or confusing jargon, just honest advice and actionable solutions. Join over 5,000 satisfied clients who have transformed their financial lives with our guidance.
+          </p>
+        </div>
+      </div>
     </section>
   );
 };
@@ -341,101 +237,42 @@ const Steps = () => {
   ];
 
   return (
-    <section
-      id="how-it-works"
-      style={{
-        margin: "80px auto",
-        maxWidth: 960,
-        padding: "48px 24px",
-        fontFamily,
-        userSelect: "text",
-        backgroundColor: "#fff",
-        boxShadow: "0 12px 30px rgba(0,112,243,0.16)",
-        borderRadius: 20,
-      }}
+    <section className="section" id="how-it-works">
+      <div className="container">
+        <div className="card"
       aria-label="Detailed 5-step process to get debt relief with Penny & Debt"
     >
-      <h2
-        style={{
-          fontSize: 36,
-          fontWeight: "900",
-          textAlign: "center",
-          color: "#0070f3",
-          marginBottom: 48,
-          userSelect: "none",
-        }}
-      >
+          <h2 className="heading-xl text-center mb-12">
         How You Get Debt Relief In 5 Simple Steps
       </h2>
-      <ol
-        style={{
-          counterReset: "step-counter",
-          listStyle: "none",
-          paddingLeft: 0,
-          maxWidth: 720,
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
-        {steps.map(({ title, description }, idx) => (
-          <li
-            key={idx}
-            style={{
-              counterIncrement: "step-counter",
-              paddingLeft: 80,
-              position: "relative",
-              marginBottom: 40,
-              color: "#1e3a8a",
-              userSelect: "text",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                left: 0,
-                top: "50%",
-                transform: "translateY(-50%)",
-                width: 56,
-                height: 56,
-                borderRadius: "50%",
-                background:
-                  "linear-gradient(90deg, #0070f3 0%, #005bb5 100%)",
-                color: "white",
-                fontWeight: "900",
-                fontSize: 24,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                boxShadow: "0 8px 24px rgba(0, 83, 181, 0.35)",
-                userSelect: "none",
-              }}
-            >
-              {idx + 1}
-            </span>
-            <h3
-              style={{
-                fontWeight: "700",
-                fontSize: 26,
-                marginBottom: 10,
-                color: "#00467f",
-              }}
-            >
-              {title}
-            </h3>
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.6,
-                maxWidth: 670,
-                color: "#33475b",
-              }}
-            >
-              {description}
-            </p>
-          </li>
-        ))}
-      </ol>
+          <ol className="grid gap-8" style={{ counterReset: "step-counter", listStyle: "none", paddingLeft: 0 }}>
+            {steps.map(({ title, description }, idx) => (
+              <li key={idx} className="flex gap-6" style={{ counterIncrement: "step-counter" }}>
+                <div className="flex items-center justify-center" style={{
+                  width: "3rem",
+                  height: "3rem",
+                  borderRadius: "50%",
+                  background: "var(--primary-blue)",
+                  color: "white",
+                  fontWeight: "700",
+                  fontSize: "1.25rem",
+                  flexShrink: 0
+                }}>
+                  {idx + 1}
+                </div>
+                <div>
+                  <h3 className="heading-md mb-4">
+                    {title}
+                  </h3>
+                  <p className="text-base">
+                    {description}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
     </section>
   );
 };

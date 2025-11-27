@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -15,46 +16,220 @@ const navItems = [
 
 export default function Header() {
   const [loginOpen, setLoginOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header style={{ position: "relative", zIndex: 100, background: "#fff", boxShadow: "0 2px 10px rgba(0, 112, 243, 0.08)", padding: "12px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", fontFamily: "'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
-      <Link to="/" style={{ fontWeight: "900", fontSize: "1.2rem", color: "#0070f3", textDecoration: "none", letterSpacing: "0.08em", whiteSpace: "nowrap", userSelect: "none" }}>PENNY & DEBT</Link>
-      <nav style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "nowrap", fontWeight: "600", fontSize: 14, color: "#223759", flexGrow: 1, marginLeft: 20, userSelect: "none" }}>
-        {navItems.map(({ label, to }) => (
-          <Link
-            key={to}
-            to={to}
-            style={{ color: "#223759", textDecoration: "none", padding: "8px 10px", borderRadius: 6, whiteSpace: "nowrap", transition: "background-color 0.25s ease, color 0.25s ease" }}
-            onMouseEnter={e => { e.currentTarget.style.backgroundColor = "#0070f3"; e.currentTarget.style.color = "white"; }}
-            onMouseLeave={e => { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#223759"; }}
+    <header className="navbar">
+      <div className="container">
+        <div className="flex items-center justify-between">
+          {/* Brand Logo */}
+          <Link 
+            to="/" 
+            className="navbar-brand"
+            style={{ 
+              fontWeight: 800, 
+              fontSize: "1.25rem", 
+              color: "var(--primary-blue)", 
+              textDecoration: "none", 
+              letterSpacing: "0.05em" 
+            }}
           >
-            {label}
+            PENNY & DEBT
           </Link>
-        ))}
-        <div style={{ marginLeft: "auto", position: "relative", userSelect: "none" }}>
+
+          {/* Desktop Navigation */}
+          <nav className="desktop-nav flex items-center gap-6">
+            {navItems.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                className="navbar-link"
+                style={{
+                  color: "var(--gray-700)",
+                  textDecoration: "none",
+                  padding: "0.5rem 0.75rem",
+                  borderRadius: "var(--radius-sm)",
+                  fontWeight: 500,
+                  fontSize: "0.875rem",
+                  transition: "all var(--transition-fast)",
+                  whiteSpace: "nowrap"
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = "var(--primary-blue)";
+                  e.currentTarget.style.color = "var(--white)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--gray-700)";
+                }}
+              >
+                {label}
+              </Link>
+            ))}
+            
+            {/* Theme Toggle */}
+            <ThemeToggle />
+            
+            {/* Login Dropdown */}
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={() => setLoginOpen(!loginOpen)}
+                className="btn btn-secondary"
+                aria-haspopup="true"
+                aria-expanded={loginOpen}
+                style={{
+                  backgroundColor: "transparent",
+                  border: "1px solid var(--primary-blue)",
+                  color: "var(--primary-blue)",
+                  padding: "0.5rem 1rem",
+                  fontSize: "0.875rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem"
+                }}
+              >
+                Login
+                <svg 
+                  width="14" 
+                  height="14" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2" 
+                  style={{ 
+                    transform: loginOpen ? "rotate(180deg)" : "rotate(0deg)", 
+                    transition: "transform var(--transition-fast)" 
+                  }}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              
+              {loginOpen && (
+                <div 
+                  style={{
+                    position: "absolute",
+                    top: "calc(100% + 0.5rem)",
+                    right: 0,
+                    backgroundColor: "var(--white)",
+                    boxShadow: "var(--shadow-lg)",
+                    borderRadius: "var(--radius-md)",
+                    border: "1px solid var(--gray-200)",
+                    minWidth: "200px",
+                    zIndex: 50,
+                    padding: "0.5rem 0"
+                  }}
+                >
+                  <Link 
+                    to="/customer-login" 
+                    className="navbar-link"
+                    style={{
+                      display: "block",
+                      padding: "0.75rem 1rem",
+                      color: "var(--gray-700)",
+                      textDecoration: "none",
+                      fontSize: "0.875rem",
+                      transition: "background-color var(--transition-fast)"
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "var(--gray-50)"}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
+                  >
+                    Customer Login
+                  </Link>
+                  <Link 
+                    to="/employee-login" 
+                    className="navbar-link"
+                    style={{
+                      display: "block",
+                      padding: "0.75rem 1rem",
+                      color: "var(--gray-700)",
+                      textDecoration: "none",
+                      fontSize: "0.875rem",
+                      transition: "background-color var(--transition-fast)"
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "var(--gray-50)"}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
+                  >
+                    Employee Login
+                  </Link>
+                  <Link 
+                    to="/signup" 
+                    className="navbar-link"
+                    style={{
+                      display: "block",
+                      padding: "0.75rem 1rem",
+                      color: "var(--gray-700)",
+                      textDecoration: "none",
+                      fontSize: "0.875rem",
+                      transition: "background-color var(--transition-fast)"
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = "var(--gray-50)"}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Mobile Theme Toggle */}
+          <div className="mobile-nav" style={{ marginRight: "1rem" }}>
+            <ThemeToggle />
+          </div>
+          
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setLoginOpen(o => !o)}
-            aria-haspopup="true"
-            aria-expanded={loginOpen}
-            aria-controls="login-dropdown"
-            style={{ backgroundColor: "transparent", border: "2px solid #0070f3", borderRadius: 8, cursor: "pointer", color: "#0070f3", fontWeight: "700", padding: "8px 16px", fontSize: 14, display: "flex", alignItems: "center", gap: 6, userSelect: "none", whiteSpace: "nowrap", transition: "all 0.3s ease" }}
-            onMouseEnter={e => { e.currentTarget.style.backgroundColor = "#0070f3"; e.currentTarget.style.color = "white"; }}
-            onMouseLeave={e => { if (!loginOpen) { e.currentTarget.style.backgroundColor = "transparent"; e.currentTarget.style.color = "#0070f3"; } }}
+            className="mobile-nav btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+            style={{
+              backgroundColor: "transparent",
+              border: "1px solid var(--gray-300)",
+              padding: "0.5rem",
+              borderRadius: "var(--radius-sm)"
+            }}
           >
-            Login
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: loginOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s ease" }}>
-              <polyline points="6 9 12 15 18 9" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
-          {loginOpen && (
-            <ul id="login-dropdown" role="menu" aria-label="Login options" style={{ listStyle: "none", margin: 0, padding: "10px 0", position: "absolute", top: "calc(100% + 8px)", right: 0, backgroundColor: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,0.15)", borderRadius: 10, minWidth: 200, fontWeight: "600", fontSize: 14, zIndex: 25, border: "1px solid #e2ecff" }}>
-              <li role="none"><Link to="/customer-login" role="menuitem" tabIndex={0} style={{ display: "block", padding: "12px 20px", color: "#0070f3", textDecoration: "none", userSelect: "none", transition: "background-color 0.15s ease", borderRadius: "6px", margin: "2px 8px" }} onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e2ecff")} onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}>Customer Login</Link></li>
-              <li role="none"><Link to="/employee-login" role="menuitem" tabIndex={0} style={{ display: "block", padding: "12px 20px", color: "#0070f3", textDecoration: "none", userSelect: "none", transition: "background-color 0.15s ease", borderRadius: "6px", margin: "2px 8px" }} onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e2ecff")} onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}>Employee Login</Link></li>
-              <li role="none"><Link to="/signup" role="menuitem" tabIndex={0} style={{ display: "block", padding: "12px 20px", color: "#0070f3", textDecoration: "none", userSelect: "none", transition: "background-color 0.15s ease", borderRadius: "6px", margin: "2px 8px" }} onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#e2ecff")} onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}>Sign Up</Link></li>
-            </ul>
-          )}
         </div>
-      </nav>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <nav className="mobile-nav" style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--gray-200)" }}>
+            <div className="flex flex-col gap-2">
+              {navItems.map(({ label, to }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="navbar-link"
+                  style={{
+                    padding: "0.75rem",
+                    textAlign: "center",
+                    borderRadius: "var(--radius-sm)",
+                    backgroundColor: "var(--gray-50)",
+                    color: "var(--gray-700)",
+                    textDecoration: "none",
+                    fontSize: "0.875rem"
+                  }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              ))}
+              <div className="flex flex-col gap-2" style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--gray-200)" }}>
+                <Link to="/customer-login" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>Customer Login</Link>
+                <Link to="/employee-login" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Employee Login</Link>
+                <Link to="/signup" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
+              </div>
+            </div>
+          </nav>
+        )}
+      </div>
     </header>
   );
 }

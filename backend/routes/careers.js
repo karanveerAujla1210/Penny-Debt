@@ -73,3 +73,24 @@ router.post('/', upload.single('resume'), [
 });
 
 module.exports = router;
+
+// GET all career applications (for CRM)
+router.get('/', async (req, res) => {
+  try {
+    const { page = 1, limit = 100 } = req.query;
+    const p = Math.max(1, parseInt(page));
+    const l = Math.min(1000, Math.max(1, parseInt(limit)));
+
+    const total = await Career.countDocuments();
+    const results = await Career.find()
+      .sort({ createdAt: -1 })
+      .skip((p - 1) * l)
+      .limit(l)
+      .lean();
+
+    res.json({ total, page: p, limit: l, applications: results });
+  } catch (err) {
+    console.error('Get careers error:', err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});

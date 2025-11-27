@@ -36,16 +36,42 @@ const Careers = () => {
     };
     
     try {
-      // Submit to Google Sheets
+      // Try to send resume and data to backend (multipart/form-data)
+      try {
+        const fd = new FormData();
+        fd.append('fullName', formData.fullName);
+        fd.append('email', formData.email);
+        fd.append('resume', formData.resume);
+
+        const backendRes = await fetch('/api/careers', {
+          method: 'POST',
+          body: fd
+        });
+
+        if (backendRes.ok) {
+          const json = await backendRes.json();
+          console.log('Career saved id:', json.applicationId || json.id || json._id);
+          setFormData({ fullName: '', email: '', resume: null });
+          setMessage("✅ Application submitted successfully! We'll contact you soon.");
+          e.target.reset();
+          setSubmitting(false);
+          return;
+        } else {
+          console.warn('Backend careers submit failed:', backendRes.status);
+        }
+      } catch (backendErr) {
+        console.warn('Careers backend error:', backendErr.message || backendErr);
+      }
+
+      // Fallback to Google Sheets (analytics)
       const result = await submitToGoogleSheets(applicationData, 'CareerApplications');
-      
+
       if (result.success) {
-        // Also save locally as backup
         const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
         existingApplications.push(applicationData);
         localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
-        
-        setFormData({ fullName: "", email: "", resume: null });
+
+        setFormData({ fullName: '', email: '', resume: null });
         setMessage("✅ Application submitted successfully! We'll contact you soon.");
         e.target.reset();
       } else {
@@ -57,8 +83,8 @@ const Careers = () => {
       const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
       existingApplications.push(applicationData);
       localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
-      
-      setFormData({ fullName: "", email: "", resume: null });
+
+      setFormData({ fullName: '', email: '', resume: null });
       setMessage("✅ Application submitted successfully! We'll contact you soon.");
       e.target.reset();
     } finally {

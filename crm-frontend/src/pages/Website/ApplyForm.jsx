@@ -140,15 +140,42 @@ const ApplyForm = () => {
     };
     
     try {
-      // Submit to Google Sheets
+      // First attempt to persist to backend (leads)
+      try {
+        const res = await fetch('/api/leads/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submissionData)
+        });
+
+        if (res.ok) {
+          const json = await res.json();
+          console.log('Saved to backend lead id:', json.applicationId || json.id || json._id);
+          setSubmitted(true);
+        } else {
+          console.warn('Backend lead submit returned', res.status);
+        }
+      } catch (backendErr) {
+        console.warn('Backend lead submit error:', backendErr.message || backendErr);
+      }
+
+      // Also attempt to persist to loan-applications collection as separate backup
+      try {
+        await fetch('/api/loan-applications', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submissionData)
+        });
+      } catch (laErr) {
+        console.warn('loan-applications endpoint error:', laErr);
+      }
+
+      // Submit to Google Sheets for analytics/backup
       const result = await submitToGoogleSheets(submissionData, 'DebtApplications');
-      
       if (result.success) {
-        // Also save locally as backup
         const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
         existingData.push(submissionData);
         localStorage.setItem('debtApplications', JSON.stringify(existingData));
-        
         setSubmitted(true);
       } else {
         throw new Error('Google Sheets submission failed');
@@ -159,7 +186,7 @@ const ApplyForm = () => {
       const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
       existingData.push(submissionData);
       localStorage.setItem('debtApplications', JSON.stringify(existingData));
-      
+
       setSubmitted(true);
     } finally {
       setSubmitting(false);

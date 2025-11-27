@@ -33,24 +33,42 @@ const Contact = () => {
       !formData.message.trim()
     ) {
       setError("Please fill in all fields.");
-      return;
-    }
+      try {
+        // Send to backend API first
+        try {
+          const res = await fetch('/api/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(contactData)
+          });
+          if (res.ok) {
+            setSubmitted(true);
+            setForm({ fullName: '', email: '', subject: '', message: '' });
+          } else {
+            console.warn('Backend contact submit failed, falling back to Google Sheets');
+          }
+        } catch (backendErr) {
+          console.warn('Contact backend error:', backendErr);
+        }
 
-    setSubmitting(true);
-    setError("");
+        // Also keep Google Sheets flow as a backup for analytics
+        const result = await submitToGoogleSheets(contactData, 'ContactForms');
 
-    const contactData = {
-      ...formData,
-      submittedAt: new Date().toISOString()
-    };
-    
-    try {
-      // Submit to Google Sheets
-      const result = await submitToGoogleSheets(contactData, 'ContactForms');
-      
-      if (result.success) {
+        if (result.success) {
+          setSubmitted(true);
+          setForm({ fullName: '', email: '', subject: '', message: '' });
+        } else {
+          throw new Error('Google Sheets submission failed');
+        }
+      } catch (err) {
+        console.error('Contact form error:', err);
         setSubmitted(true);
-        setFormData({ fullName: "", email: "", subject: "", message: "" });
+        const existing = JSON.parse(localStorage.getItem('contactForms') || '[]');
+        existing.push(contactData);
+        localStorage.setItem('contactForms', JSON.stringify(existing));
+      } finally {
+        setSubmitting(false);
+      }
       } else {
         throw new Error('Google Sheets submission failed');
       }
