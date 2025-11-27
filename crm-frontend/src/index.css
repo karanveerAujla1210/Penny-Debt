@@ -3,7 +3,7 @@
 
 /* Additional utility classes */
 .transition-all {
-  transition: all var(--transition-fast);
+  transition: none;
 }
 
 /* Image optimization */
@@ -17,7 +17,6 @@ img {
 a {
   color: var(--primary);
   text-decoration: none;
-  transition: color var(--transition-fast);
 }
 
 a:hover {

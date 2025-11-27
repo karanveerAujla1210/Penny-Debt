@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import './PremiumNavbar.css';
 
 const PremiumNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: 'easeOut' },
-    },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.2 } },
-  };
-
   return (
-    <motion.nav
-      className="premium-navbar"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-    >
+    <nav className="premium-navbar">
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo">
@@ -66,13 +50,7 @@ const PremiumNavbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <motion.div
-          className="navbar-menu mobile"
-          variants={menuVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
+        <div className="navbar-menu mobile">
           <Link to="/" className="navbar-link" onClick={() => setIsOpen(false)}>
             Home
           </Link>
@@ -96,9 +74,9 @@ const PremiumNavbar = () => {
           >
             Get Started
           </Link>
-        </motion.div>
+        </div>
       )}
-    </motion.nav>
+    </nav>
   );
 };
 

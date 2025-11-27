@@ -155,6 +155,8 @@ p {
   cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
   user-select: none;
   will-change: transform;
 }

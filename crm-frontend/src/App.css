@@ -31,7 +31,6 @@
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -42,8 +41,6 @@
 
 .btn-fintech:hover {
   background: #0025B3;
-  transform: translateY(-2px);
-  box-shadow: 0px 8px 24px rgba(0, 59, 255, 0.3);
 }
 
 .btn-fintech:focus {
@@ -57,11 +54,9 @@
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
   padding: 32px;
   border: 1px solid #E0E0E0;
-  transition: all 0.3s ease;
 }
 
 .fintech-card:hover {
-  transform: translateY(-4px);
   box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.06);
   border-color: #003BFF;
 }
@@ -80,7 +75,6 @@
   border: 1px solid #E0E0E0;
   border-radius: 10px;
   font-size: 1rem;
-  transition: all 0.3s ease;
   background: #FFFFFF;
   font-family: var(--font-primary);
   color: #0D0D0D;
@@ -142,26 +136,6 @@
 .loading {
   opacity: 0.6;
   pointer-events: none;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border: 2px solid #E0E0E0;
-  border-top-color: #003BFF;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .error {

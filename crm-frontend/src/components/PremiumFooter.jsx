@@ -1,29 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import './PremiumFooter.css';
 
 const PremiumFooter = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   const currentYear = new Date().getFullYear();
 
   return (
@@ -31,15 +10,9 @@ const PremiumFooter = () => {
       {/* Main Content */}
       <div className="footer-content">
         <div className="container">
-          <motion.div
-            className="footer-grid"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <div className="footer-grid">
             {/* Company Info */}
-            <motion.div className="footer-section" variants={itemVariants}>
+            <div className="footer-section">
               <div className="footer-brand">
                 <span className="brand-icon">💰</span>
                 <h3 className="brand-name">Penny & Debt</h3>
@@ -58,10 +31,10 @@ const PremiumFooter = () => {
                   in
                 </a>
               </div>
-            </motion.div>
+            </div>
 
             {/* Quick Links */}
-            <motion.div className="footer-section" variants={itemVariants}>
+            <div className="footer-section">
               <h4 className="footer-title">Product</h4>
               <ul className="footer-links">
                 <li>
@@ -77,10 +50,10 @@ const PremiumFooter = () => {
                   <Link to="/blog">Blog</Link>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Resources */}
-            <motion.div className="footer-section" variants={itemVariants}>
+            <div className="footer-section">
               <h4 className="footer-title">Resources</h4>
               <ul className="footer-links">
                 <li>
@@ -96,10 +69,10 @@ const PremiumFooter = () => {
                   <a href="#resources">Learning Center</a>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Legal */}
-            <motion.div className="footer-section" variants={itemVariants}>
+            <div className="footer-section">
               <h4 className="footer-title">Legal</h4>
               <ul className="footer-links">
                 <li>
@@ -115,10 +88,10 @@ const PremiumFooter = () => {
                   <a href="#compliance">Compliance</a>
                 </li>
               </ul>
-            </motion.div>
+            </div>
 
             {/* Contact */}
-            <motion.div className="footer-section" variants={itemVariants}>
+            <div className="footer-section">
               <h4 className="footer-title">Contact</h4>
               <div className="contact-info">
                 <p>
@@ -134,8 +107,8 @@ const PremiumFooter = () => {
                   <span>Financial District, Mumbai, India</span>
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -143,13 +116,7 @@ const PremiumFooter = () => {
       <div className="footer-divider"></div>
 
       {/* Bottom Section */}
-      <motion.div
-        className="footer-bottom"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
+      <div className="footer-bottom">
         <div className="container">
           <div className="footer-bottom-content">
             <p className="copyright">
@@ -160,7 +127,7 @@ const PremiumFooter = () => {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 };

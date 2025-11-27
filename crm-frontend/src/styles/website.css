@@ -14,7 +14,6 @@
   padding: var(--space-8);
   margin: var(--space-6) auto;
   max-width: 1200px;
-  transition: all var(--transition-normal);
   border: 1px solid var(--gray-200);
 }
 
@@ -29,12 +28,10 @@
   box-shadow: var(--shadow-md);
   padding: var(--space-8);
   margin-bottom: var(--space-6);
-  transition: all var(--transition-normal);
   border: 1px solid var(--gray-200);
 }
 
 .website-card:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-xl);
   border-color: var(--primary-blue-light);
 }
@@ -70,7 +67,6 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
   background: var(--primary-blue);
   color: var(--white);
   text-decoration: none;
@@ -81,7 +77,6 @@
 }
 
 .website-button:hover {
-  transform: translateY(-1px);
   box-shadow: var(--shadow-lg);
   background: var(--primary-blue-hover);
 }
@@ -107,7 +102,6 @@
   padding: var(--space-3);
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
   width: 100%;
   margin-bottom: var(--space-4);
   background: var(--white);
