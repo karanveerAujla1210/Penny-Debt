@@ -1,123 +1,118 @@
-/* Premium Fintech App Styles - Royal Blue Theme Only */
+/* Premium Fintech App Styles - Blue Theme Only */
 
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #F5F7FF;
+  background-color: #FFFFFF;
 }
 
-/* Main content area */
 .main-content {
   flex: 1;
   background-color: white;
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family: var(--font-primary);
 }
 
-/* Page wrapper */
 .page-wrapper {
   min-height: calc(100vh - 80px);
 }
 
-/* Professional fintech styling overrides */
 .fintech-page {
-  background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+  background: linear-gradient(135deg, #F5F7FF 0%, #FFFFFF 100%);
   min-height: 100vh;
 }
 
-/* Enhanced button styles */
 .btn-fintech {
-  background: var(--primary-blue);
-  color: var(--white);
+  background: #003BFF;
+  color: #FFFFFF;
   border: none;
-  padding: 0.75rem 2rem;
-  border-radius: var(--radius-md);
+  padding: 12px 32px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: var(--font-size-base);
+  font-size: 1rem;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 8px;
+  font-family: var(--font-primary);
 }
 
 .btn-fintech:hover {
-  background: var(--primary-blue-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
+  background: #0025B3;
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 24px rgba(0, 59, 255, 0.3);
 }
 
 .btn-fintech:focus {
-  outline: 2px solid var(--primary-blue);
+  outline: 2px solid #003BFF;
   outline-offset: 2px;
 }
 
-/* Professional card styling */
 .fintech-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: var(--space-8);
-  border: 1px solid var(--gray-200);
-  transition: all var(--transition-normal);
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  padding: 32px;
+  border: 1px solid #E0E0E0;
+  transition: all 0.3s ease;
 }
 
 .fintech-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-blue-light);
+  transform: translateY(-4px);
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.06);
+  border-color: #003BFF;
 }
 
-/* Form styling */
 .fintech-form {
-  background: var(--white);
-  padding: var(--space-8);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--gray-200);
+  background: #FFFFFF;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid #E0E0E0;
 }
 
 .fintech-input {
   width: 100%;
-  padding: var(--space-3);
-  border: 1px solid var(--gray-300);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-base);
-  transition: all var(--transition-fast);
-  background: var(--white);
+  padding: 12px 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #FFFFFF;
+  font-family: var(--font-primary);
+  color: #0D0D0D;
 }
 
 .fintech-input:focus {
   outline: none;
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 0 3px var(--primary-blue-light);
+  border-color: #003BFF;
+  box-shadow: 0 0 0 3px rgba(0, 59, 255, 0.1);
 }
 
-/* Section styling */
 .fintech-section {
-  padding: var(--space-20) 0;
+  padding: 80px 0;
 }
 
 .fintech-section-alt {
-  background: var(--gray-50);
-  padding: var(--space-20) 0;
+  background: #F5F7FF;
+  padding: 80px 0;
 }
 
-/* Mobile-first responsive design */
 @media (max-width: 768px) {
   .fintech-card {
-    padding: var(--space-6);
-    margin-bottom: var(--space-4);
+    padding: 24px;
+    margin-bottom: 16px;
   }
   
   .fintech-form {
-    padding: var(--space-6);
+    padding: 24px;
   }
   
   .fintech-section {
-    padding: var(--space-12) 0;
+    padding: 48px 0;
   }
   
   .btn-fintech {
@@ -125,7 +120,6 @@
     max-width: 300px;
   }
   
-  /* Mobile navigation adjustments */
   .mobile-nav {
     display: block;
   }
@@ -145,7 +139,6 @@
   }
 }
 
-/* Loading states */
 .loading {
   opacity: 0.6;
   pointer-events: none;
@@ -159,8 +152,8 @@
   width: 20px;
   height: 20px;
   margin: -10px 0 0 -10px;
-  border: 2px solid var(--gray-300);
-  border-top-color: var(--primary-blue);
+  border: 2px solid #E0E0E0;
+  border-top-color: #003BFF;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -171,22 +164,20 @@
   }
 }
 
-/* Error states */
 .error {
-  color: var(--error);
-  background-color: #fef2f2;
-  border: 1px solid #fecaca;
-  padding: var(--space-3);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
+  color: #EF4444;
+  background-color: #FEF2F2;
+  border: 1px solid #FECACA;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
 }
 
-/* Success states */
 .success {
-  color: var(--success);
-  background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  padding: var(--space-3);
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-sm);
+  color: #10B981;
+  background-color: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.875rem;
 }

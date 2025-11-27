@@ -1,21 +1,19 @@
-/* Premium Navbar Styles */
+/* Premium Navbar - FREED-Inspired Fintech Design */
 
 .premium-navbar {
   position: sticky;
   top: 0;
-  z-index: var(--z-sticky);
-  background: white;
-  border-bottom: 1px solid var(--color-border-light);
-  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid #E0E0E0;
   backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.95);
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 .navbar-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,12 +23,12 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-extrabold);
-  color: var(--color-primary);
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #003BFF;
   text-decoration: none;
-  transition: transform var(--transition-fast);
+  transition: transform 0.3s ease;
   will-change: transform;
 }
 
@@ -43,29 +41,30 @@
 }
 
 .logo-text {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+  background: linear-gradient(135deg, #003BFF 0%, #0066FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-family: var(--font-primary);
 }
 
-/* Desktop Navigation */
 .navbar-menu.desktop {
   display: flex;
   align-items: center;
-  gap: var(--space-lg);
-  margin: 0 var(--space-lg);
+  gap: 32px;
+  margin: 0 32px;
   flex: 1;
 }
 
 .navbar-link {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333333;
   text-decoration: none;
   position: relative;
-  transition: color var(--transition-fast);
-  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  padding: 8px 0;
+  font-family: var(--font-primary);
 }
 
 .navbar-link::after {
@@ -75,20 +74,19 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  transition: width var(--transition-base);
+  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  transition: width 0.3s ease;
   will-change: width;
 }
 
 .navbar-link:hover {
-  color: var(--color-primary);
+  color: #003BFF;
 }
 
 .navbar-link:hover::after {
   width: 100%;
 }
 
-/* Mobile Toggle */
 .mobile-toggle {
   display: none;
   flex-direction: column;
@@ -99,15 +97,17 @@
   padding: 0;
   width: 30px;
   height: 24px;
+  position: relative;
 }
 
 .hamburger {
   width: 24px;
   height: 2px;
-  background: var(--color-primary);
+  background: #003BFF;
   border-radius: 1px;
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
   display: block;
+  position: relative;
 }
 
 .hamburger::before {
@@ -115,10 +115,10 @@
   position: absolute;
   width: 24px;
   height: 2px;
-  background: var(--color-primary);
+  background: #003BFF;
   border-radius: 1px;
   transform: translateY(-8px);
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
 }
 
 .hamburger::after {
@@ -126,10 +126,10 @@
   position: absolute;
   width: 24px;
   height: 2px;
-  background: var(--color-primary);
+  background: #003BFF;
   border-radius: 1px;
   transform: translateY(8px);
-  transition: all var(--transition-fast);
+  transition: all 0.3s ease;
 }
 
 .hamburger.active {
@@ -144,30 +144,28 @@
   transform: rotate(-45deg);
 }
 
-/* Mobile Menu */
 .navbar-menu.mobile {
   position: absolute;
   top: 70px;
   left: 0;
   right: 0;
   background: white;
-  border-bottom: 1px solid var(--color-border-light);
-  padding: var(--space-lg);
+  border-bottom: 1px solid #E0E0E0;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 16px;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .navbar-menu.mobile .navbar-link {
-  padding: var(--space-sm) 0;
-  font-size: var(--font-size-lg);
+  padding: 12px 0;
+  font-size: 1.125rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .navbar-container {
-    padding: 0 var(--space-md);
+    padding: 0 16px;
   }
 
   .navbar-menu.desktop {
@@ -179,18 +177,18 @@
   }
 
   .navbar-logo {
-    font-size: var(--font-size-lg);
+    font-size: 1.125rem;
   }
 }
 
 @media (max-width: 480px) {
   .navbar-container {
     height: 60px;
-    padding: 0 var(--space-sm);
+    padding: 0 16px;
   }
 
   .navbar-logo {
-    font-size: var(--font-size-base);
+    font-size: 1rem;
   }
 
   .logo-icon {
@@ -199,6 +197,6 @@
 
   .navbar-menu.mobile {
     top: 60px;
-    padding: var(--space-md);
+    padding: 16px;
   }
 }

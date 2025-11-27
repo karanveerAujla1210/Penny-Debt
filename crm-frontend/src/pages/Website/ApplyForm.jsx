@@ -74,15 +74,13 @@ const ApplyForm = () => {
 
     setSendingOtp(true);
     
-    // Simulate OTP sending
     setTimeout(() => {
       setOtpData(prev => ({
         ...prev,
         isOtpSent: true,
-        timer: 60 // 1 minute for demo
+        timer: 60
       }));
 
-      // Start countdown timer
       const countdown = setInterval(() => {
         setOtpData(prev => {
           if (prev.timer <= 1) {
@@ -106,7 +104,6 @@ const ApplyForm = () => {
 
     setSendingOtp(true);
     
-    // Simulate OTP verification (accept 123456 for demo)
     setTimeout(() => {
       if (otpData.otp === '123456') {
         setOtpData(prev => ({
@@ -140,7 +137,6 @@ const ApplyForm = () => {
     };
     
     try {
-      // First attempt to persist to backend (leads)
       try {
         const res = await fetch('/api/leads/submit', {
           method: 'POST',
@@ -159,7 +155,6 @@ const ApplyForm = () => {
         console.warn('Backend lead submit error:', backendErr.message || backendErr);
       }
 
-      // Also attempt to persist to loan-applications collection as separate backup
       try {
         await fetch('/api/loan-applications', {
           method: 'POST',
@@ -170,7 +165,6 @@ const ApplyForm = () => {
         console.warn('loan-applications endpoint error:', laErr);
       }
 
-      // Submit to Google Sheets for analytics/backup
       const result = await submitToGoogleSheets(submissionData, 'DebtApplications');
       if (result.success) {
         const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
@@ -182,7 +176,6 @@ const ApplyForm = () => {
       }
     } catch (error) {
       console.error('Submission error:', error);
-      // Fallback to local storage
       const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
       existingData.push(submissionData);
       localStorage.setItem('debtApplications', JSON.stringify(existingData));
@@ -203,10 +196,11 @@ const ApplyForm = () => {
     return (
       <main style={mainStyle}>
         <div style={{
-          backgroundColor: "#f5faff",
+          backgroundColor: "#FFFFFF",
           padding: 40,
-          borderRadius: 12,
-          boxShadow: "0 8px 24px rgba(0, 112, 243, 0.12)",
+          borderRadius: 16,
+          boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.04)",
+          border: "1px solid #E0E0E0",
           textAlign: "center",
           maxWidth: 500,
           margin: "0 auto"
@@ -214,7 +208,7 @@ const ApplyForm = () => {
           <div style={{
             width: 60,
             height: 60,
-            backgroundColor: "#0070f3",
+            backgroundColor: "#003BFF",
             borderRadius: "50%",
             display: "flex",
             alignItems: "center",
@@ -226,17 +220,17 @@ const ApplyForm = () => {
             ✓
           </div>
           <h2 style={{
-            fontSize: "2rem",
-            fontWeight: "900",
-            color: "#0070f3",
+            fontSize: "1.875rem",
+            fontWeight: "800",
+            color: "#0D0D0D",
             marginBottom: 16
           }}>
             Application Submitted!
           </h2>
           <p style={{
-            fontSize: "1.1rem",
-            color: "#223759",
-            lineHeight: 1.5
+            fontSize: "1rem",
+            color: "#333333",
+            lineHeight: 1.6
           }}>
             Thank you for your verified application. Our debt relief specialist will contact you within 24 hours to discuss your personalized solution.
           </p>
@@ -258,7 +252,7 @@ const ApplyForm = () => {
         {message && (
           <div style={{
             padding: "12px 16px",
-            borderRadius: 8,
+            borderRadius: 12,
             marginBottom: 20,
             color: message.includes("successfully") || message.includes("sent") ? "#065f46" : "#991b1b",
             background: message.includes("successfully") || message.includes("sent") ? "#d1fae5" : "#fee2e2",
@@ -303,7 +297,7 @@ const ApplyForm = () => {
                   ...inputStyle, 
                   marginBottom: 0, 
                   flex: 1,
-                  backgroundColor: otpData.isVerified ? "#f0f9ff" : "transparent"
+                  backgroundColor: otpData.isVerified ? "#f0f9ff" : "#FFFFFF"
                 }}
               />
               {!otpData.isVerified && (
@@ -313,8 +307,8 @@ const ApplyForm = () => {
                   disabled={sendingOtp || otpData.timer > 0}
                   style={{
                     padding: "10px 16px",
-                    borderRadius: 8,
-                    background: sendingOtp || otpData.timer > 0 ? "#9ca3af" : "#0070f3",
+                    borderRadius: 12,
+                    background: sendingOtp || otpData.timer > 0 ? "#9ca3af" : "#003BFF",
                     color: "white",
                     border: "none",
                     fontWeight: "600",
@@ -329,7 +323,7 @@ const ApplyForm = () => {
               {otpData.isVerified && (
                 <div style={{
                   padding: "10px 16px",
-                  borderRadius: 8,
+                  borderRadius: 12,
                   background: "#10b981",
                   color: "white",
                   fontWeight: "600",
@@ -381,7 +375,7 @@ const ApplyForm = () => {
                 disabled={sendingOtp}
                 style={{
                   padding: "10px 16px",
-                  borderRadius: 8,
+                  borderRadius: 12,
                   background: sendingOtp ? "#9ca3af" : "#10b981",
                   color: "white",
                   border: "none",
@@ -524,7 +518,7 @@ const ApplyForm = () => {
           style={{
             ...inputStyle,
             resize: "none",
-            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+            fontFamily: "var(--font-primary)"
           }}
         />
 
@@ -539,8 +533,8 @@ const ApplyForm = () => {
               disabled={submitting}
               style={{ marginTop: "2px" }}
             />
-            <span style={{ fontSize: "14px", color: "#223759", lineHeight: 1.4 }}>
-              I agree to the <a href="#" style={{ color: "#0070f3", textDecoration: "underline" }}>Terms and Conditions</a> and <a href="#" style={{ color: "#0070f3", textDecoration: "underline" }}>Privacy Policy</a>. I consent to be contacted by debt relief specialists.
+            <span style={{ fontSize: "14px", color: "#333333", lineHeight: 1.4 }}>
+              I agree to the <a href="#" style={{ color: "#003BFF", textDecoration: "underline" }}>Terms and Conditions</a> and <a href="#" style={{ color: "#003BFF", textDecoration: "underline" }}>Privacy Policy</a>. I consent to be contacted by debt relief specialists.
             </span>
           </label>
         </div>
@@ -550,17 +544,15 @@ const ApplyForm = () => {
           disabled={submitting || !otpData.isVerified}
           style={{
             padding: "14px 32px",
-            borderRadius: 35,
-            background: submitting || !otpData.isVerified
-              ? "linear-gradient(90deg, #a5c9ff 0%, #8bbfff 100%)"
-              : "linear-gradient(90deg, #0070f3 0%, #005bb5 100%)",
+            borderRadius: 12,
+            background: submitting || !otpData.isVerified ? "#9ca3af" : "#003BFF",
             color: "white",
             border: "none",
             fontWeight: "700",
             fontSize: 16,
             cursor: submitting || !otpData.isVerified ? "not-allowed" : "pointer",
-            boxShadow: submitting || !otpData.isVerified ? "none" : "0 6px 16px rgba(0, 112, 243, 0.3)",
-            transition: "background 0.3s ease",
+            boxShadow: submitting || !otpData.isVerified ? "none" : "0px 4px 16px rgba(0, 59, 255, 0.2)",
+            transition: "all 0.3s ease",
             width: "100%"
           }}
         >
@@ -572,58 +564,59 @@ const ApplyForm = () => {
 };
 
 const mainStyle = {
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  fontFamily: "var(--font-primary)",
   maxWidth: 800,
   margin: "auto",
-  padding: "40px 20px",
-  color: "#223759"
+  padding: "80px 24px",
+  color: "var(--text-primary)"
 };
 
 const headingStyle = {
-  fontSize: "2.8rem",
-  fontWeight: "900",
-  color: "#0070f3",
+  fontSize: "2.25rem",
+  fontWeight: "800",
+  color: "#0D0D0D",
   textAlign: "center",
   marginBottom: 16
 };
 
 const subHeadingStyle = {
-  fontSize: "1.2rem",
+  fontSize: "1.125rem",
   textAlign: "center",
   maxWidth: 600,
-  margin: "0 auto 40px",
-  lineHeight: 1.5,
-  color: "#223759"
+  margin: "0 auto 48px",
+  lineHeight: 1.6,
+  color: "#333333"
 };
 
 const formStyle = {
-  backgroundColor: "#f5faff",
-  padding: 24,
-  borderRadius: 12,
-  boxShadow: "0 8px 24px rgba(0, 112, 243, 0.12)",
+  backgroundColor: "#FFFFFF",
+  padding: 32,
+  borderRadius: 16,
+  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.04)",
+  border: "1px solid #E0E0E0",
   marginBottom: 50
 };
 
 const labelStyle = {
-  fontWeight: "700",
+  fontWeight: "600",
   display: "block",
-  marginBottom: 6,
-  fontSize: 16,
-  color: "#223759"
+  marginBottom: 8,
+  fontSize: 14,
+  color: "#0D0D0D"
 };
 
 const inputStyle = {
   fontSize: 16,
-  padding: "10px 16px",
+  padding: "12px 16px",
   width: "100%",
   maxWidth: "100%",
-  borderRadius: 8,
-  border: "1.5px solid #d1d9f0",
+  borderRadius: 10,
+  border: "1px solid #E0E0E0",
   boxSizing: "border-box",
   marginBottom: 20,
-  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-  backgroundColor: "transparent",
-  color: "#223759"
+  fontFamily: "var(--font-primary)",
+  backgroundColor: "#FFFFFF",
+  color: "#0D0D0D"
 };
 
 export default ApplyForm;
