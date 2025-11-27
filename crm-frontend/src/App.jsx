@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { initProtection } from "./utils/protection";
 import "./styles/website.css";
-import "./styles/ultra-hd.css";
+import "./styles/royal-theme.css";
 
 
 import Home from "./pages/Website/Home";

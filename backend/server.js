@@ -12,22 +12,42 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB Atlas'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Security middleware with CSP allowing unsafe-eval for React compatibility
+// Security middleware with CSP (no 'unsafe-eval').
+// We'll collect any remaining violations via a report-only header in production.
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'", "https://vercel.live", "https://*.vercel.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live", "https://*.vercel.com"],
       styleSrc: ["'self'", "'unsafe-inline'"],
       imgSrc: ["'self'", "data:", "https:"],
       fontSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https:", "http://localhost:*"],
+      connectSrc: ["'self'", "https:", "http://localhost:*"] ,
       mediaSrc: ["'self'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? [] : undefined
+      objectSrc: ["'none'"]
     }
   }
 }));
+
+// Add a Report-Only CSP header in production to collect violation reports
+// without weakening the enforced policy. Reports are sent to `/api/csp-report`.
+if (process.env.NODE_ENV === 'production') {
+  const reportOnlyHeader = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' https://vercel.live https://*.vercel.com",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https:",
+    "font-src 'self' data: https:",
+    "connect-src 'self' https: http://localhost:*",
+    "object-src 'none'",
+    "report-uri /api/csp-report"
+  ].join('; ');
+
+  app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy-Report-Only', reportOnlyHeader);
+    next();
+  });
+}
 // CORS: allow configured frontend URL, common dev ports (Vite 5173, CRA 3000), and other localhost ports
 const allowedOrigins = [
   'https://penny-debt-crm.vercel.app',

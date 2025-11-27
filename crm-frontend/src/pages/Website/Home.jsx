@@ -168,19 +168,21 @@ const Hero = () => {
     <>
       <section
         id="home"
-        className="ultra-hd-gradient-bg ultra-hd-animate"
+        className="royal-section"
         style={{
-          minHeight: "90vh",
+          minHeight: "400px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-around",
-          padding: "60px 24px",
-          fontFamily,
+          justifyContent: "center",
+          padding: "24px",
+          fontFamily: "'Segoe UI', system-ui, sans-serif",
           flexWrap: "wrap",
-          gap: 24,
+          gap: 16,
           overflow: "hidden",
           position: "relative",
           flexDirection: "column",
+          background: "#FFFFFF",
+          border: "2px solid #4169E1",
         }}
         aria-label="Hero section introducing Penny & Debt - India's premier debt relief service"
       >
@@ -218,34 +220,37 @@ const Hero = () => {
         `}</style>
         <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "center", userSelect: "text", width: "100%" }}>
           <h1
-            className="ultra-hd-title gradient-text"
+            className="main-heading"
             style={{
-              fontSize: "clamp(2.5rem, 5vw, 4rem)",
-              fontWeight: 900,
-              marginBottom: 32,
-              lineHeight: 1.1,
+              fontSize: "14px",
+              fontWeight: 700,
+              marginBottom: "12px",
+              lineHeight: 1.4,
               userSelect: "none",
-              textShadow: "0 4px 16px rgba(0,112,243,0.4)",
+              color: "#4169E1",
+              textAlign: "center",
             }}
           >
             India's Best Debt Relief Service Provider
           </h1>
           <p
+            className="body-text"
             style={{
-              fontSize: 16,
-              marginBottom: 36,
-              color: "#223759cc",
-              fontWeight: 600,
-              minHeight: 60,
-              lineHeight: 1.45,
-              fontFamily: "'Segoe UI', sans-serif",
+              fontSize: "10px",
+              marginBottom: "16px",
+              color: "#1F2937",
+              fontWeight: 400,
+              minHeight: "40px",
+              lineHeight: 1.5,
+              fontFamily: "'Segoe UI', system-ui, sans-serif",
+              textAlign: "center",
             }}
             aria-live="polite"
             aria-atomic="true"
           >
             {messages[messageIndex]}
           </p>
-          <a href="/applyform" className="ultra-hd-button" style={{textDecoration: 'none'}}>
+          <a href="/applyform" className="royal-button" style={{textDecoration: 'none'}}>
             Get Started Today
           </a>
         </div>
@@ -302,26 +307,29 @@ const Hero = () => {
 const About = () => {
   return (
     <section
-      className="ultra-hd-card ultra-hd-text"
+      className="royal-container"
       style={{
-        fontFamily,
-        color: "#1a202c",
+        fontFamily: "'Segoe UI', system-ui, sans-serif",
+        color: "#1F2937",
         userSelect: "text",
-        fontSize: "clamp(1.1rem, 2.5vw, 1.3rem)",
-        lineHeight: 1.7,
-        fontWeight: 500,
-        maxWidth: 1000,
-        margin: "40px auto"
+        fontSize: "10px",
+        lineHeight: 1.5,
+        fontWeight: 400,
+        maxWidth: "800px",
+        margin: "16px auto",
+        textAlign: "center",
       }}
       aria-label="About Penny & Debt - Our Mission and Expertise"
     >
       <h2
-        className="ultra-hd-subtitle"
+        className="sub-heading"
         style={{
-          fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
-          fontWeight: 900,
-          marginBottom: 32,
+          fontSize: "12px",
+          fontWeight: 600,
+          marginBottom: "8px",
           userSelect: "none",
+          color: "#1E3A8A",
+          textAlign: "center",
         }}
       >
         About Penny & Debt
