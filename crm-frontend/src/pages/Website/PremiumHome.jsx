@@ -39,12 +39,12 @@ const PremiumHome = () => {
               Take control of your debt with expert guidance, personalized solutions, and real financial wellness.
             </p>
             <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-              <Link to="/apply" className="btn btn-primary btn-lg">
+              <Link to="/applyform" className="btn btn-primary btn-lg">
                 Get Started
               </Link>
-              <button className="btn btn-secondary btn-lg">
-                Learn More
-              </button>
+              <Link to="/applyform" className="btn btn-secondary btn-lg">
+                Get Debt Free
+              </Link>
             </div>
             <div style={{ display: 'flex', gap: '48px', marginTop: '64px', flexWrap: 'wrap' }}>
               {[
@@ -362,7 +362,7 @@ const PremiumHome = () => {
         }}>
           Get your free debt assessment today. No obligations, no hidden fees.
         </p>
-        <Link to="/apply" className="btn btn-primary btn-lg" style={{
+        <Link to="/applyform" className="btn btn-primary btn-lg" style={{
           background: 'white',
           color: '#003BFF'
         }}>

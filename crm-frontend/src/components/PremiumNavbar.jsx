@@ -4,6 +4,7 @@ import './PremiumNavbar.css';
 
 const PremiumNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [loginDropdown, setLoginDropdown] = useState(false);
 
   return (
     <nav className="premium-navbar">
@@ -16,27 +17,79 @@ const PremiumNavbar = () => {
 
         {/* Desktop Navigation */}
         <div className="navbar-menu desktop">
-          <Link to="/" className="navbar-link">
-            Home
-          </Link>
-          <Link to="/services" className="navbar-link">
-            Services
-          </Link>
-          <Link to="/about" className="navbar-link">
-            About
-          </Link>
-          <Link to="/blog" className="navbar-link">
-            Blog
-          </Link>
-          <Link to="/contact" className="navbar-link">
-            Contact
-          </Link>
+          <Link to="/" className="navbar-link">Home</Link>
+          <Link to="/about" className="navbar-link">About</Link>
+          <Link to="/faq" className="navbar-link">FAQ</Link>
+          <Link to="/careers" className="navbar-link">Careers</Link>
+          <Link to="/contact" className="navbar-link">Contact</Link>
+          <Link to="/blog" className="navbar-link">Blog</Link>
+          <Link to="/applyform" className="navbar-link">Apply Now</Link>
+          <Link to="/applyloan" className="navbar-link">Apply Loan</Link>
         </div>
 
-        {/* CTA Button */}
-        <Link to="/applyform" className="btn btn-primary">
-          Get Started
-        </Link>
+        {/* Login Dropdown */}
+        <div style={{ position: 'relative' }}>
+          <button
+            onClick={() => setLoginDropdown(!loginDropdown)}
+            className="btn btn-primary"
+            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            Login ▼
+          </button>
+          {loginDropdown && (
+            <div style={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              marginTop: '8px',
+              background: '#FFFFFF',
+              borderRadius: '12px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+              border: '1px solid #E0E0E0',
+              minWidth: '180px',
+              zIndex: 1000
+            }}>
+              <Link
+                to="/customer-login"
+                onClick={() => setLoginDropdown(false)}
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#0D0D0D',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid #E0E0E0'
+                }}
+              >
+                Customer Login
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setLoginDropdown(false)}
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#0D0D0D',
+                  textDecoration: 'none',
+                  borderBottom: '1px solid #E0E0E0'
+                }}
+              >
+                Sign Up
+              </Link>
+              <Link
+                to="/employee-login"
+                onClick={() => setLoginDropdown(false)}
+                style={{
+                  display: 'block',
+                  padding: '12px 16px',
+                  color: '#0D0D0D',
+                  textDecoration: 'none'
+                }}
+              >
+                Employee Login
+              </Link>
+            </div>
+          )}
+        </div>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -51,29 +104,17 @@ const PremiumNavbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="navbar-menu mobile">
-          <Link to="/" className="navbar-link" onClick={() => setIsOpen(false)}>
-            Home
-          </Link>
-          <Link to="/services" className="navbar-link" onClick={() => setIsOpen(false)}>
-            Services
-          </Link>
-          <Link to="/about" className="navbar-link" onClick={() => setIsOpen(false)}>
-            About
-          </Link>
-          <Link to="/blog" className="navbar-link" onClick={() => setIsOpen(false)}>
-            Blog
-          </Link>
-          <Link to="/contact" className="navbar-link" onClick={() => setIsOpen(false)}>
-            Contact
-          </Link>
-          <Link
-            to="/applyform"
-            className="btn btn-primary"
-            style={{ width: '100%', marginTop: 'var(--space-md)' }}
-            onClick={() => setIsOpen(false)}
-          >
-            Get Started
-          </Link>
+          <Link to="/" className="navbar-link" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link to="/about" className="navbar-link" onClick={() => setIsOpen(false)}>About</Link>
+          <Link to="/faq" className="navbar-link" onClick={() => setIsOpen(false)}>FAQ</Link>
+          <Link to="/careers" className="navbar-link" onClick={() => setIsOpen(false)}>Careers</Link>
+          <Link to="/contact" className="navbar-link" onClick={() => setIsOpen(false)}>Contact</Link>
+          <Link to="/blog" className="navbar-link" onClick={() => setIsOpen(false)}>Blog</Link>
+          <Link to="/applyform" className="navbar-link" onClick={() => setIsOpen(false)}>Apply Now</Link>
+          <Link to="/applyloan" className="navbar-link" onClick={() => setIsOpen(false)}>Apply Loan</Link>
+          <Link to="/customer-login" className="navbar-link" onClick={() => setIsOpen(false)}>Customer Login</Link>
+          <Link to="/signup" className="navbar-link" onClick={() => setIsOpen(false)}>Sign Up</Link>
+          <Link to="/employee-login" className="navbar-link" onClick={() => setIsOpen(false)}>Employee Login</Link>
         </div>
       )}
     </nav>
