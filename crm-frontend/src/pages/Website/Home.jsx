@@ -168,16 +168,16 @@ const Hero = () => {
     <>
       <section
         id="home"
+        className="ultra-hd-gradient-bg ultra-hd-animate"
         style={{
-          minHeight: "85vh",
-          backgroundColor: "#f5faff",
+          minHeight: "90vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-around",
-          padding: "40px 16px",
+          padding: "60px 24px",
           fontFamily,
           flexWrap: "wrap",
-          gap: 16,
+          gap: 24,
           overflow: "hidden",
           position: "relative",
           flexDirection: "column",
@@ -218,16 +218,15 @@ const Hero = () => {
         `}</style>
         <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "center", userSelect: "text", width: "100%" }}>
           <h1
+            className="ultra-hd-title gradient-text"
             style={{
-              fontSize: 28,
+              fontSize: "clamp(2.5rem, 5vw, 4rem)",
               fontWeight: 900,
-              marginBottom: 22,
-              color: "#0070f3",
-              lineHeight: 1.2,
+              marginBottom: 32,
+              lineHeight: 1.1,
               userSelect: "none",
-              textShadow: "0 3px 8px rgba(0,112,243,0.3)",
+              textShadow: "0 4px 16px rgba(0,112,243,0.4)",
             }}
-            className="gradient-text"
           >
             India's Best Debt Relief Service Provider
           </h1>
@@ -246,9 +245,9 @@ const Hero = () => {
           >
             {messages[messageIndex]}
           </p>
-          <Button to="/applyform" ariaLabel="Get started with Penny & Debt">
+          <a href="/applyform" className="ultra-hd-button" style={{textDecoration: 'none'}}>
             Get Started Today
-          </Button>
+          </a>
         </div>
         <div
           style={{
@@ -303,25 +302,25 @@ const Hero = () => {
 const About = () => {
   return (
     <section
+      className="ultra-hd-card ultra-hd-text"
       style={{
         fontFamily,
-        color: "#2c3e50",
+        color: "#1a202c",
         userSelect: "text",
-        fontSize: 18,
-        lineHeight: 1.62,
+        fontSize: "clamp(1.1rem, 2.5vw, 1.3rem)",
+        lineHeight: 1.7,
         fontWeight: 500,
-        padding: "48px 0",
-        maxWidth: 900,
-        margin: "0 auto"
+        maxWidth: 1000,
+        margin: "40px auto"
       }}
       aria-label="About Penny & Debt - Our Mission and Expertise"
     >
       <h2
+        className="ultra-hd-subtitle"
         style={{
-          fontSize: 24,
+          fontSize: "clamp(1.8rem, 4vw, 2.5rem)",
           fontWeight: 900,
-          color: "#0070f3",
-          marginBottom: 28,
+          marginBottom: 32,
           userSelect: "none",
         }}
       >
