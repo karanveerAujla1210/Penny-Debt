@@ -211,12 +211,10 @@
   }
 }
 
-/* Animation Performance */
-@media (prefers-reduced-motion: no-preference) {
-  * {
-    animation-duration: 0.008333s !important;
-    transition-duration: 0.008333s !important;
-  }
+/* Remove All Animations */
+* {
+  animation: none !important;
+  background-attachment: scroll !important;
 }
 
 /* Override All Existing Styles */

@@ -12,15 +12,15 @@
 }
 
 html, body {
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-  background: inherit;
-  margin: 0;
-  padding: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, sans-serif !important;
+  font-size: 10px !important;
+  color: #1F2937 !important;
+  background: #FFFFFF !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 320px !important;
+  min-height: 100vh !important;
+  box-sizing: border-box !important;
 }
 
 *, *::before, *::after {

@@ -186,38 +186,7 @@ const Hero = () => {
         }}
         aria-label="Hero section introducing Penny & Debt - India's premier debt relief service"
       >
-        <style>{`
-          @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-22px); }
-          }
-          .gradient-text {
-            background: linear-gradient(
-              90deg,
-              #0070f3,
-              #00b4ff,
-              #005bb5,
-              #0070f3,
-              #00b4ff
-            );
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            user-select: none;
-          }
-          @keyframes gradientShift {
-            0% {
-              background-position: 0% 50%;
-            }
-            50% {
-              background-position: 100% 50%;
-            }
-            100% {
-              background-position: 0% 50%;
-            }
-          }
-        `}</style>
+
         <div style={{ maxWidth: 560, flex: "1 1 420px", textAlign: "center", userSelect: "text", width: "100%" }}>
           <h1
             className="main-heading"
