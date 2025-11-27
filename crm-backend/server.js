@@ -2,10 +2,13 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require('./db'); // Connect to MongoDB
+
 const customerRoutes = require("./routes/customerRoutes");
-const customerWorkflowRoutes = require("./routes/customerWorkflowRoutes");
+const customerWorkflowRoutes =require("./routes/customerWorkflowRoutes");
 const customerAuthRoutes = require("./routes/customerAuthRoutes");
 const employeeAuthRoutes = require("./routes/employeeAuthRoutes");
+const employeeRoutes = require("./routes/employeeRoutes"); // Import Employee Routes
 
 app.use(cors());
 app.use(express.json());
@@ -13,6 +16,7 @@ const applyFormRoutes = require("./routes/applyFormRoutes");
 app.use("/api/apply-form", applyFormRoutes);
 app.use("/api/customer-auth", customerAuthRoutes);
 app.use("/api/employee-auth", employeeAuthRoutes);
+app.use('/api/employees', employeeRoutes); // Use Employee Routes
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SEO from "../../components/SEO";
 
 // Professional Fintech Home Page with New Design System
@@ -11,43 +11,25 @@ const HomeRevamped = () => {
     { label: "Years Experience", value: 8, prefix: "", suffix: "+" }
   ];
 
-  // Animated counter for stats
-  const AnimatedStat = ({ label, value, prefix = "", suffix = "" }) => {
-    const [count, setCount] = useState(0);
-    
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setCount(prev => {
-          if (prev < value) {
-            return Math.min(prev + Math.ceil(value / 50), value);
-          }
-          return value;
-        });
-      }, 50);
-      
-      return () => clearInterval(timer);
-    }, [value]);
-
-    return (
-      <div className="fintech-card text-center">
-        <div style={{ 
-          fontSize: "2.5rem", 
-          fontWeight: 800, 
-          color: "var(--primary-blue)", 
-          marginBottom: "0.5rem" 
-        }}>
-          {prefix}{count.toLocaleString()}{suffix}
-        </div>
-        <div style={{ 
-          fontSize: "0.875rem", 
-          color: "var(--gray-600)", 
-          fontWeight: 600 
-        }}>
-          {label}
-        </div>
+  const StatCard = ({ label, value, prefix = "", suffix = "" }) => (
+    <div className="fintech-card text-center">
+      <div style={{ 
+        fontSize: "2.5rem", 
+        fontWeight: 800, 
+        color: "var(--primary-blue)", 
+        marginBottom: "0.5rem" 
+      }}>
+        {prefix}{value.toLocaleString()}{suffix}
       </div>
-    );
-  };
+      <div style={{ 
+        fontSize: "0.875rem", 
+        color: "var(--gray-600)", 
+        fontWeight: 600 
+      }}>
+        {label}
+      </div>
+    </div>
+  );
 
   return (
     <div className="fintech-page">
@@ -57,12 +39,12 @@ const HomeRevamped = () => {
       <section className="hero">
         <div className="container">
           <div className="text-center">
-            <h1 className="hero-title animate-fade-in">
+            <h1 className="hero-title">
               India's Most Trusted
               <span style={{ color: "var(--primary-blue)" }}> Debt Relief </span>
               Service Provider
             </h1>
-            <p className="hero-subtitle animate-slide-up">
+            <p className="hero-subtitle">
               Professional debt relief solutions with transparent processes, 
               legal protection, and guaranteed results. Join over 5,000 satisfied clients 
               who achieved financial freedom with our expert guidance.
@@ -84,7 +66,7 @@ const HomeRevamped = () => {
         <div className="container">
           <div className="grid grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <AnimatedStat key={index} {...stat} />
+              <StatCard key={index} {...stat} />
             ))}
           </div>
         </div>
