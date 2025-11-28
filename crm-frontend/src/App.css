@@ -1,16 +1,21 @@
 /* Premium Fintech App Styles - Blue Theme Only */
 
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .main-content {
   flex: 1;
   background-color: white;
-  font-family: var(--font-primary);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .page-wrapper {
