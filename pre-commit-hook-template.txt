@@ -1,0 +1,64 @@
+#!/bin/sh
+# ============================================
+# Pre-commit Hook - Prevent Secrets in Git
+# ============================================
+# Installation:
+# 1. Copy this file to .git/hooks/pre-commit
+# 2. Make it executable: chmod +x .git/hooks/pre-commit
+# 3. Test: git commit (should block sensitive files)
+# ============================================
+
+echo "🔍 Checking for sensitive files..."
+
+# Check for .env files
+if git diff --cached --name-only | grep -E '\.env$|\.env\..*$' | grep -v '\.env\.example$'; then
+    echo "❌ ERROR: Attempting to commit .env file!"
+    echo "   Remove .env files from commit and add to .gitignore"
+    exit 1
+fi
+
+# Check for credential files
+if git diff --cached --name-only | grep -iE 'credential|password|secret|access\.md'; then
+    echo "❌ ERROR: Attempting to commit credential file!"
+    echo "   Remove credential files from commit"
+    exit 1
+fi
+
+# Check for keystores
+if git diff --cached --name-only | grep -E '\.keystore$|\.jks$'; then
+    echo "❌ ERROR: Attempting to commit keystore file!"
+    echo "   Remove keystore files from commit"
+    exit 1
+fi
+
+# Check for large archives
+if git diff --cached --name-only | grep -E '\.zip$|\.tar$|\.tar\.gz$'; then
+    echo "⚠️  WARNING: Attempting to commit archive file"
+    echo "   Consider using Git LFS or external storage"
+    echo "   Press Ctrl+C to cancel or Enter to continue"
+    read
+fi
+
+# Check for CSV files
+if git diff --cached --name-only | grep -E '\.csv$'; then
+    echo "⚠️  WARNING: Attempting to commit CSV file"
+    echo "   Ensure it doesn't contain sensitive data"
+    echo "   Press Ctrl+C to cancel or Enter to continue"
+    read
+fi
+
+# Check for common secret patterns in staged files
+if git diff --cached | grep -iE 'mongodb\+srv://.*:.*@|mysql://.*:.*@|postgres://.*:.*@'; then
+    echo "❌ ERROR: Found database connection string in code!"
+    echo "   Use environment variables instead"
+    exit 1
+fi
+
+if git diff --cached | grep -iE 'api[_-]?key|api[_-]?secret|access[_-]?token' | grep -E '=\s*["\x27][A-Za-z0-9+/=]{20,}["\x27]'; then
+    echo "❌ ERROR: Found potential API key in code!"
+    echo "   Use environment variables instead"
+    exit 1
+fi
+
+echo "✅ Pre-commit checks passed!"
+exit 0

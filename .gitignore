@@ -1,36 +1,162 @@
-# Dependencies
-node_modules/
-npm-debug.log*
+# ============================================
+# SECURITY - NEVER COMMIT THESE FILES
+# ============================================
 
-# Environment variables
+# Environment variables (ALL variations)
 .env
+.env.*
+*.env
+!.env.example
 .env.local
+.env.development
 .env.production
+.env.test
+backend/.env
+crm-backend/.env
+crm-frontend/.env
+mobileApp/.env
+
+# Credentials & Secrets
+EMPLOYEE_CREDENTIALS.md
+ADMIN_ACCESS.md
+SECRET_*.md
+*_CREDENTIALS.md
+*_ACCESS.md
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+
+# Database dumps & backups
+*.sql
+*.sql.gz
+*.dump
+*.backup
+*.bak
+
+# Archives with sensitive data
+crm-backend.zip
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# CSV files (often contain sensitive data)
+*.csv
+*.csv.csv
+master_loan.*
+
+# Android keystores
+*.keystore
+*.jks
+debug.keystore
+release.keystore
+
+# ============================================
+# BUILD ARTIFACTS & DEPENDENCIES
+# ============================================
+
+# Node modules
+node_modules/
+.pnp
+.pnp.js
+jspm_packages/
 
 # Build outputs
 build/
 dist/
+.next/
+out/
+.vite/
+*.tsbuildinfo
 
-# Uploads
-uploads/
-
-# Database
-*.db
-*.sqlite
+# ============================================
+# LOGS & DEBUG FILES
+# ============================================
 
 # Logs
-logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
-# IDE
+# Test & Coverage
+coverage/
+*.lcov
+.nyc_output
+
+# ============================================
+# IDE & EDITOR FILES
+# ============================================
+
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
 
-# OS
+# ============================================
+# OS FILES
+# ============================================
+
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Sensitive files
-config/production.js
-secrets/
-private-keys/
+# ============================================
+# TEMPORARY & UPLOAD FILES
+# ============================================
+
+uploads/
+temp/
+tmp/
+*.tmp
+
+# ============================================
+# MOBILE APP SPECIFIC
+# ============================================
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+.gradle/
+local.properties
+.cxx/
+
+# iOS
+*.ipa
+*.dSYM.zip
+*.dSYM
+Pods/
+*.xcworkspace
+!default.xcworkspace
+xcuserdata/
+DerivedData/
+
+# Expo
+.expo/
+.expo-shared/
+
+# ============================================
+# MISC
+# ============================================
+
+# Package manager locks (optional - keep if you want reproducible builds)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
