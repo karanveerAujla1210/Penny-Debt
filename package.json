@@ -6,7 +6,6 @@
   "scripts": {
     "build": "cd crm-frontend && npm install && npm run build",
     "dev": "cd crm-frontend && npm run dev",
-    "install": "cd crm-frontend && npm install",
     "init-db": "node scripts/initAllDatabases.js",
     "backend": "cd backend && npm start",
     "crm-backend": "cd crm-backend && npm start"
