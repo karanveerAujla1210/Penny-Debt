@@ -10,6 +10,7 @@ const CustomerDashboard = () => {
     axios.get(`${API_BASE_URL}/api/customer-workflow/dashboard/${customerId}`)
       .then(res => setData(res.data))
       .catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customerId]);
   return (
     <div style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>

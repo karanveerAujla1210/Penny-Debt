@@ -66,6 +66,7 @@ const EmployeeLogin = () => {
 
   useEffect(() => {
     drawCaptcha();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [captcha]);
 
   const handleChange = (e) => {

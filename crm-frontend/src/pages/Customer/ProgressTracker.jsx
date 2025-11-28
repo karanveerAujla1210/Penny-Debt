@@ -10,6 +10,7 @@ const ProgressTracker = () => {
     axios.get(`${API_BASE_URL}/api/customer-workflow/progress/${customerId}`)
       .then(res => setProgress(res.data.progress))
       .catch(() => {});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customerId]);
   return (
     <div style={{ padding: 32, maxWidth: 900, margin: "0 auto" }}>

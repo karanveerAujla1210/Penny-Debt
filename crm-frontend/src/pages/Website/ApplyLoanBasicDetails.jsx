@@ -228,7 +228,7 @@ export default function ApplyLoanBasicDetails() {
     localStorage.setItem(LS_KEY, JSON.stringify(state));
   }, 300);
 
-  useEffect(() => { debouncedSave(form); }, [form]);
+  useEffect(() => { debouncedSave(form); }, [form, debouncedSave]);
 
   // OTP countdown
   useEffect(() => {
