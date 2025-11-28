@@ -52,6 +52,7 @@ import TestLogin from "./pages/Auth/TestLogin";
 import Signup from "./pages/Website/Signup";
 import DataViewer from "./pages/Admin/DataViewer";
 import TestPage from "./pages/TestPage";
+import TestShadcn from "./TestShadcn";
 
 const fontFamily = `'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`;
 
@@ -158,6 +159,7 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin/data" element={<DataViewer />} />
           <Route path="/test" element={<TestPage />} />
+          <Route path="/shadcn" element={<TestShadcn />} />
           <Route path="*" element={<PremiumHome />} />
         </Routes>
       </main>
