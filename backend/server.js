@@ -93,6 +93,12 @@ app.use('/api/careers', require('./routes/careers'));
 app.use('/api/loan-applications', require('./routes/loanApplications'));
 app.use('/api/csp-report', require('./routes/cspReport'));
 app.use('/api/contacts', require('./routes/contacts'));
+app.use('/api/applications', require('./routes/applications'));
+app.use('/api/testimonials', require('./routes/testimonials'));
+app.use('/api/services', require('./routes/services'));
+app.use('/api/faqs', require('./routes/faqs'));
+app.use('/api/blog', require('./routes/blogs'));
+app.use('/api/stats', require('./routes/stats'));
 
 // Health check
 app.get('/health', (req, res) => {
