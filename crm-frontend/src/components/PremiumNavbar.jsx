@@ -19,12 +19,15 @@ const PremiumNavbar = () => {
         <div className="navbar-menu desktop">
           <Link to="/" className="navbar-link">Home</Link>
           <Link to="/about" className="navbar-link">About</Link>
+          <Link to="/services" className="navbar-link">Services</Link>
           <Link to="/faq" className="navbar-link">FAQ</Link>
           <Link to="/careers" className="navbar-link">Careers</Link>
           <Link to="/contact" className="navbar-link">Contact</Link>
           <Link to="/blog" className="navbar-link">Blog</Link>
           <Link to="/applyform" className="navbar-link">Apply Now</Link>
           <Link to="/applyloan" className="navbar-link">Apply Loan</Link>
+          <Link to="/privacypolicy" className="navbar-link">Privacy</Link>
+          <Link to="/terms" className="navbar-link">Terms</Link>
         </div>
 
         {/* Login Dropdown */}
@@ -106,12 +109,15 @@ const PremiumNavbar = () => {
         <div className="navbar-menu mobile">
           <Link to="/" className="navbar-link" onClick={() => setIsOpen(false)}>Home</Link>
           <Link to="/about" className="navbar-link" onClick={() => setIsOpen(false)}>About</Link>
+          <Link to="/services" className="navbar-link" onClick={() => setIsOpen(false)}>Services</Link>
           <Link to="/faq" className="navbar-link" onClick={() => setIsOpen(false)}>FAQ</Link>
           <Link to="/careers" className="navbar-link" onClick={() => setIsOpen(false)}>Careers</Link>
           <Link to="/contact" className="navbar-link" onClick={() => setIsOpen(false)}>Contact</Link>
           <Link to="/blog" className="navbar-link" onClick={() => setIsOpen(false)}>Blog</Link>
           <Link to="/applyform" className="navbar-link" onClick={() => setIsOpen(false)}>Apply Now</Link>
           <Link to="/applyloan" className="navbar-link" onClick={() => setIsOpen(false)}>Apply Loan</Link>
+          <Link to="/privacypolicy" className="navbar-link" onClick={() => setIsOpen(false)}>Privacy</Link>
+          <Link to="/terms" className="navbar-link" onClick={() => setIsOpen(false)}>Terms</Link>
           <Link to="/customer-login" className="navbar-link" onClick={() => setIsOpen(false)}>Customer Login</Link>
           <Link to="/signup" className="navbar-link" onClick={() => setIsOpen(false)}>Sign Up</Link>
           <Link to="/employee-login" className="navbar-link" onClick={() => setIsOpen(false)}>Employee Login</Link>
