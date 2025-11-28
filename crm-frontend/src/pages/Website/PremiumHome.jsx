@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import SEO from '../../components/SEO';
+import AnimatedCounter from '../../components/AnimatedCounter';
+import FloatingCTA from '../../components/FloatingCTA';
+import DebtCalculator from '../../components/DebtCalculator';
+import TrustBadges from '../../components/TrustBadges';
+import SocialProof from '../../components/SocialProof';
+import WhatsAppWidget from '../../components/WhatsAppWidget';
 
 const PremiumHome = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -80,6 +87,9 @@ const PremiumHome = () => {
           }}>
             📧 Email: care@pennyanddebt.in | 📞 Phone: +91 7814447895
           </p>
+          <div style={{ marginTop: '32px' }}>
+            <TrustBadges />
+          </div>
         </div>
       </div>
     </section>
@@ -90,16 +100,24 @@ const PremiumHome = () => {
       <div className="container">
         <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '48px', textAlign: 'center' }}>
           {[
-            { value: stats.clientsServed || '10,000+', label: 'Debt-Free Clients', desc: 'Successfully helped across India' },
-            { value: stats.debtResolved || '₹500+ Crore', label: 'Debt Resolved', desc: 'Total savings achieved for clients' },
-            { value: 'RBI-Compliant', label: 'Legal Process', desc: '100% legal & secure operations' },
-            { value: 'ISO Certified', label: 'Platform', desc: 'Bank-grade security standards' }
+            { value: 10000, label: 'Debt-Free Clients', desc: 'Successfully helped across India', suffix: '+' },
+            { value: 500, label: 'Debt Resolved', desc: 'Total savings achieved for clients', prefix: '₹', suffix: '+ Cr' },
+            { value: 95, label: 'Success Rate', desc: 'Client satisfaction score', suffix: '%' },
+            { value: 58, label: 'Avg. Savings', desc: 'Average debt reduction', suffix: '%' }
           ].map((item, i) => (
-            <div key={i}>
-              <div style={{ fontSize: '2.75rem', fontWeight: 900, color: '#0A4DFF', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>{item.value}</div>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div style={{ fontSize: '2.75rem', fontWeight: 900, color: '#0A4DFF', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>
+                <AnimatedCounter end={item.value} prefix={item.prefix || ''} suffix={item.suffix || ''} />
+              </div>
               <div style={{ fontSize: '1.125rem', color: '#0F172A', marginTop: '8px', fontWeight: 700, fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>{item.label}</div>
               <div style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '4px', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif' }}>{item.desc}</div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -188,6 +206,14 @@ const PremiumHome = () => {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+
+  const CalculatorSection = () => (
+    <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #E6EEFF 0%, #F1F5F9 100%)' }}>
+      <div className="container">
+        <DebtCalculator />
       </div>
     </section>
   );
@@ -346,10 +372,14 @@ const PremiumHome = () => {
       <TrustBar />
       <HowItWorks />
       <ServicesSection />
+      <CalculatorSection />
       <WhyChoose />
       <TestimonialsSection />
       <BlogSection />
       <CTASection />
+      <FloatingCTA />
+      <SocialProof />
+      <WhatsAppWidget />
     </>
   );
 };
