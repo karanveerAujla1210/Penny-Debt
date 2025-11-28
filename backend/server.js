@@ -1,17 +1,24 @@
 const express = require('express');
+const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
-const { setupSecurity } = require('./middleware/security');
-const { connectDb } = require('./config/database');
 
 const app = express();
 
-// Connect to MongoDB
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Database connection
+const { setupSecurity } = require('./middleware/security');
+const { connectDb } = require('./config/database');
 connectDb();
 
 // Apply security middleware
 setupSecurity(app);
 
-// Routes
+// Website Routes (Public)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/otp', require('./routes/otp'));
 app.use('/api/leads', require('./routes/leads'));
@@ -26,6 +33,11 @@ app.use('/api/services', require('./routes/services'));
 app.use('/api/faqs', require('./routes/faqs'));
 app.use('/api/blog', require('./routes/blogs'));
 app.use('/api/stats', require('./routes/stats'));
+
+// CRM Routes (Internal) - Using same MongoDB models
+app.use('/api/crm/leads', require('./routes/leads'));
+app.use('/api/crm/customers', require('./routes/customers'));
+app.use('/api/crm/applications', require('./routes/applications'));
 
 // Health check
 app.get('/health', (req, res) => {
@@ -59,4 +71,6 @@ const HOST = process.env.HOST || '0.0.0.0';
 app.listen(PORT, HOST, () => {
   console.log(`🚀 Server running on ${HOST}:${PORT}`);
   console.log(`📦 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🌐 Website API: /api/*`);
+  console.log(`🏢 CRM API: /api/crm/*`);
 });

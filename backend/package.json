@@ -1,7 +1,7 @@
 {
   "name": "penny-debt-backend",
   "version": "1.0.0",
-  "description": "Backend API for Penny Debt CRM",
+  "description": "Backend API for Penny Debt - Node.js + MongoDB",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -2,120 +2,95 @@
 
 Full-stack debt relief CRM application with React frontend, Node.js backend, and MongoDB database.
 
-## Features
-
-- 📧 Email OTP verification system
-- 💼 Debt relief application processing
-- 👥 Customer relationship management
-- 🔐 Secure authentication and validation
-- 📊 Lead tracking and management
-
-## Tech Stack
-
-- **Frontend**: React.js, Framer Motion
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB (Mongoose)
-- **Email**: Nodemailer with SMTP
-- **Deployment**: Vercel (Frontend) + Render (Backend) + MongoDB Atlas (Database)
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js 16+
-- MongoDB (local or cloud) and a connection URI
-- SMTP email credentials
+- MongoDB (Atlas or local)
 
 ### Installation
 
-1. **Clone the repository**
-
 ```bash
-git clone <repository-url>
-cd penny-debt-crm
-```
-
-1. **Setup Backend**
-
-```bash
+# Install backend
 cd backend
 npm install
-cp .env.example .env
-# Configure your .env file with MongoDB connection and email credentials
-# Example .env entry:
-# MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
+
+# Install website
+cd ../frontend/website
+npm install
+
+# Install CRM
+cd ../crm
+npm install
+```
+
+### Configuration
+
+1. **Backend** (`backend/.env`):
+```env
+MONGODB_URI=your_mongodb_connection_string
+SMTP_USER=your_email
+SMTP_PASS=your_password
+JWT_SECRET=your_secret
+```
+
+2. **Website** (`frontend/website/.env`):
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+3. **CRM** (`frontend/crm/.env`):
+```env
+VITE_API_BASE_URL=http://localhost:5000/api/crm
+```
+
+### Start Development
+
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run dev
+
+# Terminal 2 - Website
+cd frontend/website
+npm run dev
+
+# Terminal 3 - CRM
+cd frontend/crm
 npm run dev
 ```
 
-1. **Setup Frontend**
+## 🌐 Access
 
-```bash
-cd crm-frontend
-npm install
-npm start
+- Backend: http://localhost:5000
+- Website: http://localhost:5173
+- CRM: http://localhost:3001
+
+## 📁 Structure
+
+```
+Penny-Debt/
+├── backend/              # Node.js + Express + MongoDB
+├── frontend/
+│   ├── website/          # Public website (React)
+│   └── crm/              # Internal CRM (React)
+└── Junk/                 # Old files (for reference)
 ```
 
-1. **Database Setup**
+## 🔌 API Routes
 
-If you're using a hosted MongoDB (Atlas) you typically do not need to import a schema file; collections are created automatically by Mongoose models. For local MongoDB, ensure the server is running and `MONGODB_URI` points to it.
+- Website: `/api/*`
+- CRM: `/api/crm/*`
 
-## Environment Configuration
+## 🛠️ Tech Stack
 
-Create `backend/.env` with:
+- **Backend**: Node.js, Express, MongoDB, Mongoose
+- **Frontend**: React, Vite, Tailwind CSS
+- **Auth**: JWT, bcryptjs
+- **Email**: Nodemailer
 
-```env
-# MongoDB connection string
-MONGODB_URI=mongodb+srv://<user>:<pass>@cluster0.mongodb.net/pennydebt?retryWrites=true&w=majority
+## 📦 Deployment
 
-# Email
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=care@pennyanddebt.in
-SMTP_PASS=your_app_password
-
-# Security
-JWT_SECRET=your_jwt_secret
-```
-
-## Deployment
-
-### Frontend (Vercel)
-
-- Deploy `crm-frontend/` directory
-- Build command: `npm run build`
-- Output directory: `dist` (Vite)
-- Set environment variable: `VITE_API_BASE_URL` to your Render backend URL
-
-### Backend (Render)
-
-- Deploy from `backend/` directory via GitHub
-- Environment variables: MongoDB URI, JWT secret, email config
-- Free tier supports one backend instance
-
-### Database (MongoDB Atlas)
-
-- Create free tier cluster on MongoDB Atlas
-- Whitelist Render IP addresses
-- Share connection string as `MONGODB_URI` env var
-
-See `DEPLOYMENT_FINAL.md` for detailed step-by-step instructions.
-
-## Project Structure
-
-```bash
-penny-debt-crm/
-├── crm-frontend/          # React application
-├── backend/               # Node.js API server
-├── database/              # MongoDB schema files
-└── models/                # Mongoose models
-```
-
-## API Endpoints
-
-- `POST /api/send-otp` - Send email OTP
-- `POST /api/verify-otp` - Verify OTP
-- `POST /api/leads/submit` - Submit debt relief application
-
-## License
-
-MIT License - see LICENSE file for details
+- Backend → Render/Railway
+- Website → Vercel
+- CRM → Vercel (separate)
