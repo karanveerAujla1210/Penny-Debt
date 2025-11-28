@@ -10,24 +10,41 @@
    ============================================================================ */
 
 :root {
-  /* PRIMARY COLORS - ONLY BLUE */
-  --primary: #003BFF;
-  --primary-hover: #0025B3;
-  --accent: #0066FF;
-  --accent-light: #1A7FFF;
+  /* PRIMARY COLORS - ROYAL BLUE */
+  --primary: #0A4DFF;
+  --primary-hover: #0039CC;
+  --primary-light: #E6EEFF;
   
-  /* BACKGROUNDS */
-  --bg-light: #F5F7FF;
+  /* SECONDARY COLORS */
+  --secondary: #5CAEFF;
+  --secondary-light: #E3EAF6;
+  
+  /* ACCENT COLORS */
+  --accent: #00D49E;
+  --accent2: #04A0A0;
+  
+  /* NEUTRALS */
+  --dark: #0F172A;
+  --gray-text: #475569;
+  --light-gray: #F1F5F9;
   --bg-white: #FFFFFF;
   
+  /* FEEDBACK COLORS */
+  --success: #16A34A;
+  --warning: #F59E0B;
+  --danger: #DC2626;
+  
+  /* BACKGROUNDS */
+  --bg-light: #F1F5F9;
+  
   /* TEXT COLORS */
-  --text-primary: #0D0D0D;
-  --text-secondary: #333333;
-  --text-tertiary: #666666;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #64748B;
   
   /* BORDERS */
-  --border: #E0E0E0;
-  --border-light: #F0F0F0;
+  --border: #E2E8F0;
+  --border-light: #F1F5F9;
   
   /* SHADOWS - SUBTLE & PROFESSIONAL */
   --shadow-xs: 0px 2px 8px rgba(0, 0, 0, 0.02);
@@ -164,13 +181,13 @@ p {
 .btn-primary {
   background: var(--primary);
   color: var(--bg-white);
-  box-shadow: 0px 4px 16px rgba(0, 59, 255, 0.2);
+  box-shadow: 0px 4px 16px rgba(10, 77, 255, 0.2);
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0px 8px 24px rgba(0, 59, 255, 0.3);
+  box-shadow: 0px 8px 24px rgba(10, 77, 255, 0.3);
 }
 
 .btn-secondary {
@@ -249,7 +266,7 @@ p {
 .form-control:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 59, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(10, 77, 255, 0.1);
 }
 
 .form-control::placeholder {

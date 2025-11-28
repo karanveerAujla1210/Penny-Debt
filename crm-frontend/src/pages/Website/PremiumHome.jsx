@@ -1,133 +1,229 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../../components/SEO';
 
 const PremiumHome = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [stats, setStats] = useState({ clientsServed: '10,000+', debtResolved: '₹50+ Cr', successRate: '95%' });
+  const [testimonials, setTestimonials] = useState([]);
+  const [services, setServices] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/stats').then(r => r.json()).then(setStats).catch(() => {});
+    fetch('/api/testimonials').then(r => r.json()).then(d => setTestimonials(d.slice(0, 3))).catch(() => {});
+    fetch('/api/services').then(r => r.json()).then(d => setServices(d.slice(0, 6))).catch(() => {});
+    fetch('/api/blog?limit=3').then(r => r.json()).then(setBlogs).catch(() => {});
+  }, []);
 
   const HeroSection = () => (
     <section style={{
-      background: 'linear-gradient(135deg, #F5F7FF 0%, #FAFBFF 100%)',
-      padding: '80px 24px',
-      borderRadius: '0px'
+      background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)',
+      padding: '100px 24px',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
-      <div className="container">
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '48px',
-          alignItems: 'center'
-        }}>
-          <div>
-            <h1 style={{
-              fontSize: '3rem',
-              fontWeight: 800,
-              color: '#0D0D0D',
-              marginBottom: '24px',
-              lineHeight: '1.1',
-              fontFamily: 'var(--font-primary)'
-            }}>
-              Financial Freedom Starts Here
-            </h1>
-            <p style={{
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.1, backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+          <h1 style={{
+            fontSize: '3.5rem',
+            fontWeight: 900,
+            color: 'white',
+            marginBottom: '24px',
+            lineHeight: '1.1'
+          }}>
+            Become Debt-Free with India's #1 AI-Powered Debt Relief Platform
+          </h1>
+          <p style={{
+            fontSize: '1.25rem',
+            color: 'rgba(255,255,255,0.95)',
+            marginBottom: '48px',
+            lineHeight: '1.6'
+          }}>
+            We reduce your debts by negotiating with banks, NBFCs, lenders — while keeping you legally protected.
+          </p>
+          <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/applyform" style={{
+              padding: '16px 40px',
+              borderRadius: '12px',
+              background: 'white',
+              color: '#0A4DFF',
+              fontWeight: 700,
               fontSize: '1.125rem',
-              color: '#333333',
-              marginBottom: '48px',
-              lineHeight: '1.6',
-              maxWidth: '500px'
+              textDecoration: 'none',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
             }}>
-              Take control of your debt with expert guidance, personalized solutions, and real financial wellness.
-            </p>
-            <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-              <Link to="/applyform" className="btn btn-primary btn-lg">
-                Get Started
-              </Link>
-              <Link to="/applyform" className="btn btn-secondary btn-lg">
-                Get Debt Free
-              </Link>
-            </div>
-            <div style={{ display: 'flex', gap: '48px', marginTop: '64px', flexWrap: 'wrap' }}>
-              {[
-                { value: '10,000+', label: 'Customers Helped' },
-                { value: '₹500Cr+', label: 'Debt Resolved' },
-                { value: '4.9★', label: 'Rating' }
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#003BFF' }}>
-                    {stat.value}
-                  </div>
-                  <div style={{ fontSize: '0.875rem', color: '#666666', marginTop: '4px' }}>
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{
-              width: '100%',
-              maxWidth: '400px',
-              aspectRatio: '1',
-              background: 'linear-gradient(135deg, #003BFF 0%, #0066FF 100%)',
-              borderRadius: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              Check Eligibility
+            </Link>
+            <Link to="/contact" style={{
+              padding: '16px 40px',
+              borderRadius: '12px',
+              background: 'transparent',
               color: 'white',
-              fontSize: '4rem',
-              fontWeight: 'bold',
-              boxShadow: '0px 20px 60px rgba(0, 59, 255, 0.2)'
+              fontWeight: 700,
+              fontSize: '1.125rem',
+              textDecoration: 'none',
+              border: '2px solid white'
             }}>
-              💰
-            </div>
+              Talk to an Expert
+            </Link>
           </div>
         </div>
       </div>
     </section>
   );
 
-  const ServicesSection = () => (
-    <section style={{ padding: '80px 24px', backgroundColor: 'white' }}>
+  const TrustBar = () => (
+    <section style={{ padding: '40px 24px', background: '#E6EEFF' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <h2 style={{
-            fontSize: '2.25rem',
-            fontWeight: 800,
-            color: '#0D0D0D',
-            marginBottom: '16px'
-          }}>
-            Our Services
-          </h2>
-          <p style={{
-            fontSize: '1.125rem',
-            color: '#333333',
-            maxWidth: '600px',
-            margin: '0 auto'
-          }}>
-            Comprehensive debt solutions tailored to your financial situation
-          </p>
-        </div>
-        <div className="grid grid-auto" style={{ gap: '32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '32px', textAlign: 'center' }}>
           {[
-            { icon: '📊', title: 'Debt Assessment', description: 'Professional analysis of your debt situation with zero obligation' },
-            { icon: '🎯', title: 'Personalized Plans', description: 'Custom repayment strategies designed for your budget' },
-            { icon: '🤝', title: 'Expert Guidance', description: 'Direct support from certified financial advisors' },
-            { icon: '💳', title: 'Negotiation', description: 'We negotiate with creditors on your behalf' },
-            { icon: '📈', title: 'Credit Building', description: 'Rebuild your credit score with proven strategies' },
-            { icon: '🛡️', title: 'Full Protection', description: 'Secure, confidential, and compliant debt resolution' }
-          ].map((service, i) => (
-            <div key={i} className="card" style={{ padding: '32px', textAlign: 'center' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{service.icon}</div>
-              <h3 style={{
-                fontSize: '1.125rem',
-                fontWeight: 'bold',
-                color: '#0D0D0D',
-                marginBottom: '8px'
-              }}>
-                {service.title}
-              </h3>
-              <p style={{ fontSize: '1rem', color: '#333333' }}>{service.description}</p>
+            { value: stats.clientsServed || '10,000+', label: 'Debt-Free Clients' },
+            { value: stats.debtResolved || '₹50+ Crore', label: 'Debt Resolved' },
+            { value: 'RBI-Compliant', label: 'Process' },
+            { value: 'ISO Certified', label: 'Platform' }
+          ].map((item, i) => (
+            <div key={i}>
+              <div style={{ fontSize: '2rem', fontWeight: 900, color: '#0A4DFF' }}>{item.value}</div>
+              <div style={{ fontSize: '0.875rem', color: '#0F172A', marginTop: '4px' }}>{item.label}</div>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const HowItWorks = () => (
+    <section style={{ padding: '80px 24px', background: 'white' }}>
+      <div className="container">
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', textAlign: 'center', marginBottom: '64px' }}>
+          How It Works — 5-Step Flow
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
+          {[
+            { step: '1', title: 'Submit Your Details', desc: 'Apply with simple form' },
+            { step: '2', title: 'Expert Counselling', desc: 'Debt expert evaluates your case' },
+            { step: '3', title: 'Plan Creation', desc: 'Custom settlement program created' },
+            { step: '4', title: 'Negotiation', desc: 'We negotiate with lenders' },
+            { step: '5', title: 'Become Debt-Free', desc: 'Final settlement issued' }
+          ].map((item, i) => (
+            <div key={i} style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '2rem',
+                fontWeight: 900,
+                margin: '0 auto 16px',
+                boxShadow: '0 8px 24px rgba(10,77,255,0.3)'
+              }}>
+                {item.step}
+              </div>
+              <h4 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{item.title}</h4>
+              <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const ServicesSection = () => (
+    <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
+      <div className="container">
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', textAlign: 'center', marginBottom: '64px' }}>
+          Services Overview
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
+          {(services.length > 0 ? services : [
+            { title: 'Debt Settlement', type: 'Settlement', features: ['40-65% debt reduction', 'Legal settlement letter', 'Bank negotiation'] },
+            { title: 'EMI Reduction', type: 'Restructuring', features: ['Lower EMI', 'Extended tenure', 'Reduce monthly stress'] },
+            { title: 'Debt Consolidation', type: 'Consolidation', features: ['One single EMI', 'Better planning', 'Lower interest'] },
+            { title: 'Debt Counselling', type: 'Counselling', features: ['Free counselling', 'Budget planning', 'Financial strategy'] },
+            { title: 'Credit Score Improvement', type: 'Credit Repair', features: ['Monitoring', 'Dispute resolution', 'Score rebuilding'] },
+            { title: 'Legal Support', type: 'Legal', features: ['Anti-harassment', 'Legal notices', 'Lawyer consultation'] }
+          ]).map((service, i) => (
+            <div key={i} style={{
+              background: 'white',
+              padding: '32px',
+              borderRadius: '16px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+              border: '1px solid #E6EEFF'
+            }}>
+              <div style={{ fontSize: '2.5rem', marginBottom: '16px' }}>💼</div>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{service.title}</h3>
+              <div style={{ fontSize: '0.875rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '16px' }}>{service.type}</div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {(service.features || []).map((f, j) => (
+                  <li key={j} style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '8px', paddingLeft: '20px', position: 'relative' }}>
+                    <span style={{ position: 'absolute', left: 0 }}>✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const WhyChoose = () => (
+    <section style={{ padding: '80px 24px', background: 'white' }}>
+      <div className="container">
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', textAlign: 'center', marginBottom: '64px' }}>
+          Why Choose Penny & Debt?
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '32px' }}>
+          {[
+            { icon: '⚖️', title: 'Legal Assistance', desc: 'Full legal protection throughout' },
+            { icon: '🛡️', title: 'Harassment Protection', desc: 'Stop recovery agent calls' },
+            { icon: '🤖', title: 'AI-Powered Negotiation', desc: 'Smart debt settlement strategies' },
+            { icon: '💰', title: 'Upto 65% Debt Reduction', desc: 'Proven negotiation results' },
+            { icon: '📊', title: 'Transparent Dashboard', desc: 'Track your progress 24/7' },
+            { icon: '🔒', title: 'Confidential & Secure', desc: 'Bank-grade data security' }
+          ].map((item, i) => (
+            <div key={i} style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{item.icon}</div>
+              <h4 style={{ fontSize: '1.125rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{item.title}</h4>
+              <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+
+  const BlogSection = () => (
+    <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
+      <div className="container">
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', textAlign: 'center', marginBottom: '64px' }}>
+          Featured Blogs
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+          {(blogs.length > 0 ? blogs : [
+            { title: 'How to Become Debt-Free in 2025', slug: 'debt-free-2025', excerpt: 'Learn proven strategies to eliminate debt' },
+            { title: 'Understanding Credit Scores', slug: 'credit-scores', excerpt: 'Everything you need to know about CIBIL' },
+            { title: 'Debt Settlement vs Bankruptcy', slug: 'settlement-vs-bankruptcy', excerpt: 'Which option is right for you?' }
+          ]).map((blog, i) => (
+            <Link key={i} to={`/blog/${blog.slug || ''}`} style={{
+              background: 'white',
+              padding: '32px',
+              borderRadius: '16px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+              textDecoration: 'none',
+              display: 'block',
+              border: '1px solid #E6EEFF'
+            }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '12px' }}>{blog.title}</h3>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '16px' }}>{blog.excerpt || blog.content?.substring(0, 100)}</p>
+              <span style={{ fontSize: '0.875rem', color: '#0A4DFF', fontWeight: 600 }}>Read More →</span>
+            </Link>
           ))}
         </div>
       </div>
@@ -202,57 +298,32 @@ const PremiumHome = () => {
   );
 
   const TestimonialsSection = () => (
-    <section style={{ padding: '80px 24px', backgroundColor: 'white' }}>
+    <section style={{ padding: '80px 24px', background: 'white' }}>
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <h2 style={{
-            fontSize: '2.25rem',
-            fontWeight: 800,
-            color: '#0D0D0D',
-            marginBottom: '16px'
-          }}>
-            What Our Customers Say
-          </h2>
-        </div>
-        <div className="grid grid-auto" style={{ gap: '32px' }}>
-          {[
-            {
-              name: 'Rajesh Kumar',
-              role: 'Small Business Owner',
-              text: 'Penny & Debt helped me resolve 3 years of accumulated debt in just 18 months. Their guidance was invaluable.',
-              rating: 5
-            },
-            {
-              name: 'Priya Singh',
-              role: 'Software Engineer',
-              text: 'Professional, transparent, and genuinely concerned about my financial wellbeing. Highly recommended!',
-              rating: 5
-            },
-            {
-              name: 'Arjun Patel',
-              role: 'Entrepreneur',
-              text: 'The personalized approach made all the difference. I went from stressed to confident about my finances.',
-              rating: 5
-            }
-          ].map((testimonial, i) => (
-            <div key={i} className="card" style={{ padding: '32px' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', textAlign: 'center', marginBottom: '64px' }}>
+          Success Stories
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px' }}>
+          {(testimonials.length > 0 ? testimonials : [
+            { name: 'Rajesh K.', role: 'Mumbai', text: 'Reduced ₹5.2L debt to ₹2.1L. Life-changing experience!', rating: 5, savings: '60%' },
+            { name: 'Priya S.', role: 'Bangalore', text: 'Professional team, transparent process. Highly recommended!', rating: 5, savings: '55%' },
+            { name: 'Arjun M.', role: 'Delhi', text: 'Finally debt-free after 3 years of struggle. Thank you!', rating: 5, savings: '65%' }
+          ]).map((t, i) => (
+            <div key={i} style={{
+              background: '#F8FAFF',
+              padding: '32px',
+              borderRadius: '16px',
+              border: '2px solid #E6EEFF'
+            }}>
               <div style={{ display: 'flex', marginBottom: '16px' }}>
-                {[...Array(testimonial.rating)].map((_, j) => (
-                  <span key={j} style={{ color: '#003BFF', fontSize: '1.2em' }}>★</span>
+                {[...Array(t.rating || 5)].map((_, j) => (
+                  <span key={j} style={{ color: '#FFB800', fontSize: '1.2em' }}>★</span>
                 ))}
               </div>
-              <p style={{
-                fontSize: '1rem',
-                color: '#333333',
-                marginBottom: '16px',
-                fontStyle: 'italic'
-              }}>
-                "{testimonial.text}"
-              </p>
-              <div>
-                <div style={{ fontWeight: 'bold', color: '#0D0D0D' }}>{testimonial.name}</div>
-                <div style={{ fontSize: '0.875rem', color: '#666666' }}>{testimonial.role}</div>
-              </div>
+              <p style={{ fontSize: '1rem', color: '#0F172A', marginBottom: '16px', fontStyle: 'italic' }}>"{t.text}"</p>
+              {t.savings && <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#00D49E', marginBottom: '8px' }}>{t.savings} Saved</div>}
+              <div style={{ fontWeight: 700, color: '#0F172A' }}>{t.name}</div>
+              <div style={{ fontSize: '0.875rem', color: '#64748B' }}>{t.role}</div>
             </div>
           ))}
         </div>
@@ -339,34 +410,29 @@ const PremiumHome = () => {
 
   const CTASection = () => (
     <section style={{
-      padding: '80px 24px',
-      background: 'linear-gradient(135deg, #003BFF 0%, #0066FF 100%)',
-      textAlign: 'center',
-      borderRadius: '0px'
+      padding: '100px 24px',
+      background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)',
+      textAlign: 'center'
     }}>
       <div className="container">
-        <h2 style={{
-          fontSize: '2.25rem',
-          fontWeight: 800,
-          color: 'white',
-          marginBottom: '16px'
-        }}>
-          Ready to Take Control?
+        <h2 style={{ fontSize: '3rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
+          Start Your Debt-Free Journey Today
         </h2>
-        <p style={{
-          fontSize: '1.125rem',
-          color: 'rgba(255, 255, 255, 0.9)',
-          marginBottom: '32px',
-          maxWidth: '600px',
-          margin: '0 auto 32px'
-        }}>
-          Get your free debt assessment today. No obligations, no hidden fees.
+        <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', marginBottom: '48px', maxWidth: '700px', margin: '0 auto 48px' }}>
+          Join thousands of Indians who have achieved financial freedom with our expert guidance.
         </p>
-        <Link to="/applyform" className="btn btn-primary btn-lg" style={{
+        <Link to="/applyform" style={{
+          padding: '18px 48px',
+          borderRadius: '12px',
           background: 'white',
-          color: '#003BFF'
+          color: '#0A4DFF',
+          fontWeight: 700,
+          fontSize: '1.25rem',
+          textDecoration: 'none',
+          display: 'inline-block',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
         }}>
-          Start Your Free Assessment
+          Apply Now
         </Link>
       </div>
     </section>
@@ -374,12 +440,14 @@ const PremiumHome = () => {
 
   return (
     <>
-      <SEO title="Financial Freedom Starts Here | Penny & Debt" description="Expert debt relief solutions" />
+      <SEO title="India's #1 AI-Powered Debt Relief Platform | Penny & Debt" description="Become debt-free with expert negotiation, legal protection, and AI-powered solutions" />
       <HeroSection />
+      <TrustBar />
+      <HowItWorks />
       <ServicesSection />
-      <JourneySection />
+      <WhyChoose />
       <TestimonialsSection />
-      <FAQSection />
+      <BlogSection />
       <CTASection />
     </>
   );

@@ -3,13 +3,11 @@ import { motion } from "framer-motion";
 import SEO from "../../components/SEO";
 import { submitToGoogleSheets } from "../../utils/googleSheets";
 
-const fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-const fontColor = "#223759"; // consistent text color with other pages
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -29,6 +27,7 @@ const Contact = () => {
     if (
       !formData.fullName.trim() ||
       !formData.email.trim() ||
+      !formData.phone.trim() ||
       !formData.subject.trim() ||
       !formData.message.trim()
     ) {
@@ -41,7 +40,6 @@ const Contact = () => {
     try {
       const contactData = formData;
       
-      // Send to backend API first
       try {
         const res = await fetch('/api/contacts', {
           method: 'POST',
@@ -50,20 +48,19 @@ const Contact = () => {
         });
         if (res.ok) {
           setSubmitted(true);
-          setFormData({ fullName: '', email: '', subject: '', message: '' });
-        } else {
-          console.warn('Backend contact submit failed, falling back to Google Sheets');
+          setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
+          setSubmitting(false);
+          return;
         }
       } catch (backendErr) {
         console.warn('Contact backend error:', backendErr);
       }
 
-      // Also keep Google Sheets flow as a backup for analytics
       const result = await submitToGoogleSheets(contactData, 'ContactForms');
 
       if (result.success) {
         setSubmitted(true);
-        setFormData({ fullName: '', email: '', subject: '', message: '' });
+        setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
       } else {
         throw new Error('Google Sheets submission failed');
       }
@@ -78,264 +75,335 @@ const Contact = () => {
     }
   };
 
-  const labelStyle = {
-    display: "block",
-    marginBottom: 6,
-    fontWeight: "700",
-    fontSize: 16,
-    color: fontColor,
-    userSelect: "text",
-    fontFamily,
-  };
-
-  const inputStyle = {
-    width: "100%",
-    padding: "10px 14px",
-    fontSize: 16,
-    fontFamily,
-    borderRadius: 8,
-    border: "1.8px solid #d1d9f0",
-    boxSizing: "border-box",
-    outlineOffset: 2,
-    marginBottom: 20,
-    color: fontColor,
-    userSelect: "auto",
-  };
-
-  const textareaStyle = {
-    ...inputStyle,
-    height: 110,
-    resize: "vertical",
-  };
-
-  const buttonStyle = {
-    width: "100%",
-    padding: "14px 0",
-    background: submitting
-      ? "linear-gradient(90deg, #8bbfff 0%, #6aa1ff 100%)"
-      : "linear-gradient(90deg, #0070f3 0%, #005bb5 100%)",
-    color: "white",
-    fontWeight: "700",
-    fontSize: 16,
-    borderRadius: 32,
-    border: "none",
-    cursor: submitting ? "not-allowed" : "pointer",
-    userSelect: "none",
-    boxShadow: submitting
-      ? "none"
-      : "0 8px 30px rgb(0 112 243 / 0.4), 0 4px 20px rgb(0 83 181 / 0.35)",
-    transition: "background 0.3s ease",
-  };
-
   return (
     <>
       <SEO pageName="contact" />
-      <section
-      style={{
-        minHeight: "100vh",
-        padding: "32px 24px",
-        background: "#f7faff",
-        fontFamily,
-        color: fontColor,
-        userSelect: "none",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "start",
-      }}
-      aria-label="Contact Penny & Debt"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        style={{
-          maxWidth: 720,
-          width: "100%",
-          backgroundColor: "#fff",
-          borderRadius: 24,
-          padding: 36,
-          boxShadow: "0 12px 40px rgb(0 112 243 / 0.15)",
-          userSelect: "auto",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "2.6rem",
-            fontWeight: "900",
-            marginBottom: 14,
-            userSelect: "none",
-            color: "#0070f3",
-          }}
-        >
-          Contact Us
-        </h1>
-        <p
-          style={{
-            fontSize: 18,
-            marginBottom: 36,
-            maxWidth: 540,
-            userSelect: "text",
-            color: fontColor,
-            lineHeight: 1.6,
-          }}
-        >
-          Whether you're a customer or partner, we’re here to help. Submit your
-          query or reach out directly — our team will get back to you within 24
-          hours.
-        </p>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 48,
-          }}
-        >
-          {/* Contact Info */}
-          <div
-            style={{
-              userSelect: "text",
-              fontSize: 16,
-              color: fontColor,
-              lineHeight: 1.5,
-            }}
-          >
-            <h2
-              style={{
-                fontSize: 20,
-                fontWeight: "700",
-                marginBottom: 20,
-                color: "#0070f3",
-                userSelect: "none",
-              }}
-            >
-              Contact Details
-            </h2>
-            <p>
-              📧 Email:{" "}
-              <strong style={{ userSelect: "text" }}>care@pennyanddebt.in</strong>
+      <main style={{ background: '#FFFFFF' }}>
+        
+        {/* Hero Section */}
+        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
+          <div className="container">
+            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
+              Get In Touch
+            </h1>
+            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto' }}>
+              Have questions? We're here to help. Reach out and we'll respond within 24 hours.
             </p>
-            <p>
-              ☎️ Phone:{" "}
-                 <strong style={{ userSelect: "text" }}>+91 7814447895</strong>
-            </p>
-            <p>🏢 Address: 2nd Floor, Fintech Tower, Gurgaon, Haryana</p>
-            <p>🕐 Working Hours: Mon–Sat, 9:00 AM – 6:00 PM</p>
           </div>
+        </section>
 
-          {/* Contact Form */}
-          <form
-            onSubmit={handleSubmit}
-            noValidate
-            style={{ userSelect: "auto" }}
-            aria-label="Send message contact form"
-          >
-            {submitted && (
-              <div
-                role="alert"
-                aria-live="polite"
-                style={{
-                  marginBottom: 18,
-                  color: "#16a34a", // green 600
-                  fontWeight: "700",
-                  userSelect: "text",
-                }}
+        {/* Contact Info Cards */}
+        <section style={{ padding: '80px 24px', background: 'white' }}>
+          <div className="container">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px', marginBottom: '80px' }}>
+              {[
+                { icon: '📧', title: 'Email Us', info: 'care@pennyanddebt.in', desc: 'Send us an email anytime' },
+                { icon: '📞', title: 'Call Us', info: '+91 7814447895', desc: 'Mon-Sat, 9:00 AM – 6:00 PM' },
+                { icon: '📍', title: 'Visit Us', info: 'Gurgaon, Haryana', desc: '2nd Floor, Fintech Tower' },
+                { icon: '💬', title: 'Live Chat', info: 'Available Now', desc: 'Chat with our support team' }
+              ].map((contact, i) => (
+                <div key={i} style={{
+                  background: '#F8FAFF',
+                  padding: '32px',
+                  borderRadius: '16px',
+                  textAlign: 'center',
+                  border: '2px solid #E6EEFF'
+                }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{contact.icon}</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{contact.title}</h3>
+                  <div style={{ fontSize: '1.125rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '4px' }}>{contact.info}</div>
+                  <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{contact.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Contact Form and Map */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '48px', alignItems: 'start' }}>
+              
+              {/* Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
               >
-                ✅ Your query has been submitted!
+                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
+                  Send Us a Message
+                </h2>
+                <p style={{ fontSize: '1rem', color: '#64748B', marginBottom: '32px', lineHeight: 1.6 }}>
+                  Fill out the form below and our team will get back to you within 24 hours.
+                </p>
+
+                <form onSubmit={handleSubmit} style={{
+                  background: '#F8FAFF',
+                  padding: '32px',
+                  borderRadius: '16px',
+                  border: '2px solid #E6EEFF'
+                }}>
+                  {submitted && (
+                    <div style={{
+                      padding: '16px',
+                      borderRadius: '12px',
+                      marginBottom: '24px',
+                      background: '#D1FAE5',
+                      color: '#065F46',
+                      fontWeight: 600
+                    }}>
+                      ✅ Your message has been sent successfully!
+                    </div>
+                  )}
+                  {error && (
+                    <div style={{
+                      padding: '16px',
+                      borderRadius: '12px',
+                      marginBottom: '24px',
+                      background: '#FEE2E2',
+                      color: '#991B1B',
+                      fontWeight: 600
+                    }}>
+                      ⚠️ {error}
+                    </div>
+                  )}
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <label htmlFor="fullName" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
+                      Full Name<span style={{ color: 'red' }}> *</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      placeholder="Your full name"
+                      required
+                      disabled={submitting}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '10px',
+                        border: '1px solid #E0E0E0',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        background: 'white'
+                      }}
+                    />
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
+                    <div>
+                      <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
+                        Email<span style={{ color: 'red' }}> *</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="you@example.com"
+                        required
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '12px 16px',
+                          borderRadius: '10px',
+                          border: '1px solid #E0E0E0',
+                          fontSize: '1rem',
+                          outline: 'none',
+                          background: 'white'
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
+                        Phone<span style={{ color: 'red' }}> *</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="+91 9876543210"
+                        required
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '12px 16px',
+                          borderRadius: '10px',
+                          border: '1px solid #E0E0E0',
+                          fontSize: '1rem',
+                          outline: 'none',
+                          background: 'white'
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ marginBottom: '20px' }}>
+                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
+                      Subject<span style={{ color: 'red' }}> *</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="Subject of your message"
+                      required
+                      disabled={submitting}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '10px',
+                        border: '1px solid #E0E0E0',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        background: 'white'
+                      }}
+                    />
+                  </div>
+
+                  <div style={{ marginBottom: '24px' }}>
+                    <label htmlFor="message" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
+                      Message<span style={{ color: 'red' }}> *</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your message here"
+                      required
+                      disabled={submitting}
+                      rows={5}
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        borderRadius: '10px',
+                        border: '1px solid #E0E0E0',
+                        fontSize: '1rem',
+                        outline: 'none',
+                        resize: 'vertical',
+                        background: 'white',
+                        fontFamily: 'inherit'
+                      }}
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    style={{
+                      width: '100%',
+                      padding: '14px',
+                      borderRadius: '12px',
+                      background: submitting ? '#9CA3AF' : 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
+                      color: 'white',
+                      border: 'none',
+                      fontWeight: 700,
+                      fontSize: '1rem',
+                      cursor: submitting ? 'not-allowed' : 'pointer',
+                      boxShadow: submitting ? 'none' : '0 8px 24px rgba(10,77,255,0.3)'
+                    }}
+                  >
+                    {submitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </form>
+              </motion.div>
+
+              {/* Office Info & Map */}
+              <div>
+                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
+                  Our Office
+                </h2>
+                
+                <div style={{
+                  background: '#F8FAFF',
+                  padding: '32px',
+                  borderRadius: '16px',
+                  border: '2px solid #E6EEFF',
+                  marginBottom: '32px'
+                }}>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '16px' }}>
+                    Penny & Debt Headquarters
+                  </h3>
+                  <div style={{ fontSize: '1rem', color: '#64748B', lineHeight: 1.8 }}>
+                    <p style={{ marginBottom: '12px' }}>
+                      <strong style={{ color: '#0F172A' }}>Address:</strong><br />
+                      2nd Floor, Fintech Tower<br />
+                      Gurgaon, Haryana 122001<br />
+                      India
+                    </p>
+                    <p style={{ marginBottom: '12px' }}>
+                      <strong style={{ color: '#0F172A' }}>Email:</strong><br />
+                      care@pennyanddebt.in
+                    </p>
+                    <p style={{ marginBottom: '12px' }}>
+                      <strong style={{ color: '#0F172A' }}>Phone:</strong><br />
+                      +91 7814447895
+                    </p>
+                    <p>
+                      <strong style={{ color: '#0F172A' }}>Working Hours:</strong><br />
+                      Monday – Saturday: 9:00 AM – 6:00 PM<br />
+                      Sunday: Closed
+                    </p>
+                  </div>
+                </div>
+
+                {/* Map Placeholder */}
+                <div style={{
+                  background: 'linear-gradient(135deg, #E6EEFF 0%, #F8FAFF 100%)',
+                  height: '300px',
+                  borderRadius: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: '2px solid #E6EEFF'
+                }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '16px' }}>🗺️</div>
+                    <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0F172A' }}>
+                      Map Location
+                    </div>
+                    <div style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '8px' }}>
+                      Gurgaon, Haryana
+                    </div>
+                  </div>
+                </div>
               </div>
-            )}
-            {error && (
-              <div
-                role="alert"
-                aria-live="assertive"
-                style={{
-                  marginBottom: 18,
-                  color: "#dc2626", // red 600
-                  fontWeight: "700",
-                  userSelect: "text",
-                }}
-              >
-                ⚠️ {error}
-              </div>
-            )}
 
-            <label htmlFor="fullName" style={labelStyle}>
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              style={inputStyle}
-              disabled={submitting}
-              required
-              aria-required="true"
-              autoComplete="name"
-              placeholder="Your full name"
-            />
+            </div>
+          </div>
+        </section>
 
-            <label htmlFor="email" style={labelStyle}>
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={inputStyle}
-              disabled={submitting}
-              required
-              aria-required="true"
-              autoComplete="email"
-              placeholder="you@example.com"
-            />
+        {/* FAQ Quick Links */}
+        <section style={{ padding: '80px 24px', background: '#F8FAFF', textAlign: 'center' }}>
+          <div className="container">
+            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
+              Looking for Quick Answers?
+            </h2>
+            <p style={{ fontSize: '1.125rem', color: '#64748B', marginBottom: '32px' }}>
+              Check out our FAQ section for instant answers to common questions
+            </p>
+            <a href="/faq" style={{
+              padding: '14px 32px',
+              borderRadius: '12px',
+              background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
+              color: 'white',
+              fontWeight: 700,
+              fontSize: '1rem',
+              textDecoration: 'none',
+              display: 'inline-block',
+              boxShadow: '0 8px 24px rgba(10,77,255,0.3)'
+            }}>
+              Visit FAQ
+            </a>
+          </div>
+        </section>
 
-            <label htmlFor="subject" style={labelStyle}>
-              Subject
-            </label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              style={inputStyle}
-              disabled={submitting}
-              required
-              aria-required="true"
-              placeholder="Subject of your message"
-            />
-
-            <label htmlFor="message" style={labelStyle}>
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              style={textareaStyle}
-              disabled={submitting}
-              required
-              aria-required="true"
-              placeholder="Write your message here"
-            ></textarea>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              style={buttonStyle}
-              aria-busy={submitting}
-            >
-              {submitting ? "Submitting..." : "Submit Query"}
-            </button>
-          </form>
-        </div>
-      </motion.div>
-      </section>
+      </main>
     </>
   );
 };

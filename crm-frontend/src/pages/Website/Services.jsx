@@ -1,218 +1,117 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import SEO from "../../components/SEO";
 
 const Services = () => {
-  const servicesList = [
-    {
-      icon: "🛡️",
-      title: "Debt Relief Programs",
-      description: "Affordable settlement and repayment plans tailored to ease your financial burden.",
-      details: [
-        "Personalized debt assessment",
-        "Negotiation with lenders",
-        "Flexible repayment options",
-        "Legal protection throughout",
-        "Ongoing case management"
-      ]
-    },
-    {
-      icon: "⚖️",
-      title: "Legal Advisory & Anti-Harassment",
-      description: "Protect yourself from debt harassment with expert legal assistance.",
-      details: [
-        "Legal advice for debt cases",
-        "Protection from harassment",
-        "Court support",
-        "Documentation & compliance",
-        "Legal representation"
-      ]
-    },
-    {
-      icon: "📉",
-      title: "Credit Score Improvement",
-      description: "Roadmaps and steps tailored for rebuilding your credit score effectively.",
-      details: [
-        "Credit report analysis",
-        "Dispute resolution",
-        "Credit rebuilding plans",
-        "Financial literacy coaching",
-        "Ongoing credit monitoring"
-      ]
-    },
-    {
-      icon: "💼",
-      title: "Financial Planning & Budgeting",
-      description: "Expert advice for budgeting wisely and maintaining debt-free living.",
-      details: [
-        "Monthly budget setup",
-        "Expense tracking",
-        "Savings strategies",
-        "Debt prevention tips",
-        "Goal-based planning"
-      ]
-    },
-    {
-      icon: "🔍",
-      title: "Loan Eligibility Analysis",
-      description: "Assessment to improve your chances for future loan approvals.",
-      details: [
-        "Eligibility check",
-        "Profile improvement",
-        "Documentation review",
-        "Pre-approval guidance",
-        "Lender matching"
-      ]
-    },
-    {
-      icon: "🤝",
-      title: "Lender Negotiation & Settlement",
-      description: "We negotiate with lenders to reduce your debt and cut penalties legally.",
-      details: [
-        "Direct bank negotiation",
-        "Penalty reduction",
-        "Settlement agreements",
-        "Support until closure",
-        "Transparent process"
-      ]
-    }
-  ];
+  const [services, setServices] = useState([]);
 
-  const loanProducts = [
+  useEffect(() => {
+    fetch('/api/services').then(r => r.json()).then(setServices).catch(() => {});
+  }, []);
+
+  const defaultServices = [
     {
-      icon: "🏠",
-      title: "Home Loan",
-      description: "Get the best rates for new home purchase, balance transfer, or top-up.",
-      features: [
-        "Loan up to ₹5 Cr+",
-        "Tenure up to 30 years",
-        "Balance transfer options",
-        "Doorstep support"
-      ]
+      icon: '💰',
+      title: 'Debt Settlement',
+      type: 'Settlement',
+      description: 'We negotiate with banks to get 40-65% reduction with legal settlement letter',
+      features: ['Direct bank negotiation', 'Get 40-65% reduction', 'Legal settlement letter', 'Support until closure', 'Transparent process']
     },
     {
-      icon: "👤",
-      title: "Personal Loan",
-      description: "Quick, collateral-free loans for any purpose with minimal paperwork.",
-      features: [
-        "Loan up to ₹40 lakh",
-        "Tenure up to 6 years",
-        "No collateral required",
-        "Flexible EMI options"
-      ]
+      icon: '📉',
+      title: 'EMI Reduction / Restructuring',
+      type: 'Restructuring',
+      description: 'Lower EMI, extended tenure, reduce monthly stress',
+      features: ['Lower monthly EMI', 'Extended tenure options', 'Reduce financial stress', 'Better cash flow', 'Flexible terms']
     },
     {
-      icon: "🏢",
-      title: "Loan Against Property",
-      description: "Unlock the value of your property for business or personal needs.",
-      features: [
-        "Loan up to ₹10 Cr+",
-        "Residential & commercial",
-        "Flexible tenure",
-        "Quick processing"
-      ]
+      icon: '🔄',
+      title: 'Debt Consolidation',
+      type: 'Consolidation',
+      description: 'One single EMI, better planning, lower interest',
+      features: ['Single monthly payment', 'Better financial planning', 'Lower interest rates', 'Simplified tracking', 'Improved credit score']
     },
     {
-      icon: "📈",
-      title: "Loan on Mutual Funds",
-      description: "Get instant liquidity without selling your investments.",
-      features: [
-        "Up to 80% of fund value",
-        "No foreclosure charges",
-        "Continue earning returns",
-        "Quick online process"
-      ]
+      icon: '💼',
+      title: 'Debt Counselling',
+      type: 'Counselling',
+      description: 'Free counselling, budget planning, financial strategy',
+      features: ['Free expert counselling', 'Personalized budget planning', 'Financial strategy', 'Debt prevention tips', 'Ongoing support']
     },
     {
-      icon: "🚗",
-      title: "Car Loan",
-      description: "Finance your new or used car with attractive rates and fast approval.",
-      features: [
-        "Up to 100% on-road price",
-        "Tenure up to 7 years",
-        "Low interest rates",
-        "Pre-approved offers"
-      ]
+      icon: '📊',
+      title: 'Credit Score Improvement',
+      type: 'Credit Repair',
+      description: 'Monitoring, dispute resolution, score rebuilding',
+      features: ['Credit report monitoring', 'Dispute resolution', 'Score rebuilding plans', 'Financial literacy', 'Ongoing tracking']
     },
     {
-      icon: "🔵",
-      title: "Low CIBIL Score Loans",
-      description: "Specialized solutions for customers with low or no credit score.",
-      features: [
-        "Loan up to ₹10 lakh",
-        "Custom assessment",
-        "Credit improvement guidance",
-        "No hidden charges"
-      ]
+      icon: '⚖️',
+      title: 'Legal Help',
+      type: 'Legal Support',
+      description: 'Anti-harassment support, legal notices, lawyer consultation',
+      features: ['Anti-harassment protection', 'Legal notice drafting', 'Lawyer consultation', 'Court representation', 'Compliance guidance']
     }
   ];
 
   return (
     <>
       <SEO pageName="services" />
-      <main style={{ background: '#FFFFFF', minHeight: '100vh' }}>
+      <main style={{ background: '#FFFFFF' }}>
         
-        {/* Our Services Section */}
-        <section style={{ padding: '80px 24px', backgroundColor: '#F5F7FF' }}>
+        {/* Hero Section */}
+        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
           <div className="container">
-            <h1 style={{
-              fontSize: '2.25rem',
-              fontWeight: 800,
-              color: '#0D0D0D',
-              marginBottom: '16px',
-              textAlign: 'center'
-            }}>
-              Our Services
+            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
+              Comprehensive Debt Relief Services
             </h1>
-            <p style={{
-              fontSize: '1.125rem',
-              color: '#333333',
-              fontWeight: 600,
-              marginBottom: '64px',
-              textAlign: 'center',
-              maxWidth: '700px',
-              margin: '0 auto 64px'
-            }}>
-              Debt relief, legal protection, credit improvement, and more—your path to financial freedom starts here.
+            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto' }}>
+              From settlement to legal protection — we offer complete solutions for your debt problems
             </p>
-            <div className="grid grid-auto" style={{ gap: '32px' }}>
-              {servicesList.map(({ icon, title, description, details }, i) => (
-                <div key={i} className="card" style={{
-                  padding: '32px',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
+          </div>
+        </section>
+
+        {/* Main Services */}
+        <section style={{ padding: '80px 24px', background: 'white' }}>
+          <div className="container">
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
+              Our Debt Relief Services
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
+              {(services.length > 0 ? services : defaultServices).map((service, i) => (
+                <div key={i} style={{
+                  background: '#F8FAFF',
+                  padding: '40px',
+                  borderRadius: '16px',
+                  border: '2px solid #E6EEFF',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
                 }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px', color: '#003BFF' }}>
-                    {icon}
+                  <div style={{ fontSize: '3.5rem', marginBottom: '16px' }}>{service.icon}</div>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{service.title}</h3>
+                  <div style={{ fontSize: '0.875rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '16px', textTransform: 'uppercase' }}>
+                    {service.type}
                   </div>
-                  <h3 style={{
-                    fontSize: '1.25rem',
-                    color: '#0D0D0D',
-                    marginBottom: '12px',
-                    fontWeight: 800
-                  }}>
-                    {title}
-                  </h3>
-                  <p style={{
-                    fontSize: '1rem',
-                    color: '#333333',
-                    lineHeight: 1.6,
-                    marginBottom: '16px'
-                  }}>
-                    {description}
+                  <p style={{ fontSize: '1rem', color: '#64748B', marginBottom: '24px', lineHeight: 1.6 }}>
+                    {service.description}
                   </p>
-                  <ul style={{
-                    textAlign: 'left',
-                    margin: '0 auto',
-                    maxWidth: '260px',
-                    paddingLeft: '20px',
-                    color: '#333333',
-                    fontSize: '0.875rem',
-                    listStyle: 'disc'
-                  }}>
-                    {details.map((d, idx) => (
-                      <li key={idx} style={{ marginBottom: '6px' }}>{d}</li>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {(service.features || []).map((feature, j) => (
+                      <li key={j} style={{
+                        fontSize: '0.875rem',
+                        color: '#334155',
+                        marginBottom: '12px',
+                        paddingLeft: '24px',
+                        position: 'relative'
+                      }}>
+                        <span style={{
+                          position: 'absolute',
+                          left: 0,
+                          color: '#00D49E',
+                          fontWeight: 900,
+                          fontSize: '1.125rem'
+                        }}>✓</span>
+                        {feature}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -221,152 +120,143 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Additional Loan Solutions Section */}
-        <section style={{ padding: '80px 24px', backgroundColor: '#FFFFFF' }}>
+        {/* How It Works */}
+        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
           <div className="container">
-            <h2 style={{
-              fontSize: '2.25rem',
-              fontWeight: 800,
-              color: '#0D0D0D',
-              marginBottom: '16px',
-              textAlign: 'center'
-            }}>
-              Additional Loan Solutions
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
+              How Our Process Works
             </h2>
-            <p style={{
-              fontSize: '1.125rem',
-              color: '#333333',
-              fontWeight: 600,
-              marginBottom: '64px',
-              textAlign: 'center',
-              maxWidth: '700px',
-              margin: '0 auto 64px'
-            }}>
-              Explore our premium loan products for every need—home, personal, property, car, and more.
-            </p>
-            <div className="grid grid-auto" style={{ gap: '32px' }}>
-              {loanProducts.map(({ icon, title, description, features }, i) => (
-                <div key={i} className="card" style={{
-                  padding: '32px',
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px', color: '#003BFF' }}>
-                    {icon}
-                  </div>
-                  <h3 style={{
-                    fontSize: '1.25rem',
-                    color: '#0D0D0D',
-                    marginBottom: '12px',
-                    fontWeight: 800
-                  }}>
-                    {title}
-                  </h3>
-                  <p style={{
-                    fontSize: '1rem',
-                    color: '#333333',
-                    lineHeight: 1.6,
-                    marginBottom: '16px'
-                  }}>
-                    {description}
-                  </p>
-                  <ul style={{
-                    textAlign: 'left',
-                    margin: '0 auto',
-                    maxWidth: '260px',
-                    paddingLeft: '20px',
-                    color: '#333333',
-                    fontSize: '0.875rem',
-                    listStyle: 'disc'
-                  }}>
-                    {features.map((f, idx) => (
-                      <li key={idx} style={{ marginBottom: '6px' }}>{f}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section style={{ padding: '80px 24px', backgroundColor: '#F5F7FF' }}>
-          <div className="container">
-            <h2 style={{
-              fontSize: '2.25rem',
-              fontWeight: 800,
-              color: '#0D0D0D',
-              marginBottom: '64px',
-              textAlign: 'center'
-            }}>
-              How It Works
-            </h2>
-            <div className="grid grid-auto" style={{ gap: '32px' }}>
+            <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
               {[
-                { step: '1', title: 'Consultation', desc: 'Schedule a consultation with our experts to discuss your debt situation' },
-                { step: '2', title: 'Customized Plan', desc: 'We create a personalized debt relief plan tailored to your financial situation' },
-                { step: '3', title: 'Negotiation & Settlement', desc: 'Our experts negotiate with lenders to reduce your debt and secure a settlement' }
+                { step: '01', title: 'Free Consultation', desc: 'Schedule a consultation with our debt experts to discuss your situation. No obligations, completely confidential.' },
+                { step: '02', title: 'Debt Analysis', desc: 'We analyze your complete debt portfolio, income, expenses, and create a comprehensive financial picture.' },
+                { step: '03', title: 'Customized Plan', desc: 'Our AI-powered system creates a personalized debt relief plan tailored to your financial situation and goals.' },
+                { step: '04', title: 'Negotiation', desc: 'Our expert negotiators work directly with your creditors to reduce debt, lower interest rates, and stop harassment.' },
+                { step: '05', title: 'Settlement & Freedom', desc: 'Once agreements are reached, we help you execute the plan and achieve complete debt freedom.' }
               ].map((item, i) => (
-                <div key={i} className="card" style={{ padding: '32px' }}>
+                <div key={i} style={{
+                  display: 'flex',
+                  gap: '32px',
+                  marginBottom: '48px',
+                  alignItems: 'flex-start'
+                }}>
                   <div style={{
-                    width: '48px',
-                    height: '48px',
-                    background: 'linear-gradient(135deg, #003BFF 0%, #0066FF 100%)',
-                    borderRadius: '12px',
+                    minWidth: '100px',
+                    height: '100px',
+                    background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
+                    borderRadius: '16px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'white',
-                    fontSize: '1.25rem',
-                    fontWeight: 'bold',
-                    marginBottom: '16px'
+                    fontSize: '1.5rem',
+                    fontWeight: 900,
+                    boxShadow: '0 8px 24px rgba(10,77,255,0.3)'
                   }}>
                     {item.step}
                   </div>
-                  <h3 style={{ fontSize: '1.125rem', color: '#0D0D0D', marginBottom: '12px', fontWeight: 'bold' }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: '1rem', color: '#333333', lineHeight: 1.6 }}>
-                    {item.desc}
-                  </p>
+                  <div style={{ flex: 1 }}>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '12px' }}>{item.title}</h3>
+                    <p style={{ fontSize: '1rem', color: '#64748B', lineHeight: 1.6 }}>{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section style={{ padding: '80px 24px', backgroundColor: '#FFFFFF' }}>
+        {/* Service Benefits */}
+        <section style={{ padding: '80px 24px', background: 'white' }}>
           <div className="container">
-            <h2 style={{
-              fontSize: '2.25rem',
-              fontWeight: 800,
-              color: '#0D0D0D',
-              marginBottom: '64px',
-              textAlign: 'center'
-            }}>
-              Benefits of Our Services
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
+              Why Choose Our Services?
             </h2>
-            <div className="grid grid-auto" style={{ gap: '32px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
               {[
-                { title: 'Reduced Debt', desc: 'We help you reduce your debt burden and achieve financial freedom.' },
-                { title: 'Improved Credit Score', desc: 'Our services help you improve your credit score and maintain a healthy financial profile.' },
-                { title: 'Stress Relief', desc: 'Let us handle the negotiations and settlements, so you can focus on your financial well-being.' }
-              ].map((item, i) => (
-                <div key={i} className="card" style={{ padding: '32px' }}>
-                  <h3 style={{ fontSize: '1.125rem', color: '#0D0D0D', marginBottom: '12px', fontWeight: 'bold' }}>
-                    {item.title}
-                  </h3>
-                  <p style={{ fontSize: '1rem', color: '#333333', lineHeight: 1.6 }}>
-                    {item.desc}
-                  </p>
+                { icon: '🎯', title: 'Proven Results', desc: 'Average 55% debt reduction for our clients' },
+                { icon: '⚡', title: 'Fast Processing', desc: 'Most cases resolved within 12-36 months' },
+                { icon: '🔒', title: '100% Confidential', desc: 'Your information is completely secure' },
+                { icon: '💯', title: 'No Hidden Fees', desc: 'Transparent pricing, no surprises' },
+                { icon: '👨‍⚖️', title: 'Legal Protection', desc: 'Full legal compliance and protection' },
+                { icon: '📞', title: '24/7 Support', desc: 'Always available when you need us' }
+              ].map((benefit, i) => (
+                <div key={i} style={{
+                  background: '#F8FAFF',
+                  padding: '32px',
+                  borderRadius: '16px',
+                  textAlign: 'center',
+                  border: '1px solid #E6EEFF'
+                }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{benefit.icon}</div>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{benefit.title}</h3>
+                  <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{benefit.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+        {/* Service Comparison */}
+        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
+          <div className="container">
+            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
+              Service Comparison
+            </h2>
+            <div style={{ maxWidth: '900px', margin: '0 auto', overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', background: 'white', borderRadius: '16px', overflow: 'hidden' }}>
+                <thead>
+                  <tr style={{ background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)' }}>
+                    <th style={{ padding: '20px', textAlign: 'left', color: 'white', fontWeight: 700 }}>Service</th>
+                    <th style={{ padding: '20px', textAlign: 'center', color: 'white', fontWeight: 700 }}>Debt Reduction</th>
+                    <th style={{ padding: '20px', textAlign: 'center', color: 'white', fontWeight: 700 }}>Timeline</th>
+                    <th style={{ padding: '20px', textAlign: 'center', color: 'white', fontWeight: 700 }}>Best For</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { service: 'Debt Settlement', reduction: '40-65%', timeline: '12-24 months', bestFor: 'High unsecured debt' },
+                    { service: 'EMI Reduction', reduction: '20-40%', timeline: '6-12 months', bestFor: 'Cash flow issues' },
+                    { service: 'Consolidation', reduction: '15-30%', timeline: '3-6 months', bestFor: 'Multiple debts' },
+                    { service: 'Counselling', reduction: 'Varies', timeline: 'Ongoing', bestFor: 'Financial planning' }
+                  ].map((row, i) => (
+                    <tr key={i} style={{ borderBottom: '1px solid #E6EEFF' }}>
+                      <td style={{ padding: '20px', fontWeight: 600, color: '#0F172A' }}>{row.service}</td>
+                      <td style={{ padding: '20px', textAlign: 'center', color: '#00D49E', fontWeight: 700 }}>{row.reduction}</td>
+                      <td style={{ padding: '20px', textAlign: 'center', color: '#64748B' }}>{row.timeline}</td>
+                      <td style={{ padding: '20px', textAlign: 'center', color: '#64748B' }}>{row.bestFor}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
+          <div className="container">
+            <h2 style={{ fontSize: '3rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
+              Ready to Get Started?
+            </h2>
+            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', marginBottom: '48px', maxWidth: '700px', margin: '0 auto 48px' }}>
+              Choose the service that's right for you and take the first step towards financial freedom.
+            </p>
+            <Link to="/applyform" style={{
+              padding: '18px 48px',
+              borderRadius: '12px',
+              background: 'white',
+              color: '#0A4DFF',
+              fontWeight: 700,
+              fontSize: '1.25rem',
+              textDecoration: 'none',
+              display: 'inline-block',
+              boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
+            }}>
+              Apply Now
+            </Link>
+          </div>
+        </section>
+
       </main>
     </>
   );
