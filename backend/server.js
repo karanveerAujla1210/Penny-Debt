@@ -18,6 +18,20 @@ connectDb();
 // Apply security middleware
 setupSecurity(app);
 
+// Add CORS headers for CRM
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, x-auth-token'
+  );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    return res.status(200).json({});
+  }
+  next();
+});
+
 // Website Routes (Public)
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/otp', require('./routes/otp'));
@@ -34,10 +48,18 @@ app.use('/api/faqs', require('./routes/faqs'));
 app.use('/api/blog', require('./routes/blogs'));
 app.use('/api/stats', require('./routes/stats'));
 
-// CRM Routes (Internal) - Using same MongoDB models
+// CRM Routes (Internal)
+app.use('/api/crm/auth', require('./routes/crm/auth'));
+app.use('/api/crm/dashboard', require('./routes/crm/dashboard'));
 app.use('/api/crm/leads', require('./routes/leads'));
 app.use('/api/crm/customers', require('./routes/customers'));
 app.use('/api/crm/applications', require('./routes/applications'));
+app.use('/api/crm/employees', require('./routes/employees'));
+app.use('/api/crm/cases', require('./routes/cases'));
+app.use('/api/crm/payments', require('./routes/payments'));
+app.use('/api/crm/tasks', require('./routes/tasks'));
+app.use('/api/crm/documents', require('./routes/documents'));
+app.use('/api/crm/reports', require('./routes/reports'));
 
 // Health check
 app.get('/health', (req, res) => {

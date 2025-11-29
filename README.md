@@ -2,6 +2,17 @@
 
 Full-stack debt relief CRM application with React frontend, Node.js backend, and MongoDB database.
 
+## 📋 Recent Updates
+
+✅ **Complete routing structure** for Website (15 routes) and CRM (25+ routes)  
+✅ **Role-based dashboards** for 18+ employee types  
+✅ **6 new MongoDB models** (Employee, Case, Payment, Document, Task, Report)  
+✅ **6 new API route files** with full CRUD operations  
+✅ **Functional navigation components** with active link highlighting  
+✅ **Comprehensive documentation** (5 new files)  
+
+📚 **See**: `ROUTING_AND_DATABASE_SETUP.md` for complete details
+
 ## 🚀 Quick Start
 
 ### Prerequisites
