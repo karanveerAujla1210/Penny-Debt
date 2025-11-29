@@ -8,16 +8,18 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URI
-        sync: false
+        value: mongodb+srv://singh2212karanveer_db_user:Aujla1210@cluster0.0xgwopz.mongodb.net/pennydebt?retryWrites=true&w=majority
       - key: JWT_SECRET
-        sync: false
+        value: penny_debt_secret_key_2024
       - key: SMTP_HOST
         value: smtp.gmail.com
       - key: SMTP_PORT
         value: "587"
       - key: SMTP_USER
-        sync: false
+        value: care@pennyanddebt.in
       - key: SMTP_PASS
         sync: false
+      - key: FRONTEND_URL
+        value: https://penny-debt-crm.vercel.app
       - key: ALLOWED_ORIGINS
-        sync: false
+        value: https://penny-debt-crm.vercel.app,https://pennyanddebt.in
