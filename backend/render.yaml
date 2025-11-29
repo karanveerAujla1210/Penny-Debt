@@ -19,4 +19,12 @@ services:
       - key: SMTP_USER
         value: care@pennyanddebt.in
       - key: FRONTEND_URL
-        value: https://penny-debt-crm.vercel.app
+        value: https://pennyanddebt.in
+      - key: ALLOWED_ORIGINS
+        value: https://pennyanddebt.in,https://www.pennyanddebt.in,https://crmpennyanddebt.in
+      - key: SESSION_SECRET
+        value: PennyDebt2024$Session#Secret@Key!5432
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100

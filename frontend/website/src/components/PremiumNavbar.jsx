@@ -78,8 +78,8 @@ const PremiumNavbar = () => {
               >
                 Sign Up
               </Link>
-              <Link
-                to="/employee-login"
+              <a
+                href={import.meta.env.VITE_CRM_URL || 'https://crmpennyanddebt.in'}
                 onClick={() => setLoginDropdown(false)}
                 style={{
                   display: 'block',
@@ -89,7 +89,7 @@ const PremiumNavbar = () => {
                 }}
               >
                 Employee Login
-              </Link>
+              </a>
             </div>
           )}
         </div>
@@ -120,7 +120,7 @@ const PremiumNavbar = () => {
           <Link to="/terms" className="navbar-link" onClick={() => setIsOpen(false)}>Terms</Link>
           <Link to="/customer-login" className="navbar-link" onClick={() => setIsOpen(false)}>Customer Login</Link>
           <Link to="/signup" className="navbar-link" onClick={() => setIsOpen(false)}>Sign Up</Link>
-          <Link to="/employee-login" className="navbar-link" onClick={() => setIsOpen(false)}>Employee Login</Link>
+          <a href={import.meta.env.VITE_CRM_URL || 'https://crmpennyanddebt.in'} className="navbar-link" onClick={() => setIsOpen(false)}>Employee Login</a>
         </div>
       )}
     </nav>

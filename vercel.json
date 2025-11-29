@@ -1,7 +1,6 @@
 {
-  "buildCommand": "cd frontend/crm && npm install && npm run build",
-  "outputDirectory": "frontend/crm/dist",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "comment": "This file is for reference only. Deploy website and CRM as separate Vercel projects.",
+  "comment2": "Website: Deploy from frontend/website directory to pennyanddebt.in",
+  "comment3": "CRM: Deploy from frontend/crm directory to crmpennyanddebt.in"
 }

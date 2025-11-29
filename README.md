@@ -73,9 +73,15 @@ npm run dev
 
 ## 🌐 Access
 
+### Development
 - Backend: http://localhost:5000
 - Website: http://localhost:5173
 - CRM: http://localhost:3001
+
+### Production
+- Website: https://pennyanddebt.in
+- CRM: https://crmpennyanddebt.in
+- Backend API: https://api.pennyanddebt.in
 
 ## 📁 Structure
 
