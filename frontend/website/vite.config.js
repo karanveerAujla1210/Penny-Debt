@@ -3,28 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
   build: {
-    outDir: '../../public',
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
-  server: {
-    port: 3001,
-  },
-  optimizeDeps: {
-    exclude: ['axios']
-  },
-  define: {
-    global: 'globalThis',
+    outDir: '../../public/website',
+    emptyOutDir: true
   }
 });

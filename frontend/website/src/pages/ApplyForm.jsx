@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { submitToGoogleSheets } from "../../utils/googleSheets";
 
 const ApplyForm = () => {
   const [formData, setFormData] = useState({
@@ -165,15 +164,10 @@ const ApplyForm = () => {
         console.warn('loan-applications endpoint error:', laErr);
       }
 
-      const result = await submitToGoogleSheets(submissionData, 'DebtApplications');
-      if (result.success) {
-        const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
-        existingData.push(submissionData);
-        localStorage.setItem('debtApplications', JSON.stringify(existingData));
-        setSubmitted(true);
-      } else {
-        throw new Error('Google Sheets submission failed');
-      }
+      const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');
+      existingData.push(submissionData);
+      localStorage.setItem('debtApplications', JSON.stringify(existingData));
+      setSubmitted(true);
     } catch (error) {
       console.error('Submission error:', error);
       const existingData = JSON.parse(localStorage.getItem('debtApplications') || '[]');

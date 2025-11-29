@@ -1,125 +1,261 @@
-# Penny Debt Backend API
+# Penny-Debt Backend API v2.0
 
-## Setup Instructions
+Modern Node.js + Express + MongoDB backend for Penny & Debt CRM system.
 
-### 1. Install Dependencies
+## 🚀 Quick Start
+
 ```bash
-cd backend
+# Install dependencies
 npm install
-```
 
-### 2. Environment Configuration
-Update `.env` file with your actual credentials:
+# Setup environment
+cp .env.example .env
+# Edit .env with your credentials
 
-```env
-# Database Configuration
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_mysql_password
-DB_NAME=penny_debt_crm
-
-# Email Configuration for care@pennyanddebt.in
-EMAIL_HOST=smtp.gmail.com  # or your email provider's SMTP
-EMAIL_PORT=587
-EMAIL_USER=care@pennyanddebt.in
-EMAIL_PASS=your_app_password  # Generate app password for Gmail
-
-# JWT Secret (generate a strong secret)
-JWT_SECRET=your_super_secret_jwt_key_here
-
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-FRONTEND_URL=http://localhost:3000
-```
-
-### 3. Database Setup
-1. Create MySQL database: `penny_debt_crm`
-2. Run the SQL schema: `database/schema_updated.sql`
-3. Create uploads directory:
-```bash
-mkdir uploads
-mkdir uploads/resumes
-```
-
-### 4. Email Setup for care@pennyanddebt.in
-
-#### Option 1: Gmail SMTP (Recommended for testing)
-1. Enable 2-factor authentication on your Gmail account
-2. Generate an App Password for your account
-3. Use these settings in `.env`:
-   - EMAIL_HOST=smtp.gmail.com
-   - EMAIL_PORT=587
-   - EMAIL_USER=care@pennyanddebt.in
-   - EMAIL_PASS=your_16_character_app_password
-
-#### Option 2: Custom Domain SMTP
-If you have your own email server for pennyanddebt.in:
-- EMAIL_HOST=mail.pennyanddebt.in
-- EMAIL_PORT=587 (or 465 for SSL)
-- EMAIL_USER=care@pennyanddebt.in
-- EMAIL_PASS=your_email_password
-
-### 5. Start the Server
-```bash
-# Development mode
+# Start development server
 npm run dev
 
-# Production mode
+# Start production server
 npm start
 ```
 
-## API Endpoints
+## 📁 Project Structure
 
-### OTP Endpoints
-- `POST /api/otp/send-otp` - Send OTP to email
-- `POST /api/otp/verify-otp` - Verify OTP
+```
+backend/
+├── src/
+│   ├── config/          # Configuration files
+│   │   ├── db.js       # MongoDB connection
+│   │   └── env.js      # Environment variables
+│   ├── models/          # Mongoose models
+│   ├── controllers/     # Request handlers
+│   ├── middlewares/     # Express middlewares
+│   ├── services/        # Business logic
+│   ├── routes/          # API routes
+│   │   ├── website/    # Public website routes
+│   │   ├── crm/        # Internal CRM routes
+│   │   └── mobile/     # Mobile app routes
+│   ├── utils/           # Utility functions
+│   ├── validations/     # Input validations
+│   └── app.js           # Express app setup
+├── tests/               # Test files
+├── uploads/             # File uploads
+├── server.js            # Entry point
+└── package.json
+```
 
-### Lead Endpoints
-- `POST /api/leads/submit` - Submit debt relief application
-- `GET /api/leads` - Get all applications (for CRM)
+## 🔌 API Endpoints
 
-### Customer Endpoints
-- `POST /api/customers/signup` - Customer registration
+### Website API (`/api/v1/website/*`)
 
-### Career Endpoints
-- `POST /api/careers` - Submit job application with resume
+Public-facing APIs for the website:
+
+- `POST /api/v1/website/auth/register` - User registration
+- `POST /api/v1/website/auth/login` - User login
+- `POST /api/v1/website/leads` - Submit lead
+- `POST /api/v1/website/contacts` - Contact form
+- `GET /api/v1/website/services` - Get services
+- `GET /api/v1/website/testimonials` - Get testimonials
+- `GET /api/v1/website/faqs` - Get FAQs
+- `GET /api/v1/website/blogs` - Get blog posts
+
+### CRM API (`/api/v1/crm/*`)
+
+Internal APIs for employee dashboard:
+
+- `POST /api/v1/crm/auth/login` - Employee login
+- `GET /api/v1/crm/dashboard` - Dashboard stats
+- `GET /api/v1/crm/leads` - Get all leads
+- `GET /api/v1/crm/customers` - Get customers
+- `GET /api/v1/crm/applications` - Get applications
+- `GET /api/v1/crm/employees` - Get employees
+- `GET /api/v1/crm/cases` - Get cases
+- `GET /api/v1/crm/payments` - Get payments
+- `GET /api/v1/crm/tasks` - Get tasks
+- `GET /api/v1/crm/documents` - Get documents
+- `GET /api/v1/crm/reports` - Get reports
+
+### Mobile API (`/api/v1/mobile/*`)
+
+Mobile app specific APIs:
+
+- `POST /api/v1/mobile/auth/login` - Mobile login
+- `POST /api/v1/mobile/auth/refresh-token` - Refresh token
+- `GET /api/v1/mobile/customer/profile` - Customer profile
+- `GET /api/v1/mobile/customer/cases` - Customer cases
+- `GET /api/v1/mobile/employee/dashboard` - Employee dashboard
+- `GET /api/v1/mobile/employee/tasks` - Employee tasks
+
+### Legacy Routes (Backward Compatible)
+
+Old routes still work:
+- `/api/*` → Maps to `/api/v1/website/*`
+- `/api/crm/*` → Maps to `/api/v1/crm/*`
+
+## 🔐 Environment Variables
+
+```env
+# Server
+NODE_ENV=development
+PORT=5000
+HOST=0.0.0.0
+
+# Database
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/dbname
+
+# JWT
+JWT_SECRET=your-secret-key-change-in-production
+JWT_EXPIRE=7d
+
+# Session
+SESSION_SECRET=your-session-secret
+
+# Email (Gmail)
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=care@pennyanddebt.in
+SMTP_PASS=your-app-password
+SMTP_FROM=care@pennyanddebt.in
+
+# CORS
+ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3001
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+
+# File Upload
+MAX_FILE_SIZE=5242880
+UPLOAD_PATH=./uploads
+```
+
+## 🛡️ Security Features
+
+- ✅ Helmet.js for security headers
+- ✅ CORS protection
+- ✅ Rate limiting
+- ✅ MongoDB sanitization
+- ✅ HPP protection
+- ✅ JWT authentication
+- ✅ Password hashing (bcrypt)
+- ✅ Input validation
+- ✅ HTTPS enforcement (production)
+
+## 📦 Dependencies
+
+### Core
+- `express` - Web framework
+- `mongoose` - MongoDB ODM
+- `cors` - CORS middleware
+- `dotenv` - Environment variables
+
+### Security
+- `helmet` - Security headers
+- `express-rate-limit` - Rate limiting
+- `express-mongo-sanitize` - NoSQL injection protection
+- `hpp` - HTTP parameter pollution protection
+- `bcryptjs` - Password hashing
+- `jsonwebtoken` - JWT tokens
+
+### Utilities
+- `multer` - File uploads
+- `nodemailer` - Email sending
+- `compression` - Response compression
+- `morgan` - HTTP logging
+- `validator` - Input validation
+- `winston` - Advanced logging
+- `joi` - Schema validation
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Watch mode
+npm run test:watch
+```
+
+## 📊 Monitoring
 
 ### Health Check
-- `GET /health` - Server health status
 
-## Features
+```bash
+GET /health
+```
 
-✅ **Email OTP Verification**
-- Automated OTP sending from care@pennyanddebt.in
-- 5-minute expiry time
-- Rate limiting (5 OTPs per 15 minutes)
-- Professional email templates
+Response:
+```json
+{
+  "status": "OK",
+  "timestamp": "2024-01-01T00:00:00.000Z",
+  "environment": "development",
+  "mongodb": {
+    "connected": true,
+    "state": "connected"
+  }
+}
+```
 
-✅ **Form Validation**
-- Server-side validation for all forms
-- Input sanitization and normalization
-- Error handling with detailed messages
+## 🚀 Deployment
 
-✅ **Security**
-- Helmet.js for security headers
-- CORS configuration
-- Rate limiting
-- Password hashing with bcrypt
-- SQL injection prevention
+### Render
 
-✅ **Database Integration**
-- MySQL connection pooling
-- Proper indexing for performance
-- Foreign key relationships
-- Activity logging
+```bash
+# Deploy to Render
+git push origin main
+```
 
-## Testing the Setup
+### Docker
 
-1. Start the backend server
-2. Test OTP sending: `POST http://localhost:5000/api/otp/send-otp`
-3. Check your email for OTP
-4. Verify OTP: `POST http://localhost:5000/api/otp/verify-otp`
-5. Submit form: `POST http://localhost:5000/api/leads/submit`
+```bash
+# Build image
+docker build -f ../infra/docker/backend.Dockerfile -t penny-debt-backend .
 
-The backend is now ready to handle all website forms with email verification!
+# Run container
+docker run -p 5000:5000 --env-file .env penny-debt-backend
+```
+
+## 🔧 Development
+
+### Code Style
+
+```bash
+# Lint code
+npm run lint
+
+# Format code
+npm run format
+```
+
+### Database
+
+```bash
+# Connect to MongoDB
+node scripts/mongo-ping.js
+
+# Initialize database
+node scripts/initDatabase.js
+```
+
+## 📝 API Documentation
+
+Full API documentation available at:
+- Development: http://localhost:5000/api-docs
+- Production: https://api.pennyanddebt.in/api-docs
+
+## 🤝 Contributing
+
+1. Create feature branch
+2. Make changes
+3. Run tests
+4. Submit pull request
+
+## 📞 Support
+
+- Email: care@pennyanddebt.in
+- Documentation: [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md)
+- Migration Guide: [MIGRATION_GUIDE.md](../MIGRATION_GUIDE.md)

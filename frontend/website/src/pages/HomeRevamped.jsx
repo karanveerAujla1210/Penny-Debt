@@ -1,5 +1,5 @@
 import React from "react";
-import SEO from "../../components/SEO";
+import SEO from "../components/SEO";
 
 // Professional Fintech Home Page with New Design System
 const HomeRevamped = () => {

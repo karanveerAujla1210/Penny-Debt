@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const activitySchema = new mongoose.Schema({
-  leadId: { type: mongoose.Schema.Types.ObjectId, required: true },
-  leadType: { 
+  relatedId: { type: mongoose.Schema.Types.ObjectId, required: true },
+  type: { 
     type: String, 
-    enum: ['lead', 'customer', 'contact', 'career'],
+    enum: ['debt_application', 'customer', 'contact', 'career'],
     required: true 
   },
-  activityType: { 
+  action: { 
     type: String, 
     enum: ['call', 'email', 'meeting', 'note', 'status_change', 'document'],
     required: true 

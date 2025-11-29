@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import SEO from '../../components/SEO';
-import AnimatedCounter from '../../components/AnimatedCounter';
-import FloatingCTA from '../../components/FloatingCTA';
-import DebtCalculator from '../../components/DebtCalculator';
-import TrustBadges from '../../components/TrustBadges';
-import SocialProof from '../../components/SocialProof';
-import WhatsAppWidget from '../../components/WhatsAppWidget';
+import SEO from '../components/SEO';
+import AnimatedCounter from '../components/AnimatedCounter';
+import FloatingCTA from '../components/FloatingCTA';
+import DebtCalculator from '../components/DebtCalculator';
+import TrustBadges from '../components/TrustBadges';
+import SocialProof from '../components/SocialProof';
+import WhatsAppWidget from '../components/WhatsAppWidget';
 
 const PremiumHome = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);

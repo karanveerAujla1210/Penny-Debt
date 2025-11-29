@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { submitToGoogleSheets } from "../../utils/googleSheets";
-import SEO from "../../components/SEO";
+import SEO from "../components/SEO";
 
 const Careers = () => {
   const [formData, setFormData] = useState({
@@ -69,7 +68,6 @@ const Careers = () => {
         return;
       }
 
-      await submitToGoogleSheets(applicationData, 'CareerApplications');
       const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
       existingApplications.push(applicationData);
       localStorage.setItem('careerApplications', JSON.stringify(existingApplications));

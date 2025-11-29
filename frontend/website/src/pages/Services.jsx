@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import SEO from "../../components/SEO";
+import SEO from "../components/SEO";
 
 const Services = () => {
   const [services, setServices] = useState([]);

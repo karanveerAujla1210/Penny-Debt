@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import SEO from "../../components/SEO";
-import { submitToGoogleSheets } from "../../utils/googleSheets";
+import SEO from "../components/SEO";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -54,15 +53,8 @@ const Contact = () => {
         }
       } catch (backendErr) {
         console.warn('Contact backend error:', backendErr);
-      }
-
-      const result = await submitToGoogleSheets(contactData, 'ContactForms');
-
-      if (result.success) {
         setSubmitted(true);
         setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
-      } else {
-        throw new Error('Google Sheets submission failed');
       }
     } catch (err) {
       console.error('Contact form error:', err);

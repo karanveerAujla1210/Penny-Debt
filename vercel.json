@@ -1,16 +1,18 @@
 {
   "builds": [
-    { "src": "frontend/website/package.json", "use": "@vercel/static-build" },
-    { "src": "frontend/crm/package.json", "use": "@vercel/static-build" }
-  ],
-  "routes": [
     {
-      "src": "/crm/(.*)",
-      "dest": "/crm/index.html"
+      "src": "frontend/website/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "public/website" }
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "frontend/crm/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "public/crm" }
     }
+  ],
+  "routes": [
+    { "src": "/crm/(.*)", "dest": "/crm/index.html" },
+    { "src": "/(.*)", "dest": "/website/index.html" }
   ]
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import SEO from "../../components/SEO";
+import SEO from "../components/SEO";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);

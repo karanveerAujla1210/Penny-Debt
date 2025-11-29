@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const Lead = require('../../models/Lead');
-const Activity = require('../../models/Activity');
+const Lead = require('../models-website/Lead');
+const Activity = require('../models-website/Activity');
 
 const router = express.Router();
 

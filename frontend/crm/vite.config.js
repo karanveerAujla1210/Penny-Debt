@@ -6,25 +6,6 @@ export default defineConfig({
   base: '/crm/',
   build: {
     outDir: '../../public/crm',
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      '@': '/src',
-    },
-  },
-  server: {
-    port: 3001,
-  },
-  optimizeDeps: {
-    exclude: ['axios']
-  },
-  define: {
-    global: 'globalThis',
+    emptyOutDir: true
   }
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SEO from "../../components/SEO";
+import SEO from "../components/SEO";
 
 const About = () => {
   const [team, setTeam] = useState([]);
