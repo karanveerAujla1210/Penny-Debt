@@ -1,4 +1,7 @@
 {
-  "buildCommand": "cd frontend/website && npm install && npm run build",
-  "outputDirectory": "frontend/website/dist"
+  "buildCommand": "cd frontend/crm && npm install && npm run build",
+  "outputDirectory": "frontend/crm/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
