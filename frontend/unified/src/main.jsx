@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './App.css';
 
 // Detect domain and load appropriate app
 const hostname = window.location.hostname;
@@ -8,11 +9,11 @@ const isCRM = hostname.includes('crm');
 // Dynamically import the correct app
 const loadApp = async () => {
   if (isCRM) {
-    const { default: CRMApp } = await import('@crm/App.jsx');
-    return <CRMApp />;
+    const module = await import('../../crm/src/App.jsx');
+    return <module.default />;
   } else {
-    const { default: WebsiteApp } = await import('@website/App.jsx');
-    return <WebsiteApp />;
+    const module = await import('../../website/src/App.jsx');
+    return <module.default />;
   }
 };
 
@@ -24,7 +25,7 @@ const Root = () => {
     loadApp().then(setApp);
   }, []);
 
-  if (!App) return <div>Loading...</div>;
+  if (!App) return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>Loading...</div>;
   return App;
 };
 
