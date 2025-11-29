@@ -1,33 +1,16 @@
 {
-  "rewrites": [
+  "builds": [
+    { "src": "frontend/website/package.json", "use": "@vercel/static-build" },
+    { "src": "frontend/crm/package.json", "use": "@vercel/static-build" }
+  ],
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "/index.html",
-      "has": [
-        {
-          "type": "host",
-          "value": "crmpennyanddebt.in"
-        }
-      ]
+      "src": "/crm/(.*)",
+      "dest": "/crm/index.html"
     },
     {
-      "source": "/:path*",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ]
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }

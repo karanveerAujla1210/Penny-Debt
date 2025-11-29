@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: '/crm/',
   build: {
-    outDir: 'dist',
+    outDir: '../../public/crm',
     sourcemap: false,
     rollupOptions: {
       output: {
