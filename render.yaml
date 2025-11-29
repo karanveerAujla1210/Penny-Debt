@@ -7,10 +7,14 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: "5000"
       - key: MONGODB_URI
         value: mongodb+srv://singh2212karanveer_db_user:Aujla1210@cluster0.0xgwopz.mongodb.net/pennydebt?retryWrites=true&w=majority
       - key: JWT_SECRET
         value: penny_debt_secret_key_2024
+      - key: SESSION_SECRET
+        value: penny_debt_session_secret_2024
       - key: SMTP_HOST
         value: smtp.gmail.com
       - key: SMTP_PORT
@@ -21,5 +25,11 @@ services:
         sync: false
       - key: FRONTEND_URL
         value: https://penny-debt-crm.vercel.app
+      - key: WEBSITE_URL
+        value: https://pennyanddebt.in
       - key: ALLOWED_ORIGINS
         value: https://penny-debt-crm.vercel.app,https://pennyanddebt.in
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "100"
