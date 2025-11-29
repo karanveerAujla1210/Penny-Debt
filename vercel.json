@@ -1,20 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "frontend/website/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/website/$1"
-    }
-  ],
-  "buildCommand": "cd frontend/website && npm ci && npm run build",
-  "outputDirectory": "frontend/website/dist"
+  "buildCommand": "cd frontend/website && npm install && npm run build",
+  "outputDirectory": "frontend/website/dist",
+  "installCommand": "cd frontend/website && npm install"
 }
