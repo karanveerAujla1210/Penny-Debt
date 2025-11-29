@@ -1,7 +1,7 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
-const OTP = require('../../models/OTP');
+const OTP = require('../models/OTP');
 const { generateOTP, sendOTPEmail } = require('../utils/emailService');
 
 const router = express.Router();
