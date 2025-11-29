@@ -10,9 +10,8 @@ const PremiumNavbar = () => {
     <nav className="premium-navbar">
       <div className="navbar-container">
         {/* Logo */}
-        <Link to="/" className="navbar-logo">
-          <span className="logo-icon">💰</span>
-          <span className="logo-text">Penny & Debt</span>
+        <Link to="/" className="navbar-logo" style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
+          <img src="/logo.svg" alt="Penny & Debt" style={{ height: '50px', width: 'auto' }} />
         </Link>
 
         {/* Desktop Navigation */}

@@ -14,8 +14,7 @@ const PremiumFooter = () => {
             {/* Company Info */}
             <div className="footer-section">
               <div className="footer-brand">
-                <span className="brand-icon">💰</span>
-                <h3 className="brand-name">Penny & Debt</h3>
+                <img src="/logo.svg" alt="Penny & Debt" style={{ height: '50px', width: 'auto', marginBottom: '12px' }} />
               </div>
               <p className="brand-tagline">
                 Financial freedom through expert debt solutions

@@ -25,23 +25,14 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #003BFF;
   text-decoration: none;
+  height: 100%;
 }
 
-.logo-icon {
-  font-size: 1.8em;
-}
-
-.logo-text {
-  background: linear-gradient(135deg, #003BFF 0%, #0066FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: var(--font-primary);
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 .navbar-menu.desktop {
