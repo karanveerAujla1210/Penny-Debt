@@ -1,1 +1,23 @@
-dkMod'cl'//m rclthemextd{s{'253eb''ded8''6474b'dak'47556'tmlysa['Iv''sans-sif']plugins:[rei('@awcs/fs)qui(@taiwindcss/typoaphy)qui(@taiwnd/ecttio)//Adothepuinssneeded]//EnabegducutupurgeLyesByDfaultruermoeDepecteGpUtliis: ru//OptimzeopoutcrPlus//Dab udlugsptlotlcarflvratsvratsextnd{opacity[disabld]backgodColor'tv']  txCo: ['ctive]}}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: '#2563eb',
+        secondary: '#64748b',
+        dark: '#1e293b',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+  ],
+}
