@@ -30,8 +30,7 @@
     "test:frontend": "concurrently \"cd frontend/website && npm test\" \"cd frontend/crm && npm test\"",
     "test:backend": "cd backend && npm test",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
