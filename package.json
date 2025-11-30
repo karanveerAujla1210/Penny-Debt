@@ -31,7 +31,7 @@
     "test:backend": "cd backend && npm test",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "prepare": "husky install"
+
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

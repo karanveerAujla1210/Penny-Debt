@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import EmployeeLogin from './pages/Auth/EmployeeLogin';
 import CustomerLogin from './pages/Auth/CustomerLogin';
 
@@ -35,8 +35,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
+    <Routes>
         {/* Auth Routes */}
         <Route path="/login/employee" element={<EmployeeLogin />} />
         <Route path="/login/customer" element={<CustomerLogin />} />
@@ -74,8 +73,7 @@ function App() {
         {/* Default Routes */}
         <Route path="/" element={<Navigate to="/login/employee" replace />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    </Routes>
   );
 }
 

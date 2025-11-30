@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: penny-debt-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://pennyanddebt.in,https://crmpennyanddebt.in
+    healthCheckPath: /health
+    autoDeploy: true

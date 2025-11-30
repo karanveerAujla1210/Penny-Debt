@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const { body, validationResult } = require('express-validator');
-const Career = require('../../models/Career');
+const Career = require('../models-website/Career');
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
@@ -18,25 +18,23 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/apply" element={<ApplyForm />} />
-        <Route path="/apply-loan" element={<ApplyLoan />} />
-        <Route path="/apply-loan-basic" element={<ApplyLoanBasicDetails />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/apply" element={<ApplyForm />} />
+      <Route path="/apply-loan" element={<ApplyLoan />} />
+      <Route path="/apply-loan-basic" element={<ApplyLoanBasicDetails />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/careers" element={<Careers />} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/signup" element={<Signup />} />
+    </Routes>
   );
 }
 

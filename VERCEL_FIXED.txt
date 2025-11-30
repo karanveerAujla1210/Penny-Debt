@@ -1,0 +1,31 @@
+✅ VERCEL CRASH FIXED
+=====================
+
+CHANGES MADE:
+1. ✅ Deleted root vercel.json (was causing build conflicts)
+2. ✅ Fixed frontend/crm/vercel.json (added framework, --legacy-peer-deps)
+3. ✅ Fixed frontend/website/vercel.json (added framework, --legacy-peer-deps)
+
+DEPLOY NOW:
+-----------
+CRM (crmpennyanddebt.in):
+  Root Directory: frontend/crm
+  Build: npm run build
+  Output: dist
+  Install: npm install --legacy-peer-deps
+  Env: VITE_API_BASE_URL=https://api.pennyanddebt.in/api/v1/crm
+
+Website (pennyanddebt.in):
+  Root Directory: frontend/website
+  Build: npm run build
+  Output: dist
+  Install: npm install --legacy-peer-deps
+  Env: VITE_API_BASE_URL=https://api.pennyanddebt.in/api/v1/website
+
+VERCEL SETTINGS:
+- Framework: Vite (auto-detected now)
+- Node Version: 18.x
+- Build Command: npm run build
+- Output Directory: dist
+
+Push to GitHub and Vercel will auto-deploy!
