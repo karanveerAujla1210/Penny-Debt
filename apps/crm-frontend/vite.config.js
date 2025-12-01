@@ -17,14 +17,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          charts: ['recharts', 'chart.js', 'react-chartjs-2'],
-          tables: ['ag-grid-community', 'ag-grid-react'],
-        },
-      },
-    },
   },
 });
