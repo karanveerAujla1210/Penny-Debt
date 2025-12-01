@@ -6,6 +6,12 @@ const debtCaseSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  caseId: {
+    type: String,
+    required: true,
+    unique: true,
+    index: true
+  },
   caseNumber: {
     type: String,
     required: true,
@@ -86,13 +92,22 @@ const debtCaseSchema = new mongoose.Schema({
   closedReason: String
 }, { timestamps: true });
 
-// Generate case number before saving
+// Generate unique case ID before saving
 debtCaseSchema.pre('save', async function(next) {
-  if (this.isNew) {
+  if (this.isNew && !this.caseId) {
+    const year = new Date().getFullYear();
     const count = await this.constructor.countDocuments();
-    this.caseNumber = `DC-${new Date().getFullYear()}-${(count + 1).toString().padStart(5, '0')}`;
+    const sequentialNumber = (count + 1).toString().padStart(5, '0');
+    this.caseId = `PD-${year}-${sequentialNumber}`;
+    this.caseNumber = this.caseId; // Backward compatibility
   }
   next();
 });
+
+// Index for faster queries
+debtCaseSchema.index({ caseId: 1 });
+debtCaseSchema.index({ status: 1 });
+debtCaseSchema.index({ assignedTo: 1 });
+debtCaseSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model('DebtCase', debtCaseSchema);

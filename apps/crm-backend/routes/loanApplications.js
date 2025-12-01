@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const LoanApplication = require('../../models/LoanApplication');
+const LoanApplication = require('../models-website/LoanApplication');
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Application = require('../../models/Application');
+const Application = require('../models-website/Application');
 
 // POST - Submit application
 router.post('/', async (req, res) => {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const FAQ = require('../../models/FAQ');
+const FAQ = require('../models-website/FAQ');
 
 router.get('/', async (req, res) => {
   try {

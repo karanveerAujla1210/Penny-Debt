@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -15,10 +17,33 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        heading: ['Sora', 'Inter', ...defaultTheme.fontFamily.sans],
+        numeric: ['Space Grotesk', ...defaultTheme.fontFamily.mono],
       },
       colors: {
+        brand: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e3a8a',
+          900: '#0b2159',
+        },
+        surface: {
+          900: '#020617',
+          800: '#020818',
+          700: '#020c22',
+        },
+        accent: {
+          cyan: '#22d3ee',
+          teal: '#14b8a6',
+          amber: '#fbbf24',
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -144,6 +169,12 @@ module.exports = {
         '22': '5.5rem',
         '26': '6.5rem',
         '30': '7.5rem',
+      },
+      backgroundImage: {
+        'hero-radial': 'radial-gradient(circle at top left, rgba(37,99,235,0.45), transparent 55%), radial-gradient(circle at bottom right, rgba(45,212,191,0.35), transparent 55%)',
+        'diagonal-blue': 'linear-gradient(135deg, #0b2159 0%, #1d4ed8 40%, #22d3ee 100%)',
+        'card-soft': 'linear-gradient(145deg, rgba(15,23,42,0.95), rgba(2,6,23,0.98))',
+        'btn-primary': 'linear-gradient(90deg, #2563eb 0%, #1d4ed8 40%, #22d3ee 100%)',
       },
     },
   },

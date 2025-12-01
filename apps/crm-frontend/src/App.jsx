@@ -29,6 +29,8 @@ import LeadsList from './pages/Leads/LeadsList';
 import CreateLead from './pages/Leads/CreateLead';
 import LeadDetails from './pages/Leads/LeadDetails';
 import CaseList from './pages/Case/CaseList';
+import CaseDetails from './pages/Case/CaseDetails';
+import CreateCase from './pages/Case/CreateCase';
 import NotFound from './pages/Shared/NotFound';
 
 import './App.css';
@@ -67,8 +69,20 @@ function App() {
         <Route path="/leads/create" element={<CreateLead />} />
         <Route path="/leads/:id" element={<LeadDetails />} />
         
-        {/* Cases */}
+        {/* Cases Management */}
         <Route path="/cases" element={<CaseList />} />
+        <Route path="/cases/create" element={<CreateCase />} />
+        <Route path="/cases/:caseId" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/documents" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/credit-analysis" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/counselling" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/enrollment" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/negotiation" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/settlement" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/payments" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/closure" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/timeline" element={<CaseDetails />} />
+        <Route path="/cases/:caseId/notes" element={<CaseDetails />} />
         
         {/* Default Routes */}
         <Route path="/" element={<Navigate to="/login/employee" replace />} />

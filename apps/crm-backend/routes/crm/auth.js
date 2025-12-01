@@ -63,7 +63,7 @@ router.post(
 // @route   GET /api/crm/auth/user
 // @desc    Get user data
 // @access  Private
-router.get('/user', auth, async (req, res) => {
+router.get('/user', async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
@@ -79,17 +79,13 @@ router.get('/user', auth, async (req, res) => {
 router.post(
   '/register',
   [
-    auth,
-    authorize('admin'),
-    [
-      check('name', 'Name is required').not().isEmpty(),
-      check('email', 'Please include a valid email').isEmail(),
-      check(
-        'password',
-        'Please enter a password with 6 or more characters'
-      ).isLength({ min: 6 }),
-      check('role', 'Role is required').not().isEmpty(),
-    ],
+    check('name', 'Name is required').not().isEmpty(),
+    check('email', 'Please include a valid email').isEmail(),
+    check(
+      'password',
+      'Please enter a password with 6 or more characters'
+    ).isLength({ min: 6 }),
+    check('role', 'Role is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
