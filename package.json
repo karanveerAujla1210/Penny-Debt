@@ -8,6 +8,7 @@
     "dev:crm": "npm --prefix apps/crm run dev",
     "dev:website": "npm --prefix apps/website run dev",
     "dev:backend": "npm --prefix apps/backend run dev",
+    "build": "npm run build:website && npm run build:crm && npm run build:backend",
     "build:crm": "npm --prefix apps/crm run build",
     "build:website": "npm --prefix apps/website run build",
     "build:backend": "npm --prefix apps/backend run build || echo 'backend has no build step'",
@@ -15,5 +16,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "vite": "^5.1.2"
   }
 }

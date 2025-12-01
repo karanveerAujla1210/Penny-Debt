@@ -1,9 +1,20 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install --legacy-peer-deps",
-  "framework": "vite",
+  "framework": {
+    "name": "vite",
+    "version": "5.1.2"
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "devCommand": "npm run dev",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
