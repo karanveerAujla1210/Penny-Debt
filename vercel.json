@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm install --legacy-peer-deps && npm run build",
+  "buildCommand": "npm install --legacy-peer-deps",
   "installCommand": "npm install --legacy-peer-deps",
   "builds": [
     {
@@ -11,21 +11,17 @@
       }
     },
     {
-      "src": "apps/crm/package.json",
+      "src": "apps/crm-frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "apps/crm/dist"
+        "distDir": "apps/crm-frontend/dist"
       }
     }
   ],
   "routes": [
     {
-      "src": "^/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/crm/(.*)",
-      "dest": "/apps/crm/dist/$1"
+      "dest": "/apps/crm-frontend/dist/$1"
     },
     {
       "src": "/(.*)",
