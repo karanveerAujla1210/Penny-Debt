@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/website/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "apps/website/dist"
+      }
+    },
+    {
+      "src": "apps/crm/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "apps/crm/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/crm/(.*)",
+      "dest": "/apps/crm/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/apps/website/dist/$1"
+    }
+  ]
+}
