@@ -1,31 +1,9 @@
 {
-  "version": 2,
-  "buildCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm install --legacy-peer-deps && npm run build:website",
+  "outputDirectory": "apps/website/dist",
   "installCommand": "npm install --legacy-peer-deps",
-  "builds": [
-    {
-      "src": "apps/website/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "apps/website/dist"
-      }
-    },
-    {
-      "src": "apps/crm-frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "apps/crm-frontend/dist"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/crm/(.*)",
-      "dest": "/apps/crm-frontend/dist/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/apps/website/dist/$1"
-    }
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
