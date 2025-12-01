@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
-const auth = require('../../middleware/auth');
+const { authenticate } = require('../../middleware/auth');
 const User = require('../../models-website/User');
 
 // @route   POST /api/crm/auth/login
@@ -63,7 +63,7 @@ router.post(
 // @route   GET /api/crm/auth/user
 // @desc    Get user data
 // @access  Private
-router.get('/user', async (req, res) => {
+router.get('/user', authenticate, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
     res.json(user);
