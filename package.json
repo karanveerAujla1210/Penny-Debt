@@ -2,7 +2,10 @@
   "name": "penny-debt-monorepo",
   "version": "2.0.0",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "install-all": "npm install",
     "dev:crm": "npm --prefix apps/crm run dev",
@@ -18,6 +21,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "vite": "^5.1.2"
+    "nodemailer": "7.0.11",
+    "vite": "^7.2.6"
   }
 }
