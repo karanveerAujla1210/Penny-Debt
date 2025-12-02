@@ -7,12 +7,21 @@
     "packages/*"
   ],
   "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:website\" \"npm run dev:crm\"",
     "dev:backend": "npm --prefix apps/crm-backend run dev",
     "dev:crm": "npm --prefix apps/crm-frontend run dev",
     "dev:website": "npm --prefix apps/website run dev",
-    "build": "npm run build:website && npm run build:crm",
+    "build": "npm run build:website",
+    "build:all": "npm run build:website && npm run build:crm",
     "build:crm": "npm --prefix apps/crm-frontend run build",
-    "build:website": "npm --prefix apps/website run build"
+    "build:website": "npm --prefix apps/website run build",
+    "start": "npm --prefix apps/crm-backend start",
+    "install:all": "npm install && npm --prefix apps/crm-backend install && npm --prefix apps/crm-frontend install && npm --prefix apps/website install",
+    "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist",
+    "test": "npm --prefix apps/crm-backend test"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=18.0.0"
