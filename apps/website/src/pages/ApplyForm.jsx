@@ -813,6 +813,7 @@ const ApplyForm = () => {
                   </select>
                 </div>
               </div>
+            </div>
           </motion.div>
         )}
 
@@ -917,6 +918,7 @@ const ApplyForm = () => {
                   ))}
                 </div>
               </div>
+            </div>
           </motion.div>
         )}
 
@@ -1057,12 +1059,13 @@ const ApplyForm = () => {
                   </select>
                 </div>
               </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Form Navigation */}
-      <div className="mt-8 flex flex-col sm:flex-row justify-between gap-4">
+      <div className="mt-8 flex flex-col sm:flex-row justify-between gap-4 px-4">
               <div>
                 {currentStep > 0 && (
                   <button
@@ -1106,7 +1109,6 @@ const ApplyForm = () => {
                 )}
               </div>
             </div>
-          </div>
         </div>
       </section>
       </form>
