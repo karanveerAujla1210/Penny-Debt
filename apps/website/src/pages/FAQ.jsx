@@ -1,291 +1,295 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import SEO from "../components/SEO";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ChevronDown, Search, MessageCircle, Phone, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [faqs, setFaqs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetch('/api/faqs').then(r => r.json()).then(setFaqs).catch(() => {});
+    AOS.init({ duration: 800, once: true });
   }, []);
 
   const toggleIndex = (index) => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
-  const defaultFaqs = [
+  const faqCategories = [
     {
-      category: 'About Debt Relief',
-      question: 'What is debt relief and how does it work?',
-      answer: 'Debt relief is a process where we negotiate with your creditors to reduce your total debt amount, lower interest rates, or restructure payment terms. Our experts work on your behalf to create a manageable repayment plan that fits your budget.'
+      category: 'General Questions',
+      faqs: [
+        {
+          question: 'What is debt settlement?',
+          answer: 'Debt settlement is a process where we negotiate with your creditors to reduce the total amount you owe, often by 40-70%. You then pay the reduced amount in a lump sum or installments.'
+        },
+        {
+          question: 'How long does the process take?',
+          answer: 'Most settlements are completed within 24-48 months, depending on your debt amount and financial situation.'
+        },
+        {
+          question: 'Is debt settlement legal in India?',
+          answer: 'Yes, debt settlement is completely legal. We follow all RBI guidelines and ensure full legal compliance.'
+        }
+      ]
     },
     {
-      category: 'About Debt Relief',
-      question: 'Who qualifies for debt relief services?',
-      answer: 'Anyone with unsecured debt (credit cards, personal loans, medical bills) of ₹50,000 or more can qualify. We assess your financial situation and create a customized plan regardless of your credit score.'
+      category: 'Cost & Fees',
+      faqs: [
+        {
+          question: 'How much do your services cost?',
+          answer: 'We charge a success-based fee only after your debt is successfully settled. No upfront costs.'
+        },
+        {
+          question: 'Are there any hidden charges?',
+          answer: 'No. We believe in complete transparency. All fees are clearly explained before you sign up.'
+        }
+      ]
     },
     {
-      category: 'Impact on Credit Score',
-      question: 'Will debt relief affect my credit score?',
-      answer: 'Initially, there may be a temporary impact if you\'re already in default. However, our resolution efforts aim to stabilize and improve your credit score over time. We also provide credit rebuilding guidance post-resolution.'
+      category: 'Process Questions',
+      faqs: [
+        {
+          question: 'Will this affect my credit score?',
+          answer: 'Debt settlement may temporarily impact your credit score, but it\'s often better than bankruptcy or continued defaults.'
+        },
+        {
+          question: 'Can I still use my credit cards during the process?',
+          answer: 'We recommend stopping credit card usage during settlement to avoid accumulating more debt.'
+        },
+        {
+          question: 'What if creditors don\'t agree to settle?',
+          answer: 'Our expert negotiators have a 95% success rate. We work persistently to reach favorable settlements.'
+        }
+      ]
     },
     {
-      category: 'Impact on Credit Score',
-      question: 'How long does it take to rebuild my credit score?',
-      answer: 'Typically 12-24 months after debt settlement. We provide personalized credit improvement plans and ongoing monitoring to help you rebuild your score faster.'
-    },
-    {
-      category: 'Program Duration',
-      question: 'How long does the debt relief process take?',
-      answer: 'Most cases are resolved within 12-36 months, depending on your debt amount, financial situation, and creditor cooperation. We provide regular updates throughout the process.'
-    },
-    {
-      category: 'Program Duration',
-      question: 'Can I speed up the process?',
-      answer: 'Yes! Making larger monthly deposits or lump sum payments can significantly reduce your program duration. Our team will work with you to create an accelerated plan if desired.'
-    },
-    {
-      category: 'Fees',
-      question: 'What are your fees?',
-      answer: 'We charge a percentage of the debt we help you resolve, typically 15-25% of the enrolled debt. There are no upfront fees - we only get paid when you succeed. All fees are disclosed transparently before enrollment.'
-    },
-    {
-      category: 'Fees',
-      question: 'Are there any hidden charges?',
-      answer: 'Absolutely not. We believe in complete transparency. All fees are clearly explained in your service agreement. There are no hidden charges, surprise fees, or additional costs.'
-    },
-    {
-      category: 'Legal Protection',
-      question: 'Is debt relief legal in India?',
-      answer: 'Yes, debt relief and settlement services are completely legal in India. We operate in full compliance with RBI guidelines and Indian banking regulations. All our processes are legally sound and documented.'
-    },
-    {
-      category: 'Legal Protection',
-      question: 'Will I face legal action from creditors?',
-      answer: 'Our legal team handles all creditor communications and protects you from harassment. While creditors may threaten legal action, actual lawsuits are rare. If needed, we provide legal representation and support.'
-    },
-    {
-      category: 'Harassment Support',
-      question: 'Can you stop harassment calls from recovery agents?',
-      answer: 'Yes! Once enrolled, our legal team takes over all creditor communications. We send cease and desist notices to stop harassment calls. Recovery agents are legally required to contact us instead of you.'
-    },
-    {
-      category: 'Harassment Support',
-      question: 'What if recovery agents visit my home or office?',
-      answer: 'This is illegal under RBI guidelines. We provide legal documentation to prevent such visits and take immediate action if harassment occurs. Our legal team can file complaints with banking ombudsman if needed.'
+      category: 'Eligibility',
+      faqs: [
+        {
+          question: 'Who is eligible for debt settlement?',
+          answer: 'Anyone with unsecured debt (credit cards, personal loans) of ₹50,000 or more and facing financial hardship.'
+        },
+        {
+          question: 'Do I need to be in default to qualify?',
+          answer: 'No, but being in financial distress helps in negotiations.'
+        }
+      ]
     }
   ];
 
-  const faqData = faqs.length > 0 ? faqs : defaultFaqs;
-  
-  const categories = [...new Set(faqData.map(f => f.category))];
-  
+  // Flatten all FAQs for search
+  const allFaqs = faqCategories.flatMap((category, catIndex) => 
+    category.faqs.map((faq, faqIndex) => ({
+      ...faq,
+      category: category.category,
+      globalIndex: catIndex * 100 + faqIndex
+    }))
+  );
+
   const filteredFaqs = searchTerm 
-    ? faqData.filter(f => 
-        f.question.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        f.answer.toLowerCase().includes(searchTerm.toLowerCase())
+    ? allFaqs.filter(faq => 
+        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        faq.answer.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    : faqData;
+    : null;
 
   return (
-    <>
-      <SEO pageName="faq" />
-      <main style={{ background: '#FFFFFF' }}>
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
-        {/* Hero Section */}
-        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
-          <div className="container">
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
-              Frequently Asked Questions
-            </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto 48px' }}>
-              Find answers to common questions about our debt relief services
-            </p>
-            
-            {/* Search Bar */}
-            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-              <input
-                type="text"
-                placeholder="Search for answers..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '16px 24px',
-                  borderRadius: '12px',
-                  border: 'none',
-                  fontSize: '1rem',
-                  outline: 'none'
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Categories */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            
-            {categories.map((category, catIndex) => {
-              const categoryFaqs = filteredFaqs.filter(f => f.category === category);
-              if (categoryFaqs.length === 0) return null;
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Frequently Asked <br />
+                <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  Questions
+                </span>
+              </h1>
               
-              return (
-                <div key={catIndex} style={{ marginBottom: '64px' }}>
-                  <h2 style={{
-                    fontSize: '2rem',
-                    fontWeight: 900,
-                    color: '#0A4DFF',
-                    marginBottom: '32px',
-                    paddingBottom: '16px',
-                    borderBottom: '3px solid #E6EEFF'
-                  }}>
-                    {category}
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
+                Find answers to common questions about our debt relief services. 
+                Can't find what you're looking for? Contact our support team.
+              </p>
+              
+              {/* Search Bar */}
+              <div className="relative max-w-md mx-auto">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search for answers..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 rounded-lg border-0 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 outline-none"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Content */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Search Results */}
+          {filteredFaqs && (
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Search Results ({filteredFaqs.length} found)
+              </h2>
+              {filteredFaqs.length === 0 ? (
+                <div className="text-center py-12">
+                  <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
+                  <p className="text-gray-600">Try searching with different keywords</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {filteredFaqs.map((faq, index) => (
+                    <div
+                      key={index}
+                      className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+                    >
+                      <button
+                        onClick={() => toggleIndex(faq.globalIndex)}
+                        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                      >
+                        <div>
+                          <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
+                            {faq.category}
+                          </span>
+                          <h3 className="text-lg font-semibold text-gray-900 mt-1">
+                            {faq.question}
+                          </h3>
+                        </div>
+                        <ChevronDown 
+                          className={`w-5 h-5 text-gray-500 transition-transform ${
+                            activeIndex === faq.globalIndex ? 'rotate-180' : ''
+                          }`} 
+                        />
+                      </button>
+                      {activeIndex === faq.globalIndex && (
+                        <div className="px-6 pb-4">
+                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Category-wise FAQs */}
+          {!filteredFaqs && (
+            <div className="space-y-12">
+              {faqCategories.map((category, catIndex) => (
+                <div key={catIndex} data-aos="fade-up" data-aos-delay={catIndex * 100}>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-8 pb-4 border-b-2 border-blue-100">
+                    {category.category}
                   </h2>
                   
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    {categoryFaqs.map((faq, i) => {
-                      const globalIndex = faqData.indexOf(faq);
+                  <div className="space-y-4">
+                    {category.faqs.map((faq, faqIndex) => {
+                      const globalIndex = catIndex * 100 + faqIndex;
                       return (
                         <div
-                          key={i}
-                          style={{
-                            background: '#F8FAFF',
-                            borderRadius: '12px',
-                            border: '2px solid #E6EEFF',
-                            overflow: 'hidden',
-                            transition: 'all 0.3s ease'
-                          }}
+                          key={faqIndex}
+                          className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
                         >
                           <button
                             onClick={() => toggleIndex(globalIndex)}
-                            style={{
-                              width: '100%',
-                              padding: '24px',
-                              textAlign: 'left',
-                              background: 'transparent',
-                              border: 'none',
-                              cursor: 'pointer',
-                              display: 'flex',
-                              justifyContent: 'space-between',
-                              alignItems: 'center',
-                              gap: '16px'
-                            }}
+                            className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
                           >
-                            <span style={{
-                              fontSize: '1.125rem',
-                              fontWeight: 700,
-                              color: '#0F172A',
-                              flex: 1
-                            }}>
+                            <h3 className="text-lg font-semibold text-gray-900 pr-4">
                               {faq.question}
-                            </span>
-                            <span style={{
-                              fontSize: '1.5rem',
-                              color: '#0A4DFF',
-                              fontWeight: 900,
-                              transform: activeIndex === globalIndex ? 'rotate(45deg)' : 'rotate(0deg)',
-                              transition: 'transform 0.3s ease'
-                            }}>
-                              +
-                            </span>
+                            </h3>
+                            <ChevronDown 
+                              className={`w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ${
+                                activeIndex === globalIndex ? 'rotate-180' : ''
+                              }`} 
+                            />
                           </button>
-                          
                           {activeIndex === globalIndex && (
-                            <div style={{
-                              padding: '0 24px 24px',
-                              fontSize: '1rem',
-                              color: '#64748B',
-                              lineHeight: 1.6,
-                              animation: 'fadeIn 0.3s ease'
-                            }}>
-                              {faq.answer}
-                            </div>
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="px-6 pb-4"
+                            >
+                              <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                            </motion.div>
                           )}
                         </div>
                       );
                     })}
                   </div>
                 </div>
-              );
-            })}
-
-            {filteredFaqs.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '64px 24px' }}>
-                <div style={{ fontSize: '4rem', marginBottom: '16px' }}>🔍</div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>
-                  No results found
-                </h3>
-                <p style={{ fontSize: '1rem', color: '#64748B' }}>
-                  Try searching with different keywords or browse all categories
-                </p>
-              </div>
-            )}
-
-          </div>
-        </section>
-
-        {/* Quick Stats */}
-        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
-          <div className="container">
-            <div style={{ display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: '32px', textAlign: 'center' }}>
-              {[
-                { value: '10,000+', label: 'Questions Answered' },
-                { value: '95%', label: 'Satisfaction Rate' },
-                { value: '24/7', label: 'Support Available' },
-                { value: '<2hrs', label: 'Response Time' }
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0A4DFF' }}>{stat.value}</div>
-                  <div style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '8px' }}>{stat.label}</div>
-                </div>
               ))}
             </div>
-          </div>
-        </section>
+          )}
+        </div>
+      </section>
 
-        {/* Still Have Questions */}
-        <section style={{ padding: '80px 24px', background: 'white', textAlign: 'center' }}>
-          <div className="container" style={{ maxWidth: '700px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
-              Still Have Questions?
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: '#64748B', marginBottom: '48px', lineHeight: 1.6 }}>
-              Our support team is here to help. Reach out and get clarity on your debt solution.
+      {/* Contact Support */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Still Have Questions?</h2>
+            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              Our debt relief experts are here to help. Get personalized answers to your specific situation.
             </p>
-            <div style={{ display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link to="/contact" style={{
-                padding: '16px 40px',
-                borderRadius: '12px',
-                background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: '1.125rem',
-                textDecoration: 'none',
-                boxShadow: '0 8px 24px rgba(10,77,255,0.3)'
-              }}>
+            
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <Link
+                to="/contact"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+              >
+                <MessageCircle className="w-5 h-5" />
                 Contact Support
               </Link>
-              <Link to="/applyform" style={{
-                padding: '16px 40px',
-                borderRadius: '12px',
-                background: 'transparent',
-                color: '#0A4DFF',
-                fontWeight: 700,
-                fontSize: '1.125rem',
-                textDecoration: 'none',
-                border: '2px solid #0A4DFF'
-              }}>
+              
+              <Link
+                to="/apply"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
                 Apply Now
+                <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </main>
-    </>
+      {/* Quick Stats */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8 text-center" data-aos="fade-up">
+            {[
+              { value: '10,000+', label: 'Questions Answered' },
+              { value: '95%', label: 'Satisfaction Rate' },
+              { value: '24/7', label: 'Support Available' },
+              { value: '<2hrs', label: 'Response Time' }
+            ].map((stat, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

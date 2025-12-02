@@ -1,205 +1,256 @@
-import React, { useEffect, useState } from "react";
-import SEO from "../components/SEO";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Shield, Users, Award, Target, Heart, CheckCircle } from 'lucide-react';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import CountUp from 'react-countup';
 
 const About = () => {
-  const [team, setTeam] = useState([]);
-  const [milestones, setMilestones] = useState([]);
-
   useEffect(() => {
-    fetch('/api/team').then(r => r.json()).then(setTeam).catch(() => {});
-    fetch('/api/milestones').then(r => r.json()).then(setMilestones).catch(() => {});
+    AOS.init({ duration: 800, once: true });
   }, []);
 
+  const stats = [
+    { value: 50000, suffix: '+', label: 'Happy Customers' },
+    { value: 450, suffix: 'Cr+', prefix: '₹', label: 'Debt Settled' },
+    { value: 95, suffix: '%', label: 'Success Rate' },
+    { value: 4.8, suffix: '★', label: 'Average Rating' },
+  ];
+
+  const values = [
+    { icon: Shield, title: 'Transparency', desc: 'No hidden fees, clear communication at every step' },
+    { icon: Heart, title: 'Integrity', desc: 'Ethical practices, RBI-compliant processes' },
+    { icon: Users, title: 'Empathy', desc: 'Understanding your unique financial situation' },
+    { icon: Award, title: 'Excellence', desc: 'Proven track record of successful settlements' },
+  ];
+
+  const timeline = [
+    { year: '2020', title: 'Founded', desc: 'Penny & Debt established with mission to help Indians become debt-free' },
+    { year: '2021', title: '5,000 Clients', desc: 'Helped first 5,000 families achieve financial freedom' },
+    { year: '2022', title: 'AI Platform', desc: 'Launched AI-powered debt negotiation system' },
+    { year: '2023', title: '25,000 Clients', desc: 'Expanded nationwide with regional offices' },
+    { year: '2024', title: '50,000+ Clients', desc: 'Crossed major milestone with ₹450Cr+ debt settled' },
+  ];
+
   return (
-    <>
-      <SEO pageName="about" />
-      <main style={{ background: '#FFFFFF' }}>
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
-        {/* Hero Section */}
-        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
-          <div className="container">
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
-              Transforming Debt Relief with Transparency, Technology & Trust
-            </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
-              AI-driven settlement, expert negotiators, legal protection — helping Indians achieve financial freedom.
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Empowering Indians to <br />
+                <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  Achieve Debt Freedom
+                </span>
+              </h1>
+              
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-3xl mx-auto">
+                Founded in 2020, we've helped over 50,000 families settle ₹450+ crores in debt, 
+                transforming financial stress into freedom through transparent, ethical solutions.
+              </p>
+              
+              <div className="flex flex-wrap gap-6 justify-center text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>RBI Compliant</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>100% Legal</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>Proven Results</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8" data-aos="fade-up">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl font-bold text-blue-600 mb-2">
+                  {stat.prefix}
+                  <CountUp end={stat.value} duration={2.5} separator="," />
+                  {stat.suffix}
+                </div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Story</h2>
+          </div>
+          
+          <div className="prose prose-lg mx-auto text-gray-700" data-aos="fade-up" data-aos-delay="100">
+            <p className="mb-6">
+              Founded in 2020, Penny & Debt was born from a simple mission: help everyday Indians break free from 
+              the crushing burden of debt. We've helped over 50,000 families settle ₹450+ crores in debt, 
+              transforming financial stress into freedom.
+            </p>
+            <p className="mb-6">
+              India faces a silent debt crisis. Millions struggle with credit card defaults, personal loans, 
+              and harassment from recovery agents. Traditional solutions are expensive, complicated, and often ineffective. 
+              We created Penny & Debt to change that.
+            </p>
+            <p>
+              Our platform combines cutting-edge technology with human expertise to negotiate with banks and NBFCs 
+              on your behalf. We've helped thousands of Indians reduce their debt by up to 70% while protecting 
+              them legally from harassment.
             </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Our Story */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '32px', textAlign: 'center' }}>
-              Our Story
-            </h2>
-            <div style={{ fontSize: '1.125rem', color: '#334155', lineHeight: 1.8, textAlign: 'justify' }}>
-              <p style={{ marginBottom: '24px' }}>
-                Penny & Debt was founded with a simple yet profound belief: no one should feel trapped by debt. In a world where financial pressure can affect your health, relationships, and future, we step in as your trusted ally.
-              </p>
-              <p style={{ marginBottom: '24px' }}>
-                India faces a silent debt crisis. Millions struggle with credit card defaults, personal loans, and harassment from recovery agents. Traditional solutions are expensive, complicated, and often ineffective. We created Penny & Debt to change that.
-              </p>
-              <p style={{ marginBottom: '24px' }}>
-                Our platform combines cutting-edge AI technology with human expertise to negotiate with banks and NBFCs on your behalf. We've helped over 10,000 Indians reduce their debt by up to 65% while protecting them legally from harassment.
-              </p>
-              <p>
-                With Penny & Debt, you don't just get a service — you get a second chance at financial freedom.
-              </p>
-            </div>
+      {/* Our Values */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Values</h2>
+            <p className="text-xl text-gray-600">The principles that guide everything we do</p>
           </div>
-        </section>
-
-        {/* Our Values */}
-        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Our Core Values
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-              {[
-                { icon: '🎯', title: 'Integrity', desc: 'We believe in doing what\'s right — not what\'s easy. Honesty is the foundation of every solution we offer.' },
-                { icon: '💎', title: 'Transparency', desc: 'No hidden fees, no false promises. You know exactly what to expect at every step.' },
-                { icon: '❤️', title: 'Customer-First', desc: 'Your financial wellbeing is our priority. We treat every client with respect and compassion.' },
-                { icon: '🔒', title: 'Confidentiality', desc: 'Your personal and financial information is safe with us. Discretion is a promise we never break.' },
-                { icon: '✅', title: 'Accuracy', desc: 'Precise calculations, realistic plans, and achievable goals — we deliver what we promise.' },
-                { icon: '⚖️', title: 'Compliance', desc: '100% legal and RBI-compliant processes. We protect you from legal risks.' }
-              ].map((value, i) => (
-                <div key={i} style={{
-                  background: 'white',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-                  border: '1px solid #E6EEFF'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{value.icon}</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '12px' }}>{value.title}</h3>
-                  <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.6 }}>{value.desc}</p>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-gray-50 p-8 rounded-2xl text-center hover:shadow-lg transition-all hover:-translate-y-2"
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                  <value.icon className="w-7 h-7 text-white" />
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Leadership Team */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Leadership Team
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-              {(team.length > 0 ? team : [
-                { name: 'Rajesh Sharma', designation: 'Founder & CEO', specialization: 'Fintech & Debt Resolution', linkedin: '#' },
-                { name: 'Priya Mehta', designation: 'Chief Legal Officer', specialization: 'Banking Law & Compliance', linkedin: '#' },
-                { name: 'Amit Kumar', designation: 'Head of Technology', specialization: 'AI & Machine Learning', linkedin: '#' },
-                { name: 'Sneha Patel', designation: 'Head of Customer Success', specialization: 'Financial Counselling', linkedin: '#' }
-              ]).map((member, i) => (
-                <div key={i} style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  textAlign: 'center',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  <div style={{
-                    width: '100px',
-                    height: '100px',
-                    background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                    borderRadius: '50%',
-                    margin: '0 auto 16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '2.5rem',
-                    fontWeight: 900
-                  }}>
-                    {member.name.charAt(0)}
-                  </div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '4px' }}>{member.name}</h3>
-                  <div style={{ fontSize: '0.875rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '8px' }}>{member.designation}</div>
-                  <p style={{ fontSize: '0.875rem', color: '#64748B', marginBottom: '16px' }}>{member.specialization}</p>
-                  {member.linkedin && (
-                    <a href={member.linkedin} style={{ fontSize: '0.875rem', color: '#0A4DFF', fontWeight: 600, textDecoration: 'none' }}>
-                      LinkedIn →
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Milestones */}
-        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Our Journey
-            </h2>
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-              {(milestones.length > 0 ? milestones : [
-                { year: '2020', title: 'Founded', desc: 'Penny & Debt was established with a mission to help Indians become debt-free' },
-                { year: '2021', title: '1,000 Clients', desc: 'Helped our first 1,000 clients achieve financial freedom' },
-                { year: '2022', title: 'New Office', desc: 'Expanded operations with new office in Gurgaon' },
-                { year: '2023', title: 'AI System Launch', desc: 'Launched AI-powered debt negotiation platform' },
-                { year: '2024', title: '10,000+ Clients', desc: 'Crossed 10,000 debt-free clients milestone' }
-              ]).map((milestone, i) => (
-                <div key={i} style={{
-                  display: 'flex',
-                  gap: '24px',
-                  marginBottom: '32px',
-                  alignItems: 'flex-start'
-                }}>
-                  <div style={{
-                    minWidth: '80px',
-                    height: '80px',
-                    background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontSize: '1.25rem',
-                    fontWeight: 900
-                  }}>
-                    {milestone.year}
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{milestone.title}</h3>
-                    <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.6 }}>{milestone.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Mission & Vision */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '48px' }}>
-              <div>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0A4DFF', marginBottom: '24px' }}>
-                  🎯 Our Mission
-                </h2>
-                <p style={{ fontSize: '1.125rem', color: '#334155', lineHeight: 1.8 }}>
-                  To make debt resolution simple, affordable, and stigma-free for every Indian household. We are committed to delivering personalized financial solutions, always rooted in transparency, legality, and trust.
-                </p>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
+                <p className="text-gray-600">{value.desc}</p>
               </div>
-              <div>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0A4DFF', marginBottom: '24px' }}>
-                  🌠 Our Vision
-                </h2>
-                <p style={{ fontSize: '1.125rem', color: '#334155', lineHeight: 1.8 }}>
-                  To become India's most trusted name in debt advisory — helping over 10 million Indians by 2030, building a movement where financial freedom isn't a privilege, but a right.
-                </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Journey</h2>
+            <p className="text-xl text-gray-600">Milestones in our mission to help Indians achieve debt freedom</p>
+          </div>
+          
+          <div className="space-y-8">
+            {timeline.map((item, index) => (
+              <div
+                key={index}
+                data-aos="fade-right"
+                data-aos-delay={index * 100}
+                className="flex gap-6 items-start"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+                  {item.year}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-lg">{item.desc}</p>
+                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div data-aos="fade-right" className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100">
+              <div className="flex items-center gap-3 mb-6">
+                <Target className="w-8 h-8 text-blue-600" />
+                <h2 className="text-3xl font-bold text-gray-900">Our Mission</h2>
+              </div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                To provide transparent, ethical, and effective debt relief solutions that restore 
+                financial dignity and peace of mind to Indian families.
+              </p>
+            </div>
+            
+            <div data-aos="fade-left" className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100">
+              <div className="flex items-center gap-3 mb-6">
+                <Award className="w-8 h-8 text-blue-600" />
+                <h2 className="text-3xl font-bold text-gray-900">Our Vision</h2>
+              </div>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                To become India's most trusted debt relief platform, helping millions achieve 
+                financial freedom through innovative, technology-driven solutions.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </main>
-    </>
+      {/* Team Philosophy */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Team Philosophy</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Expert financial counselors, legal advisors, and negotiation specialists with 100+ years 
+              combined experience in debt management and financial services.
+            </p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg">
+              <p className="text-lg text-gray-700 italic">
+                "We believe every person deserves a second chance at financial freedom. Our team works 
+                tirelessly to ensure that debt doesn't define your future – your determination does."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6" data-aos="fade-up">
+            Ready to Start Your Debt-Free Journey?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Join 50,000+ Indians who chose financial freedom with Penny & Debt
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+            <Link
+              to="/apply"
+              className="px-10 py-4 bg-white text-blue-900 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-xl"
+            >
+              Get Free Consultation
+            </Link>
+            <Link
+              to="/how-it-works"
+              className="px-10 py-4 bg-blue-700 border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-all"
+            >
+              Learn How It Works
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

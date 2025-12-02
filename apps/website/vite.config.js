@@ -13,9 +13,24 @@ export default defineConfig({
     port: 5173,
     strictPort: false,
     host: true,
+    open: true,
   },
   build: {
     outDir: 'dist',
     sourcemap: false,
+    minify: 'terser',
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'animation-vendor': ['framer-motion', 'aos'],
+          'ui-vendor': ['react-slick', 'recharts', '@headlessui/react'],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
   },
 });

@@ -1,402 +1,430 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import SEO from "../components/SEO";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, Clock, MessageCircle, CheckCircle, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
+    fullName: '',
+    email: '',
+    phone: '',
+    debtAmount: '',
+    message: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     if (submitted) setSubmitted(false);
-    if (error) setError("");
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      !formData.fullName.trim() ||
-      !formData.email.trim() ||
-      !formData.phone.trim() ||
-      !formData.subject.trim() ||
-      !formData.message.trim()
-    ) {
-      setError("Please fill in all fields.");
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.message.trim()) {
+      setError('Please fill in all required fields.');
       return;
     }
-    
+
     setSubmitting(true);
-    
+
     try {
-      const contactData = formData;
-      
-      try {
-        const res = await fetch('/api/contacts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(contactData)
-        });
-        if (res.ok) {
-          setSubmitted(true);
-          setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
-          setSubmitting(false);
-          return;
-        }
-      } catch (backendErr) {
-        console.warn('Contact backend error:', backendErr);
-        setSubmitted(true);
-        setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' });
-      }
-    } catch (err) {
-      console.error('Contact form error:', err);
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setSubmitted(true);
-      const existing = JSON.parse(localStorage.getItem('contactForms') || '[]');
-      existing.push(contactData);
-      localStorage.setItem('contactForms', JSON.stringify(existing));
+      setFormData({ fullName: '', email: '', phone: '', debtAmount: '', message: '' });
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
   };
 
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: 'Email Us',
+      info: 'care@pennyanddebt.in',
+      desc: 'Send us an email anytime'
+    },
+    {
+      icon: Phone,
+      title: 'Call Us',
+      info: '+91-XXXXXXXXXX',
+      desc: 'Mon-Sat, 9 AM - 7 PM IST'
+    },
+    {
+      icon: MapPin,
+      title: 'Visit Us',
+      info: 'Mumbai, Maharashtra',
+      desc: 'India'
+    },
+    {
+      icon: Clock,
+      title: 'Working Hours',
+      info: 'Mon-Sat: 9 AM - 7 PM',
+      desc: 'Sunday: Closed'
+    }
+  ];
+
+  const debtAmountOptions = [
+    'Less than Rs.1 Lakh',
+    'Rs.1-5 Lakhs',
+    'Rs.5-10 Lakhs',
+    'Rs.10+ Lakhs'
+  ];
+
   return (
-    <>
-      <SEO pageName="contact" />
-      <main style={{ background: '#FFFFFF' }}>
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
-        {/* Hero Section */}
-        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
-          <div className="container">
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
-              Get In Touch
-            </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto' }}>
-              Have questions? We're here to help. Reach out and we'll respond within 24 hours.
-            </p>
-          </div>
-        </section>
-
-        {/* Contact Info Cards */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container">
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px', marginBottom: '80px' }}>
-              {[
-                { icon: '📧', title: 'Email Us', info: 'care@pennyanddebt.in', desc: 'Send us an email anytime' },
-                { icon: '📞', title: 'Call Us', info: '+91 7814447895', desc: 'Mon-Sat, 9:00 AM – 6:00 PM' },
-                { icon: '📍', title: 'Visit Us', info: 'Gurgaon, Haryana', desc: '2nd Floor, Fintech Tower' },
-                { icon: '💬', title: 'Live Chat', info: 'Available Now', desc: 'Chat with our support team' }
-              ].map((contact, i) => (
-                <div key={i} style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  textAlign: 'center',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{contact.icon}</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{contact.title}</h3>
-                  <div style={{ fontSize: '1.125rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '4px' }}>{contact.info}</div>
-                  <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{contact.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Contact Form and Map */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '48px', alignItems: 'start' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Get in Touch - <br />
+                <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  We're Here to Help
+                </span>
+              </h1>
               
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-              >
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
-                  Send Us a Message
-                </h2>
-                <p style={{ fontSize: '1rem', color: '#64748B', marginBottom: '32px', lineHeight: 1.6 }}>
-                  Fill out the form below and our team will get back to you within 24 hours.
-                </p>
-
-                <form onSubmit={handleSubmit} style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  {submitted && (
-                    <div style={{
-                      padding: '16px',
-                      borderRadius: '12px',
-                      marginBottom: '24px',
-                      background: '#D1FAE5',
-                      color: '#065F46',
-                      fontWeight: 600
-                    }}>
-                      ✅ Your message has been sent successfully!
-                    </div>
-                  )}
-                  {error && (
-                    <div style={{
-                      padding: '16px',
-                      borderRadius: '12px',
-                      marginBottom: '24px',
-                      background: '#FEE2E2',
-                      color: '#991B1B',
-                      fontWeight: 600
-                    }}>
-                      ⚠️ {error}
-                    </div>
-                  )}
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="fullName" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                      Full Name<span style={{ color: 'red' }}> *</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleChange}
-                      placeholder="Your full name"
-                      required
-                      disabled={submitting}
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '10px',
-                        border: '1px solid #E0E0E0',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        background: 'white'
-                      }}
-                    />
-                  </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
-                    <div>
-                      <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                        Email<span style={{ color: 'red' }}> *</span>
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="you@example.com"
-                        required
-                        disabled={submitting}
-                        style={{
-                          width: '100%',
-                          padding: '12px 16px',
-                          borderRadius: '10px',
-                          border: '1px solid #E0E0E0',
-                          fontSize: '1rem',
-                          outline: 'none',
-                          background: 'white'
-                        }}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                        Phone<span style={{ color: 'red' }}> *</span>
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+91 9876543210"
-                        required
-                        disabled={submitting}
-                        style={{
-                          width: '100%',
-                          padding: '12px 16px',
-                          borderRadius: '10px',
-                          border: '1px solid #E0E0E0',
-                          fontSize: '1rem',
-                          outline: 'none',
-                          background: 'white'
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div style={{ marginBottom: '20px' }}>
-                    <label htmlFor="subject" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                      Subject<span style={{ color: 'red' }}> *</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="Subject of your message"
-                      required
-                      disabled={submitting}
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '10px',
-                        border: '1px solid #E0E0E0',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        background: 'white'
-                      }}
-                    />
-                  </div>
-
-                  <div style={{ marginBottom: '24px' }}>
-                    <label htmlFor="message" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                      Message<span style={{ color: 'red' }}> *</span>
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      placeholder="Write your message here"
-                      required
-                      disabled={submitting}
-                      rows={5}
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        borderRadius: '10px',
-                        border: '1px solid #E0E0E0',
-                        fontSize: '1rem',
-                        outline: 'none',
-                        resize: 'vertical',
-                        background: 'white',
-                        fontFamily: 'inherit'
-                      }}
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    style={{
-                      width: '100%',
-                      padding: '14px',
-                      borderRadius: '12px',
-                      background: submitting ? '#9CA3AF' : 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                      color: 'white',
-                      border: 'none',
-                      fontWeight: 700,
-                      fontSize: '1rem',
-                      cursor: submitting ? 'not-allowed' : 'pointer',
-                      boxShadow: submitting ? 'none' : '0 8px 24px rgba(10,77,255,0.3)'
-                    }}
-                  >
-                    {submitting ? 'Sending...' : 'Send Message'}
-                  </button>
-                </form>
-              </motion.div>
-
-              {/* Office Info & Map */}
-              <div>
-                <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
-                  Our Office
-                </h2>
-                
-                <div style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  border: '2px solid #E6EEFF',
-                  marginBottom: '32px'
-                }}>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '16px' }}>
-                    Penny & Debt Headquarters
-                  </h3>
-                  <div style={{ fontSize: '1rem', color: '#64748B', lineHeight: 1.8 }}>
-                    <p style={{ marginBottom: '12px' }}>
-                      <strong style={{ color: '#0F172A' }}>Address:</strong><br />
-                      2nd Floor, Fintech Tower<br />
-                      Gurgaon, Haryana 122001<br />
-                      India
-                    </p>
-                    <p style={{ marginBottom: '12px' }}>
-                      <strong style={{ color: '#0F172A' }}>Email:</strong><br />
-                      care@pennyanddebt.in
-                    </p>
-                    <p style={{ marginBottom: '12px' }}>
-                      <strong style={{ color: '#0F172A' }}>Phone:</strong><br />
-                      +91 7814447895
-                    </p>
-                    <p>
-                      <strong style={{ color: '#0F172A' }}>Working Hours:</strong><br />
-                      Monday – Saturday: 9:00 AM – 6:00 PM<br />
-                      Sunday: Closed
-                    </p>
-                  </div>
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-3xl mx-auto">
+                Have questions about debt relief? Need a free consultation? 
+                Our experts are ready to help you start your journey to financial freedom.
+              </p>
+              
+              <div className="flex flex-wrap gap-6 justify-center text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>Free Consultation</span>
                 </div>
-
-                {/* Map Placeholder */}
-                <div style={{
-                  background: 'linear-gradient(135deg, #E6EEFF 0%, #F8FAFF 100%)',
-                  height: '300px',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  <div style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '4rem', marginBottom: '16px' }}>🗺️</div>
-                    <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#0F172A' }}>
-                      Map Location
-                    </div>
-                    <div style={{ fontSize: '0.875rem', color: '#64748B', marginTop: '8px' }}>
-                      Gurgaon, Haryana
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>24-Hour Response</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span>100% Confidential</span>
                 </div>
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
+      {/* Contact Info Cards */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {contactInfo.map((contact, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white p-8 rounded-2xl shadow-lg text-center hover:shadow-xl transition-all hover:-translate-y-2"
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                  <contact.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{contact.title}</h3>
+                <div className="text-blue-600 font-semibold mb-1">{contact.info}</div>
+                <p className="text-gray-600 text-sm">{contact.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form & Info */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            
+            {/* Contact Form */}
+            <div data-aos="fade-right">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Fill out the form below and our team will get back to you within 24 hours.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {submitted && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div className="flex items-center gap-2 text-green-800">
+                      <CheckCircle className="w-5 h-5" />
+                      <span className="font-semibold">Message sent successfully!</span>
+                    </div>
+                    <p className="text-green-700 text-sm mt-1">We'll get back to you within 24 hours.</p>
+                  </div>
+                )}
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 font-semibold">{error}</p>
+                  </div>
+                )}
+
+                <div>
+                  <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    required
+                    disabled={submitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  />
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your@email.com"
+                      required
+                      disabled={submitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+91 9876543210"
+                      required
+                      disabled={submitting}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="debtAmount" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Debt Amount (Optional)
+                  </label>
+                  <select
+                    id="debtAmount"
+                    name="debtAmount"
+                    value={formData.debtAmount}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  >
+                    <option value="">Select debt amount range</option>
+                    {debtAmountOptions.map((option, index) => (
+                      <option key={index} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                    Message *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Tell us about your situation and how we can help..."
+                    rows={5}
+                    required
+                    disabled={submitting}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
+                  disabled={submitting}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-4 px-8 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {submitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRight className="w-5 h-5" />
+                    </>
+                  )}
+                </motion.button>
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div data-aos="fade-left" className="lg:pl-8">
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Let's Start Your Journey</h2>
+              <p className="text-xl text-gray-600 mb-8">
+                Ready to take control of your financial future? Our debt relief experts are here to guide you every step of the way.
+              </p>
+
+              {/* Benefits */}
+              <div className="space-y-6 mb-8">
+                {[
+                  {
+                    icon: CheckCircle,
+                    title: 'Free Consultation',
+                    desc: 'Get expert advice at no cost'
+                  },
+                  {
+                    icon: MessageCircle,
+                    title: '24-Hour Response',
+                    desc: 'Quick replies to all inquiries'
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: '100% Confidential',
+                    desc: 'Your information is secure'
+                  }
+                ].map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <benefit.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-1">{benefit.title}</h3>
+                      <p className="text-gray-600">{benefit.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl border border-blue-100">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Need Immediate Help?</h3>
+                <p className="text-gray-600 mb-6">
+                  If you're facing urgent financial difficulties, don't wait. Call us now for immediate assistance.
+                </p>
+                <Link
+                  to="/apply"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-blue-900 transition-all duration-300"
+                >
+                  Get Started Now
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* FAQ Quick Links */}
-        <section style={{ padding: '80px 24px', background: '#F8FAFF', textAlign: 'center' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px' }}>
-              Looking for Quick Answers?
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: '#64748B', marginBottom: '32px' }}>
-              Check out our FAQ section for instant answers to common questions
+      {/* FAQ Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-gray-600">
+              Quick answers to common questions about our debt relief services.
             </p>
-            <a href="/faq" style={{
-              padding: '14px 32px',
-              borderRadius: '12px',
-              background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-              color: 'white',
-              fontWeight: 700,
-              fontSize: '1rem',
-              textDecoration: 'none',
-              display: 'inline-block',
-              boxShadow: '0 8px 24px rgba(10,77,255,0.3)'
-            }}>
-              Visit FAQ
-            </a>
           </div>
-        </section>
 
-      </main>
-    </>
+          <div className="space-y-6">
+            {[
+              {
+                q: 'How quickly can you help reduce my debt?',
+                a: 'Most clients see significant debt reduction within 6-24 months, depending on their specific situation and debt amount.'
+              },
+              {
+                q: 'Is the consultation really free?',
+                a: 'Yes, absolutely! We provide a comprehensive debt analysis and personalized strategy at no cost to you.'
+              },
+              {
+                q: 'Will this affect my credit score?',
+                a: 'Our debt relief strategies are designed to minimize credit impact while maximizing debt reduction. We\'ll explain all implications upfront.'
+              },
+              {
+                q: 'What types of debt do you help with?',
+                a: 'We help with credit cards, personal loans, medical bills, business debt, and other unsecured debts.'
+              }
+            ].map((faq, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
+              >
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{faq.q}</h3>
+                <p className="text-gray-600 leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              Ready to Become <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">Debt-Free?</span>
+            </h2>
+            <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+              Join thousands of Indians who have successfully eliminated their debt with our proven strategies.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/apply"
+                className="inline-flex items-center gap-2 bg-white text-blue-900 font-bold py-4 px-8 rounded-lg hover:bg-blue-50 transition-all duration-300"
+              >
+                Start Your Application
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <a
+                href="tel:+91XXXXXXXXXX"
+                className="inline-flex items-center gap-2 border-2 border-white text-white font-bold py-4 px-8 rounded-lg hover:bg-white hover:text-blue-900 transition-all duration-300"
+              >
+                <Phone className="w-5 h-5" />
+                Call Now
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
   );
 };
 

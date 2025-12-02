@@ -1,8 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import ModernNavbar from './components/ModernNavbar';
 import ModernFooter from './components/ModernFooter';
+import { AnimatePresence } from 'framer-motion';
 import NewHome from './pages/NewHome';
+import PremiumHome from './pages/PremiumHome';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
@@ -32,28 +34,33 @@ function App() {
     });
   }, []);
 
+  const location = useLocation();
+
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <ModernNavbar />
-      <Routes>
-        <Route path="/" element={<NewHome />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/apply" element={<ApplyForm />} />
-        <Route path="/apply-loan" element={<ApplyLoan />} />
-        <Route path="/apply-loan-basic" element={<ApplyLoanBasicDetails />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PremiumHome />} />
+          <Route path="/home" element={<NewHome />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/apply" element={<ApplyForm />} />
+          <Route path="/apply-loan" element={<ApplyLoan />} />
+          <Route path="/apply-loan-basic" element={<ApplyLoanBasicDetails />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </AnimatePresence>
       <ModernFooter />
-    </>
+    </div>
   );
 }
 

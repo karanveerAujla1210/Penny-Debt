@@ -1,165 +1,166 @@
-import React from 'react';
-import SEO from '../components/SEO';
+import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { Shield, Lock, Eye, FileText } from 'lucide-react';
+import AOS from 'aos';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
+
   return (
-    <>
-      <SEO title="Privacy Policy | Penny & Debt" description="Our commitment to protecting your privacy and data" />
-      <main style={{ background: '#FFFFFF' }}>
+    <div className="pt-20">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
-        {/* Hero Section */}
-        <section style={{ padding: '80px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
-          <div className="container">
-            <h1 style={{ fontSize: '3rem', fontWeight: 900, color: 'white', marginBottom: '16px' }}>
-              Privacy Policy
-            </h1>
-            <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.95)' }}>
-              Last Updated: December 2024
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">Privacy Policy</h1>
+            <p className="text-xl text-blue-100">
+              Your data is protected. Your privacy matters. Here's how we handle information at Penny & Debt.
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </div>
+      </section>
 
-        {/* Content */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-xl p-8 space-y-8">
             
-            <div style={{ fontSize: '1.125rem', color: '#334155', lineHeight: 1.8 }}>
-              
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                1. Introduction
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                At Penny & Debt ("we," "our," or "us"), we are committed to protecting your privacy and ensuring the security of your personal and financial information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our debt relief services and website.
-              </p>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                2. Information We Collect
-              </h2>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0A4DFF', marginTop: '32px', marginBottom: '16px' }}>
-                Personal Information
-              </h3>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}>Name, email address, phone number, and mailing address</li>
-                <li style={{ marginBottom: '12px' }}>Date of birth and government-issued ID information</li>
-                <li style={{ marginBottom: '12px' }}>Employment information and income details</li>
-                <li style={{ marginBottom: '12px' }}>Bank account and payment information</li>
-              </ul>
-
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0A4DFF', marginTop: '32px', marginBottom: '16px' }}>
-                Financial Information
-              </h3>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}>Debt details including creditor names, account numbers, and outstanding balances</li>
-                <li style={{ marginBottom: '12px' }}>Credit reports and credit scores</li>
-                <li style={{ marginBottom: '12px' }}>Financial statements and tax documents</li>
-                <li style={{ marginBottom: '12px' }}>Transaction history and payment records</li>
-              </ul>
-
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0A4DFF', marginTop: '32px', marginBottom: '16px' }}>
-                Usage Data
-              </h3>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}>IP address, browser type, and device information</li>
-                <li style={{ marginBottom: '12px' }}>Pages visited, time spent, and navigation patterns</li>
-                <li style={{ marginBottom: '12px' }}>Cookies and similar tracking technologies</li>
-              </ul>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                3. How We Use Your Information
-              </h2>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}><strong>Provide Services:</strong> To analyze your debt situation and create personalized relief plans</li>
-                <li style={{ marginBottom: '12px' }}><strong>Negotiate with Creditors:</strong> To communicate and negotiate on your behalf with banks and lenders</li>
-                <li style={{ marginBottom: '12px' }}><strong>Legal Protection:</strong> To provide legal assistance and protect you from harassment</li>
-                <li style={{ marginBottom: '12px' }}><strong>Communication:</strong> To send updates, notifications, and important information about your case</li>
-                <li style={{ marginBottom: '12px' }}><strong>Improve Services:</strong> To analyze usage patterns and enhance our platform</li>
-                <li style={{ marginBottom: '12px' }}><strong>Compliance:</strong> To comply with legal obligations and regulatory requirements</li>
-              </ul>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                4. How We Share Your Information
-              </h2>
-              <p style={{ marginBottom: '16px' }}>We do not sell your personal information. We may share your information with:</p>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}><strong>Creditors:</strong> To negotiate settlements and payment arrangements</li>
-                <li style={{ marginBottom: '12px' }}><strong>Legal Partners:</strong> To provide legal representation and protection</li>
-                <li style={{ marginBottom: '12px' }}><strong>Service Providers:</strong> Third-party vendors who assist in providing our services (under strict confidentiality agreements)</li>
-                <li style={{ marginBottom: '12px' }}><strong>Regulatory Authorities:</strong> When required by law or to comply with legal processes</li>
-              </ul>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                5. Data Security
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                We implement industry-leading security measures to protect your information:
-              </p>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}>256-bit SSL encryption for all data transmission</li>
-                <li style={{ marginBottom: '12px' }}>Secure servers with regular security audits</li>
-                <li style={{ marginBottom: '12px' }}>Multi-factor authentication for account access</li>
-                <li style={{ marginBottom: '12px' }}>Regular employee training on data protection</li>
-                <li style={{ marginBottom: '12px' }}>Compliance with RBI and banking security standards</li>
-              </ul>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                6. Your Rights
-              </h2>
-              <p style={{ marginBottom: '16px' }}>You have the right to:</p>
-              <ul style={{ marginBottom: '24px', paddingLeft: '24px' }}>
-                <li style={{ marginBottom: '12px' }}>Access your personal information</li>
-                <li style={{ marginBottom: '12px' }}>Correct inaccurate or incomplete data</li>
-                <li style={{ marginBottom: '12px' }}>Request deletion of your information (subject to legal requirements)</li>
-                <li style={{ marginBottom: '12px' }}>Opt-out of marketing communications</li>
-                <li style={{ marginBottom: '12px' }}>Withdraw consent for data processing</li>
-              </ul>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                7. Cookies Policy
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                We use cookies and similar technologies to enhance your experience, analyze usage, and provide personalized content. You can control cookie preferences through your browser settings.
-              </p>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                8. Data Retention
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                We retain your information for as long as necessary to provide services and comply with legal obligations. Financial records are maintained for 7 years as per Indian banking regulations.
-              </p>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                9. Children's Privacy
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                Our services are not intended for individuals under 18 years of age. We do not knowingly collect information from minors.
-              </p>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                10. Changes to This Policy
-              </h2>
-              <p style={{ marginBottom: '24px' }}>
-                We may update this Privacy Policy periodically. We will notify you of significant changes via email or website notification.
-              </p>
-
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#0F172A', marginTop: '48px', marginBottom: '24px' }}>
-                11. Contact Us
-              </h2>
-              <p style={{ marginBottom: '12px' }}>
-                For questions about this Privacy Policy or to exercise your rights, contact us:
-              </p>
-              <div style={{ background: '#F8FAFF', padding: '24px', borderRadius: '12px', border: '2px solid #E6EEFF' }}>
-                <p style={{ marginBottom: '8px' }}><strong>Email:</strong> privacy@pennyanddebt.in</p>
-                <p style={{ marginBottom: '8px' }}><strong>Phone:</strong> +91 7814447895</p>
-                <p style={{ marginBottom: '8px' }}><strong>Address:</strong> 2nd Floor, Fintech Tower, Gurgaon, Haryana, India</p>
+            <div data-aos="fade-up">
+              <div className="flex items-center gap-3 mb-4">
+                <Shield className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">1. Introduction</h2>
               </div>
+              <p className="text-gray-700 leading-relaxed">
+                This Privacy Policy explains how Penny & Debt ("we", "our", "us") collects, uses, and protects your information when you use our website or services.
+              </p>
+            </div>
 
+            <div data-aos="fade-up">
+              <div className="flex items-center gap-3 mb-4">
+                <FileText className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">2. Information We Collect</h2>
+              </div>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Personal details (name, phone, email, address)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Financial details related to your debt profile</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Communication records with our team</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Technical information (cookies, IP address)</span>
+                </li>
+              </ul>
+            </div>
+
+            <div data-aos="fade-up">
+              <div className="flex items-center gap-3 mb-4">
+                <Eye className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">3. Why We Collect Information</h2>
+              </div>
+              <p className="text-gray-700 mb-3">We use your data to:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Process your debt relief or loan application</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Provide customer support</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Improve service quality</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Ensure compliance with legal guidelines</span>
+                </li>
+              </ul>
+            </div>
+
+            <div data-aos="fade-up">
+              <div className="flex items-center gap-3 mb-4">
+                <Lock className="w-6 h-6 text-blue-600" />
+                <h2 className="text-2xl font-bold text-gray-900">4. Data Security</h2>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                We use industry-grade encryption, protected servers, and restricted access control to secure your data.
+              </p>
+            </div>
+
+            <div data-aos="fade-up">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Sharing of Information</h2>
+              <p className="text-gray-700 mb-3">We do NOT sell or share your information with third parties except:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Legal authorities if required by law</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Financial partners for service delivery (with consent)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Internal compliance teams</span>
+                </li>
+              </ul>
+            </div>
+
+            <div data-aos="fade-up">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Cookies</h2>
+              <p className="text-gray-700 leading-relaxed">
+                Cookies help improve your browsing experience. You may disable cookies in your browser settings.
+              </p>
+            </div>
+
+            <div data-aos="fade-up">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">7. User Rights</h2>
+              <p className="text-gray-700 mb-3">You may request:</p>
+              <ul className="space-y-2 text-gray-700">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Access to your data</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Correction of inaccurate information</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">•</span>
+                  <span>Deletion of your data</span>
+                </li>
+              </ul>
+            </div>
+
+            <div data-aos="fade-up" className="bg-blue-50 p-6 rounded-lg">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">8. Contact</h2>
+              <p className="text-gray-700">
+                For privacy-related queries, email us at:{' '}
+                <a href="mailto:privacy@pennyanddebt.in" className="text-blue-600 font-semibold hover:underline">
+                  privacy@pennyanddebt.in
+                </a>
+              </p>
             </div>
 
           </div>
-        </section>
-
-      </main>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 

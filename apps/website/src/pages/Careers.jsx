@@ -1,437 +1,335 @@
-import React, { useState, useEffect } from "react";
-import SEO from "../components/SEO";
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { 
+  MapPin, Clock, Users, TrendingUp, Heart, 
+  ArrowRight, Mail, Briefcase, Star 
+} from 'lucide-react';
+import { useEffect } from 'react';
+import AOS from 'aos';
 
 const Careers = () => {
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    position: "",
-    experience: "",
-    resume: null,
-  });
-  const [message, setMessage] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [jobs, setJobs] = useState([]);
-
   useEffect(() => {
-    fetch('/api/careers').then(r => r.json()).then(setJobs).catch(() => {});
+    AOS.init({ duration: 800, once: true });
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "resume") {
-      setFormData((prev) => ({ ...prev, resume: files[0] }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+  const jobOpenings = [
+    {
+      id: 1,
+      title: 'Debt Counselor',
+      department: 'Customer Success',
+      location: 'Mumbai',
+      type: 'Full-time',
+      experience: '2-5 years',
+      skills: ['Financial counseling', 'Communication', 'Empathy', 'Problem-solving'],
+      description: 'Help clients navigate their debt relief journey with compassionate guidance and expert advice.'
+    },
+    {
+      id: 2,
+      title: 'Legal Advisor',
+      department: 'Legal',
+      location: 'Mumbai',
+      type: 'Full-time',
+      experience: '3-7 years',
+      skills: ['Debt law', 'Negotiation', 'Legal documentation', 'Compliance'],
+      description: 'Provide legal support for debt settlements and ensure compliance with RBI guidelines.'
+    },
+    {
+      id: 3,
+      title: 'Customer Success Manager',
+      department: 'Customer Success',
+      location: 'Remote',
+      type: 'Full-time',
+      experience: '1-3 years',
+      skills: ['Customer service', 'CRM', 'Communication', 'Analytics'],
+      description: 'Manage client relationships and ensure successful debt relief outcomes.'
+    },
+    {
+      id: 4,
+      title: 'Marketing Executive',
+      department: 'Marketing',
+      location: 'Mumbai',
+      type: 'Full-time',
+      experience: '2-4 years',
+      skills: ['Digital marketing', 'Content creation', 'SEO', 'Social media'],
+      description: 'Drive brand awareness and lead generation through innovative marketing strategies.'
+    },
+    {
+      id: 5,
+      title: 'Software Developer',
+      department: 'Technology',
+      location: 'Remote',
+      type: 'Full-time',
+      experience: '2-6 years',
+      skills: ['React', 'Node.js', 'MongoDB', 'API development'],
+      description: 'Build and maintain our debt relief platform and customer-facing applications.'
+    },
+    {
+      id: 6,
+      title: 'Business Development Executive',
+      department: 'Sales',
+      location: 'Mumbai',
+      type: 'Full-time',
+      experience: '1-4 years',
+      skills: ['Sales', 'Lead generation', 'Relationship building', 'Negotiation'],
+      description: 'Identify and develop new business opportunities in the debt relief market.'
     }
-    setMessage("");
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.fullName.trim() || !formData.email.trim() || !formData.phone.trim() || !formData.position || !formData.resume) {
-      setMessage("Please fill all required fields and upload your resume.");
-      return;
-    }
-    setSubmitting(true);
-    
-    const applicationData = {
-      fullName: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
-      position: formData.position,
-      experience: formData.experience,
-      resumeName: formData.resume.name,
-      submittedAt: new Date().toISOString()
-    };
-    
-    try {
-      const fd = new FormData();
-      fd.append('fullName', formData.fullName);
-      fd.append('email', formData.email);
-      fd.append('phone', formData.phone);
-      fd.append('position', formData.position);
-      fd.append('experience', formData.experience);
-      fd.append('resume', formData.resume);
-
-      const backendRes = await fetch('/api/careers/apply', {
-        method: 'POST',
-        body: fd
-      });
-
-      if (backendRes.ok) {
-        setFormData({ fullName: '', email: '', phone: '', position: '', experience: '', resume: null });
-        setMessage("✅ Application submitted successfully! We'll contact you soon.");
-        e.target.reset();
-        setSubmitting(false);
-        return;
-      }
-
-      const existingApplications = JSON.parse(localStorage.getItem('careerApplications') || '[]');
-      existingApplications.push(applicationData);
-      localStorage.setItem('careerApplications', JSON.stringify(existingApplications));
-
-      setFormData({ fullName: '', email: '', phone: '', position: '', experience: '', resume: null });
-      setMessage("✅ Application submitted successfully! We'll contact you soon.");
-      e.target.reset();
-    } catch (error) {
-      console.error('Submission error:', error);
-      setFormData({ fullName: '', email: '', phone: '', position: '', experience: '', resume: null });
-      setMessage("✅ Application submitted successfully! We'll contact you soon.");
-      e.target.reset();
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const defaultJobs = [
-    { title: 'Senior Financial Advisor', location: 'Mumbai', experience: '3-5 years', type: 'Full-time', category: 'Financial' },
-    { title: 'Debt Counselor', location: 'Bangalore', experience: '2-4 years', type: 'Full-time', category: 'Financial' },
-    { title: 'Legal Associate', location: 'Gurgaon', experience: '2-3 years', type: 'Full-time', category: 'Legal' },
-    { title: 'Digital Marketing Manager', location: 'Remote', experience: '3-5 years', type: 'Full-time', category: 'Marketing' },
-    { title: 'Customer Success Executive', location: 'Hyderabad', experience: '1-3 years', type: 'Full-time', category: 'Customer Support' },
-    { title: 'Software Engineer', location: 'Bangalore', experience: '2-4 years', type: 'Full-time', category: 'Technology' },
-    { title: 'Social Media Intern', location: 'Gurgaon', experience: '0-1 year', type: 'Internship', category: 'Marketing' },
-    { title: 'Financial Analyst Intern', location: 'Mumbai', experience: '0-1 year', type: 'Internship', category: 'Financial' }
   ];
 
-  const jobData = jobs.length > 0 ? jobs : defaultJobs;
+  const benefits = [
+    {
+      icon: Heart,
+      title: 'Make a Real Impact',
+      description: 'Help thousands of families achieve financial freedom'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Career Growth',
+      description: 'Clear advancement paths and skill development opportunities'
+    },
+    {
+      icon: Users,
+      title: 'Great Team Culture',
+      description: 'Collaborative environment with supportive colleagues'
+    },
+    {
+      icon: Star,
+      title: 'Competitive Benefits',
+      description: 'Health insurance, performance bonuses, and flexible work'
+    }
+  ];
+
+  const applicationProcess = [
+    { step: 1, title: 'Submit Resume', description: 'Apply online with your updated resume and cover letter' },
+    { step: 2, title: 'Initial Screening', description: 'HR team reviews your application and conducts initial call' },
+    { step: 3, title: 'Technical Interview', description: 'Department head conducts role-specific interview' },
+    { step: 4, title: 'Final Round', description: 'Meet with leadership team and cultural fit assessment' },
+    { step: 5, title: 'Offer & Onboarding', description: 'Receive offer and complete smooth onboarding process' }
+  ];
 
   return (
-    <>
-      <SEO pageName="careers" />
-      <main style={{ background: '#FFFFFF' }}>
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
-        {/* Hero Section */}
-        <section style={{ padding: '100px 24px', background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', textAlign: 'center' }}>
-          <div className="container">
-            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'white', marginBottom: '24px' }}>
-              Join Our Mission to Transform Lives
-            </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.95)', maxWidth: '800px', margin: '0 auto' }}>
-              Be part of India's fastest-growing fintech company helping millions achieve financial freedom
-            </p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                Join Our Mission to <br />
+                <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                  Transform Lives
+                </span>
+              </h1>
+              
+              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
+                Be part of a team that's helping thousands of Indians achieve financial freedom. 
+                Build your career while making a real difference.
+              </p>
+              
+              <div className="flex flex-wrap gap-6 justify-center text-sm">
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5 text-green-400" />
+                  <span>50+ Team Members</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-green-400" />
+                  <span>Fast Growing Company</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-green-400" />
+                  <span>Meaningful Work</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Why Work With Us */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Why Work With Penny & Debt?
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '32px' }}>
-              {[
-                { icon: '🚀', title: 'Fast Growth', desc: 'Join a rapidly expanding fintech startup with unlimited potential' },
-                { icon: '💡', title: 'Innovation', desc: 'Work with cutting-edge AI and technology in financial services' },
-                { icon: '🎯', title: 'Impact', desc: 'Make a real difference in people\'s lives every single day' },
-                { icon: '🏆', title: 'Recognition', desc: 'Performance-based rewards and career advancement opportunities' },
-                { icon: '🤝', title: 'Culture', desc: 'Collaborative, inclusive, and supportive work environment' },
-                { icon: '📚', title: 'Learning', desc: 'Continuous learning and professional development programs' }
-              ].map((benefit, i) => (
-                <div key={i} style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  textAlign: 'center',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  <div style={{ fontSize: '3rem', marginBottom: '16px' }}>{benefit.icon}</div>
-                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#0F172A', marginBottom: '8px' }}>{benefit.title}</h3>
-                  <p style={{ fontSize: '0.875rem', color: '#64748B' }}>{benefit.desc}</p>
-                </div>
-              ))}
-            </div>
+      {/* Why Work With Us */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Work With Us</h2>
+            <p className="text-xl text-gray-600">Join a company that values growth, impact, and work-life balance</p>
           </div>
-        </section>
-
-        {/* Employee Benefits */}
-        <section style={{ padding: '80px 24px', background: '#F8FAFF' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Employee Benefits
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', maxWidth: '1000px', margin: '0 auto' }}>
-              {[
-                '💰 Competitive Salary',
-                '🏥 Health Insurance',
-                '🏖️ Flexible Work Hours',
-                '🏠 Work From Home Options',
-                '📈 Performance Bonuses',
-                '🎓 Learning Budget',
-                '🍕 Free Meals & Snacks',
-                '🎉 Team Outings',
-                '💻 Latest Tech Equipment',
-                '🚗 Transport Allowance',
-                '👶 Parental Leave',
-                '🎯 Career Growth Path'
-              ].map((benefit, i) => (
-                <div key={i} style={{
-                  background: 'white',
-                  padding: '20px',
-                  borderRadius: '12px',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: '#0F172A',
-                  border: '1px solid #E6EEFF',
-                  textAlign: 'center'
-                }}>
-                  {benefit}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Open Positions */}
-        <section style={{ padding: '80px 24px', background: 'white' }}>
-          <div className="container">
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '64px', textAlign: 'center' }}>
-              Open Positions
-            </h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>
-              {jobData.map((job, i) => (
-                <div key={i} style={{
-                  background: '#F8FAFF',
-                  padding: '32px',
-                  borderRadius: '16px',
-                  border: '2px solid #E6EEFF'
-                }}>
-                  <div style={{ fontSize: '0.75rem', color: '#0A4DFF', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase' }}>
-                    {job.category}
-                  </div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0F172A', marginBottom: '16px' }}>{job.title}</h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px', fontSize: '0.875rem', color: '#64748B' }}>
-                    <div>📍 {job.location}</div>
-                    <div>💼 {job.experience}</div>
-                    <div>⏰ {job.type}</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setFormData(prev => ({ ...prev, position: job.title }));
-                      document.getElementById('application-form').scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      borderRadius: '12px',
-                      background: 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                      color: 'white',
-                      border: 'none',
-                      fontWeight: 700,
-                      fontSize: '1rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    Apply Now
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Application Form */}
-        <section id="application-form" style={{ padding: '80px 24px', background: '#F8FAFF' }}>
-          <div className="container" style={{ maxWidth: '700px', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 900, color: '#0F172A', marginBottom: '24px', textAlign: 'center' }}>
-              Apply Now
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: '#64748B', marginBottom: '48px', textAlign: 'center' }}>
-              Submit your application and join our team of passionate professionals
-            </p>
-
-            <form onSubmit={handleSubmit} style={{
-              background: 'white',
-              padding: '40px',
-              borderRadius: '16px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
-              border: '1px solid #E6EEFF'
-            }}>
-              {message && (
-                <div style={{
-                  padding: '16px',
-                  borderRadius: '12px',
-                  marginBottom: '24px',
-                  background: message.includes('✅') ? '#D1FAE5' : '#FEE2E2',
-                  color: message.includes('✅') ? '#065F46' : '#991B1B',
-                  fontWeight: 600
-                }}>
-                  {message}
-                </div>
-              )}
-
-              <div style={{ marginBottom: '24px' }}>
-                <label htmlFor="fullName" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                  Full Name<span style={{ color: 'red' }}> *</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  placeholder="Enter your full name"
-                  required
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid #E0E0E0',
-                    fontSize: '1rem',
-                    outline: 'none'
-                  }}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '24px' }}>
-                <div>
-                  <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                    Email<span style={{ color: 'red' }}> *</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    required
-                    disabled={submitting}
-                    style={{
-                      width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '1px solid #E0E0E0',
-                      fontSize: '1rem',
-                      outline: 'none'
-                    }}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                    Phone<span style={{ color: 'red' }}> *</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 9876543210"
-                    required
-                    disabled={submitting}
-                    style={{
-                      width: '100%',
-                      padding: '12px 16px',
-                      borderRadius: '10px',
-                      border: '1px solid #E0E0E0',
-                      fontSize: '1rem',
-                      outline: 'none'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ marginBottom: '24px' }}>
-                <label htmlFor="position" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                  Position<span style={{ color: 'red' }}> *</span>
-                </label>
-                <select
-                  id="position"
-                  name="position"
-                  value={formData.position}
-                  onChange={handleChange}
-                  required
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid #E0E0E0',
-                    fontSize: '1rem',
-                    outline: 'none'
-                  }}
-                >
-                  <option value="">Select a position</option>
-                  {jobData.map((job, i) => (
-                    <option key={i} value={job.title}>{job.title}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={{ marginBottom: '24px' }}>
-                <label htmlFor="experience" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                  Years of Experience
-                </label>
-                <input
-                  type="text"
-                  id="experience"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  placeholder="e.g., 3 years"
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid #E0E0E0',
-                    fontSize: '1rem',
-                    outline: 'none'
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '24px' }}>
-                <label htmlFor="resume" style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#0F172A' }}>
-                  Upload Resume (PDF or DOCX)<span style={{ color: 'red' }}> *</span>
-                </label>
-                <input
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleChange}
-                  required
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    borderRadius: '10px',
-                    border: '1px solid #E0E0E0',
-                    fontSize: '1rem',
-                    cursor: 'pointer'
-                  }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={submitting}
-                style={{
-                  width: '100%',
-                  padding: '16px',
-                  borderRadius: '12px',
-                  background: submitting ? '#9CA3AF' : 'linear-gradient(135deg, #0A4DFF 0%, #0066FF 100%)',
-                  color: 'white',
-                  border: 'none',
-                  fontWeight: 700,
-                  fontSize: '1.125rem',
-                  cursor: submitting ? 'not-allowed' : 'pointer',
-                  boxShadow: submitting ? 'none' : '0 8px 24px rgba(10,77,255,0.3)'
-                }}
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow"
               >
-                {submitting ? 'Submitting...' : 'Submit Application'}
-              </button>
-            </form>
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <benefit.icon className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{benefit.title}</h3>
+                <p className="text-gray-600 text-sm">{benefit.description}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-      </main>
-    </>
+      {/* Open Positions */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Open Positions</h2>
+            <p className="text-xl text-gray-600">Find your next career opportunity with us</p>
+          </div>
+          
+          <div className="space-y-6">
+            {jobOpenings.map((job, index) => (
+              <div
+                key={job.id}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+              >
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{job.title}</h3>
+                        <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-3">
+                          <div className="flex items-center gap-1">
+                            <Briefcase className="w-4 h-4" />
+                            <span>{job.department}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" />
+                            <span>{job.location}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            <span>{job.type}</span>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <Users className="w-4 h-4" />
+                            <span>{job.experience}</span>
+                          </div>
+                        </div>
+                        <p className="text-gray-700 mb-4">{job.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {job.skills.map((skill, i) => (
+                            <span
+                              key={i}
+                              className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="lg:ml-6 mt-4 lg:mt-0">
+                    <button className="w-full lg:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                      Apply Now <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Application Process */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Application Process</h2>
+            <p className="text-xl text-gray-600">Simple and transparent hiring process</p>
+          </div>
+          
+          <div className="space-y-8">
+            {applicationProcess.map((item, index) => (
+              <div
+                key={index}
+                data-aos="fade-right"
+                data-aos-delay={index * 100}
+                className="flex gap-6 items-start"
+              >
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg flex-shrink-0">
+                  {item.step}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-600">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Didn't Find Your Role */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Didn't Find Your Role?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              We're always looking for talented individuals to join our team. 
+              Send us your resume and we'll keep you in mind for future opportunities.
+            </p>
+            
+            <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h3>
+              <p className="text-gray-600 mb-6">
+                Send your resume and a brief note about your interests to our HR team.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="mailto:careers@pennyanddebt.in"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                >
+                  <Mail className="w-5 h-5" />
+                  careers@pennyanddebt.in
+                </a>
+                <Link
+                  to="/contact"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+                >
+                  Contact Us
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6" data-aos="fade-up">
+            Ready to Make a Difference?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+            Join our mission to help Indians achieve financial freedom
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+            <button className="px-10 py-4 bg-white text-blue-900 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-xl">
+              View All Openings
+            </button>
+            <Link
+              to="/about"
+              className="px-10 py-4 bg-blue-700 border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-all"
+            >
+              Learn About Us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
