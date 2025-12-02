@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import PremiumNavbar from './components/PremiumNavbar';
-import PremiumFooter from './components/PremiumFooter';
-import Home from './pages/Home';
+import { useEffect } from 'react';
+import ModernNavbar from './components/ModernNavbar';
+import ModernFooter from './components/ModernFooter';
+import NewHome from './pages/NewHome';
 import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
@@ -16,14 +17,26 @@ import Pricing from './pages/Pricing';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import Signup from './pages/Signup';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out'
+    });
+  }, []);
+
   return (
     <>
-      <PremiumNavbar />
+      <ModernNavbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<NewHome />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
@@ -39,7 +52,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-      <PremiumFooter />
+      <ModernFooter />
     </>
   );
 }
