@@ -1,13 +1,11 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd apps/website && npm install && npm run build",
+  "outputDirectory": "apps/website/dist",
+  "framework": "vite",
+  "rewrites": [
     {
-      "src": "apps/website/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "apps/website/dist" }
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/apps/website/$1" }
   ]
 }
