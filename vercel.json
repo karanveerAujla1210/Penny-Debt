@@ -1,18 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "npm install --legacy-peer-deps && npm run build:website",
+  "buildCommand": "cd apps/website && npm install && npm run build",
   "outputDirectory": "apps/website/dist",
-  "installCommand": "npm install --legacy-peer-deps",
+  "installCommand": "npm install",
   "framework": "vite",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "NODE_VERSION": "18.x"
-  },
-  "functions": {
-    "apps/website/dist/**": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }
