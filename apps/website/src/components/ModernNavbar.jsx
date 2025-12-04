@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp, ArrowRight, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 
@@ -8,6 +8,7 @@ const ModernNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [applyDropdown, setApplyDropdown] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
@@ -194,6 +195,19 @@ const ModernNavbar = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-lg text-gray-700 hover:text-blue-700 hover:bg-gray-100 transition-all duration-200"
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? (
+                <Sun size={20} />
+              ) : (
+                <Moon size={20} />
+              )}
+            </button>
 
             {/* Sign Up Button */}
             <NavLink
