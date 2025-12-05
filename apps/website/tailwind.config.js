@@ -17,9 +17,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Segoe UI', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        heading: ['Segoe UI', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        numeric: ['Segoe UI', 'system-ui', 'sans-serif'],
+        // Use Inter as the single primary font for a consistent fintech look
+        sans: ['Inter', 'sans-serif'],
+        heading: ['Inter', 'sans-serif'],
+        numeric: ['Inter', 'sans-serif'],
       },
       colors: {
         brand: {

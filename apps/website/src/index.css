@@ -3,13 +3,36 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
+  /* Import Inter as the single brand font */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    /* Core color tokens (recommended palette) */
+    --color-primary: #1E3A8A; /* Blue Primary */
+    --color-primary-light: #3B82F6;
+    --color-accent: #FF9500; /* Accent / golden */
+    --color-gray-900: #0F172A;
+    --color-gray-500: #6B7280;
+    --color-gray-100: #F1F5F9;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 40px;
   }
+
+  * { box-sizing: border-box; }
+
+  /* Root/base styles using Inter to ensure typographic consistency */
   body {
     @apply bg-background text-foreground;
-    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', BlinkMacSystemFont, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.45;
+    color: var(--color-gray-900);
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -18,6 +41,7 @@
   
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
+    letter-spacing: -0.02em;
   }
   
   h2 {
@@ -40,6 +64,47 @@
     @apply text-base md:text-lg;
   }
 }
+
+/* Reusable components and tokens to enforce consistency */
+.btn {
+  @apply inline-flex items-center justify-center font-medium rounded-lg;
+  padding: var(--space-2) var(--space-4);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 6px 18px rgba(14, 58, 122, 0.12);
+}
+
+.btn-primary:hover { opacity: 0.95; }
+
+.btn-ghost {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-md;
+  padding: var(--space-4);
+  border: 1px solid rgba(15,23,42,0.04);
+}
+
+.role-chip-hero {
+  @apply inline-block bg-white/10 text-white px-3 py-1 rounded-md text-sm;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero-title-enhanced { font-weight: 800; }
+.hero-subtitle-enhanced { font-weight: 500; }
+
+/* Enforce consistent card/button spacing using 8pt grid */
+.section { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.section .container { max-width: 1200px; margin: 0 auto; }
+
+/* Accessibility: focus styles */
+button:focus, a:focus { outline: 3px solid rgba(59,130,246,0.25); outline-offset: 2px; }
 
 @layer utilities {
   @keyframes float-soft {
