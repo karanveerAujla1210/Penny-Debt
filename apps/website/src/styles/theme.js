@@ -4,12 +4,44 @@
  */
 
 export const theme = {
-  // PRIMARY COLORS - Fintech Blue Theme
+  // PRIMARY COLORS - Fintech Blue Theme with Orange-Golden Accents
   colors: {
     primary: '#003BFF', // Royal Blue
     primaryDark: '#0025B3',
     primaryLight: '#4D6FFF',
     accent: '#0066FF',
+    
+    // Orange & Golden accent colors - NEW
+    golden: {
+      50: '#FFF9E6',
+      100: '#FFEDD4',
+      200: '#FFD9A8',
+      300: '#FFC97D',
+      400: '#FFB951',
+      500: '#FFA500', // Main Golden Orange
+      600: '#FF9500',
+      700: '#E68500',
+      800: '#CC7500',
+      900: '#B36500',
+    },
+    
+    orange: {
+      50: '#FFF5E6',
+      100: '#FFEBCC',
+      200: '#FFD699',
+      300: '#FFC266',
+      400: '#FFAD33',
+      500: '#FF9900', // Vibrant Orange
+      600: '#FF8800',
+      700: '#E67E00',
+      800: '#CC7000',
+      900: '#B36000',
+    },
+    
+    amber: {
+      500: '#FFB84D', // Light amber
+      600: '#FF9E1B', // Medium amber
+    },
     
     // Background colors
     bg: {
@@ -18,6 +50,7 @@ export const theme = {
       lighter: '#F9FAFF',
       dark: '#0A0E27',
       darkCard: '#1a1f3a',
+      goldenLight: '#FFFCF0',
     },
     
     // Text colors
@@ -27,6 +60,8 @@ export const theme = {
       tertiary: '#666666',
       light: '#999999',
       inverse: '#FFFFFF',
+      golden: '#FF9900',
+      goldenDark: '#E68500',
     },
     
     // Semantic colors
@@ -39,6 +74,7 @@ export const theme = {
     border: '#E0E0E0',
     borderLight: '#F0F0F0',
     borderDark: '#2a2f45',
+    borderGolden: '#FFD9A8',
   },
 
   // TYPOGRAPHY - Single Font: Segoe UI / Inter fallback

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
+import theme from '../styles/theme';
 
 // Animation variants
 const container = {
@@ -127,10 +128,10 @@ const Services = () => {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900 text-white">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+        <section style={{ position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%), linear-gradient(135deg, rgba(255,165,0,0.06), rgba(255,153,0,0.03))`, color: theme.colors.text.inverse }}>
+          <div className="absolute inset-0" style={{ opacity: 0.18, background: `radial-gradient(circle at 20% 30%, rgba(255,165,0,0.08), transparent 30%), radial-gradient(circle at 80% 70%, rgba(255,153,0,0.05), transparent 40%)` }} />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -150,31 +151,37 @@ const Services = () => {
               </p>
               
               <div className="flex flex-wrap gap-6 justify-center text-sm">
-                <div className="flex items-center gap-2 bg-blue-700/30 px-4 py-2 rounded-full">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>RBI-Compliant Solutions</span>
-                </div>
-                <div className="flex items-center gap-2 bg-blue-700/30 px-4 py-2 rounded-full">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>95% Success Rate</span>
-                </div>
-                <div className="flex items-center gap-2 bg-blue-700/30 px-4 py-2 rounded-full">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>Zero Upfront Fees</span>
-                </div>
+                {[
+                  'RBI-Compliant Solutions',
+                  '95% Success Rate',
+                  'Zero Upfront Fees',
+                ].map((txt, i) => (
+                  <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ background: 'rgba(255,165,0,0.12)', border: `1px solid ${theme.colors.golden[200]}` }}>
+                    <CheckCircle className="w-5 h-5" style={{ color: theme.colors.golden[500] }} />
+                    <span>{txt}</span>
+                  </div>
+                ))}
               </div>
               
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
+                <Link
                   to="/apply"
-                  className="px-8 py-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-blue-50 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                  className="px-8 py-4 font-bold rounded-lg hover:scale-105 flex items-center justify-center gap-2"
+                  style={{
+                    paddingLeft: '2rem',
+                    paddingRight: '2rem',
+                    background: `linear-gradient(90deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})`,
+                    color: theme.colors.text.inverse,
+                    boxShadow: `0 10px 40px rgba(255,165,0,0.2)`,
+                  }}
                 >
                   Get Free Assessment
                   <ArrowRight className="w-5 h-5" />
                 </Link>
-                <Link 
+                <Link
                   to="/contact"
-                  className="px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                  className="px-8 py-4 font-semibold rounded-lg flex items-center justify-center gap-2"
+                  style={{ border: `2px solid ${theme.colors.golden[300]}`, color: theme.colors.text.inverse, background: 'transparent' }}
                 >
                   Speak with an Expert
                 </Link>
@@ -239,7 +246,7 @@ const Services = () => {
                   className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
                 >
                   <div className="p-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center mb-4">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})` }}>
                       <service.icon className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
@@ -256,7 +263,8 @@ const Services = () => {
                     
                     <Link
                       to="/contact"
-                      className="inline-flex items-center text-blue-600 font-medium hover:text-blue-800 transition-colors group"
+                      className="inline-flex items-center font-medium transition-colors group"
+                      style={{ color: theme.colors.orange[600] }}
                     >
                       Learn more
                       <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
@@ -336,14 +344,14 @@ const Services = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <caseStudy.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: theme.colors.golden[50] }}>
+                  <caseStudy.icon className="w-6 h-6" style={{ color: theme.colors.orange[500] }} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{caseStudy.title}</h3>
                 <p className="text-gray-600 mb-4">{caseStudy.description}</p>
-                <div className="flex items-center text-yellow-400">
+                <div className="flex items-center" style={{ color: theme.colors.golden[500] }}>
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-current" />
+                    <Star key={i} className="w-5 h-5" style={{ color: theme.colors.golden[500] }} />
                   ))}
                 </div>
               </motion.div>
@@ -374,7 +382,7 @@ const Services = () => {
           <div className="grid md:grid-cols-4 gap-8">
             {processSteps.map((item, index) => (
               <div key={index} data-aos="fade-up" data-aos-delay={index * 100} className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold text-white mx-auto mb-4 shadow-lg" style={{ background: `linear-gradient(135deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})` }}>
                   {item.step}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
@@ -400,7 +408,7 @@ const Services = () => {
                 data-aos-delay={index * 100}
                 className="bg-white p-8 rounded-2xl shadow-lg text-center"
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto" style={{ background: `linear-gradient(135deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})` }}>
                   <benefit.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
@@ -467,7 +475,7 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
+      <section style={{ paddingTop: '5rem', paddingBottom: '5rem', background: `linear-gradient(90deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})`, color: theme.colors.text.inverse }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6" data-aos="fade-up">
             Ready to Get Started?
@@ -478,13 +486,15 @@ const Services = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="200">
             <Link
               to="/apply"
-              className="px-10 py-4 bg-white text-blue-900 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all hover:scale-105 shadow-xl flex items-center justify-center gap-2"
+              className="px-10 py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
+              style={{ background: theme.colors.text.inverse, color: theme.colors.primary }}
             >
               Apply Now <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
               to="/contact"
-              className="px-10 py-4 bg-blue-700 border-2 border-white/30 rounded-lg font-semibold text-lg hover:bg-blue-600 transition-all"
+              className="px-10 py-4 rounded-lg font-semibold text-lg flex items-center justify-center"
+              style={{ border: `2px solid ${theme.colors.golden[300]}`, color: theme.colors.text.inverse, background: 'transparent' }}
             >
               Get Free Consultation
             </Link>

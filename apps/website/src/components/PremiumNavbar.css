@@ -56,6 +56,118 @@
   color: #003BFF;
 }
 
+.navbar-link.active {
+  color: #003BFF;
+  font-weight: 700;
+  border-bottom: 2px solid #003BFF;
+}
+
+.apply-dropdown {
+  position: relative;
+}
+
+.apply-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  min-width: 200px;
+  z-index: 1001;
+  margin-top: 8px;
+  padding: 8px 0;
+}
+
+.apply-dropdown-menu .navbar-link {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-size: 1rem;
+  border: none;
+}
+.apply-dropdown-menu .navbar-link:hover {
+  background: #F5F7FF;
+  color: #003BFF;
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  color: #fff;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-left: 24px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,59,255,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.cta-button:hover {
+  background: linear-gradient(90deg, #0025B3 0%, #003BFF 100%);
+  box-shadow: 0 8px 32px rgba(0,59,255,0.15);
+  transform: translateY(-2px);
+}
+
+.mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.mobile-apply-cta {
+  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 16px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,59,255,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: block;
+}
+
+.mobile-apply-cta:hover {
+  background: linear-gradient(90deg, #0025B3 0%, #003BFF 100%);
+  box-shadow: 0 4px 16px rgba(0,59,255,0.15);
+  transform: translateY(-1px);
+}
+.mobile-apply-section {
+  margin: 16px 0 0 0;
+}
+.apply-options-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #003BFF;
+  margin-bottom: 8px;
+}
+.mobile-apply-cta {
+  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 16px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,59,255,0.08);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: block;
+}
+
+.mobile-apply-cta:hover {
+  background: linear-gradient(90deg, #0025B3 0%, #003BFF 100%);
+  box-shadow: 0 4px 16px rgba(0,59,255,0.15);
+  transform: translateY(-1px);
+}
+
 .mobile-toggle {
   display: none;
   flex-direction: column;
