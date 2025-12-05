@@ -5,19 +5,19 @@ echo ========================================
 echo.
 
 echo Starting Backend Server...
-cd backend
+cd apps\crm-backend
 start cmd /k "npm run dev"
 timeout /t 3 /nobreak >nul
 
 echo.
 echo Starting Website Frontend...
-cd ..\frontend\website
+cd ..\website
 start cmd /k "npm run dev"
 timeout /t 2 /nobreak >nul
 
 echo.
 echo Starting CRM Frontend...
-cd ..\crm
+cd ..\crm-frontend
 start cmd /k "npm run dev"
 
 echo.

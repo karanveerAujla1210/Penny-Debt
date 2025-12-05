@@ -5,15 +5,15 @@ echo ========================================
 echo.
 
 echo Starting Backend (Port 5000)...
-start "Penny-Debt Backend" cmd /k "cd backend && npm run dev"
+start "Penny-Debt Backend" cmd /k "cd apps\crm-backend && npm run dev"
 timeout /t 3 /nobreak >nul
 
 echo Starting Website (Port 5173)...
-start "Penny-Debt Website" cmd /k "cd frontend\website && npm run dev"
+start "Penny-Debt Website" cmd /k "cd apps\website && npm run dev"
 timeout /t 3 /nobreak >nul
 
 echo Starting CRM (Port 3001)...
-start "Penny-Debt CRM" cmd /k "cd frontend\crm && npm run dev"
+start "Penny-Debt CRM" cmd /k "cd apps\crm-frontend && npm run dev"
 timeout /t 3 /nobreak >nul
 
 echo.
