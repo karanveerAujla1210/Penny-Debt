@@ -245,9 +245,38 @@ export default function Home() {
                       marginBottom: '24px'
                     }}
                   >
-                    <Button to="/services" variant="default" size="sm" className="service-learn-more" style={{ marginTop: 24 }}>
-                      Learn More
-                    </Button>
+                    {service.icon}
+                  </div>
+
+                <div className="service-content" style={{ position: 'relative', zIndex: 1 }}>
+                  <h3 
+                    className="service-title" 
+                    style={{
+                      fontSize: '22px',
+                      fontWeight: '700',
+                      color: '#0F172A',
+                      marginBottom: '12px',
+                      lineHeight: '1.3'
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p 
+                    className="service-description" 
+                    style={{
+                      fontSize: '15px',
+                      color: '#64748B',
+                      lineHeight: '1.6',
+                      marginBottom: '20px'
+                    }}
+                  >
+                    {service.desc}
+                  </p>
+                  <ul className="service-features" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {service.features.map((feature, idx) => (
+                      <li 
+                        key={idx} 
+                        className="service-feature"
                         style={{
                           display: 'flex',
                           alignItems: 'center',
@@ -283,42 +312,12 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
+
+                  <Button to="/services" variant="default" size="sm" className="service-learn-more" style={{ marginTop: 24 }}>
+                    Learn More
+                  </Button>
                 </div>
-                
-                <Link 
-                  to="/services" 
-                  className="service-learn-more"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    marginTop: '24px',
-                    padding: '12px 24px',
-                    background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)',
-                    color: 'white',
-                    borderRadius: '12px',
-                    textDecoration: 'none',
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    transition: 'all 0.3s ease',
-                    position: 'relative',
-                    zIndex: 1
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #0039CC 0%, #0A4DFF 100%)';
-                    e.currentTarget.style.transform = 'translateX(4px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)';
-                    e.currentTarget.style.transform = 'translateX(0)';
-                  }}
-                >
-                  Learn More
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
