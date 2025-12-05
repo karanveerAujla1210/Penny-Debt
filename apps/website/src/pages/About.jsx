@@ -303,7 +303,7 @@ const About = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         style={{
-          background: theme.colors.primary,
+          background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 100%)',
           color: theme.colors.text.inverse,
           padding: theme.spacing['4xl'],
           borderRadius: theme.borderRadius.xl,

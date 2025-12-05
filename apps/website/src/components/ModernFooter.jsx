@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
 
 const ModernFooter = () => {
   return (
@@ -19,17 +20,17 @@ const ModernFooter = () => {
               Your trusted partner in debt relief and financial freedom. Helping thousands achieve debt-free lives.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="https://www.instagram.com/pennydebt_?igsh=MWs3Mm1ic3k5djF0YQ==" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors">
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/company/pennydebt/?viewAsMember=true" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a href="https://x.com/pennydebt" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-black transition-colors">
+                <FaXTwitter className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="https://facebook.com/pennydebt" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
-                <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -68,7 +69,7 @@ const ModernFooter = () => {
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="w-5 h-5 text-blue-400 mt-0.5" />
-                <span className="text-sm">+91-XXXXXXXXXX</span>
+                <a href="tel:+919773921023" className="text-sm hover:text-blue-400 transition-colors">+91 9773921023</a>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-blue-400 mt-0.5" />

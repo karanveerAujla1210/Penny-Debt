@@ -64,7 +64,7 @@ const ApplyLoan = () => {
 
   return (
     <div className="pt-20">
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-yellow-600 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
@@ -74,9 +74,9 @@ const ApplyLoan = () => {
             className="text-center"
           >
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Apply for a <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">Custom Loan Plan</span>
+              Apply for a <span className="bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">Custom Loan Plan</span>
             </h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl text-orange-100 max-w-2xl mx-auto">
               Share your details and our team will match you with the best loan options based on your eligibility.
             </p>
           </motion.div>
@@ -185,7 +185,7 @@ const ApplyLoan = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg font-bold hover:from-blue-700 hover:to-blue-900 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-orange-600 to-yellow-600 text-white rounded-lg font-bold hover:from-orange-700 hover:to-yellow-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {submitting ? 'Submitting...' : 'Submit Loan Request'}
               {!submitting && <ArrowRight className="w-5 h-5" />}

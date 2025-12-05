@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
+import FloatingCTA from '../components/FloatingCTA';
+import WhatsAppWidget from '../components/WhatsAppWidget';
+import NotificationBanner from '../components/NotificationBanner';
+import TrustBadges from '../components/TrustBadges';
+import SocialProof from '../components/SocialProof';
+import AnimatedCounter from '../components/AnimatedCounter';
+import DebtCalculator from '../components/DebtCalculator';
+import LiveChat from '../components/LiveChat';
+import HeroBanner from '../assets/logos/Images/Hero Banner.png';
+import { ACHIEVEMENTS } from '../constants/achievements';
 import '../styles/fintech-system.css';
+import '../styles/spacing-fix.css';
 
 export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -14,26 +25,68 @@ export default function Home() {
   return (
     <>
       <SEO title="Turn Your Debt Into A Manageable Plan | Penny & Debt" />
+      <NotificationBanner />
+      <FloatingCTA />
+      <WhatsAppWidget />
+      <LiveChat />
 
       {/* ENHANCED HERO SECTION */}
-      <section className="hero-section-enhanced">
-        <div className="container">
+      <section className="hero-section-enhanced" style={{
+        backgroundImage: `url(${HeroBanner})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '700px',
+        position: 'relative'
+      }}>
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(135deg, rgba(10, 77, 255, 0.85) 0%, rgba(255, 149, 0, 0.75) 100%)',
+          zIndex: 1
+        }}></div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="hero-grid">
             <div className={`hero-content ${isVisible ? 'animate-in' : ''}`}>
               <div className="hero-badge">
-                <span className="badge-text">✨ Trusted by 10,000+ Indians</span>
+                <span className="badge-text">✨ Trusted by {ACHIEVEMENTS.customers.display} Indians</span>
               </div>
-              <h1 className="hero-title-enhanced">
-                Transform Your Debt Into
-                <span className="hero-highlight"> Financial Freedom</span>
+              <h1 
+                className="hero-title-enhanced"
+                style={{
+                  color: '#ffffff',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
+                  fontWeight: '900',
+                  fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                  lineHeight: '1.2',
+                  marginBottom: '24px'
+                }}
+              >
+                Transform Your Debt Into Financial Freedom
               </h1>
-              <p className="hero-subtitle-enhanced">
+              <p 
+                className="hero-subtitle-enhanced"
+                style={{
+                  color: '#ffffff',
+                  fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+                  lineHeight: '1.8',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.6)',
+                  fontWeight: '500',
+                  maxWidth: '600px',
+                  marginBottom: '32px',
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  padding: '16px 24px',
+                  borderRadius: '12px',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                }}
+              >
                 Expert debt relief solutions with personalized strategies, transparent pricing,
-                and guaranteed results. Join thousands who've eliminated ₹500Cr+ in debt.
+                and guaranteed results. Join {ACHIEVEMENTS.customers.display} customers who've resolved {ACHIEVEMENTS.debtResolved.display} in debt.
               </p>
               <div className="hero-actions">
                 <Link to="/apply" className="btn btn-primary-enhanced btn-lg">
-                  <span>Start Free Consultation</span>
+                  <span>Get Started</span>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
@@ -44,54 +97,24 @@ export default function Home() {
               </div>
               <div className="hero-stats">
                 <div className="stat-item">
-                  <div className="stat-number">10K+</div>
-                  <div className="stat-label">Happy Customers</div>
+                  <AnimatedCounter end={ACHIEVEMENTS.customers.value} suffix="+" />
+                  <div className="stat-label">{ACHIEVEMENTS.customers.shortLabel}</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">₹500Cr+</div>
-                  <div className="stat-label">Debt Resolved</div>
+                  <AnimatedCounter end={ACHIEVEMENTS.debtResolved.value} suffix="Cr+" prefix="₹" />
+                  <div className="stat-label">{ACHIEVEMENTS.debtResolved.shortLabel}</div>
                 </div>
                 <div className="stat-item">
-                  <div className="stat-number">4.9★</div>
-                  <div className="stat-label">Customer Rating</div>
+                  <AnimatedCounter end={ACHIEVEMENTS.rating.value} decimals={1} suffix="★" />
+                  <div className="stat-label">{ACHIEVEMENTS.rating.shortLabel}</div>
                 </div>
               </div>
+              <TrustBadges />
             </div>
 
-            {/* ENHANCED VISUAL */}
-            <div className="hero-visual">
-              <div className="hero-card-main">
-                <div className="card-glow"></div>
-                <div className="card-content">
-                  <div className="card-icon">💰</div>
-                  <div className="card-text">
-                    <div className="card-title">Debt-Free Journey</div>
-                    <div className="card-subtitle">Your path to financial freedom</div>
-                  </div>
-                </div>
-                <div className="card-decoration-1"></div>
-                <div className="card-decoration-2"></div>
-              </div>
-              <div className="hero-card-secondary">
-                <div className="mini-stat">
-                  <div className="mini-icon">📈</div>
-                  <div className="mini-text">72% Avg. Savings</div>
-                </div>
-              </div>
-              <div className="hero-card-tertiary">
-                <div className="mini-stat">
-                  <div className="mini-icon">🛡️</div>
-                  <div className="mini-text">100% Secure</div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
-
-        {/* BACKGROUND ELEMENTS */}
-        <div className="hero-bg-shape-1"></div>
-        <div className="hero-bg-shape-2"></div>
-        <div className="hero-bg-dots"></div>
       </section>
 
       {/* ENHANCED SERVICES SECTION */}
@@ -145,34 +168,180 @@ export default function Home() {
                 features: ['Personal finance education', 'Budget planning', 'Investment guidance', 'Wealth building']
               },
             ].map((service, i) => (
-              <div key={i} className="service-card-enhanced">
-                <div className="service-icon-wrapper">
-                  <div className="service-icon">{service.icon}</div>
-                  <div className="service-icon-bg"></div>
+              <div 
+                key={i} 
+                className="service-card-enhanced"
+                style={{
+                  background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
+                  borderRadius: '24px',
+                  padding: '32px',
+                  boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)',
+                  border: '1px solid rgba(10, 77, 255, 0.1)',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-12px)';
+                  e.currentTarget.style.boxShadow = '0 20px 60px rgba(10, 77, 255, 0.2)';
+                  e.currentTarget.style.borderColor = 'rgba(10, 77, 255, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.08)';
+                  e.currentTarget.style.borderColor = 'rgba(10, 77, 255, 0.1)';
+                }}
+              >
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: '150px',
+                  height: '150px',
+                  background: 'linear-gradient(135deg, rgba(10, 77, 255, 0.05) 0%, rgba(255, 149, 0, 0.05) 100%)',
+                  borderRadius: '0 24px 0 100%',
+                  zIndex: 0
+                }}></div>
+                
+                <div className="service-icon-wrapper" style={{ position: 'relative', zIndex: 1 }}>
+                  <div 
+                    className="service-icon" 
+                    style={{
+                      fontSize: '48px',
+                      width: '80px',
+                      height: '80px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'linear-gradient(135deg, #0A4DFF 0%, #FF9500 100%)',
+                      borderRadius: '20px',
+                      boxShadow: '0 8px 24px rgba(10, 77, 255, 0.25)',
+                      marginBottom: '24px'
+                    }}
+                  >
+                    {service.icon}
+                  </div>
                 </div>
-                <div className="service-content">
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="service-description">{service.desc}</p>
-                  <ul className="service-features">
+                
+                <div className="service-content" style={{ position: 'relative', zIndex: 1 }}>
+                  <h3 
+                    className="service-title" 
+                    style={{
+                      fontSize: '22px',
+                      fontWeight: '700',
+                      color: '#0F172A',
+                      marginBottom: '12px',
+                      lineHeight: '1.3'
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p 
+                    className="service-description" 
+                    style={{
+                      fontSize: '15px',
+                      color: '#64748B',
+                      lineHeight: '1.6',
+                      marginBottom: '20px'
+                    }}
+                  >
+                    {service.desc}
+                  </p>
+                  <ul className="service-features" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="service-feature">
-                        <span className="feature-dot"></span>
+                      <li 
+                        key={idx} 
+                        className="service-feature"
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '10px',
+                          fontSize: '14px',
+                          color: '#475569',
+                          marginBottom: '10px',
+                          padding: '8px 12px',
+                          background: 'rgba(10, 77, 255, 0.05)',
+                          borderRadius: '8px',
+                          transition: 'all 0.3s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = 'rgba(10, 77, 255, 0.1)';
+                          e.currentTarget.style.paddingLeft = '16px';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'rgba(10, 77, 255, 0.05)';
+                          e.currentTarget.style.paddingLeft = '12px';
+                        }}
+                      >
+                        <span 
+                          className="feature-dot" 
+                          style={{
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #0A4DFF, #FF9500)',
+                            flexShrink: 0
+                          }}
+                        ></span>
                         {feature}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="service-hover-overlay">
-                  <Link to="/services" className="service-learn-more">
-                    Learn More
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </Link>
-                </div>
+                
+                <Link 
+                  to="/services" 
+                  className="service-learn-more"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    marginTop: '24px',
+                    padding: '12px 24px',
+                    background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)',
+                    color: 'white',
+                    borderRadius: '12px',
+                    textDecoration: 'none',
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    transition: 'all 0.3s ease',
+                    position: 'relative',
+                    zIndex: 1
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #0039CC 0%, #0A4DFF 100%)';
+                    e.currentTarget.style.transform = 'translateX(4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                  }}
+                >
+                  Learn More
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SOCIAL PROOF */}
+      <SocialProof />
+
+      {/* DEBT CALCULATOR */}
+      <section className="section section-alt">
+        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h2>Calculate Your Debt Relief</h2>
+            <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
+              See how much you could save with our debt relief program
+            </p>
+          </div>
+          <DebtCalculator />
         </div>
       </section>
 
@@ -284,19 +453,22 @@ export default function Home() {
 
       {/* FINAL CTA */}
       <section style={{
-        background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)',
+        background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 100%)',
         color: 'white',
         padding: '80px 24px',
-        textAlign: 'center'
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}>
-        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <h2 style={{ color: 'white', fontSize: '36px', fontWeight: '800' }}>
+        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ color: 'white', fontSize: '36px', fontWeight: '800', textAlign: 'center', margin: '0 auto 16px' }}>
             Ready to Take Control?
           </h2>
-          <p style={{ fontSize: '18px', marginTop: '16px', maxWidth: '500px', margin: '16px auto 0', opacity: 0.95 }}>
+          <p style={{ fontSize: '18px', maxWidth: '500px', margin: '0 auto 32px', opacity: 0.95, textAlign: 'center' }}>
             Start your journey to financial freedom today. It's completely free!
           </p>
-          <Link to="/apply" className="btn btn-primary btn-lg" style={{ marginTop: '32px', background: 'white', color: 'var(--primary)' }}>
+          <Link to="/apply" className="btn btn-primary btn-lg" style={{ background: 'white', color: '#FF9500', display: 'inline-flex' }}>
             Get Started Now
           </Link>
         </div>

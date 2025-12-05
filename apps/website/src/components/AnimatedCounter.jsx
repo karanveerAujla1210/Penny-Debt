@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const AnimatedCounter = ({ end, duration = 2000, suffix = '', prefix = '' }) => {
+const AnimatedCounter = ({ end, duration = 2000, suffix = '', prefix = '', decimals = 0 }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -32,14 +32,18 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = '', prefix = '' }) => 
         setCount(endValue);
         clearInterval(timer);
       } else {
-        setCount(Math.floor(current));
+        setCount(decimals > 0 ? parseFloat(current.toFixed(decimals)) : Math.floor(current));
       }
     }, 16);
 
     return () => clearInterval(timer);
   }, [isVisible, end, duration]);
 
-  return <span ref={ref}>{prefix}{count.toLocaleString('en-IN')}{suffix}</span>;
+  return (
+    <div className="stat-number" ref={ref}>
+      {prefix}{decimals > 0 ? count.toFixed(decimals) : count.toLocaleString('en-IN')}{suffix}
+    </div>
+  );
 };
 
 export default AnimatedCounter;

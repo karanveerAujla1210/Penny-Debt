@@ -20,14 +20,17 @@ const PremiumFooter = () => {
                 Financial freedom through expert debt solutions
               </p>
               <div className="social-links">
-                <a href="#" aria-label="Facebook">
-                  f
+                <a href="https://www.instagram.com/pennydebt_?igsh=MWs3Mm1ic3k5djF0YQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  📷
                 </a>
-                <a href="#" aria-label="Twitter">
+                <a href="https://www.linkedin.com/company/pennydebt/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  in
+                </a>
+                <a href="https://x.com/pennydebt" target="_blank" rel="noopener noreferrer" aria-label="X">
                   𝕏
                 </a>
-                <a href="#" aria-label="LinkedIn">
-                  in
+                <a href="https://facebook.com/pennydebt" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  f
                 </a>
               </div>
             </div>
@@ -95,11 +98,11 @@ const PremiumFooter = () => {
               <div className="contact-info">
                 <p>
                   <strong>Email:</strong>
-                  <a href="mailto:support@pennydebt.com">support@pennydebt.com</a>
+                  <a href="mailto:care@pennyanddebt.in">care@pennyanddebt.in</a>
                 </p>
                 <p>
                   <strong>Phone:</strong>
-                  <a href="tel:+919876543210">+91 9876 543 210</a>
+                  <a href="tel:+919773921023">+91 9773921023</a>
                 </p>
                 <p>
                   <strong>Address:</strong>

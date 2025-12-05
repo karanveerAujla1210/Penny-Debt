@@ -40,6 +40,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/customer-login" element={<Signup />} />
+        <Route path="/employee-login" element={<Signup />} />
       </Routes>
       <PremiumFooter />
     </>

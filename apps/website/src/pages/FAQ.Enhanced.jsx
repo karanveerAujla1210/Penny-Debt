@@ -1,24 +1,20 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Search, MessageCircle, Phone, ArrowRight } from 'lucide-react';
+import { Search, MessageCircle, ArrowRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../components/ui/accordion';
 import { Input } from '../components/ui/input';
-import { Badge } from '../components/ui/badge';
+import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import AOS from 'aos';
+import { Badge } from '../components/ui/badge';
 
 const FAQ = () => {
-  const [activeIndex, setActiveIndex] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
   }, []);
-
-  const toggleIndex = (index) => {
-    setActiveIndex(index === activeIndex ? null : index);
-  };
 
   const faqCategories = [
     {
@@ -83,12 +79,11 @@ const FAQ = () => {
     }
   ];
 
-  // Flatten all FAQs for search
   const allFaqs = faqCategories.flatMap((category, catIndex) => 
     category.faqs.map((faq, faqIndex) => ({
       ...faq,
       category: category.category,
-      globalIndex: catIndex * 100 + faqIndex
+      globalIndex: `${catIndex}-${faqIndex}`
     }))
   );
 
@@ -101,8 +96,7 @@ const FAQ = () => {
 
   return (
     <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-yellow-600 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
@@ -124,15 +118,14 @@ const FAQ = () => {
                 Can't find what you're looking for? Contact our support team.
               </p>
               
-              {/* Search Bar */}
               <div className="relative max-w-md mx-auto">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
+                <Input
                   type="text"
                   placeholder="Search for answers..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-lg border-0 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 outline-none"
+                  className="pl-12 h-12 bg-white text-gray-900"
                 />
               </div>
             </motion.div>
@@ -140,60 +133,44 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* FAQ Content */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Search Results */}
           {filteredFaqs && (
             <div className="mb-12">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Search Results ({filteredFaqs.length} found)
               </h2>
               {filteredFaqs.length === 0 ? (
-                <div className="text-center py-12">
-                  <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
-                  <p className="text-gray-600">Try searching with different keywords</p>
-                </div>
+                <Card>
+                  <CardContent className="text-center py-12">
+                    <Search className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">No results found</h3>
+                    <p className="text-gray-600">Try searching with different keywords</p>
+                  </CardContent>
+                </Card>
               ) : (
-                <div className="space-y-4">
-                  {filteredFaqs.map((faq, index) => (
-                    <div
-                      key={index}
-                      className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
-                    >
-                      <button
-                        onClick={() => toggleIndex(faq.globalIndex)}
-                        className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
-                      >
-                        <div>
-                          <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">
-                            {faq.category}
-                          </span>
-                          <h3 className="text-lg font-semibold text-gray-900 mt-1">
-                            {faq.question}
-                          </h3>
-                        </div>
-                        <ChevronDown 
-                          className={`w-5 h-5 text-gray-500 transition-transform ${
-                            activeIndex === faq.globalIndex ? 'rotate-180' : ''
-                          }`} 
-                        />
-                      </button>
-                      {activeIndex === faq.globalIndex && (
-                        <div className="px-6 pb-4">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      )}
-                    </div>
+                <Accordion type="single" collapsible className="space-y-4">
+                  {filteredFaqs.map((faq) => (
+                    <Card key={faq.globalIndex}>
+                      <AccordionItem value={faq.globalIndex} className="border-0">
+                        <AccordionTrigger className="px-6 hover:no-underline">
+                          <div className="text-left">
+                            <Badge variant="secondary" className="mb-2">{faq.category}</Badge>
+                            <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="px-6 text-gray-700">
+                          {faq.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Card>
                   ))}
-                </div>
+                </Accordion>
               )}
             </div>
           )}
 
-          {/* Category-wise FAQs */}
           {!filteredFaqs && (
             <div className="space-y-12">
               {faqCategories.map((category, catIndex) => (
@@ -202,42 +179,20 @@ const FAQ = () => {
                     {category.category}
                   </h2>
                   
-                  <div className="space-y-4">
-                    {category.faqs.map((faq, faqIndex) => {
-                      const globalIndex = catIndex * 100 + faqIndex;
-                      return (
-                        <div
-                          key={faqIndex}
-                          className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
-                        >
-                          <button
-                            onClick={() => toggleIndex(globalIndex)}
-                            className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
-                          >
-                            <h3 className="text-lg font-semibold text-gray-900 pr-4">
-                              {faq.question}
-                            </h3>
-                            <ChevronDown 
-                              className={`w-5 h-5 text-gray-500 transition-transform flex-shrink-0 ${
-                                activeIndex === globalIndex ? 'rotate-180' : ''
-                              }`} 
-                            />
-                          </button>
-                          {activeIndex === globalIndex && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="px-6 pb-4"
-                            >
-                              <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                            </motion.div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
+                  <Accordion type="single" collapsible className="space-y-4">
+                    {category.faqs.map((faq, faqIndex) => (
+                      <Card key={faqIndex}>
+                        <AccordionItem value={`${catIndex}-${faqIndex}`} className="border-0">
+                          <AccordionTrigger className="px-6 hover:no-underline">
+                            <h3 className="text-lg font-semibold text-gray-900 text-left">{faq.question}</h3>
+                          </AccordionTrigger>
+                          <AccordionContent className="px-6 text-gray-700 leading-relaxed">
+                            {faq.answer}
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Card>
+                    ))}
+                  </Accordion>
                 </div>
               ))}
             </div>
@@ -245,7 +200,6 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* Contact Support */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div data-aos="fade-up">
@@ -255,27 +209,24 @@ const FAQ = () => {
             </p>
             
             <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-              <Link
-                to="/contact"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Contact Support
-              </Link>
+              <Button asChild size="lg" className="h-14">
+                <Link to="/contact">
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Contact Support
+                </Link>
+              </Button>
               
-              <Link
-                to="/apply"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
-              >
-                Apply Now
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+              <Button asChild variant="outline" size="lg" className="h-14">
+                <Link to="/apply">
+                  Apply Now
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Quick Stats */}
       <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center" data-aos="fade-up">
@@ -285,10 +236,12 @@ const FAQ = () => {
               { value: '24/7', label: 'Support Available' },
               { value: '<2hrs', label: 'Response Time' }
             ].map((stat, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
+              <Card key={index}>
+                <CardContent className="pt-6">
+                  <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
+                  <div className="text-gray-600">{stat.label}</div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>

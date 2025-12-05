@@ -25,7 +25,7 @@ export default function Footer() {
         <h4>Contact</h4>
         <address style={{ lineHeight: "1.6" }}>
           <div>Email: <a href="mailto:care@pennyanddebt.in" style={{ color: "white" }}>care@pennyanddebt.in</a></div>
-          <div>Phone: <a href="tel:+917814447895" style={{ color: "white" }}>+91 7814447895</a></div>
+          <div>Phone: <a href="tel:+919773921023" style={{ color: "white" }}>+91 9773921023</a></div>
         </address>
       </div>
 
@@ -45,11 +45,19 @@ export default function Footer() {
       <div style={{ flex: "1 1 150px", minWidth: "150px" }}>
         <h4>Follow Us</h4>
         <p>
-          <a href="https://twitter.com/pennyanddebt" style={{ color: "white" }}>
-            Twitter
+          <a href="https://www.instagram.com/pennydebt_?igsh=MWs3Mm1ic3k5djF0YQ==" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+            Instagram
           </a>
           <br />
-          <a href="https://facebook.com/pennyanddebt" style={{ color: "white" }}>
+          <a href="https://www.linkedin.com/company/pennydebt/?viewAsMember=true" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+            LinkedIn
+          </a>
+          <br />
+          <a href="https://x.com/pennydebt" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
+            X (Twitter)
+          </a>
+          <br />
+          <a href="https://facebook.com/pennydebt" target="_blank" rel="noopener noreferrer" style={{ color: "white" }}>
             Facebook
           </a>
         </p>

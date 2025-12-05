@@ -55,7 +55,7 @@ const Services = () => {
         style={{
           position: 'relative',
           overflow: 'hidden',
-          background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%)`,
+          background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 60%)',
           color: theme.colors.text.inverse
         }}
       >

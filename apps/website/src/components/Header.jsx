@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
@@ -17,9 +17,24 @@ const navItems = [
 export default function Header() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="navbar">
+    <header 
+      className="navbar"
+      style={{
+        boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.08)' : 'none',
+        transition: 'all 0.3s ease',
+        backdropFilter: scrolled ? 'blur(10px)' : 'none',
+        backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'var(--white)'
+      }}
+    >
       <div className="container">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
@@ -28,17 +43,21 @@ export default function Header() {
             className="navbar-brand"
             style={{ 
               fontWeight: 800, 
-              fontSize: "1.25rem", 
-              color: "var(--primary-blue)", 
+              fontSize: "1.5rem", 
+              background: "linear-gradient(135deg, #0070f3 0%, #00c6ff 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
               textDecoration: "none", 
-              letterSpacing: "0.05em" 
+              letterSpacing: "0.02em",
+              transition: "all 0.3s ease"
             }}
           >
             PENNY & DEBT
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="desktop-nav flex items-center gap-6">
+          <nav className="desktop-nav flex items-center gap-2">
             {navItems.map(({ label, to }) => (
               <Link
                 key={to}
@@ -47,20 +66,25 @@ export default function Header() {
                 style={{
                   color: "var(--gray-700)",
                   textDecoration: "none",
-                  padding: "0.5rem 0.75rem",
-                  borderRadius: "var(--radius-sm)",
-                  fontWeight: 500,
+                  padding: "0.625rem 1rem",
+                  borderRadius: "8px",
+                  fontWeight: 600,
                   fontSize: "0.875rem",
-                  transition: "all var(--transition-fast)",
-                  whiteSpace: "nowrap"
+                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  whiteSpace: "nowrap",
+                  position: "relative"
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.backgroundColor = "var(--primary-blue)";
-                  e.currentTarget.style.color = "var(--white)";
+                  e.currentTarget.style.backgroundColor = "#0070f3";
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,112,243,0.3)";
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.backgroundColor = "transparent";
                   e.currentTarget.style.color = "var(--gray-700)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 {label}
@@ -71,21 +95,33 @@ export default function Header() {
             <ThemeToggle />
             
             {/* Login Dropdown */}
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative", marginLeft: "0.5rem" }}>
               <button
                 onClick={() => setLoginOpen(!loginOpen)}
                 className="btn btn-secondary"
                 aria-haspopup="true"
                 aria-expanded={loginOpen}
                 style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid var(--primary-blue)",
-                  color: "var(--primary-blue)",
-                  padding: "0.5rem 1rem",
+                  background: "linear-gradient(135deg, #0070f3 0%, #00c6ff 100%)",
+                  border: "none",
+                  color: "#fff",
+                  padding: "0.625rem 1.25rem",
                   fontSize: "0.875rem",
+                  fontWeight: 600,
                   display: "flex",
                   alignItems: "center",
-                  gap: "0.5rem"
+                  gap: "0.5rem",
+                  borderRadius: "8px",
+                  boxShadow: "0 4px 12px rgba(0,112,243,0.3)",
+                  transition: "all 0.3s ease"
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,112,243,0.4)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,112,243,0.3)";
                 }}
               >
                 Login
@@ -95,10 +131,10 @@ export default function Header() {
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
-                  strokeWidth="2" 
+                  strokeWidth="2.5" 
                   style={{ 
                     transform: loginOpen ? "rotate(180deg)" : "rotate(0deg)", 
-                    transition: "transform var(--transition-fast)" 
+                    transition: "transform 0.3s ease" 
                   }}
                 >
                   <polyline points="6 9 12 15 18 9" />
