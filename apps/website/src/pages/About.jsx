@@ -6,6 +6,7 @@ import AOS from 'aos';
 import CountUp from 'react-countup';
 import PageLayout from '../components/PageLayout';
 import theme from '../styles/theme';
+import { ACHIEVEMENTS } from '../constants/achievements';
 
 const About = () => {
   useEffect(() => {
@@ -13,10 +14,10 @@ const About = () => {
   }, []);
 
   const stats = [
-    { value: 75000, suffix: '+', label: 'Happy Customers' },
-    { value: 680, suffix: 'Cr+', prefix: '₹', label: 'Debt Settled' },
-    { value: 97, suffix: '%', label: 'Success Rate' },
-    { value: 4.9, suffix: '★', label: 'from 1000+ Reviews' },
+    { value: ACHIEVEMENTS.customers.value, suffix: '+', label: ACHIEVEMENTS.customers.label },
+    { value: ACHIEVEMENTS.debtResolved.value, suffix: 'Cr+', prefix: '₹', label: ACHIEVEMENTS.debtResolved.label },
+    { value: ACHIEVEMENTS.successRate.value, suffix: '%', label: ACHIEVEMENTS.successRate.label },
+    { value: ACHIEVEMENTS.rating.value, suffix: '★', label: 'Customer Rating' },
   ];
 
   const values = [
@@ -38,23 +39,23 @@ const About = () => {
     { 
       icon: Award, 
       title: 'Proven Results', 
-      desc: 'With a 97% success rate and over ₹680+ crores settled, our track record speaks for itself. We measure our success by your financial freedom.' 
+      desc: `With a ${ACHIEVEMENTS.successRate.display} success rate and over ${ACHIEVEMENTS.debtResolved.display} settled, our track record speaks for itself. We measure our success by your financial freedom.` 
     },
   ];
 
   const timeline = [
     { year: '2020', title: 'Our Humble Beginnings', desc: 'Penny & Debt was founded in Faridabad with a vision to provide ethical debt relief solutions to middle-class Indian families struggling with financial burdens.' },
-    { year: '2021', title: 'First 10,000 Clients', desc: 'Successfully helped over 10,000 clients settle more than ₹100 crores in debt, establishing ourselves as a trusted name in debt resolution.' },
+    { year: '2021', title: 'Rapid Growth', desc: 'Successfully helped thousands of clients settle significant debt, establishing ourselves as a trusted name in debt resolution.' },
     { year: '2022', title: 'AI-Powered Solutions', desc: 'Launched our proprietary AI platform that analyzes financial situations and predicts optimal settlement strategies, improving success rates by 35%.' },
     { year: '2023', title: 'National Recognition', desc: 'Featured in leading financial publications and recognized as one of the fastest-growing financial service providers in North India.' },
-    { year: '2024', title: '75,000+ Success Stories', desc: 'Crossed the milestone of helping 75,000+ clients settle over ₹680 crores in debt, with a 97% customer satisfaction rate based on 1000+ verified reviews.' },
+    { year: '2024', title: `${ACHIEVEMENTS.customers.display} Success Stories`, desc: `Crossed the milestone of helping ${ACHIEVEMENTS.customers.display} clients settle over ${ACHIEVEMENTS.debtResolved.display} in debt, with a ${ACHIEVEMENTS.successRate.display} customer satisfaction rate.` },
   ];
 
   return (
     <PageLayout
       showHero
       title="Empowering Indians to Achieve Debt Freedom"
-      subtitle="Founded in 2020, we've helped over 50,000 families settle ₹450+ crores in debt through transparent, ethical solutions."
+      subtitle={`Founded in 2020, we've helped over ${ACHIEVEMENTS.customers.display} families settle ${ACHIEVEMENTS.debtResolved.display} in debt through transparent, ethical solutions.`}
       heroContent={
         <div style={{ display: 'flex', justifyContent: 'center', gap: theme.spacing.lg, flexWrap: 'wrap' }}>
           {[
@@ -125,8 +126,8 @@ const About = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: theme.spacing.lg, lineHeight: theme.typography.lineHeights.relaxed, color: theme.colors.text.secondary, fontSize: theme.typography.fontSizes.md }}>
           <p>
             Penny & Debt was founded in Faridabad with a clear vision: to provide ethical, transparent, and effective debt relief solutions to middle-class Indian families. 
-            What began as a small team of financial experts has grown into one of North India's most trusted debt resolution firms, helping over 75,000 clients settle 
-            more than ₹680 crores in debt to date.
+            What began as a small team of financial experts has grown into one of North India's most trusted debt resolution firms, helping over {ACHIEVEMENTS.customers.display} clients settle 
+            more than {ACHIEVEMENTS.debtResolved.display} in debt to date.
           </p>
           <p>
             Our journey started when our founders witnessed firsthand the devastating impact of unmanageable debt on hardworking families. 
@@ -142,7 +143,8 @@ const About = () => {
           <p>
             But beyond the numbers, what truly drives us is the human impact of our work. 
             From helping families save their homes to giving individuals a fresh financial start, 
-            our mission remains the same: to provide hope and real solutions to those struggling with debt.
+            our mission remains the same: to provide hope and real solutions to those struggling with debt. 
+            With a {ACHIEVEMENTS.successRate.display} success rate, we're proud to be making a real difference.
           </p>
         </div>
       </section>
@@ -314,7 +316,7 @@ const About = () => {
           Ready to Start Your Debt-Free Journey?
         </h2>
         <p style={{ fontSize: theme.typography.fontSizes.lg, marginBottom: theme.spacing.xl, opacity: 0.95 }}>
-          Join 50,000+ Indians who chose financial freedom with Penny & Debt
+          Join {ACHIEVEMENTS.customers.display} Indians who chose financial freedom with Penny & Debt
         </p>
         <div style={{ display: 'flex', gap: theme.spacing.lg, justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link
