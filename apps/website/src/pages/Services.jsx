@@ -4,155 +4,151 @@ import {
   Handshake, PhoneOff, FileText, BarChart2, TrendingUp, TrendingDown,
   Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { CheckCircle, ArrowRight, Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import theme from '../styles/theme';
 
-// Animation variants
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-};
-
 const Services = () => {
-  const [activeTab, setActiveTab] = useState('all');
-  
-  const processSteps = [
-    { step: '1', title: 'Free Consultation', desc: 'Share your financial situation with our experts' },
-    { step: '2', title: 'Financial Analysis', desc: 'We analyze your debts and create a personalized plan' },
-    { step: '3', title: 'Plan Implementation', desc: 'Execute your customized debt settlement strategy' },
-    { step: '4', title: 'Financial Freedom', desc: 'Achieve peace of mind and rebuild your credit' }
-  ];
+  const [activeTab] = useState('all');
 
-  const benefits = [
-    { 
-      icon: CheckCircle, 
-      title: 'RBI Certified', 
-      desc: '100% compliant and registered with all regulatory bodies' 
-    },
-    { 
-      icon: Shield, 
-      title: 'Legal Protection', 
-      desc: 'Complete protection against creditor harassment' 
-    },
-    { 
-      icon: BarChart2, 
-      title: 'Proven Results', 
-      desc: '97% success rate with 75,000+ satisfied clients' 
-    },
-    { 
-      icon: Award, 
-      title: 'Expert Team', 
-      desc: 'Certified financial advisors with 10+ years experience' 
-    },
-    { 
-      icon: TrendingUp, 
-      title: 'No Upfront Fees', 
-      desc: 'Pay only when you save money' 
-    },
-    { 
-      icon: PhoneOff, 
-      title: '24/7 Support', 
-      desc: 'Round the clock customer support whenever you need it' 
-    }
-  ];
-  
   useEffect(() => {
-    AOS.init({ duration: 800, once: true });
+    AOS.init({ duration: 700, once: true });
   }, []);
 
   const coreServices = [
     {
-      icon: Handshake,
+      id: 'settlement',
       title: 'Comprehensive Debt Settlement',
-      description: 'Our RBI-certified financial experts negotiate directly with your creditors to reduce your total debt by 40-70% on average. We handle everything from documentation to final settlement, making the process stress-free for you.',
-      features: [
-        '✅ Average 40-70% reduction in total debt (actual results may vary)',
-        '✅ Single, fixed monthly payment based on your budget',
-        '✅ Complete legal protection from creditor harassment',
-        '✅ Dedicated relationship manager for personalized support',
-        '✅ No upfront fees - we only get paid when you save',
-        '✅ 24/7 online dashboard to track your progress'
-      ],
-      category: 'settlement'
+      desc: 'Negotiation-led reduction of outstanding debt with full legal protection.',
+      features: ['40-70% average reduction', 'No upfront fees', 'Dedicated case manager']
     },
     {
-      icon: TrendingUp,
+      id: 'restructure',
       title: 'EMI Restructuring',
-      description: 'Struggling with high EMIs? Our financial experts can help restructure your loans to reduce monthly payments by up to 50% while keeping you on track to becoming debt-free.',
-      features: [
-        '🔄 Up to 50% lower monthly payments',
-        '📅 Extended loan tenures for better cash flow',
-        '💵 Lower interest rates through expert negotiation',
-        '🔗 Combine multiple loans into one easy payment',
-        '⏱️ Quick approval process (typically 3-5 business days)',
-        '📱 Real-time updates on your restructured loans'
-      ],
-      category: 'reduction'
+      desc: 'Restructure EMIs to make monthly payments affordable and sustainable.',
+      features: ['Lower monthly payments', 'Flexible tenures', 'Transparent process']
     },
     {
-      icon: Shield,
-      title: 'Legal Protection & Recovery Support',
-      description: 'Stop creditor harassment immediately with our legal protection services. Our team ensures all communications go through us, giving you peace of mind and space to rebuild your finances.',
-      features: [
-        '⚖️ Immediate stop to collection calls and visits',
-        '📜 Legally binding cease & desist notices',
-        '🏛️ RBI complaint registration and follow-up',
-        '👨‍⚖️ In-house legal experts for your protection',
-        '🔒 100% confidentiality guaranteed',
-        '📞 24/7 emergency support line'
-      ],
-      category: 'support'
-    },
-    {
-      icon: BarChart2,
-      title: 'Credit Score Rehabilitation',
-      description: 'Rebuild your credit score with our proven 12-24 month rehabilitation program. Most clients see a 100-200 point improvement in their credit score within the first year.',
-      features: [
-        '📊 Detailed credit report analysis and improvement plan',
-        '🔍 Dispute and remove inaccuracies from your credit report',
-        '📈 Personalized credit rebuilding strategy',
-        '🎓 Free financial education webinars and resources',
-        '🔔 Real-time credit monitoring and alerts',
-        '🏆 Certificate of financial literacy upon completion'
-      ],
-      category: 'credit'
-    },
-    {
-      icon: FileText,
-      title: 'Financial Wellness Program',
-      description: 'Our certified financial planners create personalized money management plans to help you stay debt-free and build wealth for the future.',
-      features: [
-        '💰 Customized budget that works with your lifestyle',
-        '💡 Smart strategies to build an emergency fund',
-        '📈 Investment planning for all life stages',
-        '🏡 Home ownership and wealth building guidance',
-        '👵 Retirement planning and wealth preservation',
-        '👨‍👩‍👧‍👦 Family financial planning and education'
-      ],
-      category: 'planning'
+      id: 'credit',
+      title: 'Credit Rehabilitation',
+      desc: 'Rebuild credit score with guided repayment and credit education.',
+      features: ['Personalized plan', 'Credit monitoring', 'Education & support']
     }
   ];
 
-  const comparisonData = {
-    headers: ['What You Get', 'Other Companies', 'Penny & Debt'],
-    rows: [
-      ['Regulatory Compliance', '❌ Often operate in grey areas', '✅ 100% RBI Compliant & Registered'],
-      ['Fees & Pricing', '❌ Hidden charges, high upfront costs', '✅ No Hidden Fees, Pay Only When You Save'],
-      ['Expertise', 'Basic negotiators', '🎓 Certified Financial Experts (10+ years avg. experience)'],
-      ['Success Rate', '30-50% (industry average)', '🏆 97% Success Rate (verified by clients)'],
-      ['Support', '9-5, Weekdays only', '⏰ 24/7 Dedicated Support Team'],
-      ['Credit Impact', 'Often damages credit score', '📈 Credit Rebuilding Plan Included'],
+  const processSteps = [
+    { step: '1', title: 'Free Consultation' },
+    { step: '2', title: 'Assessment & Plan' },
+    { step: '3', title: 'Negotiate & Implement' },
+    { step: '4', title: 'Recover & Rebuild' }
+  ];
+
+  const renderStars = (rating = 5) => (
+    Array.from({ length: 5 }).map((_, i) => (
+      <Star key={i} className={`w-4 h-4 ${i < rating ? 'text-yellow-400' : 'text-gray-300'}`} />
+    ))
+  );
+
+  const sampleReviews = [
+    { id: 1, name: 'A. Sharma', rating: 5, text: 'Saved my life. Professional team.' },
+    { id: 2, name: 'N. Verma', rating: 5, text: 'Transparent process and quick results.' }
+  ];
+
+  return (
+    <div className="pt-20">
+      <section
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%), rgba(255,165,0,0.03)`,
+          color: theme.colors.text.inverse
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <h1 className="text-4xl font-bold mb-4">Our Services</h1>
+            <p className="text-lg text-blue-100 mb-6">Comprehensive, compliant debt solutions for individuals and businesses.</p>
+            <div className="flex gap-3">
+              <Link to="/apply" className="px-5 py-3 rounded-md font-semibold" style={{ background: theme.colors.golden[500], color: theme.colors.text.inverse }}>
+                Apply Now
+              </Link>
+              <Link to="/contact" className="px-5 py-3 rounded-md font-semibold" style={{ border: `2px solid ${theme.colors.golden[300]}`, color: theme.colors.text.inverse, background: 'transparent' }}>
+                Contact Us
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">Core Services</h2>
+            <p className="text-gray-600 mt-2">Choose a service to learn more.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {coreServices.map((s) => (
+              <div key={s.id} className="p-6 border rounded-2xl shadow-sm hover:shadow-md">
+                <h3 className="text-xl font-semibold mb-2">{s.title}</h3>
+                <p className="text-gray-600 mb-4">{s.desc}</p>
+                <ul className="space-y-2 mb-4">
+                  {s.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                      <CheckCircle className="w-4 h-4 text-green-500 mt-1" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/contact" className="inline-flex items-center text-blue-600 font-medium">
+                  Learn more <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-2xl font-bold mb-6">How It Works</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            {processSteps.map((p) => (
+              <div key={p.step} className="p-4 bg-white rounded-lg shadow-sm">
+                <div className="text-xl font-bold mb-2">{p.step}</div>
+                <div className="font-medium">{p.title}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-bold">What Our Clients Say</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4">
+            {sampleReviews.map((r) => (
+              <div key={r.id} className="p-6 border rounded-lg">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="font-semibold">{r.name}</div>
+                  <div className="flex items-center">{renderStars(r.rating)}</div>
+                </div>
+                <p className="text-gray-700">"{r.text}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Services;
       ['Legal Protection', '❌ No legal support', '⚖️ Full Legal Team Support Included'],
       ['Client Satisfaction', '⭐⭐⭐ (3/5 average)', '⭐⭐⭐⭐⭐ (4.9/5 from 1000+ reviews)'],
       ['Response Time', '2-3 business days', '⏱️ 2-hour response guarantee'],
@@ -267,7 +263,6 @@ const Services = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-          >
           >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 Transform Your Financial Future <br />
@@ -750,6 +745,9 @@ const Services = () => {
                 className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
               >
                 Get Your Free Consultation
+                <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
