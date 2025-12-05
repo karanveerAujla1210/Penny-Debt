@@ -9,6 +9,8 @@ import SocialProof from '../components/SocialProof';
 import AnimatedCounter from '../components/AnimatedCounter';
 import DebtCalculator from '../components/DebtCalculator';
 import LiveChat from '../components/LiveChat';
+import { Button } from '../components/ui/button';
+import { Card } from '../components/ui/card';
 import HeroBanner from '../assets/logos/Images/Hero Banner.png';
 import { ACHIEVEMENTS } from '../constants/achievements';
 import '../styles/fintech-system.css';
@@ -86,19 +88,20 @@ export default function Home() {
               </p>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
                 <div className="hero-actions">
-                  <Link to="/eligibility" className="btn btn-primary-enhanced btn-lg">
+                  <Button to="/eligibility" variant="default" size="lg" className="mr-2">
                     <span>Check Eligibility</span>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
-                  <Link to="/how-it-works" className="btn btn-secondary-enhanced btn-lg">
-                    <span>How It Works</span>
-                  </Link>
+                    <svg style={{ marginLeft: 8 }} width="20" height="20" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Button>
+
+                  <Button to="/how-it-works" variant="secondary" size="lg">
+                    How It Works
+                  </Button>
                 </div>
 
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                  <a href="https://wa.me/919773921023?text=Hi%20Penny%20Debt" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">Talk to Counsellor on WhatsApp</a>
+                  <Button href="https://wa.me/919773921023?text=Hi%20Penny%20Debt" variant="ghost" size="md">Talk to Counsellor on WhatsApp</Button>
                 </div>
               </div>
               {/* Role chips + language toggles */}
@@ -190,8 +193,8 @@ export default function Home() {
                 features: ['Personal finance education', 'Budget planning', 'Investment guidance', 'Wealth building']
               },
             ].map((service, i) => (
-              <div 
-                key={i} 
+              <Card
+                key={i}
                 className="service-card-enhanced"
                 style={{
                   background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
@@ -242,39 +245,9 @@ export default function Home() {
                       marginBottom: '24px'
                     }}
                   >
-                    {service.icon}
-                  </div>
-                </div>
-                
-                <div className="service-content" style={{ position: 'relative', zIndex: 1 }}>
-                  <h3 
-                    className="service-title" 
-                    style={{
-                      fontSize: '22px',
-                      fontWeight: '700',
-                      color: '#0F172A',
-                      marginBottom: '12px',
-                      lineHeight: '1.3'
-                    }}
-                  >
-                    {service.title}
-                  </h3>
-                  <p 
-                    className="service-description" 
-                    style={{
-                      fontSize: '15px',
-                      color: '#64748B',
-                      lineHeight: '1.6',
-                      marginBottom: '20px'
-                    }}
-                  >
-                    {service.desc}
-                  </p>
-                  <ul className="service-features" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                    {service.features.map((feature, idx) => (
-                      <li 
-                        key={idx} 
-                        className="service-feature"
+                    <Button to="/services" variant="default" size="sm" className="service-learn-more" style={{ marginTop: 24 }}>
+                      Learn More
+                    </Button>
                         style={{
                           display: 'flex',
                           alignItems: 'center',
