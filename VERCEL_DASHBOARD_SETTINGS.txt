@@ -1,0 +1,37 @@
+VERCEL DASHBOARD SETTINGS - COPY THESE EXACTLY
+================================================
+
+Go to: https://vercel.com/dashboard
+Select: Your Penny-Debt project
+Go to: Settings → General
+
+IMPORTANT: Set Root Directory
+------------------------------
+Root Directory: apps/website
+
+Build & Development Settings
+-----------------------------
+Framework Preset: Vite
+
+Build Command (leave default or set):
+npm run build
+
+Output Directory (leave default or set):
+dist
+
+Install Command (leave default or set):
+npm install
+
+Node.js Version:
+18.x
+
+SAVE AND REDEPLOY
+-----------------
+1. Click Save
+2. Go to Deployments tab
+3. Click "..." on latest deployment
+4. Click "Redeploy"
+5. UNCHECK "Use existing Build Cache"
+6. Click Redeploy
+
+This will make Vercel work inside apps/website/ folder directly.
