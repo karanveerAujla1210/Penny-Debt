@@ -17,8 +17,17 @@ const PremiumFooter = () => {
                 <img src="/logo.svg" alt="Penny & Debt" style={{ height: '50px', width: 'auto', marginBottom: '12px' }} />
               </div>
               <p className="brand-tagline">
-                Financial freedom through expert debt solutions
+                Reduce your unsecured debt by up to 60% with legal, RBI-compliant settlement plans.
               </p>
+              <div className="role-chips" aria-hidden={false}>
+                <a className="role-chip" href="#salaried">Salaried</a>
+                <a className="role-chip" href="#self-employed">Self-employed</a>
+                <a className="role-chip" href="#multiple-loans">Multiple loans</a>
+                <a className="role-chip" href="#harassed">Harassed by calls</a>
+              </div>
+              <div className="language-switch" style={{ marginTop: '8px' }}>
+                <a href="?lang=en" aria-label="English">EN</a> | <a href="?lang=hi" aria-label="हिंदी">हिंदी</a>
+              </div>
               <div className="social-links">
                 <a href="https://www.instagram.com/pennydebt_?igsh=MWs3Mm1ic3k5djF0YQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   📷
@@ -73,6 +82,27 @@ const PremiumFooter = () => {
               </ul>
             </div>
 
+            {/* Help & Plans */}
+            <div className="footer-section">
+              <h4 className="footer-title">Help & Plans</h4>
+              <ul className="footer-links">
+                <li>
+                  <Link to="/harassment-help">Being harassed by recovery agents?</Link>
+                </li>
+                <li>
+                  <Link to="/eligibility">Check Eligibility</Link>
+                </li>
+              </ul>
+              <div className="tier-examples" style={{ marginTop: '8px' }}>
+                <strong>Typical plans</strong>
+                <ul>
+                  <li>₹50k–2L: Quick negotiation / 6–18 months</li>
+                  <li>₹2L–10L: Structured settlement / 12–36 months</li>
+                  <li>₹10L+: Tailored legal & negotiation pathways</li>
+                </ul>
+              </div>
+            </div>
+
             {/* Legal */}
             <div className="footer-section">
               <h4 className="footer-title">Legal</h4>
@@ -102,12 +132,24 @@ const PremiumFooter = () => {
                 </p>
                 <p>
                   <strong>Phone:</strong>
-                  <a href="tel:+919773921023">+91 9773921023</a>
+                  <a href="tel:+919773921023">+91 9773921023</a> &nbsp;|&nbsp; <a href="https://wa.me/919773921023?text=Hi%20Penny%20Debt" target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 </p>
                 <p>
                   <strong>Address:</strong>
                   <span>Financial District, Mumbai, India</span>
                 </p>
+                <p>
+                  <strong>Emergency:</strong>
+                  <Link to="/harassment-help">I am being harassed — Get urgent help</Link>
+                </p>
+                <p>
+                  <strong>Grievance Officer:</strong>
+                  <a href="mailto:grievance@pennyanddebt.in">grievance@pennyanddebt.in</a>
+                </p>
+                <div className="trust-row" style={{ marginTop: '8px' }}>
+                  <span>Rated</span>
+                  <a className="rating" href="#" target="_blank" rel="noopener noreferrer">★ ★ ★ ★ ☆ on Google</a>
+                </div>
               </div>
             </div>
           </div>
@@ -122,11 +164,22 @@ const PremiumFooter = () => {
         <div className="container">
           <div className="footer-bottom-content">
             <p className="copyright">
-              © {currentYear} Penny & Debt. All rights reserved. | Registered NBFC | ISO 27001 Certified
+              © {currentYear} Penny & Debt. All rights reserved. | Company registration: [CIN/LLPIN]
             </p>
             <p className="disclaimer">
-              We are a Debt Management Company. Results vary based on individual circumstances. Past performance does not guarantee future results.
+              We are a debt advisory and negotiation platform. We do not lend money. Settlement outcomes vary and are not guaranteed.
             </p>
+            <div className="honest-expectations" style={{ marginTop: '10px', fontSize: '0.95rem' }}>
+              <strong>Honest expectations:</strong>
+              <ul>
+                <li>Settlement can affect your credit score; impacts vary.</li>
+                <li>Typical timelines: 6–36+ months depending on creditor cooperation.</li>
+                <li>Final settlement depends on creditor approval and account history.</li>
+              </ul>
+            </div>
+            <div style={{ marginTop: '8px' }}>
+              <Link to="/privacy">Privacy</Link> | <Link to="/terms">Terms</Link> | <Link to="/faq">FAQ</Link> | <Link to="/contact">Contact</Link>
+            </div>
           </div>
         </div>
       </div>
