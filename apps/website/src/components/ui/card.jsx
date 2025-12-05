@@ -57,4 +57,16 @@ const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
 ))
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+const CardIcon = React.forwardRef(({ className, children, size = 48, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex-shrink-0 rounded-full bg-gradient-to-br from-white/40 to-white/10 flex items-center justify-center", className)}
+    style={{ width: size, height: size }}
+    {...props}
+  >
+    {children}
+  </div>
+))
+CardIcon.displayName = "CardIcon"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, CardIcon }

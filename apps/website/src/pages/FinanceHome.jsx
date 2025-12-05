@@ -10,7 +10,8 @@ import AnimatedCounter from '../components/AnimatedCounter';
 import DebtCalculator from '../components/DebtCalculator';
 import LiveChat from '../components/LiveChat';
 import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
+import { Card, CardIcon } from '../components/ui/card';
+import Icon from '../components/ui/icons';
 import HeroBanner from '../assets/logos/Images/Hero Banner.png';
 import { ACHIEVEMENTS } from '../constants/achievements';
 import '../styles/fintech-system.css';
@@ -157,37 +158,37 @@ export default function Home() {
           <div className="services-grid-enhanced">
             {[
               {
-                icon: '📊',
+                icon: 'shield',
                 title: 'Debt Assessment',
                 desc: 'Comprehensive analysis of your financial situation with detailed debt mapping and risk evaluation.',
                 features: ['Credit report analysis', 'Debt portfolio review', 'Risk assessment', 'Personalized roadmap']
               },
               {
-                icon: '🎯',
+                icon: 'wallet',
                 title: 'Debt Consolidation',
                 desc: 'Streamline multiple debts into manageable payments with better terms and lower interest rates.',
                 features: ['Multiple loan consolidation', 'Interest rate optimization', 'EMI restructuring', 'Payment scheduling']
               },
               {
-                icon: '💬',
+                icon: 'phone',
                 title: 'Negotiation Support',
                 desc: 'Expert lender negotiation on your behalf to reduce interest rates and waive penalties.',
                 features: ['Professional negotiation', 'Settlement agreements', 'Penalty waivers', 'Rate reductions']
               },
               {
-                icon: '📈',
+                icon: 'scale',
                 title: 'Credit Building',
                 desc: 'Strategies to improve your credit score while managing existing debt obligations.',
                 features: ['Credit score monitoring', 'Improvement strategies', 'Report corrections', 'Score optimization']
               },
               {
-                icon: '🛡️',
+                icon: 'shield',
                 title: 'Legal Protection',
                 desc: 'Guidance on debt protection rights and legal safeguards against unfair practices.',
                 features: ['RBI guideline compliance', 'Legal rights education', 'Dispute resolution', 'Consumer protection']
               },
               {
-                icon: '👨‍🏫',
+                icon: 'people',
                 title: 'Financial Counseling',
                 desc: '1:1 expert counseling sessions to build financial literacy and long-term wealth.',
                 features: ['Personal finance education', 'Budget planning', 'Investment guidance', 'Wealth building']
@@ -230,23 +231,9 @@ export default function Home() {
                 }}></div>
                 
                 <div className="service-icon-wrapper" style={{ position: 'relative', zIndex: 1 }}>
-                  <div 
-                    className="service-icon" 
-                    style={{
-                      fontSize: '48px',
-                      width: '80px',
-                      height: '80px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      background: 'linear-gradient(135deg, #0A4DFF 0%, #FF9500 100%)',
-                      borderRadius: '20px',
-                      boxShadow: '0 8px 24px rgba(10, 77, 255, 0.25)',
-                      marginBottom: '24px'
-                    }}
-                  >
-                    {service.icon}
-                  </div>
+                  <CardIcon className="" size={80} style={{ marginBottom: 24, borderRadius: 20, boxShadow: '0 8px 24px rgba(10, 77, 255, 0.18)' }}>
+                    <Icon name={service.icon} size={36} />
+                  </CardIcon>
                 </div>
 
                 <div className="service-content" style={{ position: 'relative', zIndex: 1 }}>
