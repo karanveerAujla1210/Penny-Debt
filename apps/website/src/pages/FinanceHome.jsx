@@ -94,29 +94,82 @@ export default function Home() {
         <div className="hero-bg-dots"></div>
       </section>
 
-      {/* SERVICES SECTION */}
-      <section className="section section-alt">
-        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-            <h2>Our Services</h2>
-            <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
-              Comprehensive debt relief solutions tailored to your financial situation
+      {/* ENHANCED SERVICES SECTION */}
+      <section className="services-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">Our Expertise</div>
+            <h2 className="section-title">Comprehensive Debt Relief Solutions</h2>
+            <p className="section-subtitle">
+              From assessment to freedom, we provide end-to-end debt management services
+              tailored to your unique financial situation and goals.
             </p>
           </div>
 
-          <div className="services-grid">
+          <div className="services-grid-enhanced">
             {[
-              { icon: '📊', title: 'Debt Assessment', desc: 'Comprehensive analysis of your financial situation' },
-              { icon: '🎯', title: 'Debt Consolidation', desc: 'Streamline multiple debts into manageable payments' },
-              { icon: '💬', title: 'Negotiation Support', desc: 'Expert lender negotiation on your behalf' },
-              { icon: '📈', title: 'Credit Building', desc: 'Strategies to improve your credit score' },
-              { icon: '🛡️', title: 'Legal Protection', desc: 'Guidance on debt protection rights' },
-              { icon: '👨‍🏫', title: 'Financial Counseling', desc: '1:1 expert counseling sessions' },
+              {
+                icon: '📊',
+                title: 'Debt Assessment',
+                desc: 'Comprehensive analysis of your financial situation with detailed debt mapping and risk evaluation.',
+                features: ['Credit report analysis', 'Debt portfolio review', 'Risk assessment', 'Personalized roadmap']
+              },
+              {
+                icon: '🎯',
+                title: 'Debt Consolidation',
+                desc: 'Streamline multiple debts into manageable payments with better terms and lower interest rates.',
+                features: ['Multiple loan consolidation', 'Interest rate optimization', 'EMI restructuring', 'Payment scheduling']
+              },
+              {
+                icon: '💬',
+                title: 'Negotiation Support',
+                desc: 'Expert lender negotiation on your behalf to reduce interest rates and waive penalties.',
+                features: ['Professional negotiation', 'Settlement agreements', 'Penalty waivers', 'Rate reductions']
+              },
+              {
+                icon: '📈',
+                title: 'Credit Building',
+                desc: 'Strategies to improve your credit score while managing existing debt obligations.',
+                features: ['Credit score monitoring', 'Improvement strategies', 'Report corrections', 'Score optimization']
+              },
+              {
+                icon: '🛡️',
+                title: 'Legal Protection',
+                desc: 'Guidance on debt protection rights and legal safeguards against unfair practices.',
+                features: ['RBI guideline compliance', 'Legal rights education', 'Dispute resolution', 'Consumer protection']
+              },
+              {
+                icon: '👨‍🏫',
+                title: 'Financial Counseling',
+                desc: '1:1 expert counseling sessions to build financial literacy and long-term wealth.',
+                features: ['Personal finance education', 'Budget planning', 'Investment guidance', 'Wealth building']
+              },
             ].map((service, i) => (
-              <div key={i} className="card">
-                <div style={{ fontSize: '40px', marginBottom: '16px' }}>{service.icon}</div>
-                <h4>{service.title}</h4>
-                <p style={{ fontSize: '14px', marginTop: '8px' }}>{service.desc}</p>
+              <div key={i} className="service-card-enhanced">
+                <div className="service-icon-wrapper">
+                  <div className="service-icon">{service.icon}</div>
+                  <div className="service-icon-bg"></div>
+                </div>
+                <div className="service-content">
+                  <h3 className="service-title">{service.title}</h3>
+                  <p className="service-description">{service.desc}</p>
+                  <ul className="service-features">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="service-feature">
+                        <span className="feature-dot"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="service-hover-overlay">
+                  <Link to="/services" className="service-learn-more">
+                    Learn More
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
