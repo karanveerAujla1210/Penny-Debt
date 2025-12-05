@@ -97,8 +97,8 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="text-center"
               style={{
-                textAlign: 'center',
                 padding: theme.spacing.xl,
                 background: theme.colors.bg.light,
                 borderRadius: theme.borderRadius.xl,
@@ -151,10 +151,10 @@ const About = () => {
 
       {/* Our Values Section */}
       <section style={{ marginBottom: theme.spacing['4xl'] }}>
-        <h2 style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.md, textAlign: 'center', color: theme.colors.text.primary }}>
+        <h2 className="text-center" style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.md, color: theme.colors.text.primary }}>
           Our Values
         </h2>
-        <p style={{ textAlign: 'center', color: theme.colors.text.secondary, marginBottom: theme.spacing.xl, fontSize: theme.typography.fontSizes.lg }}>
+        <p className="text-center" style={{ color: theme.colors.text.secondary, marginBottom: theme.spacing.xl, fontSize: theme.typography.fontSizes.lg }}>
           The principles that guide everything we do
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: theme.spacing.lg }}>
@@ -167,11 +167,11 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 viewport={{ once: true }}
+                className="text-center"
                 style={{
                   padding: theme.spacing.xl,
                   background: theme.colors.bg.light,
                   borderRadius: theme.borderRadius.xl,
-                  textAlign: 'center',
                   border: `1px solid ${theme.colors.border}`,
                   cursor: 'pointer',
                   transition: `all ${theme.transitions.base} ease`,

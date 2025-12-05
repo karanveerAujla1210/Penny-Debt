@@ -317,7 +317,7 @@ export default function Home() {
       {/* DEBT CALCULATOR */}
       <section className="section section-alt">
         <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <div className="text-center" style={{ marginBottom: '48px' }}>
             <h2>Calculate Your Debt Relief</h2>
             <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
               See how much you could save with our debt relief program
@@ -330,7 +330,7 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section className="section">
         <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div className="text-center" style={{ marginBottom: '64px' }}>
             <h2>How It Works</h2>
             <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
               A simple 5-step process to financial freedom
@@ -345,7 +345,7 @@ export default function Home() {
               { num: '4', title: 'Execution', desc: 'Implementation with lender negotiation' },
               { num: '5', title: 'Support', desc: 'Ongoing guidance until financial freedom' },
             ].map((step, i) => (
-              <div key={i} style={{ textAlign: 'center' }}>
+              <div key={i} className="text-center">
                 <div style={{
                   width: '60px',
                   height: '60px',
@@ -372,7 +372,7 @@ export default function Home() {
       {/* TESTIMONIALS */}
       <section className="section section-alt">
         <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div className="text-center" style={{ marginBottom: '64px' }}>
             <h2>What Our Customers Say</h2>
             <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
               Real stories from people who achieved financial freedom
@@ -402,7 +402,7 @@ export default function Home() {
       {/* FAQ */}
       <section className="section">
         <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+          <div className="text-center" style={{ marginBottom: '64px' }}>
             <h2>Frequently Asked Questions</h2>
             <p style={{ fontSize: '18px', color: 'var(--text-secondary)', maxWidth: '500px', margin: '16px auto 0' }}>
               Everything you need to know about our services
@@ -438,16 +438,16 @@ export default function Home() {
         background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 100%)',
         color: 'white',
         padding: '80px 24px',
-        textAlign: 'center',
+        
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ color: 'white', fontSize: '36px', fontWeight: '800', textAlign: 'center', margin: '0 auto 16px' }}>
+        <div className="container text-center" style={{ maxWidth: '1280px', margin: '0 auto' }}>
+          <h2 className="text-center" style={{ color: 'white', fontSize: '36px', fontWeight: '800', margin: '0 auto 16px' }}>
             Ready to Take Control?
           </h2>
-          <p style={{ fontSize: '18px', maxWidth: '500px', margin: '0 auto 32px', opacity: 0.95, textAlign: 'center' }}>
+          <p className="text-center" style={{ fontSize: '18px', maxWidth: '500px', margin: '0 auto 32px', opacity: 0.95 }}>
             Start your journey to financial freedom today. It's completely free!
           </p>
           <Button asChild variant="default" size="lg" className="bg-white text-[#FF9500]" >

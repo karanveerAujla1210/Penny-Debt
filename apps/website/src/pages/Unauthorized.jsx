@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Unauthorized = () => {
   return (
-    <div style={{ padding: 40, textAlign: 'center' }}>
+    <div className="text-center" style={{ padding: 40 }}>
       <h2>Unauthorized</h2>
       <p>You do not have permission to view this page.</p>
       <p>

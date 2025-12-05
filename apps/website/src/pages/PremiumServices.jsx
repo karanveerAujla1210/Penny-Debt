@@ -48,10 +48,10 @@ const PremiumServices = () => {
 
       {/* Hero Section */}
       <section
+        className="text-center"
         style={{
           background: 'linear-gradient(135deg, #F5F7FF 0%, #FAFBFF 100%)',
           padding: '4rem 2rem',
-          textAlign: 'center',
         }}
       >
         <div className="container">
@@ -182,12 +182,7 @@ const PremiumServices = () => {
         }}
       >
         <div className="container">
-          <div
-            style={{
-              textAlign: 'center',
-              marginBottom: '4rem',
-            }}
-          >
+          <div className="text-center" style={{ marginBottom: '4rem' }}>
             <h2
               style={{
                 fontSize: '2.25rem',
@@ -215,14 +210,13 @@ const PremiumServices = () => {
               { value: '15+', label: 'Years Experience', icon: '📅' },
               { value: '24/7', label: 'Customer Support', icon: '📞' },
             ].map((stat, i) => (
-              <div
-                key={i}
-                className="card"
-                style={{
-                  padding: '2.5rem',
-                  textAlign: 'center',
-                }}
-              >
+                <div
+                  key={i}
+                  className="card text-center"
+                  style={{
+                    padding: '2.5rem',
+                  }}
+                >
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>
                   {stat.icon}
                 </div>
@@ -252,10 +246,10 @@ const PremiumServices = () => {
 
       {/* CTA */}
       <section
+        className="text-center"
         style={{
           padding: '4rem 2rem',
           background: 'linear-gradient(135deg, #003BFF 0%, #0066FF 100%)',
-          textAlign: 'center',
         }}
       >
         <div className="container">
