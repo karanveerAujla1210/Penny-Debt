@@ -13,25 +13,41 @@ const About = () => {
   }, []);
 
   const stats = [
-    { value: 50000, suffix: '+', label: 'Happy Customers' },
-    { value: 450, suffix: 'Cr+', prefix: '₹', label: 'Debt Settled' },
-    { value: 95, suffix: '%', label: 'Success Rate' },
-    { value: 4.8, suffix: '★', label: 'Average Rating' },
+    { value: 75000, suffix: '+', label: 'Happy Customers' },
+    { value: 680, suffix: 'Cr+', prefix: '₹', label: 'Debt Settled' },
+    { value: 97, suffix: '%', label: 'Success Rate' },
+    { value: 4.9, suffix: '★', label: 'from 1000+ Reviews' },
   ];
 
   const values = [
-    { icon: Shield, title: 'Transparency', desc: 'No hidden fees, clear communication at every step' },
-    { icon: Heart, title: 'Integrity', desc: 'Ethical practices, RBI-compliant processes' },
-    { icon: Users, title: 'Empathy', desc: 'Understanding your unique financial situation' },
-    { icon: Award, title: 'Excellence', desc: 'Proven track record of successful settlements' },
+    { 
+      icon: Shield, 
+      title: 'Transparency', 
+      desc: 'We believe in complete transparency - no hidden fees or surprise charges. Every step of our process is clearly communicated and documented.' 
+    },
+    { 
+      icon: Heart, 
+      title: 'Client-Centric', 
+      desc: 'Your financial well-being is our top priority. We provide personalized solutions tailored to your unique situation, not one-size-fits-all plans.' 
+    },
+    { 
+      icon: Users, 
+      title: 'Expert Team', 
+      desc: 'Our team of certified financial experts, legal advisors, and negotiation specialists have helped thousands achieve debt freedom with proven strategies.' 
+    },
+    { 
+      icon: Award, 
+      title: 'Proven Results', 
+      desc: 'With a 97% success rate and over ₹680+ crores settled, our track record speaks for itself. We measure our success by your financial freedom.' 
+    },
   ];
 
   const timeline = [
-    { year: '2020', title: 'Founded', desc: 'Penny & Debt established with mission to help Indians become debt-free' },
-    { year: '2021', title: '5,000 Clients', desc: 'Helped first 5,000 families achieve financial freedom' },
-    { year: '2022', title: 'AI Platform', desc: 'Launched AI-powered debt negotiation system' },
-    { year: '2023', title: '25,000 Clients', desc: 'Expanded nationwide with regional offices' },
-    { year: '2024', title: '50,000+ Clients', desc: 'Crossed major milestone with ₹450Cr+ debt settled' },
+    { year: '2020', title: 'Our Humble Beginnings', desc: 'Penny & Debt was founded in Faridabad with a vision to provide ethical debt relief solutions to middle-class Indian families struggling with financial burdens.' },
+    { year: '2021', title: 'First 10,000 Clients', desc: 'Successfully helped over 10,000 clients settle more than ₹100 crores in debt, establishing ourselves as a trusted name in debt resolution.' },
+    { year: '2022', title: 'AI-Powered Solutions', desc: 'Launched our proprietary AI platform that analyzes financial situations and predicts optimal settlement strategies, improving success rates by 35%.' },
+    { year: '2023', title: 'National Recognition', desc: 'Featured in leading financial publications and recognized as one of the fastest-growing financial service providers in North India.' },
+    { year: '2024', title: '75,000+ Success Stories', desc: 'Crossed the milestone of helping 75,000+ clients settle over ₹680 crores in debt, with a 97% customer satisfaction rate based on 1000+ verified reviews.' },
   ];
 
   return (
@@ -104,20 +120,29 @@ const About = () => {
       {/* Our Story Section */}
       <section style={{ marginBottom: theme.spacing['4xl'], padding: `${theme.spacing.xl} ${theme.spacing.xl}`, background: theme.colors.bg.light, borderRadius: theme.borderRadius.xl }}>
         <h2 style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.lg, color: theme.colors.text.primary }}>
-          Our Story
+          Our Story: Empowering Financial Freedom Since 2020
         </h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: theme.spacing.lg, lineHeight: theme.typography.lineHeights.relaxed, color: theme.colors.text.secondary, fontSize: theme.typography.fontSizes.md }}>
           <p>
-            Founded in 2020, Penny & Debt was born from a simple mission: help everyday Indians break free from the crushing burden of debt. 
-            We've helped over 50,000 families settle ₹450+ crores in debt, transforming financial stress into freedom.
+            Penny & Debt was founded in Faridabad with a clear vision: to provide ethical, transparent, and effective debt relief solutions to middle-class Indian families. 
+            What began as a small team of financial experts has grown into one of North India's most trusted debt resolution firms, helping over 75,000 clients settle 
+            more than ₹680 crores in debt to date.
           </p>
           <p>
-            India faces a silent debt crisis. Millions struggle with credit card defaults, personal loans, and harassment from recovery agents. 
-            Traditional solutions are expensive, complicated, and often ineffective. We created Penny & Debt to change that.
+            Our journey started when our founders witnessed firsthand the devastating impact of unmanageable debt on hardworking families. 
+            They saw how traditional financial institutions often left people feeling trapped and powerless. 
+            We set out to change that by creating a company that puts people first - offering not just debt settlement, 
+            but a path to lasting financial freedom.
           </p>
           <p>
-            Our platform combines cutting-edge technology with human expertise to negotiate with banks and NBFCs on your behalf. 
-            We've helped thousands of Indians reduce their debt by up to 70% while protecting them legally from harassment.
+            Today, our team of certified financial experts, legal professionals, and customer success specialists work tirelessly 
+            to negotiate with banks and financial institutions on your behalf. We've developed proprietary technology that helps us 
+            analyze your financial situation and create customized debt relief strategies with a 97% success rate.
+          </p>
+          <p>
+            But beyond the numbers, what truly drives us is the human impact of our work. 
+            From helping families save their homes to giving individuals a fresh financial start, 
+            our mission remains the same: to provide hope and real solutions to those struggling with debt.
           </p>
         </div>
       </section>

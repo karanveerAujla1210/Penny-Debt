@@ -53,25 +53,25 @@ const Contact = () => {
       icon: Mail,
       title: 'Email Us',
       info: 'care@pennyanddebt.in',
-      desc: 'Send us an email anytime'
+      desc: 'Send us an email anytime. We typically respond within 2 business hours.'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      info: '+91-XXXXXXXXXX',
-      desc: 'Mon-Sat, 9 AM - 7 PM IST'
+      info: '+91-9773921023',
+      desc: 'Mon-Sat, 9 AM - 7 PM IST. Call or WhatsApp for immediate assistance.'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      info: 'Mumbai, Maharashtra',
-      desc: 'India'
+      info: 'Sector 78, Faridabad',
+      desc: 'Haryana 121004, India'
     },
     {
       icon: Clock,
       title: 'Working Hours',
       info: 'Mon-Sat: 9 AM - 7 PM',
-      desc: 'Sunday: Closed'
+      desc: 'Sunday: Closed. Emergency support available 24/7'
     }
   ];
 
@@ -104,7 +104,8 @@ const Contact = () => {
               
               <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-3xl mx-auto">
                 Have questions about debt relief? Need a free consultation? 
-                Our experts are ready to help you start your journey to financial freedom.
+                Our team of certified financial experts is available 24/7 to help you start your journey to financial freedom. 
+                With over 100+ verified 5-star reviews, we're committed to providing exceptional service and support.
               </p>
               
               <div className="flex flex-wrap gap-6 justify-center text-sm">
@@ -114,7 +115,7 @@ const Contact = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span>24-Hour Response</span>
+                  <span>2-Hour Response Time</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-green-400" />

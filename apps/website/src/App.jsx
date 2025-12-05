@@ -18,6 +18,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import Signup from './pages/Signup';
 import './App.css';
+import './components/PremiumNavbar.css';
 
 function App() {
   return (
