@@ -17,6 +17,16 @@ import Pricing from './pages/Pricing';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import Signup from './pages/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginCustomer from './pages/auth/LoginCustomer';
+import LoginEmployee from './pages/auth/LoginEmployee';
+import LoginAdmin from './pages/auth/LoginAdmin';
+import CustomerDashboard from './pages/dashboard/customer/CustomerDashboard';
+import EmployeeDashboard from './pages/dashboard/employee/EmployeeDashboard';
+import AdminDashboard from './pages/dashboard/admin/AdminDashboard';
+import Unauthorized from './pages/Unauthorized';
+import HarassmentHelp from './pages/HarassmentHelp';
+import Eligibility from './pages/Eligibility';
 import './App.css';
 import './components/PremiumNavbar.css';
 
@@ -40,8 +50,39 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/customer-login" element={<Signup />} />
-        <Route path="/employee-login" element={<Signup />} />
+        <Route path="/login" element={<LoginCustomer />} />
+        <Route path="/customer-login" element={<LoginCustomer />} />
+        <Route path="/employee-login" element={<LoginEmployee />} />
+        <Route path="/admin-login" element={<LoginAdmin />} />
+
+        {/* Protected dashboards */}
+        <Route
+          path="/dashboard/customer"
+          element={
+            <ProtectedRoute allowedRoles={["customer"]}>
+              <CustomerDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/employee"
+          element={
+            <ProtectedRoute allowedRoles={["employee"]}>
+              <EmployeeDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/admin"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="/harassment-help" element={<HarassmentHelp />} />
+        <Route path="/eligibility" element={<Eligibility />} />
       </Routes>
       <PremiumFooter />
     </>

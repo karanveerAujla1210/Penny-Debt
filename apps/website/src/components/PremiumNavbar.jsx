@@ -27,6 +27,7 @@ const PremiumNavbar = () => {
   const loginLinks = [
     { path: '/customer-login', label: 'Customer Login' },
     { path: '/employee-login', label: 'Employee Login' },
+    { path: '/admin-login', label: 'Admin Login' },
     { path: '/signup', label: 'Signup' },
   ];
 
