@@ -98,39 +98,19 @@ export default function Header() {
             
             {/* Login Dropdown */}
             <div style={{ position: "relative", marginLeft: "0.5rem" }}>
-              <button
-                onClick={() => setLoginOpen(!loginOpen)}
-                className="btn btn-secondary"
-                aria-haspopup="true"
-                aria-expanded={loginOpen}
-                style={{
-                  background: "linear-gradient(135deg, #0070f3 0%, #00c6ff 100%)",
-                  border: "none",
-                  color: "#fff",
-                  padding: "0.625rem 1.25rem",
-                  fontSize: "0.875rem",
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  borderRadius: "8px",
-                  boxShadow: "0 4px 12px rgba(0,112,243,0.3)",
-                  transition: "all 0.3s ease"
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,112,243,0.4)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,112,243,0.3)";
-                }}
-              >
-                Login
-                <span style={{ display: 'inline-flex', marginLeft: 6, transform: loginOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.28s ease' }}>
-                  <Icon name="people" size={14} />
-                </span>
-              </button>
+                <Button
+                  onClick={() => setLoginOpen(!loginOpen)}
+                  aria-haspopup="true"
+                  aria-expanded={loginOpen}
+                  variant="default"
+                  size="sm"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
+                >
+                  Login
+                  <span style={{ display: 'inline-flex', marginLeft: 6, transform: loginOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.28s ease' }}>
+                    <Icon name="people" size={14} />
+                  </span>
+                </Button>
               
               {loginOpen && (
                 <div 

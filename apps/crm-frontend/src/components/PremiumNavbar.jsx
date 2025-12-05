@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './PremiumNavbar.css';
+import { Button } from './ui/button';
 
 const PremiumNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,13 +33,14 @@ const PremiumNavbar = () => {
 
         {/* Login Dropdown */}
         <div style={{ position: 'relative' }}>
-          <button
+          <Button
             onClick={() => setLoginDropdown(!loginDropdown)}
-            className="btn btn-primary"
+            variant="default"
+            size="sm"
             style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
           >
             Login ▼
-          </button>
+          </Button>
           {loginDropdown && (
             <div style={{
               position: 'absolute',

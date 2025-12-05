@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { Button } from './ui/button';
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -72,21 +73,13 @@ export default function Header() {
             
             {/* Login Dropdown */}
             <div style={{ position: "relative" }}>
-              <button
+              <Button
                 onClick={() => setLoginOpen(!loginOpen)}
-                className="btn btn-secondary"
                 aria-haspopup="true"
                 aria-expanded={loginOpen}
-                style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid var(--primary-blue)",
-                  color: "var(--primary-blue)",
-                  padding: "0.5rem 1rem",
-                  fontSize: "0.875rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem"
-                }}
+                variant="default"
+                size="sm"
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
               >
                 Login
                 <svg 
@@ -103,7 +96,7 @@ export default function Header() {
                 >
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
-              </button>
+              </Button>
               
               {loginOpen && (
                 <div 
@@ -222,9 +215,15 @@ export default function Header() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2" style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--gray-200)" }}>
-                <Link to="/customer-login" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>Customer Login</Link>
-                <Link to="/employee-login" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Employee Login</Link>
-                <Link to="/signup" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
+                <Button asChild variant="default" size="sm" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/customer-login">Customer Login</Link>
+                </Button>
+                <Button asChild variant="secondary" size="sm" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/employee-login">Employee Login</Link>
+                </Button>
+                <Button asChild variant="secondary" size="sm" onClick={() => setMobileMenuOpen(false)}>
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
               </div>
             </div>
           </nav>
