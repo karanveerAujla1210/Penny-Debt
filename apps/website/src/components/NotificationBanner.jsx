@@ -6,11 +6,10 @@ const NotificationBanner = () => {
   if (!visible) return null;
 
   return (
-    <div style={{
+    <div className="text-center" style={{
       background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 100%)',
       color: 'white',
       padding: '12px 24px',
-      textAlign: 'center',
       fontSize: '14px',
       fontWeight: 600,
       position: 'relative',

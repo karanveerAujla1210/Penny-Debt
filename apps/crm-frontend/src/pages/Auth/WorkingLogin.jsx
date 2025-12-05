@@ -69,7 +69,7 @@ const WorkingLogin = () => {
         width: '100%',
         maxWidth: '400px'
       }}>
-        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '1.5rem' }}>
+        <h2 className="text-center" style={{ color: '#2c3e50', marginBottom: '1.5rem' }}>
           Employee Login
         </h2>
         
@@ -109,7 +109,7 @@ const WorkingLogin = () => {
           </div>
 
           {error && (
-            <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>
+            <div className="text-center" style={{ color: 'red', marginBottom: '1rem' }}>
               {error}
             </div>
           )}

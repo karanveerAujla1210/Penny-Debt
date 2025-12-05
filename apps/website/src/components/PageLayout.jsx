@@ -26,11 +26,11 @@ const PageLayout = ({
       {/* Hero Section */}
       {showHero && (
         <section
+          className="text-center"
           style={{
             background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%)`,
             color: theme.colors.text.inverse,
             padding: `${theme.spacing['4xl']} 0`,
-            textAlign: 'center',
             marginBottom: theme.spacing['3xl'],
             position: 'relative',
             overflow: 'hidden',

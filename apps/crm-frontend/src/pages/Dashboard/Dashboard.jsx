@@ -10,7 +10,7 @@ const CustomerDashboard = () => {
           <span style={{ fontSize: '22px', color: '#222', fontWeight: 'bold', marginLeft: '10px', textShadow: '0 2px 8px #e3e3e3' }}>Penny Debt</span>
         </div>
       </div>
-      <div style={{ background: 'rgba(255,255,255,0.98)', borderRadius: '14px', boxShadow: '0 2px 12px #dbeafe', padding: '18px', margin: '0 auto', maxWidth: '500px', textAlign: 'center' }}>
+      <div className="text-center" style={{ background: 'rgba(255,255,255,0.98)', borderRadius: '14px', boxShadow: '0 2px 12px #dbeafe', padding: '18px', margin: '0 auto', maxWidth: '500px' }}>
         <h2 style={{ color: '#0070f3', fontWeight: 'bold', marginBottom: '12px', fontSize: '15px' }}>Welcome, valued customer!</h2>
         <p style={{ fontSize: '13px', color: '#333', marginBottom: '10px' }}>View your profile, track your debt relief journey, and manage your progress here.</p>
         <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'center', gap: '16px' }}>

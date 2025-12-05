@@ -215,10 +215,10 @@ const About = () => {
 
       {/* Timeline Section */}
       <section style={{ marginBottom: theme.spacing['4xl'], padding: `${theme.spacing.xl} ${theme.spacing.xl}`, background: theme.colors.bg.light, borderRadius: theme.borderRadius.xl }}>
-        <h2 style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.md, textAlign: 'center', color: theme.colors.text.primary }}>
+        <h2 className="text-center" style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.md, color: theme.colors.text.primary }}>
           Our Journey
         </h2>
-        <p style={{ textAlign: 'center', color: theme.colors.text.secondary, marginBottom: theme.spacing.xl, fontSize: theme.typography.fontSizes.md }}>
+        <p className="text-center" style={{ color: theme.colors.text.secondary, marginBottom: theme.spacing.xl, fontSize: theme.typography.fontSizes.md }}>
           Milestones in our mission to help Indians achieve debt freedom
         </p>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: theme.spacing.xl }}>
@@ -304,12 +304,12 @@ const About = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
+        className="text-center"
         style={{
           background: 'linear-gradient(135deg, #FF9500 0%, #FFB84D 100%)',
           color: theme.colors.text.inverse,
           padding: theme.spacing['4xl'],
           borderRadius: theme.borderRadius.xl,
-          textAlign: 'center',
         }}
       >
         <h2 style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.lg }}>

@@ -21,11 +21,12 @@ export const SectionContainer = ({ children, bgLight = false, ...props }) => (
 
 export const SectionTitle = ({ children, centered = true, highlight = false, ...props }) => (
   <h2
+    {...props}
+    className={`${props.className || ''} ${centered ? 'text-center' : 'text-left'}`.trim()}
     style={{
       fontSize: theme.typography.fontSizes['2xl'],
       fontWeight: theme.typography.fontWeights.bold,
       marginBottom: theme.spacing.lg,
-      textAlign: centered ? 'center' : 'left',
       color: highlight ? theme.colors.text.golden : theme.colors.text.primary,
       background: highlight ? `linear-gradient(135deg, ${theme.colors.golden[500]}, ${theme.colors.orange[500]})` : 'none',
       WebkitBackgroundClip: highlight ? 'text' : 'unset',
@@ -33,7 +34,6 @@ export const SectionTitle = ({ children, centered = true, highlight = false, ...
       backgroundClip: highlight ? 'text' : 'unset',
       ...props.style,
     }}
-    {...props}
   >
     {children}
   </h2>
@@ -41,15 +41,15 @@ export const SectionTitle = ({ children, centered = true, highlight = false, ...
 
 export const SectionSubtitle = ({ children, centered = true, ...props }) => (
   <p
+    {...props}
+    className={`${props.className || ''} ${centered ? 'text-center' : 'text-left'}`.trim()}
     style={{
       fontSize: theme.typography.fontSizes.lg,
       color: theme.colors.text.secondary,
-      textAlign: centered ? 'center' : 'left',
       marginBottom: theme.spacing.xl,
       lineHeight: theme.typography.lineHeights.relaxed,
       ...props.style,
     }}
-    {...props}
   >
     {children}
   </p>
@@ -193,17 +193,17 @@ export const Badge = ({ children, variant = 'primary', ...props }) => {
 
 export const HeroSection = ({ title, subtitle, children, ...props }) => (
   <section
+    {...props}
+    className={`${props.className || ''} text-center`.trim()}
     style={{
       background: theme.colors.primary,
       color: theme.colors.text.inverse,
       padding: `${theme.spacing['4xl']} 0`,
-      textAlign: 'center',
       marginBottom: theme.spacing['3xl'],
       position: 'relative',
       overflow: 'hidden',
       ...props.style,
     }}
-    {...props}
   >
     <div
       style={{

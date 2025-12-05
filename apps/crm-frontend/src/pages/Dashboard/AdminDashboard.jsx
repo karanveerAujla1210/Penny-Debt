@@ -11,7 +11,7 @@ const AdminDashboard = () => (
           <span style={{ fontSize: '26px', color: '#222', fontWeight: 'bold', marginLeft: '12px', textShadow: '0 2px 8px #e3e3e3', letterSpacing: '2px' }}>PENNY DEBT</span>
         </div>
       </div>
-      <div style={{ background: 'rgba(255,255,255,0.98)', borderRadius: '14px', boxShadow: '0 2px 12px #dbeafe', padding: '24px', margin: '0 auto', maxWidth: '600px', textAlign: 'center' }}>
+      <div className="text-center" style={{ background: 'rgba(255,255,255,0.98)', borderRadius: '14px', boxShadow: '0 2px 12px #dbeafe', padding: '24px', margin: '0 auto', maxWidth: '600px' }}>
         <h2 style={{ color: '#0070f3', fontWeight: 'bold', marginBottom: '14px', fontSize: '18px' }}>Welcome, Admin!</h2>
         <p style={{ fontSize: '15px', color: '#333', marginBottom: '12px' }}>Access platform-wide controls, manage users, monitor employee activities, and generate reports.</p>
         <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'center', gap: '18px' }}>

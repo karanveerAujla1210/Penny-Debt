@@ -20,7 +20,7 @@ const DebtCalculator = () => {
         margin: '0 auto'
       }}
     >
-      <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', marginBottom: '32px', textAlign: 'center' }}>
+      <h3 className="text-center" style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', marginBottom: '32px' }}>
         Calculate Your Savings
       </h3>
       
@@ -51,30 +51,30 @@ const DebtCalculator = () => {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '32px' }}>
-        <div style={{ background: '#FEF2F2', padding: '24px', borderRadius: '16px', textAlign: 'center' }}>
+        <div className="text-center" style={{ background: '#FEF2F2', padding: '24px', borderRadius: '16px' }}>
           <div style={{ fontSize: '0.875rem', color: '#DC2626', fontWeight: 600, marginBottom: '8px' }}>Current Debt</div>
           <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#DC2626' }}>₹{debt.toLocaleString('en-IN')}</div>
         </div>
-        <div style={{ background: '#D1FAE5', padding: '24px', borderRadius: '16px', textAlign: 'center' }}>
+        <div className="text-center" style={{ background: '#D1FAE5', padding: '24px', borderRadius: '16px' }}>
           <div style={{ fontSize: '0.875rem', color: '#16A34A', fontWeight: 600, marginBottom: '8px' }}>After Settlement</div>
           <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#16A34A' }}>₹{settlement.toLocaleString('en-IN')}</div>
         </div>
       </div>
 
-      <div style={{ background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', padding: '24px', borderRadius: '16px', textAlign: 'center', marginBottom: '24px' }}>
+      <div className="text-center" style={{ background: 'linear-gradient(135deg, #0A4DFF 0%, #0039CC 100%)', padding: '24px', borderRadius: '16px', marginBottom: '24px' }}>
         <div style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.9)', marginBottom: '8px' }}>You Could Save</div>
         <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'white' }}>₹{savings.toLocaleString('en-IN')}</div>
         <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.9)' }}>Average 58% Reduction</div>
       </div>
 
       <a
+        className="text-center"
         href="/applyform"
         style={{
           display: 'block',
           padding: '16px',
           background: '#00D49E',
           color: 'white',
-          textAlign: 'center',
           borderRadius: '12px',
           textDecoration: 'none',
           fontWeight: 700,

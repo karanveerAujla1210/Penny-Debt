@@ -642,7 +642,7 @@ export default function Home() {
                               borderTop: `4px solid ${idx % 2 === 0 ? theme.colors.golden[500] : theme.colors.orange[500]}`,
                             }}
                           >
-                            <div style={{ textAlign: 'center' }}>
+                            <div className="text-center">
                               <div style={{ fontSize: '40px', marginBottom: theme.spacing.md }}>{feature.icon}</div>
                               <div
                                 style={{
@@ -678,13 +678,13 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
+                    className="text-center"
                     style={{
                       background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:rgba(255,165,0,0.1);stop-opacity:1" /><stop offset="100%" style="stop-color:rgba(255,153,0,0.05);stop-opacity:1" /></linearGradient></defs><rect fill="url(%23grad)" width="1200" height="120"/></svg>')`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       color: theme.colors.text.inverse,
                       padding: theme.spacing['4xl'] + ' ' + theme.spacing.lg,
-                      textAlign: 'center',
                       marginBottom: 0,
                       position: 'relative',
                       overflow: 'hidden',

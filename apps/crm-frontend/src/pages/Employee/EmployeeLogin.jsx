@@ -47,7 +47,7 @@ const EmployeeLogin = () => {
       borderRadius: '8px',
       boxShadow: '0 2px 10px rgba(0,0,0,0.1)'
     }}>
-      <h1 style={{ textAlign: 'center', color: '#0070f3', marginBottom: '30px' }}>
+      <h1 className="text-center" style={{ color: '#0070f3', marginBottom: '30px' }}>
         Employee Login
       </h1>
       
@@ -99,14 +99,13 @@ const EmployeeLogin = () => {
         </div>
 
         {error && (
-          <div style={{
-            color: '#f56565',
-            backgroundColor: '#fed7d7',
-            padding: '10px',
-            borderRadius: '4px',
-            marginBottom: '20px',
-            textAlign: 'center'
-          }}>
+          <div className="text-center" style={{
+              color: '#f56565',
+              backgroundColor: '#fed7d7',
+              padding: '10px',
+              borderRadius: '4px',
+              marginBottom: '20px',
+            }}>
             {error}
           </div>
         )}

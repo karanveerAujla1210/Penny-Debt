@@ -126,27 +126,27 @@ const StaffDashboard = () => {
         </div>
         {/* KPIs - Dynamic Slabs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '18px' }}>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#0070f3', fontWeight: 'bold' }}>{kpis.newLeads}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>New Leads</div>
           </div>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#00b894', fontWeight: 'bold' }}>{kpis.currentLeads}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>Current Leads</div>
           </div>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#fdcb6e', fontWeight: 'bold' }}>{kpis.activeCases}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>Active Cases</div>
           </div>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#6c5ce7', fontWeight: 'bold' }}>{kpis.totalClients}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>Total Clients Enrolled</div>
           </div>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#d63031', fontWeight: 'bold' }}>{kpis.totalDebt}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>Total Debt Enrolled</div>
           </div>
-          <div style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px', textAlign: 'center' }}>
+          <div className="text-center" style={{ background: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px #e3e3e3', padding: '16px', minWidth: '120px' }}>
             <div style={{ fontSize: '22px', color: '#00b894', fontWeight: 'bold' }}>{kpis.checklistTasks}</div>
             <div style={{ color: '#555', fontSize: '13px' }}>Checklist Tasks</div>
           </div>

@@ -62,8 +62,7 @@ const SimpleEmployeeLogin = () => {
         width: '100%',
         maxWidth: '500px'
       }}>
-        <h2 style={{
-          textAlign: 'center',
+        <h2 className="text-center" style={{
           color: '#2c3e50',
           marginBottom: '30px',
           fontSize: '28px',
@@ -126,13 +125,12 @@ const SimpleEmployeeLogin = () => {
           </div>
 
           {error && (
-            <div style={{
+            <div className="text-center" style={{
               background: '#fee',
               color: '#c33',
               padding: '10px',
               borderRadius: '5px',
               marginBottom: '20px',
-              textAlign: 'center'
             }}>
               {error}
             </div>

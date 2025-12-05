@@ -107,8 +107,7 @@ const IsolatedLogin = () => {
         width: '100%',
         maxWidth: '500px'
       }}>
-        <h2 style={{
-          textAlign: 'center',
+        <h2 className="text-center" style={{
           color: '#2c3e50',
           marginBottom: '30px',
           fontSize: '28px',
@@ -172,13 +171,12 @@ const IsolatedLogin = () => {
         </form>
 
         {message && (
-          <div style={{
+          <div className="text-center" style={{
             padding: '15px',
             margin: '20px 0',
             borderRadius: '8px',
             background: message.includes('✅') ? '#d4edda' : '#f8d7da',
             color: message.includes('✅') ? '#155724' : '#721c24',
-            textAlign: 'center',
             fontWeight: '600'
           }}>
             {message}

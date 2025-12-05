@@ -72,45 +72,41 @@ const Dashboard = () => {
           gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
           gap: '1rem'
         }}>
-          <div style={{
+          <div className="text-center" style={{
             background: '#3498db',
             color: 'white',
             padding: '1.5rem',
-            borderRadius: '8px',
-            textAlign: 'center'
+            borderRadius: '8px'
           }}>
             <h4>Total Leads</h4>
             <p style={{ fontSize: '2rem', margin: '0.5rem 0' }}>156</p>
           </div>
 
-          <div style={{
+          <div className="text-center" style={{
             background: '#2ecc71',
             color: 'white',
             padding: '1.5rem',
-            borderRadius: '8px',
-            textAlign: 'center'
+            borderRadius: '8px'
           }}>
             <h4>Active Cases</h4>
             <p style={{ fontSize: '2rem', margin: '0.5rem 0' }}>89</p>
           </div>
 
-          <div style={{
+          <div className="text-center" style={{
             background: '#f39c12',
             color: 'white',
             padding: '1.5rem',
-            borderRadius: '8px',
-            textAlign: 'center'
+            borderRadius: '8px'
           }}>
             <h4>Pending Reviews</h4>
             <p style={{ fontSize: '2rem', margin: '0.5rem 0' }}>23</p>
           </div>
 
-          <div style={{
+          <div className="text-center" style={{
             background: '#9b59b6',
             color: 'white',
             padding: '1.5rem',
-            borderRadius: '8px',
-            textAlign: 'center'
+            borderRadius: '8px'
           }}>
             <h4>Completed</h4>
             <p style={{ fontSize: '2rem', margin: '0.5rem 0' }}>67</p>
