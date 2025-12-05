@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-  Handshake, PhoneOff, FileText, BarChart2, TrendingDown, TrendingUp, 
+  Handshake, PhoneOff, FileText, BarChart2, TrendingUp, TrendingDown,
   Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -259,16 +259,16 @@ const Services = () => {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-        <section style={{ position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%), linear-gradient(135deg, rgba(255,165,0,0.06), rgba(255,153,0,0.03))`, color: theme.colors.text.inverse }}>
-          <div className="absolute inset-0" style={{ opacity: 0.18, background: `radial-gradient(circle at 20% 30%, rgba(255,165,0,0.08), transparent 30%), radial-gradient(circle at 80% 70%, rgba(255,153,0,0.05), transparent 40%)` }} />
-
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+      <section style={{ position: 'relative', overflow: 'hidden', background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%), linear-gradient(135deg, rgba(255,165,0,0.06), rgba(255,153,0,0.03))`, color: theme.colors.text.inverse }}>
+        <div className="absolute inset-0" style={{ opacity: 0.18, background: `radial-gradient(circle at 20% 30%, rgba(255,165,0,0.08), transparent 30%), radial-gradient(circle at 80% 70%, rgba(255,153,0,0.05), transparent 40%)` }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+          >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
                 Transform Your Financial Future <br />
                 <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
@@ -339,7 +339,8 @@ const Services = () => {
               </div>
             </motion.div>
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* Core Services */}
       <section className="py-20 bg-white">
@@ -734,8 +735,9 @@ const Services = () => {
               </div>
             ))}
           </div>
+        </div>
 
-          <div className="mt-12 text-center">
+        <div className="mt-12 text-center">
             <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full">
               <Quote className="w-5 h-5 text-blue-400" />
               <p className="text-blue-800 font-medium">
@@ -748,9 +750,6 @@ const Services = () => {
                 className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
               >
                 Get Your Free Consultation
-                <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
-              </Link>
-            </div>
           </div>
         </div>
       </section>
