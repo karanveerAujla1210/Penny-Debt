@@ -1,13 +1,9 @@
 {
-  "version": 2,
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "github": {
-    "silent": true
-  },
-  "buildCommand": "npm run install:all && npm run build:all",
+  "installCommand": "npm install --prefix apps/website",
+  "buildCommand": "npm run build --prefix apps/website",
   "outputDirectory": "apps/website/dist",
-  "installCommand": "npm ci --legacy-peer-deps",
-  "framework": "vite"
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
