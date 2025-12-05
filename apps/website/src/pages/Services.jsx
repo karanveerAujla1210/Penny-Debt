@@ -1,16 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Handshake, PhoneOff, FileText, BarChart2, TrendingUp, TrendingDown,
-  Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
-} from 'lucide-react';
+import { CheckCircle, ArrowRight, Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
 import theme from '../styles/theme';
 
 const Services = () => {
-  const [activeTab] = useState('all');
-
   useEffect(() => {
     AOS.init({ duration: 700, once: true });
   }, []);
@@ -145,26 +140,9 @@ const Services = () => {
   );
 };
 
-      'What I appreciated most was their transparency. No hidden fees, and they delivered exactly what they promised.',
-      'Not only did they help me settle my debt, but their credit rehabilitation program helped improve my score significantly.',
-      'My monthly EMI was impossible to manage. Penny & Debt restructured my loans and now I can finally breathe!',
-      'I was getting 10-15 calls daily from recovery agents. Penny & Debt team made it all stop within a day.',
+export default Services;
       'The team went above and beyond to help me resolve my financial situation. Truly life-changing service!',
       'Professional, courteous, and effective. They handled everything from start to finish with minimal hassle.',
-      'I can\'t thank the team enough for helping me get my financial life back on track. Worth every penny!'
-    ];
-
-    const reviews = [];
-    for (let i = 1; i <= count; i++) {
-      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-                      ))}
-                    </ul>
-                    
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center font-medium transition-colors group"
-                      style={{ color: theme.colors.orange[600] }}
-                    >
                       Learn more
                       <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
                     </Link>

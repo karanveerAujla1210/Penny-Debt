@@ -1,0 +1,230 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { 
+  Handshake, PhoneOff, FileText, BarChart2, TrendingUp, TrendingDown,
+  Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
+import AOS from 'aos';
+import theme from '../styles/theme';
+
+const Services = () => {
+  const [activeTab, setActiveTab] = useState('all');
+  const [clientReviews] = useState([
+    {
+      id: 1,
+      name: 'Rahul Sharma',
+      rating: 5,
+      text: 'Penny & Debt helped me settle my debt quickly and efficiently. The team was always available to answer my questions.'
+    },
+    {
+      id: 2,
+      name: 'Priya Patel',
+      rating: 5,
+      text: 'I was skeptical at first, but their team guided me through every step. The peace of mind is priceless!'
+    },
+    {
+      id: 3,
+      name: 'Amit Kumar',
+      rating: 5,
+      text: 'The process was smooth and their team was always available to answer my questions. Highly recommend their services!'
+    }
+  ]);
+
+  useEffect(() => {
+    AOS.init({ duration: 700, once: true });
+  }, []);
+
+  const coreServices = [
+    {
+      id: 'settlement',
+      title: 'Debt Settlement',
+      description: 'Reduce your total debt by up to 60% with our expert negotiation services.',
+      icon: Handshake,
+      features: [
+        'Average 40-60% debt reduction',
+        'Single monthly payment',
+        'Legal protection',
+        '24/7 support'
+      ]
+    },
+    {
+      id: 'restructuring',
+      title: 'EMI Restructuring',
+      description: 'Lower your monthly payments and get relief from financial stress.',
+      icon: TrendingDown,
+      features: [
+        'Up to 60% lower EMIs',
+        'Extended repayment terms',
+        'No prepayment penalty',
+        'Credit score improvement'
+      ]
+    },
+    {
+      id: 'legal',
+      title: 'Legal Protection',
+      description: 'Stop harassment from recovery agents and get legal support.',
+      icon: Shield,
+      features: [
+        'Immediate stop to harassment',
+        'Legal notice handling',
+        'Court representation',
+        'Documentation support'
+      ]
+    }
+  ];
+
+  const renderStars = (rating = 5) => {
+    return Array(5).fill(0).map((_, i) => (
+      <Star 
+        key={i} 
+        className={`w-5 h-5 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+      />
+    ));
+  };
+
+  return (
+    <div className="pt-20">
+      {/* Hero Section */}
+      <section style={{ 
+        position: 'relative', 
+        overflow: 'hidden', 
+        background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 60%), linear-gradient(135deg, rgba(255,165,0,0.06), rgba(255,153,0,0.03))`, 
+        color: theme.colors.text.inverse 
+      }}>
+        <div className="absolute inset-0" style={{ 
+          opacity: 0.18, 
+          background: `radial-gradient(circle at 20% 30%, rgba(255,165,0,0.08), transparent 30%), radial-gradient(circle at 80% 70%, rgba(255,153,0,0.05), transparent 40%)` 
+        }} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              Transform Your Financial Future <br />
+              <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                With Expert Debt Solutions
+              </span>
+            </h1>
+            <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-3xl mx-auto">
+              Trusted by over 75,000+ Indians, we've helped settle more than ₹680 crores in debt with a 97% success rate.
+              Our RBI-certified financial experts provide 24/7 support to help you break free from financial stress and 
+              achieve lasting financial freedom. Start with a free, no-obligation consultation today.
+            </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/apply"
+                className="px-8 py-4 font-bold rounded-lg hover:scale-105 flex items-center justify-center gap-2"
+                style={{
+                  background: `linear-gradient(90deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})`,
+                  color: theme.colors.text.inverse,
+                  boxShadow: '0 10px 40px rgba(255,165,0,0.2)',
+                }}
+              >
+                Get Free Assessment
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <Link
+                to="/contact"
+                className="px-8 py-4 font-semibold rounded-lg flex items-center justify-center gap-2"
+                style={{ 
+                  border: `2px solid ${theme.colors.golden[300]}`,
+                  color: theme.colors.text.inverse,
+                  background: 'transparent' 
+                }}
+              >
+                Speak with an Expert
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Core Services */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive solutions tailored to your unique financial situation
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {coreServices.map((service, index) => (
+              <motion.div
+                key={service.id}
+                className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <div className="p-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${theme.colors.golden[500]}, ${theme.colors.orange[600]})` }}>
+                    <service.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                        <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link 
+                    to="/contact" 
+                    className="inline-flex items-center text-blue-600 font-medium group"
+                  >
+                    Learn more
+                    <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+            <p className="text-xl text-gray-600">Success stories from our clients</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {clientReviews.map((review) => (
+              <div key={review.id} className="bg-white p-6 rounded-xl shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-3">
+                      {review.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{review.name}</h4>
+                      <div className="flex items-center">
+                        {renderStars(review.rating)}
+                      </div>
+                    </div>
+                  </div>
+                  <Quote className="w-8 h-8 text-gray-200" />
+                </div>
+                <p className="text-gray-600">"{review.text}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Services;
