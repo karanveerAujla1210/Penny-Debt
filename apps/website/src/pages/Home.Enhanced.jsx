@@ -327,7 +327,7 @@ export default function Home() {
                   borderTop: `4px solid ${idx % 2 === 0 ? theme.colors.golden[500] : theme.colors.orange[500]}`,
                 }}
               >
-                <div style={{ textAlign: 'center' }}>
+                <div className="text-center">
                   <div style={{ fontSize: '40px', marginBottom: theme.spacing.md }}>{feature.icon}</div>
                   <div
                     style={{
@@ -369,7 +369,7 @@ export default function Home() {
           backgroundPosition: 'center',
           color: theme.colors.text.inverse,
           padding: theme.spacing['4xl'] + ' ' + theme.spacing.lg,
-          textAlign: 'center',
+        
           marginBottom: 0,
           position: 'relative',
           overflow: 'hidden',
