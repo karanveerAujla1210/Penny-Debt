@@ -101,3 +101,44 @@ export const Icon = ({ name = 'shield', size = 20, className = '' }) => {
 }
 
 export default Icon
+
+// Additional icons: Sun & Moon for theme toggle
+export const SunGradient = ({ className = "", size = 20 }) => {
+  const gid = useGradientId('sun')
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <defs>
+        <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#FDE68A" />
+          <stop offset="100%" stopColor="#FDBA74" />
+        </linearGradient>
+      </defs>
+      <circle cx="12" cy="12" r="4" fill={`url(#${gid})`} />
+      <g stroke={`url(#${gid})`} strokeWidth="1.2" strokeLinecap="round">
+        <line x1="12" y1="1" x2="12" y2="3" />
+        <line x1="12" y1="21" x2="12" y2="23" />
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      </g>
+    </svg>
+  )
+}
+
+export const MoonGradient = ({ className = "", size = 20 }) => {
+  const gid = useGradientId('moon')
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      <defs>
+        <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#A78BFA" />
+          <stop offset="100%" stopColor="#60A5FA" />
+        </linearGradient>
+      </defs>
+      <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 0021 12.79z" fill={`url(#${gid})`} />
+    </svg>
+  )
+}
+
+// register sun/moon
+icons.sun = SunGradient
+icons.moon = MoonGradient

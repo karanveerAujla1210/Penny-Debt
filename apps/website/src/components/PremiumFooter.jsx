@@ -28,18 +28,18 @@ const PremiumFooter = () => {
               <div className="language-switch" style={{ marginTop: '8px' }}>
                 <a href="?lang=en" aria-label="English">EN</a> | <a href="?lang=hi" aria-label="हिंदी">हिंदी</a>
               </div>
-              <div className="social-links">
+              <div className="social-links" style={{ display: 'flex', gap: 12, marginTop: 8 }}>
                 <a href="https://www.instagram.com/pennydebt_?igsh=MWs3Mm1ic3k5djF0YQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  📷
+                  <img src="/assets/social/instagram.svg" alt="Instagram" style={{ width: 20, height: 20, filter: 'grayscale(0.1) brightness(1.1)' }} />
                 </a>
                 <a href="https://www.linkedin.com/company/pennydebt/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  in
+                  <img src="/assets/social/linkedin.svg" alt="LinkedIn" style={{ width: 20, height: 20 }} />
                 </a>
                 <a href="https://x.com/pennydebt" target="_blank" rel="noopener noreferrer" aria-label="X">
-                  𝕏
+                  <img src="/assets/social/x.svg" alt="X" style={{ width: 20, height: 20 }} />
                 </a>
                 <a href="https://facebook.com/pennydebt" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  f
+                  <img src="/assets/social/facebook.svg" alt="Facebook" style={{ width: 20, height: 20 }} />
                 </a>
               </div>
             </div>

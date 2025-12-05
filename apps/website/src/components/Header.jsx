@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import Icon from './ui/icons';
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -125,20 +126,9 @@ export default function Header() {
                 }}
               >
                 Login
-                <svg 
-                  width="14" 
-                  height="14" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5" 
-                  style={{ 
-                    transform: loginOpen ? "rotate(180deg)" : "rotate(0deg)", 
-                    transition: "transform 0.3s ease" 
-                  }}
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
+                <span style={{ display: 'inline-flex', marginLeft: 6, transform: loginOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.28s ease' }}>
+                  <Icon name="people" size={14} />
+                </span>
               </button>
               
               {loginOpen && (
