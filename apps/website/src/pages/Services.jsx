@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
-  Handshake, PhoneOff, FileText, BarChart2, TrendingUp, 
+  Handshake, PhoneOff, FileText, BarChart2, TrendingDown, TrendingUp, 
   Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -263,7 +263,8 @@ const Services = () => {
           <div className="absolute inset-0" style={{ opacity: 0.18, background: `radial-gradient(circle at 20% 30%, rgba(255,165,0,0.08), transparent 30%), radial-gradient(circle at 80% 70%, rgba(255,153,0,0.05), transparent 40%)` }} />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
-          <div className="text-center">
+            <motion.div 
+              className="text-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -338,8 +339,7 @@ const Services = () => {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Core Services */}
       <section className="py-20 bg-white">
