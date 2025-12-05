@@ -1,71 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import '../styles/fintech-system.css';
 
 export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
 
   return (
     <>
       <SEO title="Turn Your Debt Into A Manageable Plan | Penny & Debt" />
 
-      {/* HERO SECTION */}
-      <section className="hero-section">
-        <div className="container" style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '64px', alignItems: 'center' }}>
-            <div>
-              <h1 className="hero-title">
-                Financial Freedom Starts Here
+      {/* ENHANCED HERO SECTION */}
+      <section className="hero-section-enhanced">
+        <div className="container">
+          <div className="hero-grid">
+            <div className={`hero-content ${isVisible ? 'animate-in' : ''}`}>
+              <div className="hero-badge">
+                <span className="badge-text">✨ Trusted by 10,000+ Indians</span>
+              </div>
+              <h1 className="hero-title-enhanced">
+                Transform Your Debt Into
+                <span className="hero-highlight"> Financial Freedom</span>
               </h1>
-              <p className="hero-subtitle">
-                Take control of your debt with expert guidance, personalized solutions, and real financial wellness. Join 10,000+ Indians who achieved freedom.
+              <p className="hero-subtitle-enhanced">
+                Expert debt relief solutions with personalized strategies, transparent pricing,
+                and guaranteed results. Join thousands who've eliminated ₹500Cr+ in debt.
               </p>
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '48px', flexWrap: 'wrap' }}>
-                <Link to="/apply" className="btn btn-primary btn-lg">
-                  Get Started Free
+              <div className="hero-actions">
+                <Link to="/apply" className="btn btn-primary-enhanced btn-lg">
+                  <span>Start Free Consultation</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </Link>
-                <Link to="/contact" className="btn btn-secondary btn-lg">
-                  Book Consultation
+                <Link to="/how-it-works" className="btn btn-secondary-enhanced btn-lg">
+                  <span>How It Works</span>
                 </Link>
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '24px', marginTop: '48px' }}>
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)' }}>10K+</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '4px' }}>Customers Helped</div>
+              <div className="hero-stats">
+                <div className="stat-item">
+                  <div className="stat-number">10K+</div>
+                  <div className="stat-label">Happy Customers</div>
                 </div>
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)' }}>₹500Cr+</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '4px' }}>Debt Resolved</div>
+                <div className="stat-item">
+                  <div className="stat-number">₹500Cr+</div>
+                  <div className="stat-label">Debt Resolved</div>
                 </div>
-                <div>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: 'var(--primary)' }}>4.9★</div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-tertiary)', marginTop: '4px' }}>Customer Rating</div>
+                <div className="stat-item">
+                  <div className="stat-number">4.9★</div>
+                  <div className="stat-label">Customer Rating</div>
                 </div>
               </div>
             </div>
 
-            {/* VISUAL */}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <div style={{
-                width: '100%',
-                maxWidth: '400px',
-                aspectRatio: '1',
-                background: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)',
-                borderRadius: '20px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: 'white',
-                fontSize: '80px',
-                fontWeight: 'bold',
-                boxShadow: 'var(--shadow-lg)'
-              }}>
-                💰
+            {/* ENHANCED VISUAL */}
+            <div className="hero-visual">
+              <div className="hero-card-main">
+                <div className="card-glow"></div>
+                <div className="card-content">
+                  <div className="card-icon">💰</div>
+                  <div className="card-text">
+                    <div className="card-title">Debt-Free Journey</div>
+                    <div className="card-subtitle">Your path to financial freedom</div>
+                  </div>
+                </div>
+                <div className="card-decoration-1"></div>
+                <div className="card-decoration-2"></div>
+              </div>
+              <div className="hero-card-secondary">
+                <div className="mini-stat">
+                  <div className="mini-icon">📈</div>
+                  <div className="mini-text">72% Avg. Savings</div>
+                </div>
+              </div>
+              <div className="hero-card-tertiary">
+                <div className="mini-stat">
+                  <div className="mini-icon">🛡️</div>
+                  <div className="mini-text">100% Secure</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* BACKGROUND ELEMENTS */}
+        <div className="hero-bg-shape-1"></div>
+        <div className="hero-bg-shape-2"></div>
+        <div className="hero-bg-dots"></div>
       </section>
 
       {/* SERVICES SECTION */}
