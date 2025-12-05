@@ -247,6 +247,7 @@ export default function Home() {
                   >
                     {service.icon}
                   </div>
+                </div>
 
                 <div className="service-content" style={{ position: 'relative', zIndex: 1 }}>
                   <h3 
