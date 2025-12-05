@@ -15,8 +15,12 @@ export const ShieldGradient = ({ className = "", size = 20, title = "shield icon
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#6EE7B7" />
-          <stop offset="100%" stopColor="#06B6D4" />
+          <stop offset="0%" stopColor="#6EE7B7">
+            <animate attributeName="stop-color" values="#6EE7B7;#34D399;#6EE7B7" dur="5s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#06B6D4">
+            <animate attributeName="stop-color" values="#06B6D4;#06B6D4;#06B6D4" dur="5s" repeatCount="indefinite" begin="1s" />
+          </stop>
         </linearGradient>
       </defs>
       <path d="M12 2l7 3v5c0 5-3.6 9.7-7 12-3.4-2.3-7-7-7-12V5l7-3z" fill={`url(#${gid})`} />
@@ -30,8 +34,12 @@ export const PhoneGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#FFD166" />
-          <stop offset="100%" stopColor="#EF476F" />
+          <stop offset="0%" stopColor="#FFD166">
+            <animate attributeName="stop-color" values="#FFD166;#FFB4A2;#FFD166" dur="6s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#EF476F">
+            <animate attributeName="stop-color" values="#EF476F;#FF7BAC;#EF476F" dur="6s" repeatCount="indefinite" begin="1.2s" />
+          </stop>
         </linearGradient>
       </defs>
       <path d="M21 16.5a3.5 3.5 0 0 1-3.5 3.5h-1A16 16 0 0 1 3 6.5v-1A3.5 3.5 0 0 1 6.5 2h1A1 1 0 0 1 8.5 3.1L9.8 6a1 1 0 0 1-.2 1.1l-1.2 1.2a12 12 0 0 0 5.6 5.6l1.2-1.2a1 1 0 0 1 1.1-.2l2.9 1.3a1 1 0 0 1 1.1 1.1v1z" fill={`url(#${gid})`} />
@@ -45,8 +53,12 @@ export const WalletGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#7C3AED" />
-          <stop offset="100%" stopColor="#3B82F6" />
+          <stop offset="0%" stopColor="#7C3AED">
+            <animate attributeName="stop-color" values="#7C3AED;#8B5CF6;#7C3AED" dur="5.5s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#3B82F6">
+            <animate attributeName="stop-color" values="#3B82F6;#60A5FA;#3B82F6" dur="5.5s" repeatCount="indefinite" begin="0.8s" />
+          </stop>
         </linearGradient>
       </defs>
       <rect x="2" y="6" width="20" height="12" rx="2" fill={`url(#${gid})`} />
@@ -61,8 +73,12 @@ export const ScaleGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#34D399" />
-          <stop offset="100%" stopColor="#06B6D4" />
+          <stop offset="0%" stopColor="#34D399">
+            <animate attributeName="stop-color" values="#34D399;#6EE7B7;#34D399" dur="6s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#06B6D4">
+            <animate attributeName="stop-color" values="#06B6D4;#06B6D4;#06B6D4" dur="6s" repeatCount="indefinite" begin="1s" />
+          </stop>
         </linearGradient>
       </defs>
       <path d="M12 3v2m0 0a6 6 0 0 0-6 6v1m12-7v2m0 0a6 6 0 0 1 6 6v1" stroke={`url(#${gid})`} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,8 +93,12 @@ export const PeopleGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#F97316" />
-          <stop offset="100%" stopColor="#EF4444" />
+          <stop offset="0%" stopColor="#F97316">
+            <animate attributeName="stop-color" values="#F97316;#FB923C;#F97316" dur="5.2s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#EF4444">
+            <animate attributeName="stop-color" values="#EF4444;#F43F5E;#EF4444" dur="5.2s" repeatCount="indefinite" begin="0.9s" />
+          </stop>
         </linearGradient>
       </defs>
       <path d="M16 11a3 3 0 1 0-6 0 3 3 0 0 0 6 0zM6 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" fill={`url(#${gid})`} />
@@ -109,8 +129,12 @@ export const SunGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#FDE68A" />
-          <stop offset="100%" stopColor="#FDBA74" />
+          <stop offset="0%" stopColor="#FDE68A">
+            <animate attributeName="stop-color" values="#FDE68A;#FCA5A5;#FDE68A" dur="6s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#FDBA74">
+            <animate attributeName="stop-color" values="#FDBA74;#FDBA74;#FDBA74" dur="6s" repeatCount="indefinite" begin="1s" />
+          </stop>
         </linearGradient>
       </defs>
       <circle cx="12" cy="12" r="4" fill={`url(#${gid})`} />
@@ -130,8 +154,12 @@ export const MoonGradient = ({ className = "", size = 20 }) => {
     <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
       <defs>
         <linearGradient id={gid} x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stopColor="#A78BFA" />
-          <stop offset="100%" stopColor="#60A5FA" />
+          <stop offset="0%" stopColor="#A78BFA">
+            <animate attributeName="stop-color" values="#A78BFA;#C4B5FD;#A78BFA" dur="6s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#60A5FA">
+            <animate attributeName="stop-color" values="#60A5FA;#7DD3FC;#60A5FA" dur="6s" repeatCount="indefinite" begin="1.3s" />
+          </stop>
         </linearGradient>
       </defs>
       <path d="M21 12.79A9 9 0 0111.21 3 7 7 0 0021 12.79z" fill={`url(#${gid})`} />
