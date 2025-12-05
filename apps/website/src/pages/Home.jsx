@@ -1,177 +1,356 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { ArrowRight, CheckCircle, Users, TrendingUp, Shield, Zap } from 'lucide-react';
 import SEO from '../components/SEO';
-import AnimatedCounter from '../components/AnimatedCounter';
 import FloatingCTA from '../components/FloatingCTA';
 import WhatsAppWidget from '../components/WhatsAppWidget';
+import theme from '../styles/theme';
+import { Grid, Card, HeroSection, SectionContainer, SectionTitle, SectionSubtitle } from '../components/StyledComponents';
 
 const stats = [
-  { label: 'Debt Analysed', value: '150', suffix: '+ Cr', prefix: '₹' },
-  { label: 'Clients Helped', value: '10000', suffix: '+' },
-  { label: 'Success Rate', value: '95', suffix: '%' },
+  { label: 'Debt Analysed', value: '150', suffix: '+ Cr', prefix: '₹', icon: TrendingUp },
+  { label: 'Clients Helped', value: '10000', suffix: '+', icon: Users },
+  { label: 'Success Rate', value: '95', suffix: '%', icon: CheckCircle },
+];
+
+const steps = [
+  { step: '1', title: 'Understand Your Debt', desc: 'We analyze your income, expenses, loans, and payment history.', icon: Shield },
+  { step: '2', title: 'Design Relief Plan', desc: 'Our team creates a tailored strategy with realistic payment roadmap.', icon: Zap },
+  { step: '3', title: 'Support Till Freedom', desc: 'Regular check-ins, plan adjustments, and guidance on dealing with lenders.', icon: ArrowRight },
 ];
 
 export default function Home() {
   return (
     <>
       <SEO title="Turn Your Debt Into A Manageable Plan | Penny & Debt" />
-      
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-surface-900 bg-hero-radial text-slate-50">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 pb-16 pt-24 md:flex-row md:pb-24 md:pt-28">
-          
+      <HeroSection
+        style={{
+          background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%)`,
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: theme.spacing['3xl'],
+            alignItems: 'center',
+            maxWidth: '1280px',
+            margin: '0 auto',
+            padding: `0 ${theme.spacing.lg}`,
+          }}
+        >
           {/* Left: Text */}
-          <div className="relative z-10 max-w-xl space-y-6">
-            <p className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-slate-300">
-              Debt Relief • India
-              <span className="ml-2 h-1.5 w-1.5 rounded-full bg-accent-teal" />
-            </p>
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: theme.spacing.sm,
+                background: 'rgba(255,255,255,0.1)',
+                padding: `${theme.spacing.sm} ${theme.spacing.md}`,
+                borderRadius: theme.borderRadius.full,
+                marginBottom: theme.spacing.lg,
+                backdropFilter: 'blur(10px)',
+              }}
+            >
+              <span style={{ fontSize: '12px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', opacity: 0.9 }}>
+                🇮🇳 Debt Relief • India
+              </span>
+            </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="font-heading text-4xl leading-tight md:text-5xl lg:text-6xl"
+              transition={{ delay: 0.2, duration: 0.8 }}
+              style={{
+                fontSize: theme.typography.fontSizes['4xl'],
+                fontWeight: theme.typography.fontWeights.black,
+                lineHeight: 1.2,
+                marginBottom: theme.spacing.lg,
+              }}
             >
-              Turn your{' '}
-              <span className="bg-gradient-to-r from-brand-400 via-brand-200 to-accent-cyan bg-clip-text text-transparent">
-                unmanageable debt
-              </span>{' '}
-              into a clear plan.
+              Turn Your <span style={{ color: '#FFD700' }}>Unmanageable Debt</span> Into a Clear Plan
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-              className="max-w-lg text-base text-slate-300 md:text-lg"
+              transition={{ delay: 0.3, duration: 0.8 }}
+              style={{
+                fontSize: theme.typography.fontSizes.lg,
+                lineHeight: theme.typography.lineHeights.relaxed,
+                marginBottom: theme.spacing.xl,
+                opacity: 0.95,
+              }}
             >
               Penny & Debt analyses your loans and credit cards, designs a realistic relief strategy, and keeps you on track—so you don't have to fight this alone.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              className="flex flex-wrap items-center gap-3"
+              transition={{ delay: 0.4, duration: 0.8 }}
+              style={{ display: 'flex', gap: theme.spacing.md, marginBottom: theme.spacing.xl, flexWrap: 'wrap' }}
             >
               <Link
                 to="/apply"
-                className="rounded-lg bg-btn-primary bg-[length:220%_220%] bg-left px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-right hover:scale-105"
+                style={{
+                  padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+                  background: theme.colors.text.inverse,
+                  color: theme.colors.primary,
+                  borderRadius: theme.borderRadius.lg,
+                  textDecoration: 'none',
+                  fontWeight: theme.typography.fontWeights.bold,
+                  fontSize: theme.typography.fontSizes.md,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: theme.spacing.sm,
+                  transition: `all ${theme.transitions.base} ease`,
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'scale(1.05)';
+                  e.target.style.boxShadow = theme.shadows.lg;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'scale(1)';
+                  e.target.style.boxShadow = 'none';
+                }}
               >
-                Check Your Eligibility
+                Check Your Eligibility <ArrowRight size={20} />
               </Link>
-
               <Link
                 to="/contact"
-                className="rounded-lg border border-slate-600 bg-white/5 px-6 py-3 text-sm text-slate-100 hover:bg-white/10"
+                style={{
+                  padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+                  background: 'transparent',
+                  color: theme.colors.text.inverse,
+                  border: `2px solid ${theme.colors.text.inverse}`,
+                  borderRadius: theme.borderRadius.lg,
+                  textDecoration: 'none',
+                  fontWeight: theme.typography.fontWeights.semibold,
+                  fontSize: theme.typography.fontSizes.md,
+                  transition: `all ${theme.transitions.base} ease`,
+                  display: 'inline-block',
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'rgba(255,255,255,0.1)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent';
+                }}
               >
                 Book Free Consultation
               </Link>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-4 flex flex-wrap items-center gap-3 text-xs text-slate-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{ display: 'flex', gap: theme.spacing.xl, flexWrap: 'wrap', fontSize: theme.typography.fontSizes.sm, opacity: 0.9 }}
             >
-              <div className="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>1:1 Human Counsellors</span>
-              </div>
-              <span>•</span>
-              <span>Data Kept Private & Secure</span>
+              {[
+                '✓ 1:1 Human Counsellors',
+                '✓ Data Kept Private & Secure',
+                '✓ RBI Compliant',
+              ].map((item, i) => (
+                <div key={i}>{item}</div>
+              ))}
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Right: Stats Cards */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="relative z-10 w-full max-w-md"
+            transition={{ duration: 0.7 }}
+            style={{ display: 'grid', gap: theme.spacing.md }}
           >
-            <div className="float-soft rounded-3xl border border-white/10 bg-card-soft p-5 shadow-[0_28px_80px_rgba(15,23,42,0.95)] backdrop-blur">
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-slate-400">
-                Your Debt Snapshot
-              </p>
-
-              <div className="mt-4 grid gap-3">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-surface-800/80 px-4 py-3"
-                  >
+            {stats.map((stat, idx) => {
+              const Icon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + idx * 0.1 }}
+                  style={{
+                    padding: theme.spacing.lg,
+                    background: 'rgba(255,255,255,0.1)',
+                    borderRadius: theme.borderRadius.xl,
+                    border: `1px solid rgba(255,255,255,0.2)`,
+                    backdropFilter: 'blur(10px)',
+                    cursor: 'pointer',
+                    transition: `all ${theme.transitions.base} ease`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
                     <div>
-                      <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-400">
+                      <p style={{ fontSize: theme.typography.fontSizes.xs, opacity: 0.8, marginBottom: theme.spacing.sm, textTransform: 'uppercase' }}>
                         {stat.label}
                       </p>
-                      <p className="font-numeric text-xl font-semibold text-slate-50">
-                        <AnimatedCounter end={stat.value} prefix={stat.prefix || ''} suffix={stat.suffix || ''} />
+                      <p style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold }}>
+                        {stat.prefix}
+                        {stat.value}
+                        {stat.suffix}
                       </p>
                     </div>
-                    <span className="h-8 w-8 rounded-full bg-gradient-to-tr from-brand-500 to-accent-cyan opacity-90" />
+                    <div style={{ padding: theme.spacing.md, background: 'rgba(255,255,255,0.2)', borderRadius: theme.borderRadius.lg }}>
+                      <Icon size={24} />
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
+      </HeroSection>
 
-        {/* Gradient Overlays */}
-        <div className="pointer-events-none absolute -left-40 top-10 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-accent-cyan/20 blur-3xl" />
-      </section>
+      {/* How It Works Section */}
+      <SectionContainer bgLight>
+        <SectionTitle>How Penny & Debt Helps You</SectionTitle>
+        <SectionSubtitle>Simple, transparent, and effective debt relief process</SectionSubtitle>
 
-      {/* How It Works */}
-      <section className="bg-slate-50 px-4 py-20">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="text-center font-heading text-3xl font-bold text-slate-900 md:text-4xl">
-            How Penny & Debt Helps You
-          </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {[
-              { step: '1', title: 'Understand Your Debt', desc: 'We analyze your income, expenses, loans, and payment history.' },
-              { step: '2', title: 'Design Relief Plan', desc: 'Our team creates a tailored strategy with realistic payment roadmap.' },
-              { step: '3', title: 'Support Till Freedom', desc: 'Regular check-ins, plan adjustments, and guidance on dealing with lenders.' },
-            ].map((item, i) => (
+        <Grid gap={theme.spacing.xl}>
+          {steps.map((item, idx) => {
+            const Icon = item.icon;
+            return (
               <motion.div
-                key={i}
+                key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="text-center"
+                transition={{ delay: idx * 0.1 }}
               >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand-500 to-accent-cyan text-2xl font-bold text-white shadow-lg">
-                  {item.step}
-                </div>
-                <h3 className="mt-4 font-heading text-xl font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-slate-600">{item.desc}</p>
+                <Card>
+                  <div style={{ display: 'flex', gap: theme.spacing.lg, alignItems: 'flex-start' }}>
+                    <div
+                      style={{
+                        width: '64px',
+                        minWidth: '64px',
+                        height: '64px',
+                        background: theme.colors.primary,
+                        borderRadius: theme.borderRadius.lg,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: theme.colors.text.inverse,
+                        fontWeight: theme.typography.fontWeights.bold,
+                        fontSize: theme.typography.fontSizes.xl,
+                      }}
+                    >
+                      <Icon size={28} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <h3 style={{ fontSize: theme.typography.fontSizes.lg, fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.sm, color: theme.colors.text.primary }}>
+                        {item.title}
+                      </h3>
+                      <p style={{ color: theme.colors.text.secondary, fontSize: theme.typography.fontSizes.base, lineHeight: theme.typography.lineHeights.relaxed }}>
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+            );
+          })}
+        </Grid>
+      </SectionContainer>
+
+      {/* Why Choose Us Section */}
+      <SectionContainer>
+        <SectionTitle>Why Choose Penny & Debt?</SectionTitle>
+        <Grid gap={theme.spacing.xl}>
+          {[
+            { icon: '⚖️', title: '100% Legal & RBI Compliant', desc: 'All our practices are legally sound and RBI-approved.' },
+            { icon: '🛡️', title: 'Complete Data Privacy', desc: 'Your financial information is encrypted and secure.' },
+            { icon: '📞', title: 'Expert Counsellors', desc: '1:1 personalized support from financial experts.' },
+            { icon: '💰', title: 'Up to 70% Debt Reduction', desc: 'Proven track record of significant debt reduction.' },
+            { icon: '⏱️', title: 'Fast Process', desc: 'Quick assessment and swift relief plan implementation.' },
+            { icon: '🎯', title: 'Transparent Pricing', desc: 'No hidden charges, everything upfront and clear.' },
+          ].map((feature, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.08 }}
+            >
+              <Card>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '40px', marginBottom: theme.spacing.md }}>{feature.icon}</div>
+                  <h3 style={{ fontSize: theme.typography.fontSizes.lg, fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.sm, color: theme.colors.text.primary }}>
+                    {feature.title}
+                  </h3>
+                  <p style={{ color: theme.colors.text.secondary, fontSize: theme.typography.fontSizes.sm, lineHeight: theme.typography.lineHeights.relaxed }}>
+                    {feature.desc}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
+        </Grid>
+      </SectionContainer>
 
       {/* CTA Section */}
-      <section className="bg-diagonal-blue px-4 py-20 text-center text-white">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="font-heading text-3xl font-bold md:text-4xl">
-            Start Your Debt-Free Journey Today
-          </h2>
-          <p className="mt-4 text-lg text-slate-200">
-            Join 10,000+ Indians who achieved financial freedom with our expert guidance.
-          </p>
-          <Link
-            to="/apply"
-            className="mt-8 inline-block rounded-lg bg-white px-8 py-4 font-semibold text-brand-700 shadow-xl hover:scale-105"
-          >
-            Apply Now - It's Free
-          </Link>
-        </div>
-      </section>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        style={{
+          background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%)`,
+          color: theme.colors.text.inverse,
+          padding: theme.spacing['4xl'] + ' ' + theme.spacing.lg,
+          textAlign: 'center',
+          marginBottom: 0,
+        }}
+      >
+        <h2 style={{ fontSize: theme.typography.fontSizes['2xl'], fontWeight: theme.typography.fontWeights.bold, marginBottom: theme.spacing.lg }}>
+          Start Your Debt-Free Journey Today
+        </h2>
+        <p style={{ fontSize: theme.typography.fontSizes.lg, marginBottom: theme.spacing.xl, maxWidth: '600px', margin: '0 auto ' + theme.spacing.xl }}>
+          Join 10,000+ Indians who achieved financial freedom with our expert guidance.
+        </p>
+        <Link
+          to="/apply"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: theme.spacing.sm,
+            padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+            background: theme.colors.text.inverse,
+            color: theme.colors.primary,
+            borderRadius: theme.borderRadius.lg,
+            textDecoration: 'none',
+            fontWeight: theme.typography.fontWeights.bold,
+            fontSize: theme.typography.fontSizes.md,
+            transition: `all ${theme.transitions.base} ease`,
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = theme.shadows.lg;
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = 'none';
+          }}
+        >
+          Apply Now - It's Free <ArrowRight size={20} />
+        </Link>
+      </motion.section>
 
       <FloatingCTA />
       <WhatsAppWidget />
