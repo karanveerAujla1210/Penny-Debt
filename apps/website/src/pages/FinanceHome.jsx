@@ -450,9 +450,9 @@ export default function Home() {
           <p style={{ fontSize: '18px', maxWidth: '500px', margin: '0 auto 32px', opacity: 0.95, textAlign: 'center' }}>
             Start your journey to financial freedom today. It's completely free!
           </p>
-          <Link to="/apply" className="btn btn-primary btn-lg" style={{ background: 'white', color: '#FF9500', display: 'inline-flex' }}>
-            Get Started Now
-          </Link>
+          <Button asChild variant="default" size="lg" className="bg-white text-[#FF9500]" >
+            <Link to="/apply">Get Started Now</Link>
+          </Button>
         </div>
       </section>
     </>

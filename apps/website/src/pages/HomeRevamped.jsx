@@ -1,5 +1,6 @@
 import React from "react";
 import SEO from "../components/SEO";
+import { Button } from '../components/ui/button';
 
 // Professional Fintech Home Page with New Design System
 const HomeRevamped = () => {
@@ -50,12 +51,12 @@ const HomeRevamped = () => {
               who achieved financial freedom with our expert guidance.
             </p>
             <div className="flex gap-4 justify-center mt-8">
-              <a href="/applyform" className="btn btn-primary btn-lg">
-                Get Started Today
-              </a>
-              <a href="/contact" className="btn btn-secondary btn-lg">
-                Free Consultation
-              </a>
+              <Button asChild variant="default" size="lg">
+                <a href="/applyform">Get Started Today</a>
+              </Button>
+              <Button asChild variant="secondary" size="lg">
+                <a href="/contact">Free Consultation</a>
+              </Button>
             </div>
           </div>
         </div>
@@ -91,8 +92,12 @@ const HomeRevamped = () => {
                 provide personalized strategies for financial recovery.
               </p>
               <div className="flex gap-4">
-                <a href="/about" className="btn btn-primary">Learn More</a>
-                <a href="/services" className="btn btn-secondary">Our Services</a>
+                <Button asChild variant="default">
+                  <a href="/about">Learn More</a>
+                </Button>
+                <Button asChild variant="secondary">
+                  <a href="/services">Our Services</a>
+                </Button>
               </div>
             </div>
             <div className="fintech-card">
@@ -297,28 +302,12 @@ const HomeRevamped = () => {
             Join thousands of satisfied clients who have successfully eliminated their debt with our proven strategies.
           </p>
           <div className="flex gap-4 justify-center">
-            <a 
-              href="/applyform" 
-              className="btn btn-lg"
-              style={{ 
-                background: "var(--white)", 
-                color: "var(--primary-blue)",
-                border: "none"
-              }}
-            >
-              Apply Now
-            </a>
-            <a 
-              href="/contact" 
-              className="btn btn-lg"
-              style={{ 
-                background: "transparent", 
-                color: "var(--white)",
-                border: "2px solid var(--white)"
-              }}
-            >
-              Contact Us
-            </a>
+            <Button asChild variant="default" size="lg" className="bg-white text-[var(--primary-blue)]">
+              <a href="/applyform">Apply Now</a>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <a href="/contact">Contact Us</a>
+            </Button>
           </div>
         </div>
       </section>

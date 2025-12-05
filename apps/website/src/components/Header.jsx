@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 import Icon from './ui/icons';
+import { Button } from './ui/button';
 
 const navItems = [
   { label: "Home", to: "/" },
@@ -248,9 +249,15 @@ export default function Header() {
                 </Link>
               ))}
               <div className="flex flex-col gap-2" style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid var(--gray-200)" }}>
-                <Link to="/customer-login" className="btn btn-primary" onClick={() => setMobileMenuOpen(false)}>Customer Login</Link>
-                <Link to="/employee-login" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Employee Login</Link>
-                <Link to="/signup" className="btn btn-secondary" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
+                <Button asChild>
+                  <Link to="/customer-login" onClick={() => setMobileMenuOpen(false)}>Customer Login</Link>
+                </Button>
+                <Button asChild variant="secondary">
+                  <Link to="/employee-login" onClick={() => setMobileMenuOpen(false)}>Employee Login</Link>
+                </Button>
+                <Button asChild variant="secondary">
+                  <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link>
+                </Button>
               </div>
             </div>
           </nav>

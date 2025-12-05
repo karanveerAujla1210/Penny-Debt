@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '../components/ui/button';
 
 const Eligibility = () => {
   return (
@@ -7,7 +8,9 @@ const Eligibility = () => {
       <h2>Check Eligibility</h2>
       <p>Enter minimal details to get a free, non-binding assessment of approximate settlement potential.</p>
       <p>
-        <Link to="/customer-login" className="btn">Start Assessment</Link>
+        <Button asChild>
+          <Link to="/customer-login">Start Assessment</Link>
+        </Button>
       </p>
       <div style={{ marginTop: 20 }}>
         <h4>What to expect</h4>

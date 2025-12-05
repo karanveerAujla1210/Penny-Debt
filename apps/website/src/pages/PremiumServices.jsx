@@ -1,5 +1,6 @@
 import React from 'react';
 import SEO from '../components/SEO';
+import { Button } from '../components/ui/button';
 
 const PremiumServices = () => {
   const services = [
@@ -268,15 +269,9 @@ const PremiumServices = () => {
           >
             Ready to Get Started?
           </h2>
-          <button
-            className="btn btn-primary btn-lg"
-            style={{
-              background: 'white',
-              color: '#003BFF',
-            }}
-          >
+          <Button variant="default" size="lg" className="bg-white text-[#003BFF]">
             Schedule Free Consultation
-          </button>
+          </Button>
         </div>
       </section>
     </>
