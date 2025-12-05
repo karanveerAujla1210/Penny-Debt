@@ -17,9 +17,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', ...defaultTheme.fontFamily.sans],
-        heading: ['Sora', 'Inter', ...defaultTheme.fontFamily.sans],
-        numeric: ['Space Grotesk', ...defaultTheme.fontFamily.mono],
+        sans: ['Segoe UI', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        heading: ['Segoe UI', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        numeric: ['Segoe UI', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {

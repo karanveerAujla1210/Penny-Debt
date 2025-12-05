@@ -125,9 +125,12 @@ const ModernNavbar = () => {
             >
               <span className="text-white font-bold text-xl">P&D</span>
             </motion.div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">
-              Penny & Debt
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-gray-900">
+                Penny & Debt
+              </span>
+              <span className="text-xs font-semibold text-blue-600">Debt Relief Solutions</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -136,7 +139,7 @@ const ModernNavbar = () => {
               <NavLink
                 key={link.path}
                 to={link.path}
-                className="px-3 py-2 text-sm font-medium transition-colors duration-200"
+                className="px-3 py-2 text-sm font-semibold transition-colors duration-200"
               >
                 {link.name}
               </NavLink>
@@ -146,7 +149,7 @@ const ModernNavbar = () => {
               <button
                 onClick={toggleApplyDropdown}
                 className={clsx(
-                  'flex items-center space-x-1 px-3 py-2 text-sm font-medium rounded-md transition-colors duration-200',
+                  'flex items-center space-x-1 px-3 py-2 text-sm font-semibold rounded-md transition-colors duration-200',
                   (isActive('/apply') || isActive('/apply-loan') || isActive('/apply-loan-basic'))
                     ? 'text-blue-700 font-semibold'
                     : 'text-gray-700 hover:text-blue-700',
@@ -181,10 +184,10 @@ const ModernNavbar = () => {
                         >
                           <span className="text-xl mr-3 mt-0.5">{item.icon}</span>
                           <div>
-                            <div className="font-medium text-gray-900 group-hover:text-blue-700">
+                            <div className="font-bold text-gray-900 group-hover:text-blue-700">
                               {item.name}
                             </div>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-xs text-gray-600 font-medium">
                               {item.description}
                             </p>
                           </div>
@@ -196,23 +199,12 @@ const ModernNavbar = () => {
               </AnimatePresence>
             </div>
 
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg text-gray-700 hover:text-blue-700 hover:bg-gray-100 transition-all duration-200"
-              aria-label="Toggle dark mode"
-            >
-              {isDarkMode ? (
-                <Sun size={20} />
-              ) : (
-                <Moon size={20} />
-              )}
-            </button>
+
 
             {/* Sign Up Button */}
             <NavLink
               to="/signup"
-              className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-lg shadow-md hover:shadow-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 flex items-center"
+              className="ml-2 px-5 py-2.5 bg-blue-600 text-white text-sm font-bold rounded-lg shadow-md hover:shadow-lg hover:bg-blue-700 transition-all duration-300 flex items-center"
             >
               Get Started
               <ArrowRight size={16} className="ml-2" />
