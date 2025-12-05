@@ -11,18 +11,33 @@
   border-radius: 16px;
   border: 1px solid var(--border-light);
   padding: 32px 24px;
-  box-shadow: var(--shadow-md);
-  transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+.service-card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--golden-orange) 0%, var(--primary) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
 .service-card-enhanced:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary);
-  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  border-color: var(--golden-orange);
+  transform: translateY(-12px) scale(1.03);
+}
+.service-card-enhanced:hover::before {
+  transform: scaleX(1);
 }
 .service-icon-wrapper {
   position: relative;
@@ -30,18 +45,26 @@
 }
 .service-icon {
   font-size: 2.2rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, var(--golden-orange) 0%, var(--golden-orange-dark) 100%);
   color: #fff;
   border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 2px 8px rgba(0,59,255,0.08);
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(255, 149, 0, 0.25);
   display: inline-block;
+  transition: transform 0.3s ease;
+}
+.service-card-enhanced:hover .service-icon {
+  transform: translateY(-4px) scale(1.1);
 }
 .service-title {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 8px;
   color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--golden-orange) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .service-description {
   font-size: 1rem;
@@ -94,11 +117,14 @@
    ============================================================================ */
 
 :root {
-  /* COLORS - Royal Blue Fintech Theme */
+  /* COLORS - Royal Blue Fintech Theme with Golden Orange Accents */
   --primary: #003BFF;
   --primary-dark: #0025B3;
   --primary-light: #4D6FFF;
   --accent: #0066FF;
+  --golden-orange: #FF9500;
+  --golden-orange-dark: #E67E00;
+  --golden-orange-light: #FFB84D;
   --bg-light: #F5F7FF;
   --bg-white: #FFFFFF;
   --text-primary: #0D0D0D;
@@ -558,14 +584,23 @@ select {
   padding: var(--space-lg);
   background: white;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-light);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.stat-item:hover {
+  box-shadow: 0 12px 32px rgba(255, 149, 0, 0.15);
+  border-color: var(--golden-orange);
+  transform: translateY(-6px);
 }
 
 .stat-number {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-extrabold);
-  color: var(--primary);
+  background: linear-gradient(135deg, var(--golden-orange) 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: var(--space-xs);
 }
 
@@ -761,8 +796,24 @@ select {
   background: var(--bg-white);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   border: 1px solid var(--border-light);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+.testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-size: 3rem;
+  color: var(--golden-orange);
+  opacity: 0.3;
+}
+.testimonial-card:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+  border-color: var(--golden-orange);
+  transform: translateY(-8px);
 }
 
 .testimonial-rating {
@@ -771,13 +822,17 @@ select {
   margin-bottom: var(--space-sm);
 }
 
-/* FAQ ACCORDION */
 .faq-item {
   background: var(--bg-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   margin-bottom: var(--space-md);
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+.faq-item:hover {
+  border-color: var(--golden-orange);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.08);
 }
 
 .faq-header {
@@ -792,15 +847,16 @@ select {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   transition: all var(--transition-base);
+  color: var(--text-primary);
 }
 
 .faq-header:hover {
-  background: var(--bg-light);
-  color: var(--primary);
+  background: linear-gradient(90deg, rgba(255, 149, 0, 0.03) 0%, rgba(0, 59, 255, 0.03) 100%);
+  color: var(--golden-orange);
 }
 
 .faq-header.active {
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--golden-orange) 0%, var(--primary) 100%);
   color: var(--bg-white);
 }
 
@@ -1054,7 +1110,7 @@ select {
    ============================================================================ */
 
 .hero-section-enhanced {
-  background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 50%, rgba(0, 59, 255, 0.02) 100%);
+  background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 50%, #fff8f0 100%);
   padding: 120px 24px 80px;
   position: relative;
   overflow: hidden;
@@ -1105,8 +1161,8 @@ select {
 
 .hero-badge {
   display: inline-block;
-  background: linear-gradient(135deg, rgba(0, 59, 255, 0.1) 0%, rgba(0, 102, 255, 0.05) 100%);
-  border: 1px solid rgba(0, 59, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.1) 0%, rgba(255, 180, 77, 0.05) 100%);
+  border: 1px solid rgba(255, 149, 0, 0.3);
   padding: 8px 16px;
   border-radius: 20px;
   margin-bottom: 24px;
@@ -1115,7 +1171,7 @@ select {
 .badge-text {
   font-size: 13px;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--golden-orange);
 }
 
 .hero-title-enhanced {

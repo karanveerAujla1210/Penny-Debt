@@ -27,6 +27,12 @@
   align-items: center;
   text-decoration: none;
   height: 100%;
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #003BFF 0%, #FF9500 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .navbar-logo img {
@@ -93,7 +99,7 @@
 }
 
 .cta-button {
-  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  background: linear-gradient(90deg, #FF9500 0%, #FFB84D 100%);
   color: #fff;
   padding: 10px 28px;
   border-radius: 8px;
@@ -101,13 +107,13 @@
   font-size: 1rem;
   margin-left: 24px;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(0,59,255,0.08);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.15);
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   display: inline-block;
 }
 .cta-button:hover {
-  background: linear-gradient(90deg, #0025B3 0%, #003BFF 100%);
-  box-shadow: 0 8px 32px rgba(0,59,255,0.15);
+  background: linear-gradient(90deg, #E67E00 0%, #FF9500 100%);
+  box-shadow: 0 8px 32px rgba(255, 149, 0, 0.25);
   transform: translateY(-2px);
 }
 
@@ -117,9 +123,27 @@
   gap: 12px;
 }
 
+.mobile-cta {
+  background: linear-gradient(90deg, #FF9500 0%, #FFB84D 100%);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.15);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.mobile-cta:hover {
+  background: linear-gradient(90deg, #E67E00 0%, #FF9500 100%);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.25);
+  transform: translateY(-1px);
+}
+
 
 .mobile-apply-cta {
-  background: linear-gradient(90deg, #003BFF 0%, #0066FF 100%);
+  background: linear-gradient(90deg, #FF9500 0%, #FFB84D 100%);
   color: #fff;
   padding: 10px 0;
   border-radius: 8px;
@@ -128,7 +152,7 @@
   text-align: center;
   margin-top: 16px;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0,59,255,0.08);
+  box-shadow: 0 2px 8px rgba(255, 149, 0, 0.15);
   transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
   display: block;
 }
@@ -162,13 +186,11 @@
   display: block;
 }
 
-.mobile-apply-cta:hover {
-  background: linear-gradient(90deg, #0025B3 0%, #003BFF 100%);
-  box-shadow: 0 4px 16px rgba(0,59,255,0.15);
+ .mobile-apply-cta:hover {
+  background: linear-gradient(90deg, #E67E00 0%, #FF9500 100%);
+  box-shadow: 0 4px 16px rgba(255, 149, 0, 0.25);
   transform: translateY(-1px);
-}
-
-.mobile-toggle {
+}.mobile-toggle {
   display: none;
   flex-direction: column;
   gap: 5px;

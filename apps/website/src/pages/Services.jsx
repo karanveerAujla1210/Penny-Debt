@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
   Handshake, PhoneOff, FileText, BarChart2, TrendingUp, 
-  Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck
+  Shield, CheckCircle, ArrowRight, ChevronRight, Star, Award, FileCheck, Quote
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AOS from 'aos';
@@ -26,6 +26,46 @@ const item = {
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState('all');
+  
+  const processSteps = [
+    { step: '1', title: 'Free Consultation', desc: 'Share your financial situation with our experts' },
+    { step: '2', title: 'Financial Analysis', desc: 'We analyze your debts and create a personalized plan' },
+    { step: '3', title: 'Plan Implementation', desc: 'Execute your customized debt settlement strategy' },
+    { step: '4', title: 'Financial Freedom', desc: 'Achieve peace of mind and rebuild your credit' }
+  ];
+
+  const benefits = [
+    { 
+      icon: CheckCircle, 
+      title: 'RBI Certified', 
+      desc: '100% compliant and registered with all regulatory bodies' 
+    },
+    { 
+      icon: Shield, 
+      title: 'Legal Protection', 
+      desc: 'Complete protection against creditor harassment' 
+    },
+    { 
+      icon: BarChart2, 
+      title: 'Proven Results', 
+      desc: '97% success rate with 75,000+ satisfied clients' 
+    },
+    { 
+      icon: Award, 
+      title: 'Expert Team', 
+      desc: 'Certified financial advisors with 10+ years experience' 
+    },
+    { 
+      icon: TrendingUp, 
+      title: 'No Upfront Fees', 
+      desc: 'Pay only when you save money' 
+    },
+    { 
+      icon: PhoneOff, 
+      title: '24/7 Support', 
+      desc: 'Round the clock customer support whenever you need it' 
+    }
+  ];
   
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -147,6 +187,75 @@ const Services = () => {
     }
   ];
 
+  // Function to generate random reviews
+  const generateReviews = (count) => {
+    const firstNames = ['Aarav', 'Neha', 'Rahul', 'Priya', 'Vikram', 'Ananya', 'Raj', 'Meera', 'Amit', 'Sunita', 'Vijay', 'Pooja', 'Ravi', 'Kavita', 'Sanjay', 'Divya', 'Arjun', 'Shweta', 'Rohit', 'Anjali'];
+    const lastNames = ['Sharma', 'Patel', 'Singh', 'Kumar', 'Gupta', 'Verma', 'Reddy', 'Mehta', 'Iyer', 'Choudhary', 'Malhotra', 'Chopra', 'Bose', 'Nair', 'Menon'];
+    const cities = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Chandigarh', 'Indore', 'Bhopal', 'Vadodara', 'Surat'];
+    const titles = [
+      'Life-changing experience!', 
+      'Stopped all harassment calls', 
+      'EMI reduced by 60%', 
+      'Best financial decision', 
+      'Credit score improved',
+      'Professional and transparent',
+      'Highly recommended service',
+      'Saved my business',
+      'Peace of mind achieved',
+      'Excellent customer support'
+    ];
+    const contents = [
+      'Penny & Debt helped me settle my debt quickly and efficiently. The team was always available to answer my questions.',
+      'I was skeptical at first, but their team guided me through every step. The peace of mind is priceless!',
+      'The process was smooth and their team was always available to answer my questions. Highly recommend their services!',
+      'What I appreciated most was their transparency. No hidden fees, and they delivered exactly what they promised.',
+      'Not only did they help me settle my debt, but their credit rehabilitation program helped improve my score significantly.',
+      'My monthly EMI was impossible to manage. Penny & Debt restructured my loans and now I can finally breathe!',
+      'I was getting 10-15 calls daily from recovery agents. Penny & Debt team made it all stop within a day.',
+      'The team went above and beyond to help me resolve my financial situation. Truly life-changing service!',
+      'Professional, courteous, and effective. They handled everything from start to finish with minimal hassle.',
+      'I can\'t thank the team enough for helping me get my financial life back on track. Worth every penny!'
+    ];
+
+    const reviews = [];
+    for (let i = 1; i <= count; i++) {
+      const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      const city = cities[Math.floor(Math.random() * cities.length)];
+      const debtAmount = Math.floor(Math.random() * 4000000) + 500000; // 5L to 45L
+      const savedAmount = Math.floor(debtAmount * (0.4 + Math.random() * 0.3)); // 40-70% of debt
+      const months = Math.floor(Math.random() * 18) + 3; // 3-20 months
+      
+      reviews.push({
+        id: i,
+        name: `${firstName} ${lastName}`,
+        location: city,
+        rating: Math.random() > 0.1 ? 5 : 4, // 90% 5-star, 10% 4-star
+        date: `${Math.floor(Math.random() * 12) + 1} ${['day', 'week', 'month'][Math.floor(Math.random() * 3)]}${Math.random() > 0.5 ? 's' : ''} ago`,
+        title: titles[Math.floor(Math.random() * titles.length)],
+        content: contents[Math.floor(Math.random() * contents.length)],
+        avatar: `${firstName[0]}${lastName[0]}`,
+        verified: Math.random() > 0.2, // 80% verified
+        debtSettled: `₹${(debtAmount / 100000).toFixed(1)}L`,
+        saved: `₹${(savedAmount / 100000).toFixed(1)}L`,
+        duration: months > 12 ? `${Math.floor(months/12)} year${months > 18 ? 's' : ''}` : `${months} month${months > 1 ? 's' : ''}`
+      });
+    }
+    return reviews;
+  };
+
+  const [clientReviews] = useState(() => generateReviews(100));
+
+  // Function to render star ratings
+  const renderStars = (rating) => {
+    return Array(5).fill(0).map((_, i) => (
+      <Star 
+        key={i} 
+        className={`w-5 h-5 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+      />
+    ));
+  };
+
   return (
     <div className="pt-20">
       {/* Hero Section */}
@@ -155,7 +264,6 @@ const Services = () => {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
           <div className="text-center">
-            <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -540,6 +648,109 @@ const Services = () => {
             >
               Get Free Consultation
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Reviews Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Don't just take our word for it. Here's what our clients have to say about their experience with us.
+            </p>
+            <div className="flex items-center justify-center mt-4 space-x-1">
+              {renderStars(5)}
+              <span className="ml-2 text-gray-700 font-medium">4.9/5 from 1000+ reviews</span>
+            </div>
+          </div>
+
+          <div className="relative overflow-hidden py-8">
+            <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+            <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+            <div 
+              className="flex space-x-6 px-4 py-8 overflow-x-auto scrollbar-hide"
+              style={{
+                scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
+                scrollBehavior: 'smooth',
+                animation: 'scroll 60s linear infinite',
+              }}
+            >
+              {clientReviews.map((review) => (
+              <div 
+                key={review.id}
+                className="flex-shrink-0 w-80 md:w-96 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                style={{
+                  scrollSnapAlign: 'start',
+                  animation: `slideIn 0.5s ease-out ${review.id * 0.05}s both`,
+                  opacity: 0
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-lg mr-4">
+                      {review.avatar}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">{review.name}</h4>
+                      <p className="text-sm text-gray-500">{review.location} • {review.date}</p>
+                    </div>
+                  </div>
+                  {review.verified && (
+                    <div className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full flex items-center">
+                      <CheckCircle className="w-3 h-3 mr-1" />
+                      Verified
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex mb-3">
+                  {renderStars(review.rating)}
+                </div>
+                
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{review.title}</h3>
+                <p className="text-gray-600 mb-4">"{review.content}"</p>
+                
+                <div className="pt-4 border-t border-gray-100">
+                  <div className="grid grid-cols-3 gap-2 text-center">
+                    <div>
+                      <p className="text-sm text-gray-500">Debt Settled</p>
+                      <p className="font-semibold text-blue-600">{review.debtSettled}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Amount Saved</p>
+                      <p className="font-semibold text-green-600">₹{review.saved}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Duration</p>
+                      <p className="font-semibold">{review.duration}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full">
+              <Quote className="w-5 h-5 text-blue-400" />
+              <p className="text-blue-800 font-medium">
+                Join 75,000+ Indians who've achieved financial freedom with our help
+              </p>
+            </div>
+            <div className="mt-8">
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
+              >
+                Get Your Free Consultation
+                <ArrowRight className="ml-2 -mr-1 w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
