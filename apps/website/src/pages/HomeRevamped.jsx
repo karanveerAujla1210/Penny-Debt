@@ -304,10 +304,10 @@ const HomeRevamped = () => {
           </p>
           <div className="flex gap-4 justify-center">
             <Button asChild variant="default" size="lg" className="bg-white text-[var(--primary-blue)]">
-              <a href="/applyform">Apply Now</a>
+              <Link to="/apply">Apply Now</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <a href="/contact">Contact Us</a>
+              <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
         </div>
