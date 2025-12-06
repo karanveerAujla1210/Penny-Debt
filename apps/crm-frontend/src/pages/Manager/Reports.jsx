@@ -1,10 +1,6 @@
-import React from 'react'; 
-const Reports = () => {
-  return (
-    <div>
-      <h1>Reports Page</h1>
-      <p>This is the reports section for managers.</p>
-    </div>
-  );
+import React from 'react';
+import Reports from '../Shared/Reports.jsx';
+
+export default function ManagerReports(props) {
+  return <Reports role={"Manager"} {...props} />;
 }
-export default Reports;

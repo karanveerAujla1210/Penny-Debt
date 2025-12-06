@@ -1,19 +1,6 @@
 import React from 'react';
+import Reports from '../Shared/Reports.jsx';
 
-const COOReports = () => {
-  return (
-    <div style={{
-      minHeight: '100vh',
-      padding: '40px',
-      fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
-      background: 'linear-gradient(to right, #0070f3, #005bb5)',
-      color: 'white'
-    }}>
-      <h1 style={{ fontSize: 36, fontWeight: 'bold', marginBottom: 20 }}>Penny & Debt</h1>
-      <h2 style={{ fontSize: 28 }}>Welcome to the Reports Page</h2>
-      <p style={{ fontSize: 18, marginTop: 10 }}>Role: <strong>COO</strong></p>
-    </div>
-  );
-};
-
-export default COOReports;
+export default function COOReports(props) {
+  return <Reports role={"COO"} {...props} />;
+}

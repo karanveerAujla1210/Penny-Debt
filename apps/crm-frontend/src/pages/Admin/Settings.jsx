@@ -1,12 +1,6 @@
 import React from 'react';
+import Settings from '../Shared/Settings.jsx';
 
-function AdminSettings() {
-  return (
-    <div>
-      <h1>Admin Settings</h1>
-      {/* Your component content here */}
-    </div>
-  );
+export default function AdminSettings(props) {
+  return <Settings role={"Admin"} {...props} />;
 }
-
-export default AdminSettings;

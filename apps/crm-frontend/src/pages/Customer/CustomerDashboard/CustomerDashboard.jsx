@@ -1,15 +1,12 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import CustomerLayout from '../../../components/layout/CustomerLayout';
 import Overview from './Overview';
 
 const CustomerDashboard = () => {
   return (
-    <div style={{ display: 'flex' }}>
-      <Sidebar />
-      <div style={{ flex: 1, padding: 20 }}>
-        <Overview />
-      </div>
-    </div>
+    <CustomerLayout>
+      <Overview />
+    </CustomerLayout>
   );
 };
 

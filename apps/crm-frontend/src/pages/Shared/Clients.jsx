@@ -1,18 +1,18 @@
 import React from 'react';
+import CRMLayout from '../../components/layout/CRMLayout';
 
-const SharedClients = () => {
+const SharedClients = ({ role = 'Advisor' }) => {
   return (
-    <div style={{
-      minHeight: '100vh',
-      padding: '40px',
-      fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
-      background: 'linear-gradient(to right, #0070f3, #005bb5)',
-      color: 'white'
-    }}>
-      <h1 style={{ fontSize: 36, fontWeight: 'bold', marginBottom: 20 }}>Penny & Debt</h1>
-      <h2 style={{ fontSize: 28 }}>Welcome to the Clients Page</h2>
-      <p style={{ fontSize: 18, marginTop: 10 }}>Role: <strong>Shared</strong></p>
-    </div>
+    <CRMLayout role={role}>
+      <div style={{
+        minHeight: '60vh',
+        padding: '24px',
+        fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif'
+      }}>
+        <h1 style={{ fontSize: 28, fontWeight: '700', marginBottom: 12 }}>Clients</h1>
+        <p style={{ fontSize: 16 }}>This is the shared Clients view. Role: <strong>{role}</strong></p>
+      </div>
+    </CRMLayout>
   );
 };
 
