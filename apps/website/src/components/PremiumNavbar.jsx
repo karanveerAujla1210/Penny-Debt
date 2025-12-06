@@ -48,14 +48,25 @@ const PremiumNavbar = () => {
           <ThemeToggle />
           
           <div className="apply-dropdown" onMouseEnter={() => setLoginDropdown(true)} onMouseLeave={() => setLoginDropdown(false)}>
-            <button className={`cta-button`}>
+            <button 
+              className={`cta-button`}
+              onClick={() => setLoginDropdown(!loginDropdown)}
+              type="button"
+            >
               Login <ChevronDown size={16} />
             </button>
 
             {loginDropdown && (
               <div className="apply-dropdown-menu">
                 {loginLinks.map((link) => (
-                  <Link key={link.path} to={link.path} className={`navbar-link ${isActive(link.path) ? 'active' : ''}`}>{link.label}</Link>
+                  <Link 
+                    key={link.path} 
+                    to={link.path} 
+                    className={`navbar-link ${isActive(link.path) ? 'active' : ''}`}
+                    onClick={() => setLoginDropdown(false)}
+                  >
+                    {link.label}
+                  </Link>
                 ))}
               </div>
             )}

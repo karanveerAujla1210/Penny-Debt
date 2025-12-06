@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "step": "home",
+      "url": "http://localhost:5175/",
+      "screenshot": null,
+      "error": "ProtocolError: Protocol error (Page.captureScreenshot): Cannot take screenshot with 0 width."
+    },
+    {
+      "step": "Check Eligibility",
+      "found": false,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "step": "How it works",
+      "found": false,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "step": "Learn more",
+      "found": false,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "step": "Learn more ›",
+      "found": false,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "step": "Learn More",
+      "found": false,
+      "url": "chrome-error://chromewebdata/"
+    },
+    {
+      "step": "login-cta",
+      "clicked": false,
+      "url": "chrome-error://chromewebdata/"
+    }
+  ],
+  "consoles": []
+}
