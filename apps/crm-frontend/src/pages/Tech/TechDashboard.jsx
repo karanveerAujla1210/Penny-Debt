@@ -264,7 +264,7 @@ const TechDashboard = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={5} style={{ padding: 12, textAlign: "center", color: "#6b7280" }}>
+                      <td colSpan={5} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
                         No assigned tickets found.
                       </td>
                     </tr>
