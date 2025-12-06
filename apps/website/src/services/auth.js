@@ -1,4 +1,4 @@
-const API_BASE = process.env.REACT_APP_API_BASE || '';
+const API_BASE = import.meta.env.VITE_API_BASE_URL?.replace('/api/v1/website', '') || '';
 
 async function postJson(url, body) {
   const res = await fetch(url, {
@@ -17,7 +17,7 @@ async function postJson(url, body) {
 
 export async function loginCustomer({ phone }) {
   try {
-    const payload = await postJson(`${API_BASE}/api/auth/customer-login`, { phone });
+    const payload = await postJson(`${API_BASE}/api/v1/website/auth/customer-login`, { phone });
     // Expecting { token, role }
     if (payload && payload.token && payload.role) {
       localStorage.setItem('token', payload.token);
@@ -36,7 +36,7 @@ export async function loginCustomer({ phone }) {
 
 export async function loginEmployee({ email }) {
   try {
-    const payload = await postJson(`${API_BASE}/api/auth/employee-login`, { email });
+    const payload = await postJson(`${API_BASE}/api/v1/website/auth/employee-login`, { email });
     if (payload && payload.token && payload.role) {
       localStorage.setItem('token', payload.token);
       localStorage.setItem('role', payload.role);
@@ -53,7 +53,7 @@ export async function loginEmployee({ email }) {
 
 export async function loginAdmin({ username }) {
   try {
-    const payload = await postJson(`${API_BASE}/api/auth/admin-login`, { username });
+    const payload = await postJson(`${API_BASE}/api/v1/website/auth/admin-login`, { username });
     if (payload && payload.token && payload.role) {
       localStorage.setItem('token', payload.token);
       localStorage.setItem('role', payload.role);

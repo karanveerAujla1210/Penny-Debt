@@ -8,6 +8,7 @@ import {
 import { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import { v4 as uuidv4 } from 'uuid';
+import { loanApplicationService } from '../services/api';
 
 // Alias Info icon for consistency
 const InformationCircleIcon = Info;
@@ -279,16 +280,8 @@ const ApplyForm = () => {
     setSubmitting(true);
     
     try {
-      // Simulate API call with form data
-      const response = await fetch('/api/loan-application', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (!response.ok) throw new Error('Submission failed');
+      // Submit form data to backend API
+      const response = await loanApplicationService.submit(formData);
       
       // Clear saved form data on successful submission
       if (typeof window !== 'undefined') {
