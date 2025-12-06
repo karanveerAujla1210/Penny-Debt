@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   CheckCircle, Shield, Clock, ArrowRight, User, Mail, Phone, 
   DollarSign, FileText, Upload, X, Check, ArrowLeft, AlertCircle, 
@@ -86,6 +86,7 @@ const ApplyForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const location = useLocation();
 
   // Save form data to localStorage whenever it changes
   useEffect(() => {
@@ -437,6 +438,20 @@ const ApplyForm = () => {
       }
     }
   }, []);
+
+  // If a phone query param is present (e.g. from the Check Eligibility CTA),
+  // prefill the phone field so the user doesn't need to retype it.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(location.search);
+      const phoneParam = params.get('phone');
+      if (phoneParam && phoneParam.length === 10) {
+        setFormData(prev => ({ ...prev, phone: phoneParam }));
+      }
+    } catch (e) {
+      // ignore malformed query
+    }
+  }, [location.search]);
 
   // Clean up on unmount
   useEffect(() => {

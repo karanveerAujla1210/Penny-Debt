@@ -40,7 +40,6 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/apply" element={<ApplyForm />} />
-        <Route path="/apply-loan" element={<ApplyLoan />} />
         <Route path="/apply-loan-basic" element={<ApplyLoanBasicDetails />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/careers" element={<Careers />} />
@@ -82,7 +81,10 @@ function App() {
         />
         <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="/harassment-help" element={<HarassmentHelp />} />
-        <Route path="/eligibility" element={<Eligibility />} />
+        {/* Keep `/eligibility` pointing to the apply form so CTAs that use eligibility
+          lead users straight into the application flow */}
+        <Route path="/eligibility" element={<ApplyForm />} />
+        <Route path="/apply-loan" element={<ApplyLoan />} />
       </Routes>
       <PremiumFooter />
     </>

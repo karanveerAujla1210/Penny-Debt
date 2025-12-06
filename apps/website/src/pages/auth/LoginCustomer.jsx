@@ -8,28 +8,20 @@ const LoginCustomer = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Instead of performing a customer-only login flow here, the primary CTA
+  // should take users to the application form so "Check Eligibility"
+  // refers to the Apply form. We still validate the phone and pass it
+  // as a query param to the form so it can be prefilled.
+  const handleSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
     setError('');
-    if (!/^\d{10}$/.test(phone)) {
+    const cleaned = phone.replace(/\D/g, '');
+    if (!/^\d{10}$/.test(cleaned)) {
       setError('Please enter a valid 10-digit Indian mobile number');
       return;
     }
-    setLoading(true);
-    try {
-      const payload = await auth.loginCustomer({ phone });
-      if (payload && payload.role === 'customer') {
-        navigate('/dashboard/customer');
-      } else {
-        // Defensive: clear any token and show clear message if role mismatches
-        auth.logout();
-        setError('This account is not a customer account. Please use the appropriate login.');
-      }
-    } catch (err) {
-      setError('Login failed. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
+    // Navigate to the apply form and prefill phone via query param
+    navigate(`/apply?phone=${encodeURIComponent(cleaned)}`);
   };
 
   return (
@@ -81,7 +73,7 @@ const LoginCustomer = () => {
           {error && <div style={{ color: 'crimson', marginTop: 8 }}>{error}</div>}
           <button
             type="submit"
-            disabled={loading}
+            disabled={false}
             style={{
               marginTop: 14,
               width: '100%',
@@ -94,7 +86,7 @@ const LoginCustomer = () => {
               cursor: 'pointer'
             }}
           >
-            {loading ? 'Signing in…' : 'Check Eligibility'}
+            {'Check Eligibility'}
           </button>
         </form>
 
