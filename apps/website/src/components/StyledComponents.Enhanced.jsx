@@ -1,4 +1,5 @@
 import theme from '../styles/theme';
+import { Link } from 'react-router-dom';
 
 /**
  * Common styled components for consistent design with orange-golden accents
@@ -95,7 +96,7 @@ export const Card = ({ children, hover = true, accent = false, ...props }) => (
   </div>
 );
 
-export const Button = ({ children, primary = true, variant = 'primary', ...props }) => {
+export const Button = ({ children, primary = true, variant = 'primary', to, href, ...props }) => {
   let bgColor = primary ? theme.colors.primary : 'transparent';
   let textColor = primary ? theme.colors.text.inverse : theme.colors.primary;
   let borderColor = primary ? 'none' : `2px solid ${theme.colors.primary}`;
@@ -110,36 +111,52 @@ export const Button = ({ children, primary = true, variant = 'primary', ...props
     borderColor = `2px solid ${theme.colors.golden[500]}`;
   }
 
+  const sharedStyle = {
+    padding: `${theme.spacing.md} ${theme.spacing.xl}`,
+    background: bgColor,
+    color: textColor,
+    border: borderColor,
+    borderRadius: theme.borderRadius.lg,
+    fontWeight: theme.typography.fontWeights.semibold,
+    fontSize: theme.typography.fontSizes.sm,
+    cursor: 'pointer',
+    transition: `all ${theme.transitions.base} ease`,
+    fontFamily: theme.typography.fontFamily.primary,
+    boxShadow: variant === 'golden' ? `0 4px 20px rgba(255, 165, 0, 0.2)` : 'none',
+    ...props.style,
+  };
+
+  const handlers = {
+    onMouseEnter: (e) => {
+      try { e.currentTarget.style.transform = 'translateY(-2px)'; } catch (err) {}
+      if (variant === 'golden') {
+        try { e.currentTarget.style.boxShadow = `0 8px 32px rgba(255, 165, 0, 0.35)`; } catch (err) {}
+      }
+    },
+    onMouseLeave: (e) => {
+      try { e.currentTarget.style.transform = 'translateY(0)'; } catch (err) {}
+      try { e.currentTarget.style.boxShadow = variant === 'golden' ? `0 4px 20px rgba(255, 165, 0, 0.2)` : 'none'; } catch (err) {}
+    }
+  };
+
+  if (to) {
+    return (
+      <Link to={to} style={sharedStyle} {...handlers} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  if (href) {
+    return (
+      <a href={href} style={sharedStyle} {...handlers} {...props}>
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <button
-      style={{
-        padding: `${theme.spacing.md} ${theme.spacing.xl}`,
-        background: bgColor,
-        color: textColor,
-        border: borderColor,
-        borderRadius: theme.borderRadius.lg,
-        fontWeight: theme.typography.fontWeights.semibold,
-        fontSize: theme.typography.fontSizes.sm,
-        cursor: 'pointer',
-        transition: `all ${theme.transitions.base} ease`,
-        fontFamily: theme.typography.fontFamily.primary,
-        boxShadow: variant === 'golden' ? `0 4px 20px rgba(255, 165, 0, 0.2)` : 'none',
-        ...props.style,
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)';
-        if (variant === 'golden') {
-          e.currentTarget.style.boxShadow = `0 8px 32px rgba(255, 165, 0, 0.35)`;
-        } else {
-          e.currentTarget.style.boxShadow = theme.shadows.hover;
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = variant === 'golden' ? `0 4px 20px rgba(255, 165, 0, 0.2)` : 'none';
-      }}
-      {...props}
-    >
+    <button style={sharedStyle} {...handlers} {...props}>
       {children}
     </button>
   );
