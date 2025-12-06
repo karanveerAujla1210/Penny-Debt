@@ -233,11 +233,11 @@ const VerifierDashboard = () => {
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Loan ID</th>
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Status</th>
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Due Date</th>
-                    <tr>
-                      <td colSpan={4} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
-                        No verification tasks found.
-                      </td>
                     </tr>
+                  </thead>
+                  <tbody>
+                    {verificationTasks.map((task) => (
+                      <tr key={task.id} style={{ borderBottom: "1px solid #d1d9f0" }}>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{task.taskId}</td>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{task.loanId}</td>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{task.status}</td>

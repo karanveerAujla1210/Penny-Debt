@@ -235,11 +235,11 @@ const TeamLeadDashboard = () => {
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Role</th>
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Email</th>
                       <th style={{ padding: 8, border: "1px solid #d1d9f0" }}>Status</th>
-                    <tr>
-                      <td colSpan={3} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
-                        No pending tasks found.
-                      </td>
                     </tr>
+                  </thead>
+                  <tbody>
+                    {teamMembers.map((member) => (
+                      <tr key={member.id} style={{ borderBottom: "1px solid #d1d9f0" }}>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{member.name}</td>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{member.role}</td>
                         <td style={{ padding: 8, border: "1px solid #d1d9f0" }}>{member.email}</td>

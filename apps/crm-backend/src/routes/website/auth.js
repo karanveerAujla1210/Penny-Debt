@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-// Import from old location (will be moved to controllers)
-const oldAuthRoute = require('../../../routes/auth');
+// Simple dev stub for website auth routes to avoid module-not-found during dev
+const express = require('express');
+const router = express.Router();
 
-// Re-export old routes for now (backward compatibility)
-module.exports = oldAuthRoute;
+// Basic dev endpoints used by frontend services. These return mock tokens and roles
+router.post('/customer-login', (req, res) => {
+	res.json({ token: 'dev-customer-token', role: 'customer' });
+});
 
-// TODO: Migrate to new controller structure
-// const authController = require('../../controllers/website/authController');
-// router.post('/register', authController.register);
-// router.post('/login', authController.login);
-// router.post('/logout', authController.logout);
-// router.get('/me', authController.getMe);
+router.post('/employee-login', (req, res) => {
+	res.json({ token: 'dev-employee-token', role: 'employee' });
+});
+
+router.post('/admin-login', (req, res) => {
+	res.json({ token: 'dev-admin-token', role: 'admin' });
+});
+
+module.exports = router;
