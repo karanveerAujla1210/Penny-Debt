@@ -54,6 +54,7 @@ const About = () => {
   return (
     <PageLayout
       showHero
+      heroGradient={`linear-gradient(135deg, ${theme.colors.golden[600]} 0%, ${theme.colors.amber[500]} 100%)`}
       title="Empowering Indians to Achieve Debt Freedom"
       subtitle={`Founded in 2020, we've helped over ${ACHIEVEMENTS.customers.display} families settle ${ACHIEVEMENTS.debtResolved.display} in debt through transparent, ethical solutions.`}
       heroContent={

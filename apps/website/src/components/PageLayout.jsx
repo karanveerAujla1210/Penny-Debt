@@ -13,6 +13,7 @@ const PageLayout = ({
   heroContent = null,
   className = '',
   bgLight = false,
+  heroGradient = null,
 }) => {
   return (
     <div
@@ -27,7 +28,7 @@ const PageLayout = ({
       {showHero && (
         <section
           style={{
-            background: `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%)`,
+            background: heroGradient || `linear-gradient(135deg, ${theme.colors.primary} 0%, ${theme.colors.primaryDark} 100%)`,
             color: theme.colors.text.inverse,
             padding: `${theme.spacing['4xl']} 0`,
             textAlign: 'center',

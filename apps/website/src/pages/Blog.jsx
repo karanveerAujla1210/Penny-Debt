@@ -89,7 +89,7 @@ const Blog = () => {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-500 to-yellow-600 text-white">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20"></div>
         
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
@@ -101,12 +101,12 @@ const Blog = () => {
             >
               <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
                 Financial Insights & <br />
-                <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-200 to-orange-200 bg-clip-text text-transparent">
                   Debt Management Tips
                 </span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-lg lg:text-xl text-orange-100 mb-8 leading-relaxed max-w-2xl mx-auto">
                 Expert advice, success stories, and practical tips to help you achieve financial freedom. 
                 Stay informed with the latest in debt management.
               </p>
@@ -165,8 +165,8 @@ const Blog = () => {
               </div>
               <div className="md:w-1/2 p-8">
                 <div className="flex items-center gap-2 mb-4">
-                  <Tag className="w-4 h-4 text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-600">{featuredPost.category}</span>
+                  <Tag className="w-4 h-4 text-orange-600" />
+                  <span className="text-sm font-semibold text-orange-600">{featuredPost.category}</span>
                 </div>
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">{featuredPost.title}</h3>
                 <p className="text-lg text-gray-600 mb-6">{featuredPost.excerpt}</p>
@@ -227,9 +227,9 @@ const Blog = () => {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                      <Tag className="w-4 h-4 text-blue-600" />
-                      <span className="text-sm font-semibold text-blue-600">{post.category}</span>
-                    </div>
+                          <Tag className="w-4 h-4 text-orange-600" />
+                          <span className="text-sm font-semibold text-orange-600">{post.category}</span>
+                        </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{post.title}</h3>
                     <p className="text-base text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                     <div className="flex items-center justify-between text-sm text-gray-500">
@@ -239,7 +239,7 @@ const Blog = () => {
                       </div>
                       <span>{post.readTime}</span>
                     </div>
-                    <button className="mt-4 flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                    <button className="mt-4 flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-700 transition-colors">
                       Read Article <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
