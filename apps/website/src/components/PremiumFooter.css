@@ -1,7 +1,8 @@
 /* Premium Footer - FREED-Inspired Fintech Design */
 
 .premium-footer {
-  background: linear-gradient(135deg, var(--primary-light, #E6EEFF) 0%, var(--primary, #0A4DFF) 100%);
+  /* Warm golden/orange flowing into brand blue */
+  background: linear-gradient(135deg, #FFB84D 0%, #FFD27A 40%, #3B82F6 100%);
   color: var(--text-primary, #0D0D0D);
   margin-top: 120px;
   font-family: var(--font-primary, 'Segoe UI', sans-serif);
