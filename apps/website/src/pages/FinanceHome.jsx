@@ -89,20 +89,26 @@ export default function Home() {
               </p>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
                 <div className="hero-actions">
-                  <Button to="/apply" variant="default" size="lg" className="mr-2">
-                    <span>Check Eligibility</span>
-                    <svg style={{ marginLeft: 8 }} width="20" height="20" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                  <Button asChild variant="default" size="lg" className="mr-2">
+                    <Link to="/apply">
+                      <span>Check Eligibility</span>
+                      <svg style={{ marginLeft: 8 }} width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </Link>
                   </Button>
 
-                  <Button to="/how-it-works" variant="secondary" size="lg">
-                    How It Works
+                  <Button asChild variant="secondary" size="lg">
+                    <Link to="/how-it-works">How It Works</Link>
                   </Button>
                 </div>
 
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                  <Button href="https://wa.me/919773921023?text=Hi%20Penny%20Debt" variant="ghost" size="md">Talk to Counsellor on WhatsApp</Button>
+                  <Button asChild variant="ghost" size="md">
+                    <a href="https://wa.me/919773921023?text=Hi%20Penny%20Debt" target="_blank" rel="noopener noreferrer">
+                      Talk to Counsellor on WhatsApp
+                    </a>
+                  </Button>
                 </div>
               </div>
               {/* Role chips + language toggles */}
