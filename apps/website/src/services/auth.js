@@ -1,4 +1,8 @@
-const API_BASE = process.env.REACT_APP_API_BASE || '';
+// Use Vite-compatible env variables in the browser. Keep backwards compatibility
+// with Node (process.env) when available.
+const API_BASE = (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_BASE)
+  || (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_API_BASE)
+  || '';
 
 async function postJson(url, body) {
   const res = await fetch(url, {
