@@ -60,22 +60,22 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="desktop-nav flex items-center gap-2">
-            {navItems.map(({ label, to }) => (
-              <Link
-                key={to}
-                to={to}
-                className="navbar-link"
-                style={{
-                  color: "var(--gray-700)",
-                  textDecoration: "none",
-                  padding: "0.625rem 1rem",
-                  borderRadius: "8px",
-                  fontWeight: 600,
-                  fontSize: "0.875rem",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  whiteSpace: "nowrap",
-                  position: "relative"
-                }}
+              {navItems.map(({ label, to }) => (
+                <Link
+                  key={to}
+                  to={to}
+                  className="navbar-link"
+                  style={{
+                    color: "var(--gray-700)",
+                    textDecoration: "none",
+                    padding: "0.625rem 1rem",
+                    borderRadius: "8px",
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    whiteSpace: "nowrap",
+                    position: "relative"
+                  }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = "#0070f3";
                   e.currentTarget.style.color = "#fff";
@@ -213,10 +213,9 @@ export default function Header() {
                 <Link
                   key={to}
                   to={to}
-                  className="navbar-link"
+                  className="navbar-link text-center"
                   style={{
                     padding: "0.75rem",
-                    textAlign: "center",
                     borderRadius: "var(--radius-sm)",
                     backgroundColor: "var(--gray-50)",
                     color: "var(--gray-700)",

@@ -256,9 +256,9 @@ const RecoveryDashboard = () => {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={5} style={{ padding: 12, textAlign: "center", color: "#6b7280" }}>
-                          No overdue accounts found.
-                        </td>
+                        <td colSpan={5} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
+                            No overdue accounts found.
+                          </td>
                       </tr>
                     )}
                   </tbody>
@@ -307,7 +307,7 @@ const RecoveryDashboard = () => {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={5} style={{ padding: 12, textAlign: "center", color: "#6b7280" }}>
+                        <td colSpan={5} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
                           No pending recoveries found.
                         </td>
                       </tr>

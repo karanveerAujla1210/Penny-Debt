@@ -289,7 +289,7 @@ const SharedDashboard = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={4} style={{ padding: 12, textAlign: "center", color: "#6b7280" }}>
+                      <td colSpan={4} className="text-center" style={{ padding: 12, color: "#6b7280" }}>
                         No tasks found.
                       </td>
                     </tr>

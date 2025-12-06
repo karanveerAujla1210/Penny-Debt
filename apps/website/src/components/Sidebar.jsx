@@ -17,7 +17,7 @@ const Sidebar = () => {
         fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
       }}
     >
-      <h3 style={{ color: "#0070f3", marginBottom: "20px", textAlign: "center" }}>
+      <h3 className="text-center" style={{ color: "#0070f3", marginBottom: "20px" }}>
         Dashboard Menu
       </h3>
 

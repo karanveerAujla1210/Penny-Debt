@@ -6,7 +6,7 @@ const PremiumFooter = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="premium-footer">
+    <footer className="premium-footer text-center">
       {/* Main Content */}
       <div className="footer-content">
         <div className="container">
@@ -162,7 +162,7 @@ const PremiumFooter = () => {
       {/* Bottom Section */}
       <div className="footer-bottom">
         <div className="container">
-          <div className="footer-bottom-content">
+          <div className="footer-bottom-content text-center">
             <p className="copyright">
               © {currentYear} Penny & Debt. All rights reserved. | Company registration: [CIN/LLPIN]
             </p>
