@@ -1,18 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const controller = require('../../controllers/payments');
+const { checkPermission } = require('../../middleware/rbac');
+const { validateRequest } = require('../../middleware/validate');
+const validators = require('../../validators/payments');
 
-let Payment;
-try { Payment = require('../../../models-website/Payment'); } catch (e) { Payment = null; }
-
-router.get('/', async (req, res) => {
-  try {
-    const list = Payment ? await Payment.find().sort({ createdAt: -1 }).limit(200) : [];
-    res.json({ ok: true, items: list });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+router.post('/', checkPermission('create:payment'), validators.createPayment, validateRequest, controller.createPayment);
+router.get('/', checkPermission('view:payment'), controller.listPayments);
+router.get('/:id', checkPermission('view:payment'), controller.getPayment);
+router.put('/:id', checkPermission('update:payment'), validators.updatePayment, validateRequest, controller.updatePayment);
+router.delete('/:id', checkPermission('delete:payment'), controller.deletePayment);
 
 module.exports = router;
-const oldPaymentsRoute = require('../../../routes/payments');
-module.exports = oldPaymentsRoute;
