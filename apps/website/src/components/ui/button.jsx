@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
+import { Link } from 'react-router-dom'
 import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
@@ -32,12 +33,21 @@ const buttonVariants = cva(
   }
 )
 
-const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
-  const Comp = asChild ? Slot : "button"
+const Button = React.forwardRef(({ className, variant, size, asChild = false, to, href, ...props }, ref) => {
+  // Choose rendered element:
+  // - if `asChild` is true, render the child via Slot
+  // - else if `to` is provided, render a react-router `Link`
+  // - else if `href` is provided, render an anchor `a`
+  // - otherwise render a native `button`
+  const Comp = asChild ? Slot : to ? Link : href ? 'a' : 'button'
+
+  const extraProps = { ...(to ? { to } : {}), ...(href ? { href } : {}) }
+
   return (
     <Comp
       className={cn(buttonVariants({ variant, size, className }))}
       ref={ref}
+      {...extraProps}
       {...props}
     />
   )
