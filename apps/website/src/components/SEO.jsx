@@ -50,7 +50,7 @@ const SEO = ({
       <meta name="keywords" content={seoData.keywords} />
       <meta name="author" content="Penny & Debt" />
       <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      {/* viewport meta intentionally provided in the HTML head (`index.html`) */}
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       <link rel="canonical" href={fullUrl} />
 
