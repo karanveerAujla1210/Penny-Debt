@@ -103,17 +103,29 @@ app.use('/api/v1/website/faqs', require('./routes/website/faqs'));
 app.use('/api/v1/website/blogs', require('./routes/website/blogs'));
 
 // API Routes - CRM (Internal)
-app.use('/api/v1/crm/auth', require('./routes/crm/auth'));
-app.use('/api/v1/crm/dashboard', require('./routes/crm/dashboard'));
-app.use('/api/v1/crm/leads', require('./routes/crm/leads'));
-app.use('/api/v1/crm/customers', require('./routes/crm/customers'));
-app.use('/api/v1/crm/applications', require('./routes/crm/applications'));
-app.use('/api/v1/crm/employees', require('./routes/crm/employees'));
-app.use('/api/v1/crm/cases', require('./routes/crm/cases'));
-app.use('/api/v1/crm/payments', require('./routes/crm/payments'));
-app.use('/api/v1/crm/tasks', require('./routes/crm/tasks'));
-app.use('/api/v1/crm/documents', require('./routes/crm/documents'));
-app.use('/api/v1/crm/reports', require('./routes/crm/reports'));
+// API Routes - CRM (Internal)
+// Load CRM routes safely. Some legacy modules may be missing in this branch;
+// don't crash the server if a route file is absent.
+function safeUse(mountPath, modulePath) {
+  try {
+    const r = require(modulePath);
+    app.use(mountPath, r);
+  } catch (err) {
+    console.warn(`Warning: failed to load route ${modulePath} for ${mountPath}:`, err && err.code ? err.code : err.message);
+  }
+}
+
+safeUse('/api/v1/crm/auth', './routes/crm/auth');
+safeUse('/api/v1/crm/dashboard', './routes/crm/dashboard');
+safeUse('/api/v1/crm/leads', './routes/crm/leads');
+safeUse('/api/v1/crm/customers', './routes/crm/customers');
+safeUse('/api/v1/crm/applications', './routes/crm/applications');
+safeUse('/api/v1/crm/employees', './routes/crm/employees');
+safeUse('/api/v1/crm/cases', './routes/crm/cases');
+safeUse('/api/v1/crm/payments', './routes/crm/payments');
+safeUse('/api/v1/crm/tasks', './routes/crm/tasks');
+safeUse('/api/v1/crm/documents', './routes/crm/documents');
+safeUse('/api/v1/crm/reports', './routes/crm/reports');
 
 // API Routes - Mobile
 app.use('/api/v1/mobile/auth', require('./routes/mobile/auth'));
@@ -129,11 +141,11 @@ app.use('/api/careers', require('./routes/website/careers'));
 app.use('/api/contacts', require('./routes/website/contacts'));
 app.use('/api/loan-applications', require('./routes/website/loanApplications'));
 
-// CRM legacy routes
-app.use('/api/crm/auth', require('./routes/crm/auth'));
-app.use('/api/crm/dashboard', require('./routes/crm/dashboard'));
-app.use('/api/crm/leads', require('./routes/crm/leads'));
-app.use('/api/crm/customers', require('./routes/crm/customers'));
+// CRM legacy routes (safe load)
+safeUse('/api/crm/auth', './routes/crm/auth');
+safeUse('/api/crm/dashboard', './routes/crm/dashboard');
+safeUse('/api/crm/leads', './routes/crm/leads');
+safeUse('/api/crm/customers', './routes/crm/customers');
 
 // 404 handler
 app.use('*', (req, res) => {
