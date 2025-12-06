@@ -25,7 +25,7 @@ const ApplyLoanBasicDetails = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/applyloan');
+    navigate('/apply-loan');
   };
 
   return (

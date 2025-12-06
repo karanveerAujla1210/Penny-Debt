@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const DebtCalculator = () => {
@@ -67,8 +68,8 @@ const DebtCalculator = () => {
         <div style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.9)' }}>Average 58% Reduction</div>
       </div>
 
-      <a
-        href="/applyform"
+      <Link
+        to="/apply"
         style={{
           display: 'block',
           padding: '16px',
@@ -85,7 +86,7 @@ const DebtCalculator = () => {
         onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
       >
         Get Your Free Plan →
-      </a>
+      </Link>
     </motion.div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import SEO from "../components/SEO";
 import { Button } from '../components/ui/button';
 
@@ -52,10 +53,10 @@ const HomeRevamped = () => {
             </p>
             <div className="flex gap-4 justify-center mt-8">
               <Button asChild variant="default" size="lg">
-                <a href="/applyform">Get Started Today</a>
+                <Link to="/apply">Get Started Today</Link>
               </Button>
               <Button asChild variant="secondary" size="lg">
-                <a href="/contact">Free Consultation</a>
+                <Link to="/contact">Free Consultation</Link>
               </Button>
             </div>
           </div>
@@ -93,10 +94,10 @@ const HomeRevamped = () => {
               </p>
               <div className="flex gap-4">
                 <Button asChild variant="default">
-                  <a href="/about">Learn More</a>
+                  <Link to="/about">Learn More</Link>
                 </Button>
                 <Button asChild variant="secondary">
-                  <a href="/services">Our Services</a>
+                  <Link to="/services">Our Services</Link>
                 </Button>
               </div>
             </div>

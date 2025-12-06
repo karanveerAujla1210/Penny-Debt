@@ -28,7 +28,7 @@ const FloatingCTA = () => {
           }}
         >
           <Link
-            to="/applyform"
+            to="/apply"
             style={{
               display: 'flex',
               alignItems: 'center',

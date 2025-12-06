@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -32,13 +33,13 @@ export default function Footer() {
       <div style={{ flex: "1 1 150px", minWidth: "150px" }}>
         <h4>Legal</h4>
         <p>
-          <a href="/terms" style={{ color: "white", textDecoration: "underline" }}>
+          <Link to="/terms" style={{ color: "white", textDecoration: "underline" }}>
             Terms & Conditions
-          </a>
+          </Link>
           <br />
-          <a href="/privacy-policy" style={{ color: "white", textDecoration: "underline" }}>
+          <Link to="/privacy" style={{ color: "white", textDecoration: "underline" }}>
             Privacy Policy
-          </a>
+          </Link>
         </p>
       </div>
 

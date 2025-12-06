@@ -12,8 +12,8 @@ const navItems = [
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
   { label: "Blog", to: "/blog" },
-  { label: "Apply", to: "/applyform" },
-  { label: "Apply Loan", to: "/applyloan" },
+  { label: "Apply", to: "/apply" },
+  { label: "Apply Loan", to: "/apply-loan" },
 ];
 
 export default function Header() {
