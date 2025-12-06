@@ -99,14 +99,14 @@ const Blog = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6">
                 Financial Insights & <br />
                 <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
                   Debt Management Tips
                 </span>
               </h1>
               
-              <p className="text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-lg lg:text-xl text-blue-100 mb-8 leading-relaxed max-w-2xl mx-auto">
                 Expert advice, success stories, and practical tips to help you achieve financial freedom. 
                 Stay informed with the latest in debt management.
               </p>
@@ -159,7 +159,7 @@ const Blog = () => {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden" data-aos="fade-up" data-aos-delay="200">
             <div className="md:flex">
               <div className="md:w-1/2">
-                <div className="h-64 md:h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                <div className="h-64 md:h-full bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
                   <div className="text-6xl">📊</div>
                 </div>
               </div>
@@ -168,8 +168,8 @@ const Blog = () => {
                   <Tag className="w-4 h-4 text-blue-600" />
                   <span className="text-sm font-semibold text-blue-600">{featuredPost.category}</span>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{featuredPost.title}</h3>
-                <p className="text-gray-600 mb-6">{featuredPost.excerpt}</p>
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">{featuredPost.title}</h3>
+                <p className="text-lg text-gray-600 mb-6">{featuredPost.excerpt}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-sm text-gray-500">
                     <div className="flex items-center gap-1">
@@ -216,7 +216,7 @@ const Blog = () => {
                   data-aos-delay={index * 100}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 >
-                  <div className="h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                  <div className="h-48 bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
                     <div className="text-4xl">
                       {post.category === 'Debt Management' ? '💰' :
                        post.category === 'Credit Score Tips' ? '📊' :
@@ -231,11 +231,11 @@ const Blog = () => {
                       <span className="text-sm font-semibold text-blue-600">{post.category}</span>
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">{post.title}</h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                    <p className="text-base text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <div className="flex items-center gap-1">
                         <Calendar className="w-4 h-4" />
-                        <span>{new Date(post.date).toLocaleDateString()}</span>
+                        <span className="text-sm">{new Date(post.date).toLocaleDateString()}</span>
                       </div>
                       <span>{post.readTime}</span>
                     </div>
@@ -251,19 +251,19 @@ const Blog = () => {
       </section>
 
       {/* Newsletter Signup */}
-      <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900 text-white">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6" data-aos="fade-up">
             Stay Updated with Financial Tips
           </h2>
-          <p className="text-xl text-blue-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+          <p className="text-lg lg:text-xl text-blue-100 mb-8" data-aos="fade-up" data-aos-delay="100">
             Get the latest debt management tips and success stories delivered to your inbox
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto" data-aos="fade-up" data-aos-delay="200">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 outline-none"
+              className="flex-1 px-4 py-4 rounded-lg text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-300 outline-none text-base"
             />
             <button className="px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
               Subscribe
