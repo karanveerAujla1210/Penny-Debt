@@ -1,6 +1,20 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const Role = require('../models/Role');
-const { ROLE_PERMISSIONS } = require('../../../packages/shared/constants/permissions');
+
+const ROLE_PERMISSIONS = {
+  COUNSELLOR: ['create:lead', 'update:lead', 'view:lead', 'view:customer_basic'],
+  ADVISOR: ['view:lead', 'update:lead', 'create:case', 'update:case', 'view:case', 'create:customer', 'update:customer', 'view:customer', 'create:loan', 'update:loan', 'view:loan', 'create:program', 'update:program', 'view:program'],
+  CREDIT: ['view:case', 'view:customer', 'view:loan', 'update:credit', 'verify:kyc', 'update:loan_risk'],
+  OPERATIONS: ['view:program', 'update:program_status', 'create:mandate', 'update:mandate', 'view:payment', 'update:payment'],
+  NEGOTIATOR: ['view:program', 'view:loan', 'create:settlement', 'update:settlement', 'view:settlement'],
+  LEGAL: ['view:customer', 'view:loan', 'create:legal_case', 'update:legal_case', 'create:harassment_case', 'update:harassment_case'],
+  FINANCE: ['view:payment', 'update:payment_status', 'view:settlement', 'update:settlement_payment', 'view:finance_reports'],
+  SUPPORT: ['view:customer', 'update:customer_contact', 'create:ticket', 'update:ticket', 'view:ticket', 'create:harassment_case'],
+  RECOVERY: ['view:program', 'update:program', 'view:customer', 'view:payment'],
+  COMPLIANCE: ['view:all', 'view:audit', 'override:all'],
+  ADMIN: ['*']
+};
 
 const seedRoles = async () => {
   try {

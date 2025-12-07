@@ -1,4 +1,4 @@
-const AuditLog = require('../models/audit_log');
+const { AuditLog } = require('../models');
 
 // Simple permissive checkPermission middleware stub.
 // In production this should verify user roles/permissions.

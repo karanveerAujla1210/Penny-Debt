@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Settlement = require('../../../models/Settlement');
+const { Settlement } = require('../../models');
 const { checkPermission, logAction } = require('../../../middleware/rbac');
 
 // Create settlement

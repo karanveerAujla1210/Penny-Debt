@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Loan = require('../../../models/loan');
+const { Loan } = require('../../models');
 const { checkPermission, logAction } = require('../../../middleware/rbac');
 const { validateRequest } = require('../../../middleware/validate');
 const validators = require('../../../validators/loans');

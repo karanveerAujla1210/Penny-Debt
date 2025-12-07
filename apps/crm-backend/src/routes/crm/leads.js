@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Lead = require('../../../models/Lead');
-const Customer = require('../../../models/Customer');
+const { Lead, Customer } = require('../../models');
 const { checkPermission, logAction } = require('../../../middleware/rbac');
 
 // Create lead

@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Case = require('../../../models/Case');
-const Customer = require('../../../models/Customer');
-const Loan = require('../../../models/Loan');
+const { Case, Customer, Loan } = require('../../models');
 const { checkPermission, logAction } = require('../../../middleware/rbac');
 
 // Create case
