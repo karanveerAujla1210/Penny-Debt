@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// Import all models
-const Lead = require('../models/Lead');
-const Customer = require('../models/Customer');
-const Contact = require('../models/Contact');
-const Career = require('../models/Career');
-const LoanApplication = require('../models/LoanApplication');
-const OTP = require('../models/OTP');
-const User = require('../models/User');
+// Import models from central index
+const models = require('../src/models');
+const { Lead, Customer, Contact, Career, LoanApplication, OTP, User } = models;
 
-// CRM Backend Models
-const Employee = require('../crm-backend/models/Employee');
+// CRM Backend Models (legacy employee model may live elsewhere)
+let Employee;
+try { Employee = require('../models/Employee'); } catch (e) { Employee = models.User; }
 
 async function initializeDatabase() {
   try {

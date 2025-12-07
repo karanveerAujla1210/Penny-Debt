@@ -2,14 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
-// Import all models
-const User = require('../models/User');
-const Customer = require('../models/Customer');
-const Lead = require('../models/Lead');
-const Contact = require('../models/Contact');
-const Career = require('../models/Career');
-const OTP = require('../models/OTP');
-const Activity = require('../models/Activity');
+// Import all models from central index
+const models = require('../src/models');
+const { User, Customer, Lead, Contact, Career, OTP, Activity } = models;
 
 const initDatabase = async () => {
   try {
