@@ -1,10 +1,12 @@
 const Loan = require('../../models/Loan');
+const { logAction } = require('../middleware/rbac');
 
 exports.createLoan = async (req, res, next) => {
   try {
     const payload = req.body;
     const loan = new Loan(payload);
     await loan.save();
+    try { await logAction(req.user && req.user._id, 'loan', loan._id, 'create', null, loan, req); } catch (e) { }
     res.status(201).json(loan);
   } catch (err) {
     next(err);
@@ -44,9 +46,12 @@ exports.updateLoan = async (req, res, next) => {
   try {
     const id = req.params.id;
     const updates = req.body;
-    const loan = await Loan.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
-    if (!loan) return res.status(404).json({ error: 'Loan not found' });
-    res.json(loan);
+    const before = await Loan.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Loan not found' });
+
+    const updated = await Loan.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
+    try { await logAction(req.user && req.user._id, 'loan', id, 'update', before, updated, req); } catch (e) { }
+    res.json(updated);
   } catch (err) {
     next(err);
   }
@@ -55,8 +60,11 @@ exports.updateLoan = async (req, res, next) => {
 exports.deleteLoan = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const removed = await Loan.findByIdAndDelete(id).lean();
-    if (!removed) return res.status(404).json({ error: 'Loan not found' });
+    const before = await Loan.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Loan not found' });
+
+    await Loan.findByIdAndDelete(id);
+    try { await logAction(req.user && req.user._id, 'loan', id, 'delete', before, null, req); } catch (e) { }
     res.json({ success: true });
   } catch (err) {
     next(err);

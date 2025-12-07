@@ -1,10 +1,12 @@
 const Ticket = require('../../models/Ticket');
+const { logAction } = require('../middleware/rbac');
 
 exports.createTicket = async (req, res, next) => {
   try {
     const payload = req.body;
     const ticket = new Ticket(payload);
     await ticket.save();
+    try { await logAction(req.user && req.user._id, 'ticket', ticket._id, 'create', null, ticket, req); } catch (e) { }
     res.status(201).json(ticket);
   } catch (err) {
     next(err);
@@ -44,9 +46,12 @@ exports.updateTicket = async (req, res, next) => {
   try {
     const id = req.params.id;
     const updates = req.body;
-    const ticket = await Ticket.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
-    if (!ticket) return res.status(404).json({ error: 'Ticket not found' });
-    res.json(ticket);
+    const before = await Ticket.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Ticket not found' });
+
+    const updated = await Ticket.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
+    try { await logAction(req.user && req.user._id, 'ticket', id, 'update', before, updated, req); } catch (e) { }
+    res.json(updated);
   } catch (err) {
     next(err);
   }
@@ -55,8 +60,11 @@ exports.updateTicket = async (req, res, next) => {
 exports.deleteTicket = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const removed = await Ticket.findByIdAndDelete(id).lean();
-    if (!removed) return res.status(404).json({ error: 'Ticket not found' });
+    const before = await Ticket.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Ticket not found' });
+
+    await Ticket.findByIdAndDelete(id);
+    try { await logAction(req.user && req.user._id, 'ticket', id, 'delete', before, null, req); } catch (e) { }
     res.json({ success: true });
   } catch (err) {
     next(err);

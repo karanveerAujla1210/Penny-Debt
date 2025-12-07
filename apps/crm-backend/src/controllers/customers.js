@@ -1,10 +1,12 @@
 const Customer = require('../../models/Customer');
+const { logAction } = require('../middleware/rbac');
 
 exports.createCustomer = async (req, res, next) => {
   try {
     const payload = req.body;
     const customer = new Customer(payload);
     await customer.save();
+    try { await logAction(req.user && req.user._id, 'customer', customer._id, 'create', null, customer, req); } catch (e) { }
     res.status(201).json(customer);
   } catch (err) {
     next(err);
@@ -44,9 +46,12 @@ exports.updateCustomer = async (req, res, next) => {
   try {
     const id = req.params.id;
     const updates = req.body;
-    const customer = await Customer.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
-    if (!customer) return res.status(404).json({ error: 'Customer not found' });
-    res.json(customer);
+    const before = await Customer.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Customer not found' });
+
+    const updated = await Customer.findByIdAndUpdate(id, updates, { new: true, runValidators: true }).lean();
+    try { await logAction(req.user && req.user._id, 'customer', id, 'update', before, updated, req); } catch (e) { }
+    res.json(updated);
   } catch (err) {
     next(err);
   }
@@ -55,8 +60,11 @@ exports.updateCustomer = async (req, res, next) => {
 exports.deleteCustomer = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const removed = await Customer.findByIdAndDelete(id).lean();
-    if (!removed) return res.status(404).json({ error: 'Customer not found' });
+    const before = await Customer.findById(id).lean();
+    if (!before) return res.status(404).json({ error: 'Customer not found' });
+
+    await Customer.findByIdAndDelete(id);
+    try { await logAction(req.user && req.user._id, 'customer', id, 'delete', before, null, req); } catch (e) { }
     res.json({ success: true });
   } catch (err) {
     next(err);
