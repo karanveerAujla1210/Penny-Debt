@@ -61,10 +61,19 @@ const customerSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
-// Legacy file replaced with shim to prefer canonical `src/models/customer.js`.
-// Original backed up to `Customer.bak.js`.
-try {
-  module.exports = require('../src/models/customer');
-} catch (err) {
-  module.exports = require('./Customer.bak');
-}
+
+customerSchema.pre('save', function(next) {
+  this.expenses.total = 
+    (this.expenses.rentOrHomeEmi || 0) +
+    (this.expenses.utilities || 0) +
+    (this.expenses.groceries || 0) +
+    (this.expenses.schoolFees || 0) +
+    (this.expenses.transport || 0) +
+    (this.expenses.insurance || 0) +
+    (this.expenses.otherAmount || 0);
+  
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('Customer', customerSchema);

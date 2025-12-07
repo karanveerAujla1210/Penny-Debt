@@ -1,66 +1,7 @@
-const mongoose = require('mongoose');
-
-const communicationSchema = new mongoose.Schema({
-  caseId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'DebtCase',
-    required: true
-  },
-  client: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  type: {
-    type: String,
-    enum: ['call', 'email', 'meeting', 'letter', 'document', 'system'],
-    required: true
-  },
-  direction: {
-    type: String,
-    enum: ['inbound', 'outbound'],
-    required: true
-  },
-  subject: String,
-  content: {
-    type: String,
-    required: true
-  },
-  attachments: [{
-    name: String,
-    url: String,
-    type: String,
-    size: Number
-  }],
-  relatedTo: [{
-    type: String,
-    enum: ['creditor', 'payment', 'document', 'other']
-  }],
-  status: {
-    type: String,
-    enum: ['pending', 'in_progress', 'completed', 'failed'],
-    default: 'completed'
-  },
-  followUp: {
-    required: Boolean,
-    date: Date,
-    notes: String
-  },
-  createdBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  isImportant: {
-    type: Boolean,
-    default: false
-  },
-  tags: [String]
-}, { timestamps: true });
-
-// Index for faster querying
-communicationSchema.index({ caseId: 1, createdAt: -1 });
-communicationSchema.index({ client: 1, createdAt: -1 });
-communicationSchema.index({ type: 1, status: 1 });
-
-module.exports = mongoose.model('Communication', communicationSchema);
+// Legacy file replaced with shim to prefer canonical `src/models/communication.js`.
+// Original backed up to `Communication.bak.js`.
+try {
+  module.exports = require('../src/models/communication');
+} catch (err) {
+  module.exports = require('./Communication.bak');
+}

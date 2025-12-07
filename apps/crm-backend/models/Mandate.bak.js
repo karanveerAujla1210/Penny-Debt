@@ -30,10 +30,4 @@ const mandateSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/mandate.js`.
-// Original backed up to `Mandate.bak.js`.
-try {
-  module.exports = require('../src/models/mandate');
-} catch (err) {
-  module.exports = require('./Mandate.bak');
-}
+module.exports = mongoose.model('Mandate', mandateSchema);

@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2025-12-08T00:00:00Z",
+  "notes": "Basenames discovered across legacy folders and `src/models`.",
+  "mappings": {
+    "case": {
+      "canonical": "src/models/case.js",
+      "legacy": ["models/Case.bak.js","models-website/Case.js","models/Case.js"]
+    },
+    "customer": {
+      "canonical": "src/models/customer.js",
+      "legacy": ["models/Customer.bak.js","models-website/Customer.js","models/Customer.js"]
+    },
+    "document": {
+      "canonical": "src/models/document.js",
+      "legacy": ["models/Document.bak.js","models-website/Document.js","models/Document.js"]
+    },
+    "lead": {
+      "canonical": "src/models/lead.js",
+      "legacy": ["models/Lead.bak.js","models-website/Lead.js","models/Lead.js"]
+    },
+    "loan": {
+      "canonical": "src/models/loan.js",
+      "legacy": ["models/Loan.bak.js","models/Loan.js"]
+    },
+    "otp": {
+      "canonical": "src/models/otp.js",
+      "legacy": ["models/OTP.bak.js","models-website/OTP.js","models/OTP.js"]
+    },
+    "payment": {
+      "canonical": "src/models/payment.js",
+      "legacy": ["models/Payment.bak.js","models-website/Payment.js","models/Payment.js"]
+    },
+    "user": {
+      "canonical": "src/models/user.js",
+      "legacy": ["models/User.bak.js","models-website/User.js","models/User.js"]
+    },
+    "role": {
+      "canonical": "src/models/role.js",
+      "legacy": ["models/Role.bak.js","models/Role.js"]
+    },
+    "program": {
+      "canonical": "src/models/program.js",
+      "legacy": ["models/Program.bak.js","models/Program.js"]
+    },
+    "settlement": {
+      "canonical": "src/models/settlement.js",
+      "legacy": ["models/Settlement.bak.js","models/Settlement.js"]
+    },
+    "ticket": {
+      "canonical": "src/models/ticket.js",
+      "legacy": ["models/Ticket.bak.js","models/Ticket.js"]
+    },
+    "mandate": {
+      "canonical": "src/models/mandate.js",
+      "legacy": ["models/Mandate.bak.js","models/Mandate.js"]
+    },
+    "auditlog": {
+      "canonical": "src/models/audit_log.js",
+      "legacy": ["models/AuditLog.bak.js","models/AuditLog.js"]
+    },
+    "communication": {
+      "canonical": "src/models/communication.js",
+      "legacy": ["models/Communication.bak.js","models/Communication.js"]
+    },
+    "harassmentcase": {
+      "canonical": "src/models/harassment_case.js",
+      "legacy": ["models/HarassmentCase.bak.js","models/HarassmentCase.js"]
+    },
+    "legalcase": {
+      "canonical": "src/models/legal_case.js",
+      "legacy": ["models/LegalCase.bak.js","models/LegalCase.js"]
+    }
+  }
+}

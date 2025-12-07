@@ -25,10 +25,4 @@ const otpSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/otp.js`.
-// Original backed up to `OTP.bak.js`.
-try {
-  module.exports = require('../src/models/otp');
-} catch (err) {
-  module.exports = require('./OTP.bak');
-}
+module.exports = mongoose.model('OTP', otpSchema);

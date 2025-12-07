@@ -56,4 +56,10 @@ programSchema.pre('save', async function(next) {
   next();
 });
 
-module.exports = mongoose.model('Program', programSchema);
+// Legacy file replaced with shim to prefer canonical `src/models/program.js`.
+// Original backed up to `Program.bak.js`.
+try {
+  module.exports = require('../src/models/program');
+} catch (err) {
+  module.exports = require('./Program.bak');
+}

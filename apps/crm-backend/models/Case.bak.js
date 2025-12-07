@@ -25,11 +25,5 @@ const caseSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
-// Legacy file replaced with shim to prefer canonical `src/models/case.js`.
-// Original backed up to `Case.bak.js`.
-try {
-  module.exports = require('../src/models/case');
-} catch (err) {
-  // fallback to legacy implementation backup
-  module.exports = require('./Case.bak');
-}
+
+module.exports = mongoose.model('Case', caseSchema);

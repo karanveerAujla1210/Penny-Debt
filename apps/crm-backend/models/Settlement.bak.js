@@ -41,10 +41,4 @@ const settlementSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/settlement.js`.
-// Original backed up to `Settlement.bak.js`.
-try {
-  module.exports = require('../src/models/settlement');
-} catch (err) {
-  module.exports = require('./Settlement.bak');
-}
+module.exports = mongoose.model('Settlement', settlementSchema);

@@ -40,10 +40,4 @@ const leadSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/lead.js`.
-// Original backed up to `Lead.bak.js`.
-try {
-  module.exports = require('../src/models/lead');
-} catch (err) {
-  module.exports = require('./Lead.bak');
-}
+module.exports = mongoose.model('Lead', leadSchema);

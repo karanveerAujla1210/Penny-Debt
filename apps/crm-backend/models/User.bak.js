@@ -23,10 +23,4 @@ userSchema.methods.comparePassword = function(password) {
   return bcrypt.compare(password, this.passwordHash);
 };
 
-// Legacy file replaced with shim to prefer canonical `src/models/user.js`.
-// Original backed up to `User.bak.js`.
-try {
-  module.exports = require('../src/models/user');
-} catch (err) {
-  module.exports = require('./User.bak');
-}
+module.exports = mongoose.model('User', userSchema);

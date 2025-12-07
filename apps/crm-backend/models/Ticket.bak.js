@@ -18,10 +18,4 @@ const ticketSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/ticket.js`.
-// Original backed up to `Ticket.bak.js`.
-try {
-  module.exports = require('../src/models/ticket');
-} catch (err) {
-  module.exports = require('./Ticket.bak');
-}
+module.exports = mongoose.model('Ticket', ticketSchema);

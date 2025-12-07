@@ -47,10 +47,4 @@ const loanSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/loan.js`.
-// Original backed up to `Loan.bak.js`.
-try {
-  module.exports = require('../src/models/loan');
-} catch (err) {
-  module.exports = require('./Loan.bak');
-}
+module.exports = mongoose.model('Loan', loanSchema);

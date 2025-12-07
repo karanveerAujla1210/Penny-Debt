@@ -11,10 +11,4 @@ const roleSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/role.js`.
-// Original backed up to `Role.bak.js`.
-try {
-  module.exports = require('../src/models/role');
-} catch (err) {
-  module.exports = require('./Role.bak');
-}
+module.exports = mongoose.model('Role', roleSchema);

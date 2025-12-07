@@ -29,10 +29,4 @@ const paymentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-// Legacy file replaced with shim to prefer canonical `src/models/payment.js`.
-// Original backed up to `Payment.bak.js`.
-try {
-  module.exports = require('../src/models/payment');
-} catch (err) {
-  module.exports = require('./Payment.bak');
-}
+module.exports = mongoose.model('Payment', paymentSchema);
