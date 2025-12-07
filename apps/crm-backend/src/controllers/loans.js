@@ -1,4 +1,4 @@
-const { Loan } = require('../models');
+const Loan = require('../../models/Loan');
 
 exports.createLoan = async (req, res, next) => {
   try {
