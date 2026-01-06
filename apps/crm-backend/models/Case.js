@@ -25,6 +25,12 @@ const caseSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
+
+// Indexes
+caseSchema.index({ customerId: 1 });
+caseSchema.index({ advisorId: 1, status: 1 });
+caseSchema.index({ status: 1 });
+caseSchema.index({ createdAt: -1 });
 // Legacy file replaced with shim to prefer canonical `src/models/case.js`.
 // Original backed up to `Case.bak.js`.
 try {

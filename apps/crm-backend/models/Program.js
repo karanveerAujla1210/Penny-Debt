@@ -43,6 +43,13 @@ const programSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+programSchema.index({ caseId: 1 });
+programSchema.index({ status: 1 });
+programSchema.index({ 'loans.loanId': 1 });
+programSchema.index({ createdBy: 1 });
+programSchema.index({ createdAt: -1 });
+
 programSchema.pre('save', async function(next) {
   if (this.isModified('loans')) {
     const Loan = mongoose.model('Loan');

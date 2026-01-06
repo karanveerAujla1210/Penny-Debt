@@ -1,31 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const { Lead, Customer } = require('../../models');
+const Lead = require('../../../models/Lead');
 const { checkPermission, logAction } = require('../../../middleware/rbac');
+const { createLead, updateLead } = require('../../validators/leads');
+const { validationResult } = require('express-validator');
 
-// Create lead
-router.post('/', checkPermission('create:lead'), async (req, res) => {
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, errors: errors.array() });
+  }
+  next();
+};
+
+router.post('/', checkPermission('create:lead'), createLead, validate, async (req, res) => {
   try {
-    const lead = new Lead({
-      ...req.body,
-      counsellorId: req.user._id
-    });
+    const lead = new Lead({ ...req.body, counsellorId: req.user._id });
     await lead.save();
-    
     await logAction(req.user._id, 'LEAD', lead._id, 'CREATE', null, lead.toObject(), req);
-    
     res.status(201).json(lead);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-// Get all leads
 router.get('/', checkPermission('view:lead'), async (req, res) => {
   try {
     const { status, counsellorId } = req.query;
     const filter = {};
-    
     if (status) filter.status = status;
     if (counsellorId) filter.counsellorId = counsellorId;
     
@@ -40,8 +42,7 @@ router.get('/', checkPermission('view:lead'), async (req, res) => {
   }
 });
 
-// Update lead
-router.patch('/:id', checkPermission('update:lead'), async (req, res) => {
+router.patch('/:id', checkPermission('update:lead'), updateLead, validate, async (req, res) => {
   try {
     const lead = await Lead.findById(req.params.id);
     if (!lead) return res.status(404).json({ error: 'Lead not found' });
@@ -52,14 +53,12 @@ router.patch('/:id', checkPermission('update:lead'), async (req, res) => {
     await lead.save();
     
     await logAction(req.user._id, 'LEAD', lead._id, 'UPDATE', previousData, lead.toObject(), req);
-    
     res.json(lead);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-// Assign to advisor
 router.post('/:id/assign', checkPermission('update:lead'), async (req, res) => {
   try {
     const lead = await Lead.findById(req.params.id);

@@ -29,6 +29,15 @@ const paymentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+paymentSchema.index({ customerId: 1 });
+paymentSchema.index({ programId: 1 });
+paymentSchema.index({ loanId: 1 });
+paymentSchema.index({ paymentType: 1, status: 1 });
+paymentSchema.index({ scheduledDate: 1 });
+paymentSchema.index({ status: 1 });
+paymentSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/payment.js`.
 // Original backed up to `Payment.bak.js`.
 try {

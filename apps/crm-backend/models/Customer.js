@@ -61,6 +61,13 @@ const customerSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
+
+// Indexes
+customerSchema.index({ userId: 1 });
+customerSchema.index({ 'basic.primaryMobile': 1 });
+customerSchema.index({ 'basic.email': 1 });
+customerSchema.index({ 'kyc.pan': 1 }, { sparse: true });
+customerSchema.index({ createdAt: -1 });
 // Legacy file replaced with shim to prefer canonical `src/models/customer.js`.
 // Original backed up to `Customer.bak.js`.
 try {

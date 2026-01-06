@@ -41,6 +41,14 @@ const settlementSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+settlementSchema.index({ loanId: 1 });
+settlementSchema.index({ programId: 1 });
+settlementSchema.index({ negotiatorId: 1 });
+settlementSchema.index({ status: 1 });
+settlementSchema.index({ customerDecision: 1 });
+settlementSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/settlement.js`.
 // Original backed up to `Settlement.bak.js`.
 try {

@@ -30,6 +30,13 @@ const mandateSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+mandateSchema.index({ customerId: 1 });
+mandateSchema.index({ programId: 1 });
+mandateSchema.index({ status: 1 });
+mandateSchema.index({ mandateType: 1 });
+mandateSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/mandate.js`.
 // Original backed up to `Mandate.bak.js`.
 try {

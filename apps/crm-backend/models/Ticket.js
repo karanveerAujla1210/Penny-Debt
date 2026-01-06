@@ -18,6 +18,13 @@ const ticketSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+ticketSchema.index({ customerId: 1 });
+ticketSchema.index({ type: 1, status: 1 });
+ticketSchema.index({ assignedTo: 1 });
+ticketSchema.index({ priority: 1 });
+ticketSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/ticket.js`.
 // Original backed up to `Ticket.bak.js`.
 try {

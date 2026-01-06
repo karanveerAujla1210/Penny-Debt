@@ -40,6 +40,13 @@ const leadSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+leadSchema.index({ counsellorId: 1, status: 1 });
+leadSchema.index({ assignedAdvisor: 1 });
+leadSchema.index({ status: 1 });
+leadSchema.index({ leadSource: 1 });
+leadSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/lead.js`.
 // Original backed up to `Lead.bak.js`.
 try {

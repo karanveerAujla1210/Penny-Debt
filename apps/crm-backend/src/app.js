@@ -103,9 +103,9 @@ app.use('/api/v1/website/faqs', require('./routes/website/faqs'));
 app.use('/api/v1/website/blogs', require('./routes/website/blogs'));
 
 // API Routes - CRM (Internal)
-// API Routes - CRM (Internal)
-// Load CRM routes safely. Some legacy modules may be missing in this branch;
-// don't crash the server if a route file is absent.
+const authMiddleware = require('../middleware/auth');
+
+// Load CRM routes safely
 function safeUse(mountPath, modulePath) {
   try {
     const r = require(modulePath);
@@ -115,7 +115,12 @@ function safeUse(mountPath, modulePath) {
   }
 }
 
+// Public CRM routes (no auth required)
 safeUse('/api/v1/crm/auth', './routes/crm/auth');
+
+// Protected CRM routes (auth required)
+app.use('/api/v1/crm', authMiddleware);
+
 safeUse('/api/v1/crm/dashboard', './routes/crm/dashboard');
 safeUse('/api/v1/crm/leads', './routes/crm/leads');
 safeUse('/api/v1/crm/customers', './routes/crm/customers');
@@ -126,6 +131,8 @@ safeUse('/api/v1/crm/loans', './routes/crm/loans');
 safeUse('/api/v1/crm/programs', './routes/crm/programs');
 safeUse('/api/v1/crm/settlements', './routes/crm/settlements');
 safeUse('/api/v1/crm/payments', './routes/crm/payments');
+safeUse('/api/v1/crm/tickets', './routes/crm/tickets');
+safeUse('/api/v1/crm/mandates', './routes/crm/mandates');
 safeUse('/api/v1/crm/tasks', './routes/crm/tasks');
 safeUse('/api/v1/crm/documents', './routes/crm/documents');
 safeUse('/api/v1/crm/reports', './routes/crm/reports');

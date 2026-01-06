@@ -47,6 +47,13 @@ const loanSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
+// Indexes
+loanSchema.index({ customerId: 1 });
+loanSchema.index({ caseId: 1 });
+loanSchema.index({ 'status.dpdStatus': 1 });
+loanSchema.index({ includeInProgram: 1 });
+loanSchema.index({ createdAt: -1 });
+
 // Legacy file replaced with shim to prefer canonical `src/models/loan.js`.
 // Original backed up to `Loan.bak.js`.
 try {
